@@ -57,14 +57,49 @@ if [ -n "$force_color_prompt" ]; then
 fi
 unset color_prompt force_color_prompt
 
-export PS1="\[\e[1;34m\]\W\[\e[m\] \[\e[2m\]\t\[\e[m\]\[\e[1;38;2;200;80;200m\]\`get_git_branch\`\[\e[m\]\[\e[1;38;2;200;200;0m\] \u \[\e[38;2;200;40;70m\]<3\[\e[m\] "
+PROMPT_COMMAND=__prompt_command # Func to gen PS1 after CMDs
+
+__prompt_command() {
+    local EXIT="$?"             # This needs to be first
+    PS1=""
+
+
+    local rcol='\[\e[0m\]'
+
+    local red='\[\e[0;31m\]'
+    local gre='\[\e[0;32m\]'
+    local byel='\[\e[1;33m\]'
+    local bblu='\[\e[1;34m\]'
+    local bpur='\[\e[1;35m\]'
+	local fbla='\[\e[2m\]'
+
+	local branch="$(get_git_branch)"
+
+	local pre="$rcol"
+	local post="$rcol "
+
+    PS1+="$pre"
+
+	PS1+="$bblu\W$rcol "
+	PS1+="$fbla\t$rcol "
+	PS1+="$bpur$branch$rcol "
+	PS1+="$byel\u$rcol "
+
+    if [ $EXIT != 0 ]; then
+        PS1+="${red}</3${rcol}"
+    else
+        PS1+="${gre}<3${rcol}"
+    fi
+
+    PS1+="$post"
+}
 
 function get_git_branch() {
 	branch="$(git branch 2>/dev/null | grep '^*' | colrm 1 2)"
 	if [ -z "$branch" ]; then
 		echo ''
 	else
-		echo -e " $branch"
+		echo -e "$branch"
 	fi
 }
 
@@ -191,10 +226,11 @@ alias inf_2201_old='cd /home/david/studies/semester_4/inf_2201'
 alias vim_29_main='vim -p App.js src/screens/Login.js src/navigation/*.js'
 alias vim_29_screens='vim -p src/screens/**/*.js'
 alias vim_29_extra='vim -p src/store/*.js src/modules/*.js'
-alias inf_2700='cd /home/david/studies/semester_7/inf_2700'
-alias inf_2700_old='cd /home/david/studies/semester_5/inf_2700'
-alias inf_3200='cd /home/david/studies/semester_7/inf_3200'
-alias inf_3201='cd /home/david/studies/semester_7/inf_3201'
+
+alias inf_2700='cd ~/studies/semester_7/inf_2700'
+alias inf_2700_old='cd ~/studies/semester_5/inf_2700'
+alias inf_3200='cd ~/studies/semester_7/inf_3200'
+alias inf_3201='cd ~/studies/semester_7/inf_3201'
 
 export LATEX_HEADER='/home/david/config/template.latex'
 export MDPDF_SCRIPT='/home/david/scripts/markdownpdf/mdpdf.py'
@@ -232,5 +268,5 @@ alias emu=$ANDROID_HOME/emulator/emulator
 alias emu-def='$ANDROID_HOME/emulator/emulator @pixel2xl'
 alias emu-menu='adb shell input keyevent 82'
 
-echo "setleds: Error reading current flags setting. Maybe you are not on the console?: ioctl KDGKBLED: Inappropriate ioctl for device"
+# echo "setleds: Error reading current flags setting. Maybe you are not on the console?: ioctl KDGKBLED: Inappropriate ioctl for device"
 # export GOOGLE_SHEETS_ACCESS_TOKEN='ya29.GluYBkxhmCHrXOejiEQGf95fI7imH5phnoF__tit2EAfkHSp8LslumnmqIdApjfC6XeCKP_HVTlK0HprsITMjn00qtH5sULk3WiCCQV7FQwAqnNiWyLrLIr39B_S'
