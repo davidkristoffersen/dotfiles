@@ -1,0 +1,62 @@
+set mainfont {Inconsolata 10}
+set textfont {{Liberation Sans} 9}
+set uifont {sans 9 bold}
+set tabstop 8
+set findmergefiles 0
+set maxgraphpct 50
+set maxwidth 16
+set cmitmode patch
+set wrapcomment none
+set autoselect 1
+set autosellen 40
+set showneartags 1
+set maxrefs 20
+set visiblerefs {"master"}
+set hideremotes 0
+set showlocalchanges 1
+set datetimeformat {%Y-%m-%d %H:%M:%S}
+set limitdiffs 1
+set uicolor #666666
+set want_ttk 1
+set bgcolor #555555
+set fgcolor #ffffff
+set uifgcolor black
+set uifgdisabledcolor #999
+set colors {"#00ff00" red blue magenta darkgrey brown orange}
+set diffcolors {{#ff3329} #00bb00 #00f8dd}
+set mergecolors {red blue "#00ff00" purple brown "#009090" magenta "#808000" "#009000" "#ff0080" cyan "#b07070" "#70b0f0" "#70f0b0" "#f0b070" "#ff70b0"}
+set markbgcolor #999999
+set diffcontext 3
+set selectbgcolor gray85
+set foundbgcolor yellow
+set currentsearchhitbgcolor orange
+set extdifftool meld
+set perfile_attrs 0
+set headbgcolor #00ff00
+set headfgcolor black
+set headoutlinecolor black
+set remotebgcolor #ffddaa
+set tagbgcolor yellow
+set tagfgcolor black
+set tagoutlinecolor black
+set reflinecolor black
+set filesepbgcolor #aaaaaa
+set filesepfgcolor black
+set linehoverbgcolor #ffff80
+set linehoverfgcolor black
+set linehoveroutlinecolor black
+set mainheadcirclecolor yellow
+set workingfilescirclecolor red
+set indexcirclecolor #00ff00
+set circlecolors {white blue gray blue blue}
+set linkfgcolor blue
+set circleoutlinecolor black
+set geometry(main) 1920x1050+0+0
+set geometry(state) normal
+set geometry(topwidth) 1920
+set geometry(topheight) 957
+set geometry(pwsash0) "1216 1"
+set geometry(pwsash1) "1891 1"
+set geometry(botwidth) 1115
+set geometry(botheight) 88
+set permviews {}

@@ -1,0 +1,226 @@
+% STANDARD PACKAGES:
+	% Text size, paper type and file type
+		\documentclass[14pt, a4paper] {article}
+	% Language from babel catalouge
+		\usepackage[british]{babel}
+	% Hyphonation
+		\usepackage[utf8]{inputenc}
+	% Fonts
+		\usepackage[T1]{fontenc}
+
+% PROGRAMMING:
+	% Packages
+		% Enables typesetting of programming code
+			\usepackage{listings}
+		% Foreground and background color management
+			\usepackage{color}
+		% TODO
+			\usepackage{float}
+		% TODO
+			\usepackage{amssymb}
+
+	% New commands and settings
+		% Sets values for syntax color
+			\definecolor{mygray}{rgb}{0.4,0.4,0.4}
+			\definecolor{mygreen}{rgb}{0,0.8,0.6}
+			\definecolor{myorange}{rgb}{1.0,0.4,0}
+	% Printed code settings
+		% Temporary fix
+		\lstset{
+		%  Size, style and color of text
+			basicstyle=\footnotesize\sffamily\color{black},
+		% Comments color
+			commentstyle=\color{mygray},
+		% Only one frame for the code
+			frame=single,
+		% Line numbers on the left side
+			numbers=left,
+		% Distance between numbers and listings
+			numbersep=5pt,
+		% Numbers size and color
+			numberstyle=\tiny\color{mygray},
+		% Keywords color
+			keywordstyle=\color{mygreen},
+		% No spaces is printed
+			showspaces=false,
+		% No blank spaces in strings is printed
+			showstringspaces=false,
+		% Strings color
+			stringstyle=\color{myorange},
+		% Size of the tab
+			tabsize=2}
+
+% MATH:
+	% Packages
+		% Standard math
+			\usepackage{amsmath} 
+		% Tools to enchance large amounts of math
+			\usepackage{mathtools}
+		% Alignment tools
+			\usepackage{eqnarray}
+		% Cancel and strikethrough commands
+			\usepackage[makeroom]{cancel}
+		% Useful for better tables and underlines, such as \ul
+			\usepackage{soul}
+		% Variant to \hline
+			\usepackage{hhline}
+		% Autodetect math or text in tabular
+			\usepackage{tabu}
+		% Custom columntypes
+			\usepackage{array}
+		% Adds in�fix ex�pres�sions to per�form arith�metic on the ar�gu�ments of the LATEX com�mands \set�counter, \ad�dto�counter, \setlength, and \ad�dtolength
+			\usepackage{calc}
+		% An extended version of tex
+			\usepackage{etex}
+
+	% New commands and settings
+		% Double underline (\underline, \doubleunderline)
+			\def\doubleunderline#1{\underline{\underline{#1}}}
+		% Degrees \degrees{90}
+			\newcommand\degrees[1]{\ensuremath{#1^\circ}}
+		% Creates the \negphantom macro, the oposite of \phantom
+			\makeatletter
+			\newlength{\negphwd}
+			\newcommand{\negphantom}[1]{%
+			\settowidth{\negphwd}{#1}%
+			\hspace*{-\negphwd}%
+			}
+			\makeatother
+	% Mathcolumns
+		% Temporary fix
+		\newcolumntype{L}{>{\begin{math}}l<{\end{math}}} % math-mode version of "l" column type
+		\newcolumntype{R}{>{\begin{math}}r<{\end{math}}} % math-mode version of "r" column type
+		\newcolumntype{C}{>{\begin{math}}c<{\end{math}}} % math-mode version of "c" column type
+
+	% Enviorement and aligment change
+		\usepackage{breqn}
+	% Initialize ceiling functions
+		\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+% TEXT:
+	% Packages
+		% Links
+			\usepackage{url}
+		% Random text: Lorem ipsum
+			\usepackage{lipsum}
+		% Includes the \text macro
+			\usepackage{amstext}
+		% Adding custom graphics
+			\usepackage{graphicx}
+		% Allignment for custom graphics
+			\usepackage{wrapfig}
+		% Allignment of figure captions
+			\usepackage[font=small]{caption}
+		% Allignment of figure subcaptions
+			\usepackage[font=small]{subcaption}
+		% Adding custom pdf's
+			\usepackage{pdfpages}
+		% No indented paragraphs
+			\usepackage[parfill]{parskip}
+		% Margins
+			\usepackage[a4paper,margin=3cm]{geometry}
+		% Headings and footers
+			\usepackage{fancyhdr}
+		% Provides a interface to sectioning commands
+			\usepackage{titlesec}
+		% Handles cross-referencing commands
+			\usepackage{hyperref}
+		% Handles bibliography commands
+			\usepackage[backend=bibtex8,
+						style=numeric,
+						urldate=long,
+						sorting=none]{biblatex}
+		% Various citation format support
+			% \usepackage{natbib}
+		% Quote support (\say)
+			\usepackage{dirtytalk}
+		% Default file for references
+			% \addbibresource{ref.bib}
+		% Improves general spacing and looks, is not necessary
+			\usepackage{microtype}
+		% Commenting
+			\usepackage{verbatim}
+	% Fonts
+		% \usepackage{mathptmx} % rm Times New Roman Derivation
+		%\usepackage{libertine} % rm Libertine
+		% \usepackage{mathpazo} % rm Palatino derivation
+		%\usepackage{helvet} % Helvetica
+		%\usepackage{kpfonts} % rm kpfonts
+		\usepackage{amsfonts}
+		\usepackage{inconsolata} % Inconsolata tt
+
+	% New commands and settings
+		% Adds support for auto justify images
+			% $if(graphics)$
+			% \usepackage{graphicx}
+			% % -- We will generate all images so they have a width \maxwidth. This means
+			% % -- that they will get their normal width if they fit onto the page, but
+			% % -- are scaled down if they would overflow the margins.
+			% \makeatletter
+			% \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+			% \else\Gin@nat@width\fi}
+			% \makeatother
+			% \let\Oldincludegraphics\includegraphics
+			% \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth]{#1}}
+			% $endif$
+		% Adds graphics
+			% \graphicspath{ {/graphics/} }
+		% Set style of the page
+			\pagestyle{fancy}
+	% Headers
+		\lhead{}
+		\chead{}
+		\rhead{\nouppercase{\leftmark}} % Get current section
+	% Footers
+		\lfoot{}
+		\cfoot{\thepage} % Get current page
+		\rfoot{}
+	% Whitespace lenght between paragraphs
+		\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+	% Whitespace lenght between references
+		% \setlength{\bibsep}{10pt}
+		\setlength\bibitemsep{8pt}
+	% Bibliography formatting style
+		% \bibliographystyle{plain}
+	% Set rm (serif) to be default font family
+		\renewcommand{\familydefault}{\rmdefault}
+	% Width of header and footer line
+		\renewcommand{\headrulewidth}{0pt}
+		\renewcommand{\footrulewidth}{0pt}
+	% Line height
+		\renewcommand{\baselinestretch}{1}
+	% Comment out a given area
+		\newcommand{\comments}[1]{}
+		\makeatletter
+	% Remove section numbers
+		%\renewcommand\thesection{\hspace{-17pt}}
+		%\renewcommand\thesubsection{\@arabic\c@section.\@arabic\c@subsection}
+	% Remove subsection numbers
+		%\renewcommand\thesubsection{\hspace{-14pt}}
+		%\renewcommand\thesubsubsection{\@arabic\c@subsection.\@arabic\c@subsubsection}
+	% Remove subsubsection numbers
+		%\renewcommand\thesubsubsection{\hspace{-11pt}}
+		%\renewcommand\theparagraph{\@arabic\c@subsubsection.\@arabic\c@paragraph}
+	% Remove paragraph numbers
+		%\renewcommand\theparagraph{\hspace{-11pt}}
+		%\renewcommand\thesubparagraph{\@arabic\c@paragraph.\@arabic\c@subparagraph}
+		\makeatother
+	% Set the level of numbered sections
+		\setcounter{secnumdepth}{3}
+	% Set the depth of how much ToC show
+		\setcounter{tocdepth}{3}
+		\thispagestyle{empty}
+	% Creation of title
+	\date{}
+	\author{
+		\large{David Kristoffersen}\\ [0.5cm]
+		% \large{Navn: David Kristoffersen}\\ [0.5cm]
+		% \large{Epost: dkr011@post.uit.no}\\ [0.5cm]
+		% \large{Git brukernavn: davidkristoffersen}\\ [0.5cm]
+		\vspace{-2cm}
+	}
+	\title{
+		\vspace{-2cm}
+		\huge{$title$}\\ [0.3cm]
+	}
+

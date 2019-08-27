@@ -1,0 +1,20 @@
+# This is Git's per-user configuration file.
+[user]
+	name = David Kristoffersen
+	email = david.alta2010@gmail.com
+[push]
+	default = matching
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lgs = "!f() { num=$1; git lg | head -n $num; }; f"
+	pushm = push origin master
+	pullm = pull origin master
+	st = status
+	credz = config credential.helper store
+	mergeignore = "!f() { git diff-index --quiet HEAD --; if [ $? -eq 1 ]; then echo \"You have uncommitted files!\"; return 1; fi; git merge --no-commit --no-ff $@; for no_merge in $(grep merge=ignore .gitattributes | awk '{print $1}'); do git reset HEAD $no_merge; git checkout $no_merge; git clean -di $no_merge; done; git commit --no-edit 2> /dev/null;}; f"
+[core]
+	editor = vim
+[credential]
+	helper = store --file ~/.git-credentials
+[merge "ignore"]
+	driver = true
