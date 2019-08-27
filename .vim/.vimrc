@@ -10,11 +10,6 @@
 " new c file setup
 " persistence
 
-" Vim plug: plugins
-call plug#begin('~/.vim/plugged')
-" Plug 'jooize/vim-colemak'
-call plug#end()
-
 " OS
 set clipboard=unnamedplus		" OS-wide clipboard
 set mouse=a						" mouse integration
