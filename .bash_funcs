@@ -1,0 +1,18 @@
+#!/bin/bash
+
+function code-style-format() {
+	for i in $@; do
+		backup_pos="/tmp/clang_format_backup/$(basename $i)$(date +%Y.%m.%d-%H:%M:%S).bak"
+		mkdir -p /tmp/clang_format_backup
+		mv $i $backup_pos
+		cat $backup_pos | clang-format -style="$CLANG_FORMAT_CONFIG" > $i
+	done
+}
+
+function evalps1() {
+	myprompt=${PS1@P}; printf '%s\n' "${myprompt//[$'\001'$'\002']}" | tr '\n' '\0'
+}
+
+function format_patch() {
+	git format-patch --base=$1 $1..$2 --stdout > "../patches/patch-$1-$2.patch";
+}
