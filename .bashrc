@@ -75,6 +75,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+cd ~
+
 # Secret exports and aliases
 . ~/.bash_secrets
 
