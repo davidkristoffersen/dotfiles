@@ -4,3 +4,4 @@ hard_link.sh
 .vim/spell/
 create_submodules.sh
 submodules.txt
+.secrets/
