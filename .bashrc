@@ -41,8 +41,8 @@ __prompt_command() {
 	local fbla='\[\e[2m\]'
 
 	# Git branch detection
-	local branch="$(git branch 2>/dev/null | grep '^*' | colrm 1 2)"
-	if [ -z "$branch" ]; then
+	local branch="$(git branch 2>/dev/null | grep '^*' | colrm 1 2) "
+ 	if [ "$branch" == " " ]; then
 		branch=''
 	fi
 
@@ -53,7 +53,7 @@ __prompt_command() {
 
 	PS1+="$bblu\W$rcol "
 	PS1+="$fbla\t$rcol "
-	PS1+="$bpur$branch$rcol "
+	PS1+="$bpur$branch$rcol"
 	PS1+="$byel\u$rcol "
 
 	# Color based exit status
