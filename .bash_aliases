@@ -7,11 +7,14 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+alias tree='tree -C'
+
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias srcbash='source ~/.bashrc'
 alias bashrc='vim ~/.bashrc'
+alias bashconfig='vim -p ~/.bash*'
 alias vimrc='vim $MYVIMRC'
 
 alias c='clear'
