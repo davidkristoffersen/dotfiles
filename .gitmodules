@@ -1,9 +1,6 @@
 [submodule ".vim/bundle/ale"]
 	path = .vim/bundle/ale
 	url = https://github.com/w0rp/ale.git
-[submodule ".vim/bundle/CoVim"]
-	path = .vim/bundle/CoVim
-	url = git://github.com/FredKSchott/CoVim.git
 [submodule ".vim/bundle/git-blame"]
 	path = .vim/bundle/git-blame
 	url = https://github.com/zivyangll/git-blame.vim.git
