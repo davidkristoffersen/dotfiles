@@ -51,10 +51,15 @@ __prompt_command() {
 
     PS1+="$pre"
 
-	PS1+="$bblu\W$rcol "
-	PS1+="$fbla\t$rcol "
+	# Add user and host if it is a ssh session
+	if [ ! -z "$SSH_TTY" ]; then
+		PS1+="$byel[$rcol\u$rcol"
+		PS1+="$fbla@$rcol"
+		PS1+="${HOSTNAME%%.*}$byel]$rcol "
+	fi
+
 	PS1+="$bpur$branch$rcol"
-	PS1+="$byel\u$rcol "
+	PS1+="$bblu\W$rcol "
 
 	# Color based exit status
     if [ $EXIT != 0 ]; then
@@ -75,7 +80,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-cd ~
+# cd ~
 
 # Secret exports and aliases
 . ~/.bash_secrets
