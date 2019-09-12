@@ -83,10 +83,17 @@ fi
 # cd ~
 
 # Secret exports and aliases
-. ~/.bash_secrets
+if [ -z "$SSH_TTY" ]; then
+	. ~/.bash_secrets
+fi
 
 # Alias definitions
 . ~/.bash_aliases
 
 # Functions
 . ~/.bash_funcs
+
+# Cluster exports
+if [ ! -z "$SSH_TTY" ]; then
+	. ~/.bash_uvcluster
+fi
