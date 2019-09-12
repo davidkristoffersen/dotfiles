@@ -21,3 +21,7 @@ export LATEX_HEADER='~/config/template.latex'
 export MDPDF_SCRIPT='~/scripts/markdownpdf/mdpdf.py'
 
 tabs 4
+
+if [ ! -z "$SSH_TTY" ]; then
+	. ~/.bashrc
+fi
