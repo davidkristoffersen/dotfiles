@@ -149,6 +149,9 @@ endfunction
 " Disable \"Hit enter to continue\" in vim run command
 command! -nargs=1 Silent execute 'silent !' . <q-args> | execute 'redraw!'
 
+" Increment/Decrement numbers by search
+" :let i=x0 g/pattern/s//\='pattern'.i/ | let i=i+1/
+
 " FUNCTIONS
 " Toggle commands
 nnoremap <leader>tp :call Toggle_val("set_paste")<cr>
