@@ -80,7 +80,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# cd ~
+. ~/.bash_profile
 
 # Secret exports and aliases
 if [ -z "$SSH_TTY" ]; then
