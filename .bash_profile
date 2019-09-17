@@ -15,10 +15,10 @@ AfterEnum: true,
 
 export BROWSER="/usr/bin/firefox"
 export SYSTEMD_EDITOR="vim"
-export MYVIMRC="~/.vimrc"
+export MYVIMRC="$HOME/.vimrc"
 
-export LATEX_HEADER='~/config/template.latex'
-export MDPDF_SCRIPT='~/scripts/markdownpdf/mdpdf.py'
+export LATEX_HEADER="$HOME/.config/latex/template.latex"
+export MDPDF_SCRIPT="$HOME/scripts/markdownpdf/mdpdf.py"
 
 tabs 4
 

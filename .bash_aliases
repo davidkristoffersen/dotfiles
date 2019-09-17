@@ -12,15 +12,15 @@ alias tree='tree -C'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias srcbash='source ~/.bashrc'
-alias bashrc='vim ~/.bashrc'
-alias bashconfig='vim -p ~/.bash*'
+alias srcbash="source $HOME/.bashrc"
+alias bashrc="vim $HOME/.bashrc"
+alias bashconfig="vim -p $HOME/.bash*"
 alias vimrc='vim $MYVIMRC'
 
 alias c='clear'
 
 # Program specific
-alias ed_osucli='vim ~/scripts/osu/osucli.py'
+alias ed_osucli="vim $HOME/scripts/osu/osucli.py"
 alias rip='gio trash'
 alias lock='i3lock-fancy -pf inconsolata'
 alias python='python3'
