@@ -60,7 +60,7 @@ set breakindent						" Indents word-wrapped lines as much as the 'parent' line
 " Ensures word-wrap does not split words
 set formatoptions=l
 set lbr
-au Filetype python setl et ts=4 sw=4
+au Filetype python setl et ts=4 sw=4 softtabstop=4
 
 " UNDO HISTORY
 set undofile                    " use an undo file
