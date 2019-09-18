@@ -80,11 +80,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-. ~/.bash_profile
 
 # Secret exports and aliases
 if [ -z "$SSH_TTY" ]; then
 	. ~/.bash_secrets
+    . ~/.bash_profile
 fi
 
 # Alias definitions

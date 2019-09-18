@@ -23,6 +23,5 @@ export MDPDF_SCRIPT="$HOME/scripts/markdownpdf/mdpdf.py"
 tabs 4
 
 if [ ! -z "$SSH_TTY" ]; then
-	. /opt/rh/devtoolset-8/enable
 	. ~/.bashrc
 fi
