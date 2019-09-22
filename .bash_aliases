@@ -14,7 +14,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias srcbash="source $HOME/.bashrc"
 alias bashrc="vim $HOME/.bashrc"
-alias bashconfig="vim -p $HOME/.bash*"
+alias bashconfig="vim -p `echo $HOME/.bash* | xargs -n 1 | grep -ve ".bash_history\|.bash_logout" | xargs`"
 alias vimrc='vim $MYVIMRC'
 
 alias c='clear'
