@@ -16,3 +16,7 @@ function evalps1() {
 function format_patch() {
 	git format-patch --base=$1 $1..$2 --stdout > "../patches/patch-$1-$2.patch";
 }
+
+function hostname_master() {
+	getent hosts | sort | tail -n 1 | awk '{print $2}' | cut -d . -f 1
+}

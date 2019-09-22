@@ -94,6 +94,6 @@ fi
 . ~/.bash_funcs
 
 # Cluster exports
-if [ ! -z "$SSH_TTY" ]; then
+if [ ! -z "$SSH_TTY" ] && [ "`hostname_master`" == "uvcluster" ]; then
 	. ~/.bash_uvcluster
 fi
