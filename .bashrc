@@ -82,7 +82,7 @@ fi
 
 
 # Secret exports and aliases
-if [ -z "$SSH_TTY" ]; then
+if [ -z "$SSH_TTY" ] && [ -z "$TMUX" ]; then
 	. ~/.bash_secrets
     . ~/.bash_profile
 fi

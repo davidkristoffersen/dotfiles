@@ -22,6 +22,8 @@ export MDPDF_SCRIPT="$HOME/scripts/markdownpdf/mdpdf.py"
 
 tabs 4
 
-if [ ! -z "$SSH_TTY" ]; then
+if [ ! -z "$SSH_TTY" ] || [ ! -z "$TMUX" ]; then
 	. ~/.bashrc
 fi
+
+export PATH="$HOME/.cargo/bin:$PATH"
