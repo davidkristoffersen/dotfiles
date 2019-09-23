@@ -1,7 +1,7 @@
 % PACKAGES:
 	% Standard:
 		% Text size, paper type and file type
-			\documentclass[14pt, a4paper] {article}
+			\documentclass[a4paper] {article}
 		% Language from babel catalouge
 			\usepackage[british]{babel}
 		% Hyphonation
@@ -47,6 +47,8 @@
 		% Enviorement and aligment change
 			\usepackage{breqn}
 	% Text
+	    % Ensure that quoted texts are typeset according to the rules of your main language
+	        \usepackage{csquotes}
 		% Links
 			\usepackage{url}
 		% Random text: Lorem ipsum
@@ -74,7 +76,7 @@
 		% Handles cross-referencing commands
 			\usepackage{hyperref}
 		% Handles bibliography commands
-			\usepackage[backend=bibtex8,
+			\usepackage[backend=biber,
 						style=numeric,
 						urldate=long,
 						sorting=none]{biblatex}
