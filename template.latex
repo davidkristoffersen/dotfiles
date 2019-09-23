@@ -64,9 +64,9 @@
 		% Adding custom pdf's
 			\usepackage{pdfpages}
 		% No indented paragraphs
-			\usepackage[parfill]{parskip}
+			\usepackage{parskip}
 		% Margins
-			\usepackage[a4paper,margin=3cm]{geometry}
+			\usepackage{geometry}
 		% Headings and footers
 			\usepackage{fancyhdr}
 		% Provides a interface to sectioning commands
@@ -137,6 +137,8 @@
     		\rfoot{}
     	% Whitespace lenght between paragraphs
     		\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+		% Fix line indent causing hbox
+    		\setlength{\parindent}{0em}
     	% Whitespace lenght between references
     		\setlength\bibitemsep{8pt}
     	% Set rm (serif) to be default font family
