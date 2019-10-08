@@ -18,3 +18,5 @@
 	helper = store --file ~/.git-credentials
 [merge "ignore"]
 	driver = true
+[color]
+	ui = auto
