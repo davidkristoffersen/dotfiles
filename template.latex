@@ -105,7 +105,8 @@
 			\definecolor{myorange}{rgb}{1.0,0.4,0}
 		% Custom code blocks
 			\tcbuselibrary{minted,skins}
-			\newtcblisting{code}[2][]{
+			\newtcblisting[auto counter,number within=section,
+				list inside=mypyg]{code}[3][]{
 				listing engine=minted,
 				colback=gray!20,
 				colframe=black!70,
@@ -113,10 +114,14 @@
 				minted options={linenos=true,numbersep=3mm,texcl=true,#1},
 				left=5mm,
 				enhanced,
-				overlay={
-					{\begin{tcbclipinterior}\fill[black!25] (frame.south west)
-						rectangle ([xshift=5mm]frame.north west);\end{tcbclipinterior}}
-					},
+				overlay={{
+					\begin{tcbclipinterior}
+						\fill[black!25] (frame.south west)
+						rectangle ([xshift=5mm]frame.north west);
+					\end{tcbclipinterior}
+				}},
+				title={Listing \thetcbcounter: #3},
+				list entry={\protect\numberline{\thetcbcounter}#3},
 				minted language=#2,#1
 			}
 	% Math:
