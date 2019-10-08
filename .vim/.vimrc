@@ -176,6 +176,9 @@ endfunction
 
 " PLUGINS
 
+" Syntastic
+let g:syntastic_c_checkers = ['gcc', 'mpicc']
+
 " NERDTree
 " Open NERDTree when vim starts up
 autocmd VimEnter * NERDTree
