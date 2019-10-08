@@ -11,7 +11,6 @@
 	pullm = pull origin master
 	st = status
 	credz = config credential.helper store
-	mergeignore = "!f() { git diff-index --quiet HEAD --; if [ $? -eq 1 ]; then echo \"You have uncommitted files!\"; return 1; fi; git merge --no-commit --no-ff $@; for no_merge in $(grep merge=ignore .gitattributes | awk '{print $1}'); do git reset HEAD $no_merge; git checkout $no_merge; git clean -di $no_merge; done; git commit --no-edit 2> /dev/null;}; f"
 	df = diff --word-diff
 	submodulepull = "!f() { git submodule foreach \"(git checkout master; git pull)\"; }; f"
 [core]
