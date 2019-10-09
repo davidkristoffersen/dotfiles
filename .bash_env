@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Is the shell a sh environment
+[ "$0" == "sh" ] \
+	&& SHELL_SH=true \
+	|| SHELL_SH=false
+
+# Is the shell interactive
+[ ! -z "`echo $- | grep i`" ] \
+	&& SHELL_INTERACTIVE=true \
+	|| SHELL_INTERACTIVE=false
+
+# Is the shell a login shell
+[ ! -z "`shopt login_shell`" ] \
+	&& SHELL_LOGIN=true \
+	|| SHELL_LOGIN=false
+
+# Is the shell a ssh environment
+[ ! -z "`env | grep SSH`" ] \
+	&& SSH=true \
+	|| SSH=false
+
+# Is the shell a ssh environment on the uvcluster
+[ ! -z "`ping -c 1 uvcluster 2>/dev/null`" ] \
+	&& UVCLUSTER=true \
+	|| UVCLUSTER=false
+
+export SHELL_SH SHELL_INTERACTIVE SHELL_LOGIN SSH UVCLUSTER

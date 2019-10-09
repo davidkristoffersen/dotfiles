@@ -18,5 +18,6 @@ function format_patch() {
 }
 
 function hostname_master() {
-	getent hosts | sort | tail -n 1 | awk '{print $2}' | cut -d . -f 1
+	name="$1"
+	tracepath -b 129.242.16.30 | grep "$name" | grep -e '^ 1:'
 }
