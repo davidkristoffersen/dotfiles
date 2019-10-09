@@ -16,7 +16,7 @@
 	|| SHELL_LOGIN=false
 
 # Is the shell a ssh environment
-[ ! -z "`env | grep SSH`" ] \
+[ ! -z "`pstree -ps $$ | grep sshd`" ] \
 	&& SSH=true \
 	|| SSH=false
 
