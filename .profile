@@ -20,4 +20,14 @@ export MYVIMRC="$HOME/.vimrc"
 export LATEX_HEADER="$HOME/.config/latex/template.latex"
 export MDPDF_SCRIPT="$HOME/scripts/markdownpdf/mdpdf.py"
 
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
 export PATH="$HOME/.cargo/bin:$PATH"
