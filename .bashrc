@@ -1,13 +1,28 @@
 #!/bin/bash
 
-# Bash source files
-b_env="$HOME/.bash_env"
-b_shopt="$HOME/.bash_shopt"
-b_promt="$HOME/.bash_prompt"
-b_secrets="$HOME/.bash_secrets"
-b_aliases="$HOME/.bash_aliases"
-b_funcs="$HOME/.bash_funcs"
-b_uvcluster="$HOME/.bash_uvcluster"
+# Test source file names
+declare -a bash_files=( \
+	# Environment status exports
+	env \
+	# Shell options
+	shopt \
+	# Shell prompt
+	prompt \
+	# Secret exports and aliases
+	secrets \
+	# Alias definitions
+	aliases \
+	# Functions
+	funcs \
+	# Cluster exports
+	uvcluster \
+)
+
+# Test source prepend
+bash_pre="$HOME/.bash_"
+
+# Sourced file names
+declare -a BASH_SOURCE_FILES
 
 # Test if file exist and
 # is either a regular file or a symlink
@@ -17,40 +32,40 @@ function source_test() {
 		|| false
 }
 
-# Environment status exports
-if source_test $b_env; then
-	. $b_env
-fi
+# Append to sourced files array
+function sourced_append() {
+	BASH_SOURCE_FILES[${#BASH_SOURCE_FILES[@]}]=$1
+}
 
-# Shell options
-if source_test $b_shopt; then
-	. $b_shopt
-fi
+for bash_file in ${bash_files[@]}; do
+	# Create absolute file path
+	bash_file="$bash_pre$bash_file"
 
-# Shell prompt
-if source_test $b_promt; then
-	. $b_promt
-fi
+	# Do not source if case and if test is true
+	case $bash_file in
+		secrets)
+			# If ssh or tmux session
+			if [ ! -z "`pstree -ps $$ | grep sshd`" ] \
+				|| [ ! -z "$TMUX" ]; then
+				continue
+			fi
+			;;
+		uvcluster)
+			# If not uvcluster session
+			if [ -z "`ping -c 1 uvcluster 2>/dev/null`" ]; then
+				continue
+			fi
+			;;
+		*)
+			;;
+	esac
+	# Do not source if file do not exist
+	if source_test $bash_file; then
+		sourced_append $bash_file
+		# Source file
+		. $bash_file
+	fi
+done
 
-# Secret exports and aliases
-if source_test $b_secrets \
-	&& [ -z "`pstree -ps $$ | grep sshd`" ] \
-	&& [ -z "$TMUX" ]; then
-	. $b_secrets
-fi
-
-# Alias definitions
-if source_test $b_aliases; then
-	. $b_aliases
-fi
-
-# Functions
-if source_test $b_funcs; then
-	. $b_funcs
-fi
-
-# Cluster exports
-if source_test $b_uvcluster \
-	&& [ ! -z "`ping -c 1 uvcluster 2>/dev/null`" ]; then
-	. $b_uvcluster
-fi
+# List of all files sourced
+export BASH_SOURCE_FILES="${BASH_SOURCE_FILES[@]}"
