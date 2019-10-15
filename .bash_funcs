@@ -6,7 +6,9 @@ function bash_sourced_link() {
 
 	for dest in $BASH_SOURCE_FILES; do
 		src="${path%/}/`basename $dest`"
-		echo "ln -sf $src $dest"
+		echo "`basename $dest`:"
+		echo "cp $dest $dest.bak"
+		echo -e "ln -sf $src $dest\n"
 	done
 }
 
