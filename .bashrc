@@ -33,16 +33,7 @@ function source_test() {
 		|| false
 }
 
-# Append to sourced files array
-function sourced_append() {
-	BASH_SOURCE_FILES[${#BASH_SOURCE_FILES[@]}]=$1
-}
-
 for bash_file in ${bash_files[@]}; do
-	# Create absolute file path
-	bash_file="$bash_pre$bash_file"
-	BASH_FILES[${#BASH_FILES[@]}]=$bash_file
-
 	# Do not source if case and if test is true
 	case $bash_file in
 		secrets)
@@ -61,11 +52,18 @@ for bash_file in ${bash_files[@]}; do
 		*)
 			;;
 	esac
+
+	# Create absolute file path
+	bash_file="$bash_pre$bash_file"
+
+	# All files that can exist
+	BASH_FILES[${#BASH_FILES[@]}]=$bash_file
+
 	# Do not source if file do not exist
 	if source_test $bash_file; then
 		BASH_SOURCE_FILES[${#BASH_SOURCE_FILES[@]}]=$bash_file
 		# Source file
-		. $bash_file
+		source $bash_file
 	fi
 done
 
