@@ -2,7 +2,7 @@
 
 # Set number of spaces in tabs
 if $SHELL_INTERACTIVE; then
-	tabs 4 1>/dev/null
+	tabs 4
 fi
 
 # Don't put duplicate lines or lines starting with space in the history.
