@@ -180,26 +180,24 @@ endfunction
 let g:syntastic_c_checkers = ['gcc', 'mpicc']
 
 " NERDTree
-" Open NERDTree when vim starts up
-autocmd VimEnter * NERDTree
-" autocmd VimEnter * wincmd l
-let g:nerdtree_tabs_autofind=1
-" Open a NERDTree automatically when vim starts up if no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" Close vim if only NERDTree is open
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" Leader map for opening NERDTree
-nnoremap <leader>n :NERDTreeTabsToggle<CR>
 " NERDTree will be on new tab
 let g:nerdtree_tabs_open_on_console_startup=1
+" Do not display files
+let NERDTreeIgnore = ['\.pyc$', '__pycache__$']
+" Width in number of characters
+let NERDTreeWinSize = 20
+" Cleaner ui
+let NERDTreeMinimalUI = 1
+" Unicode arrows
+let NERDTreeDirArrows = 1
+
+" Leader map for opening NERDTree
+nnoremap <leader>n :NERDTreeTabsToggle<CR>
 " Leader for navigating vimsplit
 nnoremap <leader>j <C-W><C-J>
 nnoremap <leader>k <C-W><C-K>
 nnoremap <leader>l <C-W><C-L>
 nnoremap <leader>h <C-W><C-H>
-let NERDTreeIgnore = ['\.pyc$', '__pycache__$']
-let NERDTreeWinSize = 20
 
 " Vim git blame
 nnoremap <Leader>b :<C-u>call gitblame#echo()<CR>
