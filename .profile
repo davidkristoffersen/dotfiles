@@ -15,6 +15,7 @@ AfterEnum: true,
 
 export BROWSER="/usr/bin/firefox"
 export SYSTEMD_EDITOR="vim"
+export EDITOR="/usr/bin/vim"
 export MYVIMRC="$HOME/.vimrc"
 
 export LATEX_HEADER="$HOME/.config/latex/template.latex"
@@ -35,3 +36,5 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+export PROFILE_SOURCED=true

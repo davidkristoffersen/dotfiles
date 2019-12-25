@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Profile
+profile="$HOME/.profile"
+
 # Test source file names
 declare -a bash_files=( \
 	# Environment status exports
@@ -32,6 +35,11 @@ function source_test() {
 		&& true \
 		|| false
 }
+
+# Do not source if file do not exist and profile is not already sourced
+if source_test $profile && [ -z $PROFILE_SOURCED ]; then
+	source "$profile"
+fi
 
 for bash_file in ${bash_files[@]}; do
 	# Do not source if case and if test is true
