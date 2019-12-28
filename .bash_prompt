@@ -62,7 +62,6 @@ __prompt_command() {
 	fi
 
 	PS1+="$bpur$branch$rcol"
-	echo "`pwd`"
 	PS1+="$bblu$path$rcol "
 
 	# Color based exit status
