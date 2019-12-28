@@ -19,8 +19,38 @@ __prompt_command() {
 		branch=''
 	fi
 
-	local pre="$rcol"
-	local post="$rcol "
+	# Create truncated path
+	local path=""
+
+	local -a path_arr
+	IFS="/" read -ra path_arr <<< "$(pwd)"
+	local path_len="$((${#path_arr[@]}-1))"
+	local path_it=-1
+	local path_padd=2
+	if [ $path_len -eq 0 ]; then
+		path="/"
+	fi
+
+	for i in "${path_arr[@]}"; do
+		if [ $path_it -eq -1 ]; then
+			((path_it++))
+			continue
+		elif [ $path_len -gt $((path_padd * 2)) ]; then
+			if [ $path_it -lt $path_padd ]; then
+				path="$path/$i"
+			elif [ $path_it -gt $((path_len - $path_padd - 1)) ]; then
+				path="$path/$i"
+			elif [ $path_it -eq $path_padd ]; then
+				path="$path/..."
+			fi
+		else
+			path="$path/$i"
+		fi
+		((path_it++))
+	done
+
+	local pre="$rcol$byel╭─ $rcol"
+	local post="$rcol\n$byel╰─$rcol "
 
     PS1+="$pre"
 
@@ -32,7 +62,8 @@ __prompt_command() {
 	fi
 
 	PS1+="$bpur$branch$rcol"
-	PS1+="$bblu\W$rcol "
+	echo "`pwd`"
+	PS1+="$bblu$path$rcol "
 
 	# Color based exit status
     if [ $EXIT != 0 ]; then
