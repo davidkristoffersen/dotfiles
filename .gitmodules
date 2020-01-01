@@ -44,5 +44,5 @@
 	path = .vim/bundle/vim-trailing-whitespace
 	url = https://github.com/bronson/vim-trailing-whitespace.git
 [submodule ".vim/bundle/syntax"]
-	path = .vim/bundle/syntax
+	path = .vim/bundle/i3-syntax/
 	url = https://github.com/mboughaba/i3config.vim.git

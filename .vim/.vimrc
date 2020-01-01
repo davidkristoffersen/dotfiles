@@ -17,7 +17,7 @@ set mouse=a						" mouse integration
 " PATHOGEN PLUGINS
 " Set disabled plugins
 let g:pathogen_disabled = []
-" call add(g:pathogen_disabled, 'syntax')
+" call add(g:pathogen_disabled, 'i3-syntax')
 " Load all plugins
 execute pathogen#infect()
 
