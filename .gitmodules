@@ -46,3 +46,6 @@
 [submodule ".vim/bundle/syntax"]
 	path = .vim/bundle/i3-syntax/
 	url = https://github.com/mboughaba/i3config.vim.git
+[submodule ".vim/bundle/omnisharp-vim"]
+	path = .vim/bundle/omnisharp-vim
+	url = https://github.com/OmniSharp/omnisharp-vim.git
