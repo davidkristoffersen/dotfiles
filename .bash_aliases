@@ -16,11 +16,12 @@ alias srcbash="source $HOME/.bashrc"
 alias bashrc="vim $HOME/.bashrc"
 alias bashconfig="vim -p `echo $HOME/.bash* | xargs -n 1 | grep -ve ".bash_history\|.bash_logout" | xargs`"
 alias vimrc='vim $MYVIMRC'
+alias vim_plugins="cd $HOME/.config/config/.vim/bundle"
+alias config="cd $HOME/.config/config"
 
 alias c='clear'
 
 # Program specific
-alias ed_osucli="vim $HOME/scripts/osu/osucli.py"
 alias rip='gio trash'
 alias lock='i3lock-fancy -pf inconsolata'
 alias python='python3'
