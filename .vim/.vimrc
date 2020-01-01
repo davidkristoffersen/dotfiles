@@ -67,6 +67,8 @@ set breakindent						" Indents word-wrapped lines as much as the 'parent' line
 set formatoptions=l
 set lbr
 au Filetype python setl et ts=4 sw=4 softtabstop=4
+" Conf files have dosini syntax
+au BufEnter,BufRead *.conf setf dosini
 
 " UNDO HISTORY
 set undofile                    " use an undo file
