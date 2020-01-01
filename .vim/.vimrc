@@ -14,9 +14,15 @@
 set clipboard=unnamedplus		" OS-wide clipboard
 set mouse=a						" mouse integration
 
+" PATHOGEN PLUGINS
+" Set disabled plugins
+let g:pathogen_disabled = []
+" call add(g:pathogen_disabled, 'syntax')
+" Load all plugins
+execute pathogen#infect()
+
 " GENERAL
 set nocompatible				" disable compatibility
-execute pathogen#infect()
 set encoding=utf-8
 filetype off
 " filetype plugin indent on		" file specific scripts
