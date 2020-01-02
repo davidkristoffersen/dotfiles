@@ -69,6 +69,8 @@ set lbr
 au Filetype python setl et ts=4 sw=4 softtabstop=4
 " Conf files have dosini syntax
 au BufEnter,BufRead *.conf setf dosini
+" Rasi files have css syntax
+au BufEnter,BufRead *.rasi setf css
 
 " UNDO HISTORY
 set undofile                    " use an undo file
