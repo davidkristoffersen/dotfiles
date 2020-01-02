@@ -1,0 +1,212 @@
+configuration {
+	/* Enabled modi */
+	/* modi:                           "window,run,ssh"; */
+	/* Window opacity */
+	/* opacity:                        "100"; */
+	/* Window width */
+	/* width:                          "50"; */
+	/* Number of lines */
+	/* lines:                          "15"; */
+	/* Number of columns */
+	/* columns:                        "1"; */
+	/* Font to use */
+	/* font:                           "mono 12"; */
+	/* Color scheme for normal row */
+	/* color-normal:                   "#fdf6e3,#002b36,#eee8d5,#586e75,#eee8d5"; */
+	/* Color scheme for urgent row */
+	/* color-urgent:                   "#fdf6e3,#dc322f,#eee8d5,#dc322f,#fdf6e3"; */
+	/* Color scheme for active row */
+	/* color-active:                   "#fdf6e3,#268bd2,#eee8d5,#268bd2,#fdf6e3"; */
+	/* Color scheme window */
+	/* color-window:                   "#fdf6e3,#002b36"; */
+	/* Border width */
+	/* bw:                             "1"; */
+	/* Location on screen */
+	/* location:                       "0"; */
+	/* Padding */
+	/* padding:                        "5"; */
+	/* Y-offset relative to location */
+	/* yoffset:                        "0"; */
+	/* X-offset relative to location */
+	/* xoffset:                        "0"; */
+	/* Always show number of lines */
+	/* fixed-num-lines:                "false"; */
+	/* Terminal to use */
+	/* terminal:                       "rofi-sensible-terminal"; */
+	/* Ssh client to use */
+	/* ssh-client:                     "ssh"; */
+	/* Ssh command to execute */
+	/* ssh-command:                    "{terminal} -e {ssh-client} {host}"; */
+	/* Run command to execute */
+	/* run-command:                    "{cmd}"; */
+	/* Command to get extra run targets */
+	/* run-list-command:				""; */
+	/* Run command to execute that runs in shell */
+	/* run-shell-command:              "{terminal} -e {cmd}"; */
+	/* Command executed on accep-entry-custom for window modus */
+	/* window-command:                 "xkill -id {window}"; */
+	/* Disable history in run/ssh */
+	/* disable-history:                "false"; */
+	/* Use levenshtein sorting */
+	/* levenshtein-sort:               "false"; */
+	/* Set case-sensitivity */
+	/* case-sensitive:                 "false"; */
+	/* Cycle through the results list */
+	/* cycle:                          "true"; */
+	/* Enable sidebar-mode */
+	/* sidebar-mode:                   "false"; */
+	/* Row height (in chars) */
+	/* eh:                             "1"; */
+	/* Enable auto select mode */
+	/* auto-select:                    "false"; */
+	/* Parse hosts file for ssh mode */
+	/* parse-hosts:                    "false"; */
+	/* Parse known_hosts file for ssh mode */
+	/* parse-known-hosts:              "true"; */
+	/* Set the modi to combine in combi mode */
+	/* combi-modi:                     "window,run"; */
+	/* Do a more fuzzy matching */
+	/* fuzzy:                          "false"; */
+	/* Use glob matching */
+	/* glob:                           "false"; */
+	/* Use regex matching */
+	/* regex:                          "false"; */
+	/* Tokenize input string */
+	/* tokenize:                       "true"; */
+	/* Monitor id to show on */
+	/* m:                              "-1"; */
+	/* Margin between rows */
+	/* line-margin:                    "2"; */
+	/* Pre-set filter */
+	/* filter:							""; */
+	/* Separator style (none, dash, solid) */
+	/* separator-style:                "dash"; */
+	/* Hide scroll-bar */
+	/* hide-scrollbar:                 "false"; */
+	/* Fullscreen */
+	/* fullscreen:                     "false"; */
+	/* Fake transparency */
+	/* fake-transparency:              "false"; */
+	/* DPI */
+	/* dpi:                            "-1"; */
+	/* Threads to use for string matching */
+	/* threads:                        "1"; */
+	/* Scrollbar width */
+	/* scrollbar-width:                "8"; */
+	/* Scrolling method. (0: Page, 1: Centered) */
+	/* scroll-method:                  "0"; */
+	/* Background to use for fake transparency. (background or screenshot) */
+	/* fake-background:                "screenshot"; */
+	/* Pidfile location */
+	/* pid:                            "/run/user/1000/pid"; */
+	/* Paste primary selection */
+	/* kb-primary-paste:               "Control+Shift+v,Shift+Insert"; */
+	/* Paste clipboard */
+	/* kb-secondary-paste:             "Control+v,Insert"; */
+	/* Clear input line */
+	/* kb-clear-line:                  "Control+u"; */
+	/* Beginning of line */
+	/* kb-move-front:                  "Control+a"; */
+	/* End of line */
+	/* kb-move-end:                    "Control+e"; */
+	/* Move back one word */
+	/* kb-move-word-back:              "Alt+b"; */
+	/* Move forward one word */
+	/* kb-move-word-forward:           "Alt+f"; */
+	/* Move back one char */
+	/* kb-move-char-back:              "Left,Control+b"; */
+	/* Move forward one char */
+	/* kb-move-char-forward:           "Right,Control+f"; */
+	/* Delete previous word */
+	/* kb-remove-word-back:            "Control+Alt+h,Control+Backspace"; */
+	/* Delete next word */
+	/* kb-remove-word-forward:         "Control+Alt+d"; */
+	/* Delete next char */
+	/* kb-remove-char-forward:         "Delete,Control+d"; */
+	/* Delete previous char */
+	/* kb-remove-char-back:            "BackSpace,Control+h"; */
+	/* Accept entry */
+	/* kb-accept-entry:                "Control+j,Control+m,Return,KP_Enter"; */
+	/* Use entered text as command (in ssh/run modi) */
+	/* kb-accept-custom:               "Control+Return,Shift+Return"; */
+	/* Delete entry from history */
+	/* kb-delete-entry:                "Shift+Delete"; */
+	/* Switch to the next mode. */
+	/* kb-mode-next:                   "Shift+Right,Control+Tab"; */
+	/* Switch to the previous mode. */
+	/* kb-mode-previous:               "Shift+Left,Control+Shift+Tab"; */
+	/* Go to the previous column */
+	/* kb-row-left:                    "Control+Page_Up"; */
+	/* Go to the next column */
+	/* kb-row-right:                   "Control+Page_Down"; */
+	/* Select previous entry */
+	/* kb-row-up:                      "Up,Control+p,Shift+Tab,Shift+ISO_Left_Tab"; */
+	/* Select next entry */
+	/* kb-row-down:                    "Down,Control+n,Tab"; */
+	/* Go to next row, if one left, accept it, if no left next mode. */
+	/* kb-row-tab:                     "Tab"; */
+	/* Go to the previous page */
+	/* kb-page-prev:                   "Page_Up"; */
+	/* Go to the next page */
+	/* kb-page-next:                   "Page_Down"; */
+	/* Go to the first entry */
+	/* kb-row-first:                   "Home,KP_Home"; */
+	/* Go to the last entry */
+	/* kb-row-last:                    "End,KP_End"; */
+	/* Set selected item as input text */
+	/* kb-row-select:                  "Control+space"; */
+	/* Take a screenshot of the rofi window */
+	/* kb-screenshot:                  "Alt+Shift+S"; */
+	/* Toggle case sensitivity */
+	/* kb-toggle-case-sensitivity:     "grave,dead_grave"; */
+	/* Toggle sort */
+	/* kb-toggle-sort:                 "Alt+grave"; */
+	/* Quit rofi */
+	/* kb-cancel:                      "Escape,Control+bracketleft"; */
+	/* Custom keybinding 1 */
+	/* kb-custom-1:                    "Alt+1"; */
+	/* Custom keybinding 2 */
+	/* kb-custom-2:                    "Alt+2"; */
+	/* Custom keybinding 3 */
+	/* kb-custom-3:                    "Alt+3"; */
+	/* Custom keybinding 4 */
+	/* kb-custom-4:                    "Alt+4"; */
+	/* Custom Keybinding 5 */
+	/* kb-custom-5:                    "Alt+5"; */
+	/* Custom keybinding 6 */
+	/* kb-custom-6:                    "Alt+6"; */
+	/* Custom Keybinding 7 */
+	/* kb-custom-7:                    "Alt+7"; */
+	/* Custom keybinding 8 */
+	/* kb-custom-8:                    "Alt+8"; */
+	/* Custom keybinding 9 */
+	/* kb-custom-9:                    "Alt+9"; */
+	/* Custom keybinding 10 */
+	/* kb-custom-10:                   "Alt+0"; */
+	/* Custom keybinding 11 */
+	/* kb-custom-11:                   "Alt+Shift+1"; */
+	/* Custom keybinding 12 */
+	/* kb-custom-12:                   "Alt+Shift+2"; */
+	/* Csutom keybinding 13 */
+	/* kb-custom-13:                   "Alt+Shift+3"; */
+	/* Custom keybinding 14 */
+	/* kb-custom-14:                   "Alt+Shift+4"; */
+	/* Custom keybinding 15 */
+	/* kb-custom-15:                   "Alt+Shift+5"; */
+	/* Custom keybinding 16 */
+	/* kb-custom-16:                   "Alt+Shift+6"; */
+	/* Custom keybinding 17 */
+	/* kb-custom-17:                   "Alt+Shift+7"; */
+	/* Custom keybinding 18 */
+	/* kb-custom-18:                   "Alt+Shift+8"; */
+	/* Custom Keybinding 19 */
+	/* kb-custom-19:                   "Alt+Shift+9"; */
+	/* The display name of this browser */
+	/* display-ssh:					""; */
+	/* The display name of this browser */
+	/* display-run:					""; */
+	/* The display name of this browser */
+	/* display-drun:					""; */
+	/* The display name of this browser */
+	/* display-combi:					""; */
+}
