@@ -1,12 +1,6 @@
 #!/bin/bash
 
 #
-# Pre profile
-#
-
-echo "Sourcing profile"
-
-#
 # Exports
 #
 
@@ -64,10 +58,3 @@ path_add "$HOME/.cargo/bin"
 
 # Make path global
 export PATH="$PATH"
-
-#
-# Post profile
-#
-
-# Profile is now sourced
-export PROFILE_IS_SOURCED=true

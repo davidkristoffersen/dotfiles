@@ -36,8 +36,8 @@ function source_test() {
 		|| false
 }
 
-# Do not source if file do not exist and profile is not already sourced
-if source_test $profile && [ -z $PROFILE_SOURCED ]; then
+# Source profile if debug mode is enabled
+if source_test $profile && `debug_bash.sh -k debug_profile`; then
 	source "$profile"
 fi
 
