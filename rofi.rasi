@@ -1,6 +1,6 @@
 configuration {
 	/* Enabled modi */
-	/* modi:                           "window,run,ssh"; */
+	modi:                           "window,drun";
 	/* Window opacity */
 	/* opacity:                        "100"; */
 	/* Window width */
@@ -22,11 +22,11 @@ configuration {
 	/* Border width */
 	/* bw:                             "1"; */
 	/* Location on screen */
-	/* location:                       "0"; */
+	/* location:                       north; */
 	/* Padding */
 	/* padding:                        "5"; */
 	/* Y-offset relative to location */
-	/* yoffset:                        "0"; */
+	/* y-offset:                        0%; */
 	/* X-offset relative to location */
 	/* xoffset:                        "0"; */
 	/* Always show number of lines */
@@ -210,3 +210,5 @@ configuration {
 	/* The display name of this browser */
 	/* display-combi:					""; */
 }
+
+@import "/home/david/.local/share/rofi/themes/flat-orange.rasi"
