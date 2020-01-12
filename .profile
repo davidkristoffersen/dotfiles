@@ -24,7 +24,7 @@ export EDITOR="/usr/bin/vim"
 export MYVIMRC="$HOME/.vimrc"
 
 # Applications
-export BROWSER="/usr/bin/firefox"
+export BROWSER="/usr/bin/chromium"
 
 # Widget toolkits
 # Configurator
