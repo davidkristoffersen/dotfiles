@@ -101,8 +101,19 @@ let mapleader = " "
 set timeout ttimeoutlen=50
 
 " Extended normal mode commands
-noremap <leader>jj 20j
-noremap <leader>kk 20k
+noremap <leader>jj :call ManyDown()<cr>
+noremap <leader>kk :call ManyUp()<cr>
+
+function! g:ManyDown()
+	for i in range(50)
+		exec "normal j\<C-e>"
+	endfor
+endfunction
+function! g:ManyUp()
+	for i in range(50)
+		exec "normal k\<C-y>"
+	endfor
+endfunction
 
 " Remove soft tabs
 nmap <leader>T :%s/\s\s\s\s/\t/g<cr>
