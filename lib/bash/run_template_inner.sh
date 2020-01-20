@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Bash script for gitlab-runner commands
 
 ######################
@@ -13,6 +13,8 @@ function help_vars() {
 	reset_col="\e[m"
 	script="$(basename "$0")"
 	title_name="$title_col$script$1:$reset_col"
+	completion_file="$HOME/.bash_completion.d/_$script"
+	touch $completion_file
 }
 
 function help_init() {
@@ -36,6 +38,8 @@ function help_init() {
 	options_arr_multies=()
 	options_arr_infos=()
 	options_arr_datas=()
+	completion_flags=""
+
 	add_option -s h -m help -i "Print this help message."
 	add_option -m print_args -i "Print argument values."
 }
@@ -102,6 +106,11 @@ function add_option() {
 		add_option_help
 	fi
 
+	if [ ! -z "$_single" ]; then
+		completion_flags+="-$_single "
+	fi
+	completion_flags+="--$_multi "
+
 	options_arr_singles+=("$_single")
 	options_arr_multies+=("$_multi")
 	options_arr_infos+=("$_info")
@@ -162,7 +171,24 @@ function help_print() {
 #   Argument parsing	#
 #########################
 
+function generate_completion_file() {
+	completion_src="$(which $0)"
+	if [ $? -eq 0 ]; then
+		completion_src=$script
+	fi
+	echo -e "#!/usr/bin/env bash\n\
+\n\
+function compl() {\n\
+	local flags=\"\$(echo -e \"$completion_flags\")\"\n\
+	COMPREPLY=(\$(compgen -W \"\$flags\" -- \"\${COMP_WORDS[COMP_CWORD]}\"))\n\
+}\n\
+\n\
+complete -o nosort -F compl $completion_src" > $completion_file
+}
+
 function arg_parse_pre() {
+	generate_completion_file
+	. $completion_file
 	POSITIONAL=()
 }
 

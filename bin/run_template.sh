@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Source inner template
 . "$HOME/.local/lib/bash/run_template_inner.sh"
