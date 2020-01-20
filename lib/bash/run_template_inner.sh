@@ -143,7 +143,10 @@ function help_strings() {
 			options="$options${option_col} <${options_arr_datas[i]}>$reset_col"
 		fi
 		if [ ! -z "${options_arr_infos[i]}" ]; then
-			options="$options\n\t\t\t${options_arr_infos[i]}"
+			lines="$(echo -e "${options_arr_infos[$i]}")"
+			while IFS= read -r line; do
+				options="$options\n\t\t\t$line"
+			done <<< "$lines"
 		fi
 	done
 }
