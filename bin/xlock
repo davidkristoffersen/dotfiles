@@ -1,0 +1,20 @@
+#!/bin/bash
+
+tmpdir="/tmp/"
+image="$HOME/.local/share/icons/xlock/locked.png"
+
+sh "$HOME/.local/lib/xlock/individual_lock.sh"
+
+convert $tmpdir/head_0.png -scale 10% -scale 1000% $tmpdir/head_0.png
+
+[[ -f $image ]] && convert $tmpdir/head_0.png $image -gravity center -composite -matte $tmpdir/head_0.png
+
+if [ -e $tmpdir/head_1.png ]; then
+	convert $tmpdir/head_1.png -scale 10% -scale 1000% $tmpdir/head_1.png
+	[[ -f $image ]] && convert $tmpdir/head_1.png $image -gravity center -composite -matte $tmpdir/head_1.png
+	convert $tmpdir/head_0.png $tmpdir/head_1.png +append $tmpdir/screen.png
+else
+	mv $tmpdir/head_0.png $tmpdir/screen.png
+fi
+
+i3lock -u -i $tmpdir/screen.png
