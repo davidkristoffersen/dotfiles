@@ -173,6 +173,10 @@ function print_args() {
 	done
 }
 
+function key_exists() {
+	eval '[ ${'args'[$1]+true} ]'
+}
+
 function arg_parse() {
 	local single=""
 	local multi=""
@@ -182,12 +186,14 @@ function arg_parse() {
 	while [[ $# -gt 0 ]]; do
 		local hit=false
 		opt="$1"
+		# echo "OPT: $opt"
 		for ((i = 0; i < "${#options_arr_singles[@]}"; i += 1)); do
 			local single="${options_arr_singles[i]}"
 			local multi="${options_arr_multies[i]}"
 			local data="${options_arr_datas[i]}"
+			# echo "-$single, --$multi <$data>"
 			if [ "$opt" == "-$single" ] || [ "$opt" == "--$multi" ]; then
-				if [ ${args[$multi]+true} ] && ${args[$multi]}; then
+				if [ ${args[$multi]+true} ]; then
 					echo -e "Argument already exists: '$opt'\n" >&2
 					help
 				fi
@@ -202,21 +208,19 @@ function arg_parse() {
 					args[$multi]=true
 				fi
 				local hit=true
-			elif ! [ ${args[$multi]+true} ]; then
-				args[$multi]=false
 			fi
 		done
 
 		if ! $hit; then
 			echo -e "Invalid argument: '$opt'\n" >&2
 			help
-		elif ${args[help]}; then
+		elif key_exists help; then
 			help
 		fi
 		shift
 	done
 
-	if ${args[print_args]}; then
+	if key_exists print_args; then
 		print_args
 	fi
 }
