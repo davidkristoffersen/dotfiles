@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-src="$XDG_DATA_HOME/bash-metadata.json"
+src="$XDG_DATA_HOME/bash-metadata/vars.json"
 
 function help() {
 	echo -e "Usage: ./debug_bash.sh -[kps] [ARGS]..."
