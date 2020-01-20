@@ -178,12 +178,12 @@ function generate_completion_file() {
 	fi
 	echo -e "#!/usr/bin/env bash\n\
 \n\
-function compl() {\n\
+function _$completion_file() {\n\
 	local flags=\"\$(echo -e \"$completion_flags\")\"\n\
 	COMPREPLY=(\$(compgen -W \"\$flags\" -- \"\${COMP_WORDS[COMP_CWORD]}\"))\n\
 }\n\
 \n\
-complete -o nosort -F compl $completion_src" > $completion_file
+complete -o nosort -F _$completion_file $completion_src" > $completion_file
 }
 
 function arg_parse_pre() {
@@ -221,7 +221,7 @@ function arg_parse() {
 			local multi="${options_arr_multies[i]}"
 			local data="${options_arr_datas[i]}"
 			# echo "-$single, --$multi <$data>"
-			if [ "$opt" == "-$single" ] || [ "$opt" == "--$multi" ]; then
+			if ([ ! -z "$single" ] && [ "$opt" == "-$single" ]) || [ "$opt" == "--$multi" ]; then
 				if [ ${args[$multi]+true} ]; then
 					echo -e "Argument already exists: '$opt'\n" >&2
 					help
