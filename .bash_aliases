@@ -26,3 +26,4 @@ alias rip='gio trash'
 alias lock='i3lock-fancy -pf inconsolata'
 alias python='python3'
 alias pcloud_start='pcloud > /dev/null 2>&1 &'
+alias vless="$PAGER"
