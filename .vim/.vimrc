@@ -15,9 +15,29 @@ set clipboard=unnamedplus		" OS-wide clipboard
 set mouse=a						" mouse integration
 
 " PATHOGEN PLUGINS
+let g:pathogen_plugins = system("ls -A1 $HOME/.vim/bundle")
 " Set disabled plugins
 let g:pathogen_disabled = []
 " call add(g:pathogen_disabled, 'i3-syntax')
+" call add(g:pathogen_disabled, 'ale')
+" call add(g:pathogen_disabled, 'git-blame')
+" call add(g:pathogen_disabled, 'i3-syntax')
+call add(g:pathogen_disabled, 'nerdtree')
+call add(g:pathogen_disabled, 'nerdtree-git-plugin')
+call add(g:pathogen_disabled, 'omnisharp-vim')
+" call add(g:pathogen_disabled, 'syntastic')
+" call add(g:pathogen_disabled, 'tagbar')
+" call add(g:pathogen_disabled, 'vim-airline')
+" call add(g:pathogen_disabled, 'vim-airline-themes')
+" call add(g:pathogen_disabled, 'vim-commenter')
+" call add(g:pathogen_disabled, 'vim-fugitive')
+" call add(g:pathogen_disabled, 'vim-indent-guides')
+" call add(g:pathogen_disabled, 'vim-javascript')
+" call add(g:pathogen_disabled, 'vim-jsx')
+call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
+" call add(g:pathogen_disabled, 'vimpager')
+" call add(g:pathogen_disabled, 'vim-trailing-whitespace')
+
 " Load all plugins
 execute pathogen#infect()
 
@@ -143,6 +163,12 @@ nnoremap <leader>] :tabn<cr>
 " Move tab prev
 nnoremap <leader>[ :tabp<cr>
 
+" Leader for navigating vimsplit
+nnoremap <leader>j <C-W><C-J>
+nnoremap <leader>k <C-W><C-K>
+nnoremap <leader>l <C-W><C-L>
+nnoremap <leader>h <C-W><C-H>
+
 " Comment out/in line
 nnoremap <leader>c :call CommenterToggle()<cr>
 
@@ -209,92 +235,115 @@ function! g:Toggle_val(cmd)
     endif
 endfunction
 
+"
 " PLUGINS
-
-" Syntastic
-let g:syntastic_c_checkers = ['gcc', 'mpicc']
-
-" NERDTree
-" NERDTree will be on new tab
-let g:nerdtree_tabs_open_on_console_startup=1
-" Do not display files
-let NERDTreeIgnore = ['\.pyc$', '__pycache__$']
-" Width in number of characters
-let NERDTreeWinSize = 20
-" Cleaner ui
-let NERDTreeMinimalUI = 1
-" Unicode arrows
-let NERDTreeDirArrows = 1
-
-" Leader map for opening NERDTree
-nnoremap <leader>n :NERDTreeTabsToggle<CR>
-" Leader for navigating vimsplit
-nnoremap <leader>j <C-W><C-J>
-nnoremap <leader>k <C-W><C-K>
-nnoremap <leader>l <C-W><C-L>
-nnoremap <leader>h <C-W><C-H>
-
-" Vim git blame
-nnoremap <Leader>b :<C-u>call gitblame#echo()<CR>
-
-" PinFold Make plugin! :)
-"augroup pythonFold
-"	autocmd!
-"	autocmd BufReadPre *.py setlocal foldmethod=indent
-"	autocmd CursorMovedI *.py call LightlineContext()
-"	autocmd CursorMoved *.py call LightlineContext()
-"augroup END
 "
-"function! PinFold()
-"	" save current position
-"	let saveCursor = getcurpos()
-"	" Go to upper split, open all folds and go to the same line as bottom split
-"	wincmd k
-"	normal! zR
-"	execute "normal! " . saveCursor[1] . "G"
-"	" Go to the beginning of the fold and put the line top of the upper split
-"	normal! [zkk
-"	normal! zt
-"	let contextline=getline('.')
-"	" Go back to bottom split and restore position
-"	wincmd j
-"	call setpos('.', saveCursor)
-"	return contextline
-"endfunction
-"
-"function! LightlineContext()
-"	return PinFold()
-"endfunction
 
-" Indent Guides
-let g:indent_guides_enable_on_vim_startup = 1
+" SYNTASTIC
+function! g:Plugin_syntastic()
+	let g:syntastic_c_checkers = ['gcc', 'mpicc']
+endfunction
 
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=235
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=239
+" NERDTREE
+function! g:Plugin_nerdtree()
+	" NERDTree will be on new tab
+	let g:nerdtree_tabs_open_on_console_startup=1
+	" Do not display files
+	let NERDTreeIgnore = ['\.pyc$', '__pycache__$']
+	" Width in number of characters
+	let NERDTreeWinSize = 20
+	" Cleaner ui
+	let NERDTreeMinimalUI = 1
+	" Unicode arrows
+	let NERDTreeDirArrows = 1
 
-let g:indent_guides_start_level=1
-let g:indent_guides_guide_size=1
+	" Leader map for opening NERDTree
+	nnoremap <leader>n :NERDTreeTabsToggle<CR>
+endfunction
 
-" Tagbar
-nmap <leader>t :TagbarToggle<CR>
+" VIM GIT BLAME
+function! g:Plugin_git_blame()
+	nnoremap <Leader>b :<C-u>call gitblame#echo()<CR>
+endfunction
 
-" Vim trailing whitespace
-nmap <leader>F :FixWhitespace<CR>
+" INDENT GUIDES
+function! g:Plugin_vim_indent_guides()
+	let g:indent_guides_enable_on_vim_startup = 1
 
-" Omnisharp
-" Use the stdio version of OmniSharp-roslyn:
-let g:OmniSharp_server_stdio = 1
-" Update semantic highlighting after all text changes
-let g:OmniSharp_highlight_types = 3
-" Timeout in seconds to wait for a response from the server
-let g:OmniSharp_timeout = 5
-" Set desired preview window height for viewing documentation.
-set previewheight=5
-" Don't autoselect first omnicomplete option, show options even if there is only one
-" Remove 'preview' if you don't want to see any documentation whatsoever.
-set completeopt=longest,menuone,preview
+	let g:indent_guides_auto_colors = 0
+	autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=235
+	autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=239
 
-" Ale
-" Tell ALE to use OmniSharp for linting C# files, and no other linters.
-let g:ale_linters = { 'cs': ['OmniSharp'] }
+	let g:indent_guides_start_level=1
+	let g:indent_guides_guide_size=1
+endfunction
+
+" TAGBAR
+function! g:Plugin_tagbar()
+	nmap <leader>t :TagbarToggle<CR>
+	endfunction
+
+	" VIM TRAILING WHITESPACE
+	function! g:Plugin_vim_trailing_whitespace()
+	nmap <leader>F :FixWhitespace<CR>
+endfunction
+
+" OMNISHARP
+function! g:Plugin_omnisharp_vim()
+	" Use the stdio version of OmniSharp-roslyn:
+	let g:OmniSharp_server_stdio = 1
+	" Update semantic highlighting after all text changes
+	let g:OmniSharp_highlight_types = 3
+	" Timeout in seconds to wait for a response from the server
+	let g:OmniSharp_timeout = 5
+	" Set desired preview window height for viewing documentation.
+	set previewheight=5
+	" Don't autoselect first omnicomplete option, show options even if there is only one
+	" Remove 'preview' if you don't want to see any documentation whatsoever.
+	set completeopt=longest,menuone,preview
+endfunction
+
+" ALE
+function! g:Plugin_ale()
+	" Tell ALE to use OmniSharp for linting C# files, and no other linters.
+	let g:ale_linters = { 'cs': ['OmniSharp'] }
+endfunction
+
+" VIMPAGER
+function! g:Plugin_vimpager()
+	if !exists('g:vimpager')
+	  let g:vimpager = {}
+	endif
+
+	if !exists('g:less')
+	  let g:less     = {}
+	endif
+	let g:less.enabled = 0
+endfunction
+
+" PLUGINS MANAGEMENT
+" Run plugins that are not disabled
+function! Run_plugins()
+	for l:plugin in split(g:pathogen_plugins)
+		let l:skip = 0
+		for l:disabled in g:pathogen_disabled
+			if l:plugin == l:disabled
+				let l:skip = 1
+				continue
+			endif
+		endfor
+		if l:skip
+			continue
+		endif
+
+		" Replace all '-' with '_'
+		let l:fplugin = substitute(l:plugin, "-", "_", "g")
+		let l:fplugin = "g:Plugin_" . l:fplugin
+
+		" Run function if it exists
+		if eval("exists(\"*" . l:fplugin . "\")")
+			exec "call " . l:fplugin . "()"
+		endif
+	endfor
+endfunction
+call Run_plugins()
