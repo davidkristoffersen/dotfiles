@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
+cd "$(dirname "$0")"
+
 # Bash script for gitlab-runner commands
 
-######################
-#   HELP FUNCTIONS   #
-######################
+########################
+#   CONFIG VARIABLES   #
+########################
 
 # Help menu variables
 function help_vars() {
@@ -13,13 +15,36 @@ function help_vars() {
 	reset_col="\e[m"
 	script="$(basename "$0")"
 	title_name="$title_col$script$1:$reset_col"
-	completion_file="$HOME/.bash_completion.d/_$script"
-	completion_file_raw="\$HOME/.bash_completion.d/_$script"
+}
+
+function completion_vars() {
+	completion_enable=true
+	completion_path="$HOME/.bash_completion.d"
+}
+
+######################
+#   HELP FUNCTIONS   #
+######################
+
+function completion_parse() {
+	completion_src="$(pwd)/$script"
+	completion_script="$script"
+
+	completion_format="$(pwd | cut -c 2- | tr / -)"
+	completion_file="$completion_path/$completion_format-completion_file_$script"
+	completion_func="$completion_format-completion_func_$script"
+
+	mkdir -p "$completion_path"
 	touch $completion_file
 }
 
 function help_init() {
 	help_vars
+
+	completion_vars
+	if $completion_enable; then
+		completion_parse
+	fi
 
 	title_body="Example title body"
 	if [ ! -z "$1" ]; then
@@ -173,21 +198,26 @@ function help_print() {
 #########################
 
 function generate_completion_file() {
-	completion_src="$(which $0)"
-	if [ $? -eq 0 ]; then
-		completion_src=$script
-	fi
 	echo -e "#!/usr/bin/env bash
-eval \"function _$completion_file_raw() {
-	local flags=\\\"\\\$(echo -e \\\"$completion_flags\\\")\\\"
-	COMPREPLY=(\\\$(compgen -W \\\"\\\$flags\\\" -- \\\"\\\${COMP_WORDS[COMP_CWORD]}\\\"))
-}\"
+function $completion_func() {
+	local src=\"$completion_src\"
+	local caller=\"\$(readlink -f \"\$1\")\"
 
-complete -o nosort -F _$completion_file_raw $completion_src" > $completion_file
+	if [ \"\$caller\" == \"\$src\" ]; then
+		local flags=\"$completion_flags\"
+		COMPREPLY=(\$(compgen -W \"\$flags\" -- \"\${COMP_WORDS[COMP_CWORD]}\"))
+	fi
+}
+
+complete -o nosort -F $completion_func $completion_script
+complete -o nosort -F $completion_func ./$completion_script
+" > $completion_file
 }
 
 function arg_parse_pre() {
-	generate_completion_file
+	if $completion_enable; then
+		generate_completion_file
+	fi
 	POSITIONAL=()
 }
 
