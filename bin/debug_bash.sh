@@ -26,9 +26,9 @@ function set_val() {
 }
 
 if key_exists key; then
-	jq ".${args[key]}" $src
+	jq ".$(get_key key)" $src
 elif key_exists profile; then
-	if `get_val debug_profile`; then
+	if $(get_val debug_profile); then
 		set_val debug_profile false
 	else
 		set_val debug_profile true
