@@ -202,7 +202,7 @@ function generate_completion_file() {
 function $completion_func() {
 	local src=\"$completion_src\"
 	local caller=\"\$(readlink -f \"\$1\")\"
-	local in_path=\"$(which $script)\"
+	local in_path=\"$(which $script 2>&1)\"
 
 	if [ \"\$caller\" == \"\$src\" ] || [ -x \"\$in_path\" ]; then
 		local flags=\"$completion_flags\"
