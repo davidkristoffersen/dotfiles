@@ -14,6 +14,7 @@ function help_vars() {
 	script="$(basename "$0")"
 	title_name="$title_col$script$1:$reset_col"
 	completion_file="$HOME/.bash_completion.d/_$script"
+	completion_file_raw="\$HOME/.bash_completion.d/_$script"
 	touch $completion_file
 }
 
@@ -176,19 +177,17 @@ function generate_completion_file() {
 	if [ $? -eq 0 ]; then
 		completion_src=$script
 	fi
-	echo -e "#!/usr/bin/env bash\n\
-\n\
-function _$completion_file() {\n\
-	local flags=\"\$(echo -e \"$completion_flags\")\"\n\
-	COMPREPLY=(\$(compgen -W \"\$flags\" -- \"\${COMP_WORDS[COMP_CWORD]}\"))\n\
-}\n\
-\n\
-complete -o nosort -F _$completion_file $completion_src" > $completion_file
+	echo -e "#!/usr/bin/env bash
+eval \"function _$completion_file_raw() {
+	local flags=\\\"\\\$(echo -e \\\"$completion_flags\\\")\\\"
+	COMPREPLY=(\\\$(compgen -W \\\"\\\$flags\\\" -- \\\"\\\${COMP_WORDS[COMP_CWORD]}\\\"))
+}\"
+
+complete -o nosort -F _$completion_file_raw $completion_src" > $completion_file
 }
 
 function arg_parse_pre() {
 	generate_completion_file
-	. $completion_file
 	POSITIONAL=()
 }
 
@@ -206,6 +205,14 @@ function key_exists() {
 	eval '[ ${'args'[$1]+true} ]'
 }
 
+function get_key() {
+	if key_exists $1; then
+		echo "${args[$1]}"
+	else
+		echo false
+	fi
+}
+
 function arg_parse() {
 	local single=""
 	local multi=""
@@ -215,25 +222,40 @@ function arg_parse() {
 	while [[ $# -gt 0 ]]; do
 		local hit=false
 		opt="$1"
+		local opt_flag
+		local opt_data
+		IFS='=' read -r opt_flag opt_data <<< "$opt"
+		if [ ! -z "$opt_data" ]; then
+			opt="$opt_flag"
+		fi
+
 		# echo "OPT: $opt"
 		for ((i = 0; i < "${#options_arr_singles[@]}"; i += 1)); do
 			local single="${options_arr_singles[i]}"
 			local multi="${options_arr_multies[i]}"
 			local data="${options_arr_datas[i]}"
 			# echo "-$single, --$multi <$data>"
+
 			if ([ ! -z "$single" ] && [ "$opt" == "-$single" ]) || [ "$opt" == "--$multi" ]; then
 				if [ ${args[$multi]+true} ]; then
 					echo -e "Argument already exists: '$opt'\n" >&2
 					help
 				fi
 				if [ ! -z "$data" ]; then
-					if [ -z "$2" ]; then
+					if [ ! -z "$opt_data" ]; then
+						args[$multi]="$opt_data"
+					elif [ -z "$2" ]; then
 						echo -e "Data option must have an argument: $opt" >&2
 						help
+					else
+						args[$multi]="$2"
+						shift
 					fi
-					args[$multi]="$2"
-					shift
 				else
+					if [ ! -z "$opt_data" ]; then
+						echo -e "Non data option cannot have an argument: $opt" >&2
+						help
+					fi
 					args[$multi]=true
 				fi
 				local hit=true
