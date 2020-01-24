@@ -295,6 +295,11 @@ function arg_parse_pre() {
 	POSITIONAL=()
 }
 
+function vcp() {
+	eval "$2_string=\$(declare -p $2)"
+	eval "declare -gA $1=\"\${$2_string#*=}\""
+}
+
 function arg_parse_post() {
 	set -- "${POSITIONAL[@]}"
 }
@@ -318,11 +323,13 @@ function get_key() {
 }
 
 function arg_parse() {
+	# Tmp global vars
 	local _single=""
 	local _multi=""
 	local _data=""
 	local _hit=false
-	declare -gA args=()
+	declare -A _args=()
+
 	while [[ $# -gt 0 ]]; do
 		local _opt="$1"
 		local _opt_flag
@@ -341,18 +348,18 @@ function arg_parse() {
 			# echo "-$_single, --$_multi <$_data>"
 
 			if ([ ! -z "$_single" ] && [ "$_opt" == "-$_single" ]) || [ "$_opt" == "--$_multi" ]; then
-				if [ ${args[$_multi]+true} ]; then
+				if [ ${_args[$_multi]+true} ]; then
 					echo -e "Argument already exists: '$_opt'\n" >&2
 					help
 				fi
 				if [ ! -z "$_data" ]; then
 					if [ ! -z "$_opt_data" ]; then
-						args[$_multi]="$_opt_data"
+						_args[$_multi]="$_opt_data"
 					elif [ -z "$2" ]; then
 						echo -e "Data option must have an argument: $_opt" >&2
 						help
 					else
-						args[$_multi]="$2"
+						_args[$_multi]="$2"
 						shift
 					fi
 				else
@@ -360,14 +367,17 @@ function arg_parse() {
 						echo -e "Non data option cannot have an argument: $_opt" >&2
 						help
 					fi
-					args[$_multi]=true
+					_args[$_multi]=true
 					if [ "$_opt" == "-h" ]; then
-						args[$_single]=true
+						_args[$_single]=true
 					fi
 				fi
 				_hit=true
 			fi
 		done
+
+		# Tmp global args
+		vcp args _args
 
 		if ! $_hit; then
 			echo -e "Invalid argument: '$_opt'\n" >&2
@@ -383,6 +393,7 @@ function arg_parse() {
 	if key_exists print_args; then
 		print_args
 	fi
+
 }
 
 function parse() {
