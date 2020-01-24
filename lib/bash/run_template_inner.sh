@@ -211,7 +211,7 @@ function help_print() {
 	fi
 
 	local _title="$title"
-	local _usalge="$usage"
+	local _usage="$usage"
 	local _options="$options"
 
 	echo -e "$_title\n"
