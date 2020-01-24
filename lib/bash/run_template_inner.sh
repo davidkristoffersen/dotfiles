@@ -13,12 +13,13 @@ function help_vars() {
 	header_col="\e[33m"
 	option_col="\e[32m"
 	reset_col="\e[m"
+	tab_len=4
 	script="$(basename "$0")"
 	title_name="$title_col$script$1:$reset_col"
 }
 
 function completion_vars() {
-	completion_enable=true
+	completion_enable=false
 	completion_path="$HOME/.bash_completion.d"
 }
 
@@ -45,7 +46,7 @@ function help_init() {
 						[s]="SUBCOMMANDS"
 	)
 
-	usage_arr=("./$script [OPTIONS]")
+	usage_arr=("$script [OPTIONS]")
 
 	options_arr=()
 	options_arr_singles=()
@@ -140,13 +141,20 @@ function add_option() {
 #################
 
 function help() {
-	help_strings
-	help_print
+	help_strings $@
+	help_print $@
 	exit 0
 }
 
 # Creating printable strings
 function help_strings() {
+	if [ "$1" == "short" ]; then
+		local short=true
+		short_delimiter="/"
+	else
+		local short=false
+	fi
+
 	for key in "${!headers[@]}"; do
 		headers[$key]="$header_col${headers[$key]}:$reset_col"
 	done
@@ -156,27 +164,39 @@ function help_strings() {
 	done
 
 	options="${headers[o]}"
+	if $short; then
+		options+="\n"
+	fi
 	for ((i = 0; i < "${#options_arr_singles[@]}"; i += 1)); do
 		local _single=true
 		if [ ! -z "${options_arr_singles[i]}" ]; then
-			options="$options\n\t${option_col}-${options_arr_singles[i]}$reset_col"
+			options+="\n\t${option_col}-${options_arr_singles[i]}$reset_col"
 		else
-			options="$options\n\t\t"
+			options+="\n\t$option_col$reset_col\t"
 			_single=false
 		fi
+
 		if [ ! -z "${options_arr_multies[i]}" ]; then
 			if $_single; then
-				options="$options, "
+				options+=", "
 			fi
-			options="$options${option_col}--${options_arr_multies[i]}$reset_col"
+			options+="${option_col}--${options_arr_multies[i]}$reset_col"
 		fi
+
 		if [ ! -z "${options_arr_datas[i]}" ]; then
-			options="$options${option_col} <${options_arr_datas[i]}>$reset_col"
+			options+="${option_col} <${options_arr_datas[i]}>$reset_col"
+		else
+			options+="${option_col}$reset_col"
 		fi
+
 		if [ ! -z "${options_arr_infos[i]}" ]; then
 			lines="$(echo -e "${options_arr_infos[$i]}")"
 			while IFS= read -r line; do
-				options="$options\n\t\t\t$line"
+				if $short; then
+					options+="\n$short_delimiter$line"
+					break
+				fi
+				options+="\n\t\t\t$line"
 			done <<< "$lines"
 		fi
 	done
@@ -184,9 +204,50 @@ function help_strings() {
 
 # Printing help menu
 function help_print() {
-	echo -e "$title\n"
-	echo -e "$usage\n"
-	echo -e "$options"
+	if [ "$1" == "short" ]; then
+		local _short=true
+	else
+		local _short=false
+	fi
+
+	local _title="$title"
+	local _usalge="$usage"
+	local _options="$options"
+
+	echo -e "$_title\n"
+	echo -e "$_usage\n"
+
+	if $_short; then
+		echo -e "$_options" | xargs -d "\n" -n 2 | column -s "$short_delimiter" -t
+	else
+
+		oIFS="$IFS"
+		_options="$(echo -e "$_options" | tr "\n" "¤")"
+		IFS=¤ _options=($_options)
+		IFS="$oIFS"
+
+		for ((i = 0; i < ${#_options[@]}; i++)); do
+			local _line="${_options[i]}"
+			if [[ "${_line:0:3}" == $'\t\t\t' ]] && ((${#_line} + ($tab_len * 3) > $COLUMNS)); then
+				_line="${_line:3:${#_line}}"
+				local _width=$(($COLUMNS - $tab_len * 5))
+				echo -en "\t\t\t"
+				local _len=0
+				local _word
+				for _word in $_line; do
+					_len=$((_len+${#_word}+1))
+					if (($_len > $_width)); then
+						echo -en "\n\t\t\t"
+						_len=$((${#_word}+1))
+					fi
+					echo -n "$_word "
+				done
+				echo
+			else
+				echo -e "$_line"
+			fi
+		done
+	fi
 }
 
 #########################
@@ -300,6 +361,9 @@ function arg_parse() {
 						help
 					fi
 					args[$_multi]=true
+					if [ "$_opt" == "-h" ]; then
+						args[$_single]=true
+					fi
 				fi
 				_hit=true
 			fi
@@ -308,6 +372,8 @@ function arg_parse() {
 		if ! $_hit; then
 			echo -e "Invalid argument: '$_opt'\n" >&2
 			help
+		elif key_exists h; then
+			help "short"
 		elif key_exists help; then
 			help
 		fi
