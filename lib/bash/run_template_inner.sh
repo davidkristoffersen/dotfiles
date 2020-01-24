@@ -22,21 +22,9 @@ function completion_vars() {
 	completion_path="$HOME/.bash_completion.d"
 }
 
-######################
-#   HELP FUNCTIONS   #
-######################
-
-function completion_parse() {
-	completion_src="$(pwd)/$script"
-	completion_script="$script"
-
-	completion_format="$(pwd | cut -c 2- | tr / -)"
-	completion_file="$completion_path/$completion_format-completion_file_$script"
-	completion_func="$completion_format-completion_func_$script"
-
-	mkdir -p "$completion_path"
-	touch $completion_file
-}
+#################
+#   HELP INIT   #
+#################
 
 function help_init() {
 	help_vars
@@ -69,6 +57,10 @@ function help_init() {
 	add_option -s h -m help -i "Print this help message."
 	add_option -m print_args -i "Print argument values."
 }
+
+####################
+#   OPTION PARSE   #
+####################
 
 function add_option_help() {
 	echo -e "add_option ⁻(smid)"
@@ -143,6 +135,10 @@ function add_option() {
 	options_arr_datas+=("$_data")
 }
 
+#################
+#   HELP PRINT  #
+#################
+
 function help() {
 	help_strings
 	help_print
@@ -161,15 +157,15 @@ function help_strings() {
 
 	options="${headers[o]}"
 	for ((i = 0; i < "${#options_arr_singles[@]}"; i += 1)); do
-		local single=true
+		local _single=true
 		if [ ! -z "${options_arr_singles[i]}" ]; then
 			options="$options\n\t${option_col}-${options_arr_singles[i]}$reset_col"
 		else
 			options="$options\n\t\t"
-			single=false
+			_single=false
 		fi
 		if [ ! -z "${options_arr_multies[i]}" ]; then
-			if $single; then
+			if $_single; then
 				options="$options, "
 			fi
 			options="$options${option_col}--${options_arr_multies[i]}$reset_col"
@@ -194,19 +190,31 @@ function help_print() {
 }
 
 #########################
-#   Argument parsing	#
+#   Completion funcs	#
 #########################
+
+function completion_parse() {
+	completion_src="$(pwd)/$script"
+	completion_script="$script"
+
+	completion_format="$(pwd | cut -c 2- | tr / -)"
+	completion_file="$completion_path/$completion_format-completion_file_$script"
+	completion_func="$completion_format-completion_func_$script"
+
+	mkdir -p "$completion_path"
+	touch $completion_file
+}
 
 function generate_completion_file() {
 	echo -e "#!/usr/bin/env bash
 function $completion_func() {
-	local src=\"$completion_src\"
-	local caller=\"\$(readlink -f \"\$1\")\"
-	local in_path=\"$(which $script 2>&1)\"
+	local _src=\"$completion_src\"
+	local _caller=\"\$(readlink -f \"\$1\")\"
+	local _in_path=\"$(which $script 2>&1)\"
 
-	if [ \"\$caller\" == \"\$src\" ] || [ -x \"\$in_path\" ]; then
-		local flags=\"$completion_flags\"
-		COMPREPLY=(\$(compgen -W \"\$flags\" -- \"\${COMP_WORDS[COMP_CWORD]}\"))
+	if [ \"\$_caller\" == \"\$_src\" ] || [ -x \"\$_in_path\" ]; then
+		local _flags=\"$completion_flags\"
+		COMPREPLY=(\$(compgen -W \"\$_flags\" -- \"\${COMP_WORDS[COMP_CWORD]}\"))
 	fi
 }
 
@@ -214,6 +222,10 @@ complete -o nosort -F $completion_func $completion_script
 complete -o nosort -F $completion_func ./$completion_script
 " > $completion_file
 }
+
+#########################
+#   Argument parsing	#
+#########################
 
 function arg_parse_pre() {
 	if $completion_enable; then
@@ -245,56 +257,56 @@ function get_key() {
 }
 
 function arg_parse() {
-	local single=""
-	local multi=""
-	local data=""
-	local hit=false
+	local _single=""
+	local _multi=""
+	local _data=""
+	local _hit=false
 	declare -gA args=()
 	while [[ $# -gt 0 ]]; do
-		local hit=false
-		opt="$1"
-		local opt_flag
-		local opt_data
-		IFS='=' read -r opt_flag opt_data <<< "$opt"
-		if [ ! -z "$opt_data" ]; then
-			opt="$opt_flag"
+		local _opt="$1"
+		local _opt_flag
+		local _opt_data
+		_hit=false
+		IFS='=' read -r _opt_flag _opt_data <<< "$_opt"
+		if [ ! -z "$_opt_data" ]; then
+			_opt="$_opt_flag"
 		fi
 
-		# echo "OPT: $opt"
+		# echo "OPT: $_opt"
 		for ((i = 0; i < "${#options_arr_singles[@]}"; i += 1)); do
-			local single="${options_arr_singles[i]}"
-			local multi="${options_arr_multies[i]}"
-			local data="${options_arr_datas[i]}"
-			# echo "-$single, --$multi <$data>"
+			_single="${options_arr_singles[i]}"
+			_multi="${options_arr_multies[i]}"
+			_data="${options_arr_datas[i]}"
+			# echo "-$_single, --$_multi <$_data>"
 
-			if ([ ! -z "$single" ] && [ "$opt" == "-$single" ]) || [ "$opt" == "--$multi" ]; then
-				if [ ${args[$multi]+true} ]; then
-					echo -e "Argument already exists: '$opt'\n" >&2
+			if ([ ! -z "$_single" ] && [ "$_opt" == "-$_single" ]) || [ "$_opt" == "--$_multi" ]; then
+				if [ ${args[$_multi]+true} ]; then
+					echo -e "Argument already exists: '$_opt'\n" >&2
 					help
 				fi
-				if [ ! -z "$data" ]; then
-					if [ ! -z "$opt_data" ]; then
-						args[$multi]="$opt_data"
+				if [ ! -z "$_data" ]; then
+					if [ ! -z "$_opt_data" ]; then
+						args[$_multi]="$_opt_data"
 					elif [ -z "$2" ]; then
-						echo -e "Data option must have an argument: $opt" >&2
+						echo -e "Data option must have an argument: $_opt" >&2
 						help
 					else
-						args[$multi]="$2"
+						args[$_multi]="$2"
 						shift
 					fi
 				else
-					if [ ! -z "$opt_data" ]; then
-						echo -e "Non data option cannot have an argument: $opt" >&2
+					if [ ! -z "$_opt_data" ]; then
+						echo -e "Non data option cannot have an argument: $_opt" >&2
 						help
 					fi
-					args[$multi]=true
+					args[$_multi]=true
 				fi
-				local hit=true
+				_hit=true
 			fi
 		done
 
-		if ! $hit; then
-			echo -e "Invalid argument: '$opt'\n" >&2
+		if ! $_hit; then
+			echo -e "Invalid argument: '$_opt'\n" >&2
 			help
 		elif key_exists help; then
 			help
