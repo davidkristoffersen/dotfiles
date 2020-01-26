@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+pre_lib_cd="$(pwd)"
 cd "$(dirname "$0")"
 
 # Bash script for gitlab-runner commands
@@ -494,4 +495,5 @@ function parse() {
 	arg_parse_pre "$@"
 	arg_parse "$@"
 	arg_parse_post "$@"
+	cd "$pre_lib_cd"
 }
