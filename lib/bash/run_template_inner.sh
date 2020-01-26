@@ -398,6 +398,12 @@ function get_key() {
 	fi
 }
 
+function set_key() {
+	if key_exists $1; then
+		eval "$1=${args[$1]}"
+	fi
+}
+
 function arg_parse() {
 	if $recurse; then
 		recurse=false
