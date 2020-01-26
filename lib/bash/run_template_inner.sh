@@ -12,6 +12,7 @@ function help_vars() {
 	title_col="\e[36m"
 	header_col="\e[33m"
 	option_col="\e[32m"
+	default_col="\e[35m"
 	reset_col="\e[m"
 	tab_len=4
 	num_tabs=3
@@ -56,8 +57,9 @@ function help_init() {
 	options_arr_multies=()
 	options_arr_infos=()
 	options_arr_datas=()
-	options_arr_default=()
+	options_arr_defaults=()
 	completion_flags=""
+	declare -gA args=()
 
 	options_max_len=0
 	add_option -s h -m help -i "Print this help message."
@@ -79,6 +81,7 @@ function add_option() {
 	local _multi=""
 	local _info=""
 	local _value=""
+	local _default=""
 
 	while [[ $# -gt 0 ]]; do
 		opt="$1"
@@ -155,7 +158,8 @@ function add_option() {
 		if [ ! -z "$_info" ]; then
 			_info+=" "
 		fi
-		_info+="[default: $_default]"
+		_info+="$default_col[default: $_default]$reset_col"
+		args[$_multi]="$_default"
 	fi
 
 	options_arr_singles+=("$_single")
@@ -252,73 +256,57 @@ function help_print() {
 	IFS=$'\n' _options_arr=($_options_arr)
 	IFS="$oIFS"
 
-	if false; then
-		_options=""
-		local newline_next=false
-		for ((i = 0; i < ${#_options_arr[@]}; i++)); do
-			local _line="${_options_arr[i]}"
-			if (($i < 2)); then
-				:
-			elif (($i % 2 != 0)) && $newline_next; then
-				_line="\n$_line"
-				newline_next=false
-			else
-				_line="$_line\n\t\t\t\t\t\t text"
-				newline_next=true
+	local _pre_tabs
+	local _prev_len=0
+	local _prev_option_len=0
+	local _option_col_len=$((${#option_col} * 2 + ${#reset_col} * 2))
+	local _width
+
+	for ((i = 0; i < ${#_options_arr[@]}; i++)); do
+
+		printf -v _pre_tabs "$info_tabs"
+
+		local _line="${_options_arr[i]}"
+		if [[ "${_line:0:${#_pre_tabs}}" == $_pre_tabs ]]; then
+			_line="${_line:3:${#_line}}"
+
+			if $_short; then
+				printf -v _pre_tabs ' %.0s' $(seq 1 $_prev_len)
+				printf -v _pre_option ' %.0s' $(seq 1 $_prev_option_len)
 			fi
-			_options="$_options\n$_line"
-		done
 
-		_options="$(echo "$_options" | tail +1)"
-		local out_options="$(echo -e "$_options" | xargs -d "\n" -n 2 | column -s "$short_delimiter" -t)"
-		echo -e "$out_options"
-		echo "$options_max_len"
-	else
-		local _pre_tabs
-		local _prev_len=0
-		local _prev_option_len=0
-		local _option_col_len=$((${#option_col} * 2 + ${#reset_col} * 2))
-		local _width
-
-		for ((i = 0; i < ${#_options_arr[@]}; i++)); do
-			printf -v _pre_tabs "$info_tabs"
-
-			local _line="${_options_arr[i]}"
-			if [[ "${_line:0:${#_pre_tabs}}" == $_pre_tabs ]]; then
-				_line="${_line:3:${#_line}}"
-
+			if ((${#_line} + ($tab_len * 3) + ($_prev_len) > $COLUMNS)); then
 				if $_short; then
-					printf -v _pre_tabs ' %.0s' $(seq 1 $_prev_len)
-					printf -v _pre_option ' %.0s' $(seq 1 $_prev_option_len)
-				fi
-
-				if ((${#_line} + ($tab_len * 3) + ($_prev_len) > $COLUMNS)); then
-					if $_short; then
-						_width=$(($COLUMNS - $tab_len * 2 - $_prev_option_len))
-					else
-						_width=$(($COLUMNS - $tab_len * 5))
-					fi
-					echo -en "$_pre_tabs"
-					local _len=0
-					local _word
-					for _word in $_line; do
-						_len=$((_len+${#_word}+1))
-						if (($_len > $_width)); then
-							if $_short; then
-								echo -en "\n$_pre_option"
-							else
-								echo -en "\n$_pre_tabs"
-							fi
-							_len=$((${#_word}+1))
-						fi
-						echo -n "$_word "
-					done
-					echo
+					_width=$(($COLUMNS - $tab_len * 2 - $_prev_option_len))
 				else
-					echo -e "$_pre_tabs$_line"
+					_width=$(($COLUMNS - $tab_len * 5))
 				fi
+				echo -en "$_pre_tabs"
+				local _len=0
+				local _word
+				for _word in $_line; do
+					_len=$((_len+${#_word}+1))
+					if (($_len > $_width)); then
+						if $_short; then
+							echo -en "\n$_pre_option"
+						else
+							echo -en "\n$_pre_tabs"
+						fi
+						_len=$((${#_word}+1))
+					fi
+					echo -n "$_word "
+				done
+				echo
 			else
-				if (($i > 0)) && $_short; then
+				echo -e "$_pre_tabs$_line"
+			fi
+		else
+			if (($i == 0)); then
+				echo -e "$_line"
+				_prev_len="$(($tab_len * 3))"
+			else
+				((_info_iter++))
+				if $_short; then
 					echo -ne "$_line"
 					local _line_len=${#_line}
 					_prev_len=$(($_line_len - $_option_col_len - 1))
@@ -329,8 +317,8 @@ function help_print() {
 					_prev_len="$(($tab_len * 3))"
 				fi
 			fi
-		done
-	fi
+		fi
+	done
 }
 
 #########################
@@ -378,7 +366,12 @@ function arg_parse_pre() {
 	POSITIONAL=()
 }
 
-function vcp() {
+function agcp() {
+	eval "$2_string=\$(declare -p $2)"
+	eval "declare -gA $1=\"\${$2_string#*=}\""
+}
+
+function alcp() {
 	eval "$2_string=\$(declare -p $2)"
 	eval "declare -gA $1=\"\${$2_string#*=}\""
 }
@@ -412,7 +405,7 @@ function arg_parse() {
 	fi
 
 	# Tmp global vars
-	declare -A _args=()
+	alcp _args args
 	# declare -n options_arr_singles=()
 	# declare -n options_arr_singles=()
 	# declare -n options_arr_singles=()
@@ -438,10 +431,11 @@ function arg_parse() {
 			_single="${options_arr_singles[i]}"
 			_multi="${options_arr_multies[i]}"
 			_data="${options_arr_datas[i]}"
-			# echo "-$_single, --$_multi <$_data>"
+			_default="${options_arr_defaults[i]}"
+			# echo "-$_single, --$_multi <$_data> [default: $_default]"
 
 			if ([ ! -z "$_single" ] && [ "$_opt" == "-$_single" ]) || [ "$_opt" == "--$_multi" ]; then
-				if [ ${_args[$_multi]+true} ]; then
+				if [ -z "$_default" ] && [ ${_args[$_multi]+true} ]; then
 					echo -e "Argument already exists: '$_opt'\n" >&2
 					help
 				fi
@@ -470,7 +464,7 @@ function arg_parse() {
 		done
 
 		# Tmp global args
-		vcp args _args
+		agcp args _args
 
 		if ! $_hit; then
 			echo -e "Invalid argument: '$_opt'\n" >&2
