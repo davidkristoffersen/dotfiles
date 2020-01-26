@@ -56,6 +56,7 @@ function help_init() {
 	options_arr_multies=()
 	options_arr_infos=()
 	options_arr_datas=()
+	options_arr_default=()
 	completion_flags=""
 
 	options_max_len=0
@@ -77,7 +78,7 @@ function add_option() {
 	local _single=""
 	local _multi=""
 	local _info=""
-	local _data=""
+	local _value=""
 
 	while [[ $# -gt 0 ]]; do
 		opt="$1"
@@ -109,11 +110,19 @@ function add_option() {
 				shift
 				shift
 				;;
+			-v)
+				if [ -z "$2" ]; then
+					return
+				fi
+				_value="$2"
+				shift
+				shift
+				;;
 			-d)
 				if [ -z "$2" ]; then
 					return
 				fi
-				_data="$2"
+				_default="$2"
 				shift
 				shift
 				;;
@@ -135,17 +144,25 @@ function add_option() {
 	completion_flags+="--$_multi "
 
 	local new_len="$(($tab_len + 4 + ${#_multi} + 3))"
-	if [ ! -z "$_data" ]; then
-		new_len="$(($new_len + 2 + ${#_data}))"
+	if [ ! -z "$_value" ]; then
+		new_len="$(($new_len + 2 + ${#_value}))"
 	fi
 	if (($new_len > $options_max_len)); then
 		options_max_len=$new_len
 	fi
 
+	if [ ! -z "$_value" ] && [ ! -z "$_default" ]; then
+		if [ ! -z "$_info" ]; then
+			_info+=" "
+		fi
+		_info+="[default: $_default]"
+	fi
+
 	options_arr_singles+=("$_single")
 	options_arr_multies+=("$_multi")
 	options_arr_infos+=("$_info")
-	options_arr_datas+=("$_data")
+	options_arr_datas+=("$_value")
+	options_arr_defaults+=("$_default")
 }
 
 #################
@@ -277,7 +294,7 @@ function help_print() {
 
 				if ((${#_line} + ($tab_len * 3) + ($_prev_len) > $COLUMNS)); then
 					if $_short; then
-						_width=$(($COLUMNS - $tab_len * 5 - $_prev_len))
+						_width=$(($COLUMNS - $tab_len * 2 - $_prev_option_len))
 					else
 						_width=$(($COLUMNS - $tab_len * 5))
 					fi
