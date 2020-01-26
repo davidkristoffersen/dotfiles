@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
 function script() {
-# Script
-if key_exists data; then
-	echo "Data: $(get_key data)"
-fi
+	set_key value
+	echo "value: $value"
 }
 
 function lib_args() {
@@ -12,11 +10,8 @@ function lib_args() {
 	help_init "Example title text"
 
 	# Add option
-	add_option -s a -m alpha -i "ALSO VERY MUCH Make bool true Long text is incoming on this line you should be prepared yes indeed oh man this is scary ho nn"
-	add_option -s b -m bravo -i "Make bool true Long text is incoming on this line you should be prepared too as well though it is soon"
-	add_option -s c -m charlie -i "Make bool true Long text is incoming on this line you should be prepared too as well though it is soon anvm aga muva nuvag vuag  vv vvmv gmvulv uqgmvu q  vugmuv luavgmln uvagm a vgmula uvgm avuvmg lmvu vugmluvgmlv uamvlu amlamuvla uvgmlav mgaluvamuv lamuvgla uvgmalv avlgmauvl gmauvl agmuv amuvg auvmlgaluvgmal uvglaguvvau "
-	add_option -s d -m delta -i "Input text\nCan be multiline" -d "text"
-	add_option -s e -m echo -i "Make bool true Long text is incoming on this line you should be prepared too as well though it is soo"
+	add_option -s e -m example -i "Example info text"
+	add_option -s v -m value -i "Value option" -v "number" -d "12"
 }
 
 #
