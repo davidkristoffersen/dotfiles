@@ -16,6 +16,8 @@ function lib_args() {
 	add_option -m charlie -i "Make bool true Long text is incoming on this line you should be prepared too as well though it is soon anvm aga muva nuvag vuag  vv vvmv gmvulv uqgmvu q  vugmuv luavgmln uvagma lwamuv awmlva vlawa vmlawvavu mlauvwavgmula uvgm avuvmg lmvu vugmluvgmlv uamvlu amlamuvla uvgmlavmgaluvamuv lamuvgla uvgmalv avlgmauvl gmauvl agmuv amuvg auvmlgaluvgmal uvglaguvvau nua mgn gmn gm gmnauuv vu mvlua uvlamvu avlamv alvmwav lamuva"
 	add_option -s d -m delta -i "Input text\nCan be multiline" -v "text"
 	add_option -s e -m echo -i "Make bool true Long text is incoming on this line you should be prepared too as well though it is soo" -v "character" -d "n"
+	add_option -s n -m november -i "on this line yell though it is soon"
+	add_option -s q -m quit -i "on this line yeis soon"
 }
 
 #
