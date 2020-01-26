@@ -427,6 +427,9 @@ function arg_parse() {
 		local _opt="$1"
 		local _opt_flag
 		local _opt_data
+		local _opt_single=false
+		local _opt_multi=false
+
 		_hit=false
 		IFS='=' read -r _opt_flag _opt_data <<< "$_opt"
 		if [ ! -z "$_opt_data" ]; then
@@ -434,6 +437,14 @@ function arg_parse() {
 		fi
 
 		# echo "OPT: $_opt"
+		if [ "${_opt:0:2}" == "--" ]; then
+			local _opt_is_single=false
+			local _opt_singles="."
+			local _opt_single="$_opt"
+		elif [ "${_opt:0:1}" == "-" ]; then
+			local _opt_is_single=true
+		fi
+
 		for ((i = 0; i < "${#options_arr_singles[@]}"; i += 1)); do
 			_single="${options_arr_singles[i]}"
 			_multi="${options_arr_multies[i]}"
@@ -441,33 +452,52 @@ function arg_parse() {
 			_default="${options_arr_defaults[i]}"
 			# echo "-$_single, --$_multi <$_data> [default: $_default]"
 
-			if ([ ! -z "$_single" ] && [ "$_opt" == "-$_single" ]) || [ "$_opt" == "--$_multi" ]; then
-				if [ -z "$_default" ] && [ ${_args[$_multi]+true} ]; then
-					echo -e "Argument already exists: '$_opt'\n" >&2
-					help
-				fi
-				if [ ! -z "$_data" ]; then
-					if [ ! -z "$_opt_data" ]; then
-						_args[$_multi]="$_opt_data"
-					elif [ -z "$2" ]; then
-						echo -e "Data option must have an argument: $_opt" >&2
-						help
-					else
-						_args[$_multi]="$2"
-						shift
-					fi
-				else
-					if [ ! -z "$_opt_data" ]; then
-						echo -e "Non data option cannot have an argument: $_opt" >&2
-						help
-					fi
-					_args[$_multi]=true
-					if [ "$_opt" == "-h" ]; then
-						_args[$_single]=true
-					fi
-				fi
-				_hit=true
+			if $_opt_is_single; then
+				_opt_singles="$(echo "${_opt:1:${#_opt}}")"
 			fi
+
+			for ((k = 0; k < ${#_opt_singles}; k++)); do
+				local _opt_old="$_opt"
+				if $_opt_is_single; then
+					local _opt_single="${_opt_singles:$k:1}"
+				fi
+				if ([ ! -z "$_single" ] && [ "-$_opt_single" == "-$_single" ]) || [ "$_opt" == "--$_multi" ]; then
+					if $_opt_is_single; then
+						if [ ! -z "$_data" ] && (($k < ${#_opt_singles} - 1)); then
+							echo "Single combined data flag has to be at the end: $_opt"
+							help
+						fi
+						_opt="$_opt_single"
+					fi
+
+					if [ -z "$_default" ] && [ ${_args[$_multi]+true} ]; then
+						echo -e "Argument already exists: '$_opt'\n" >&2
+						help
+					fi
+					if [ ! -z "$_data" ]; then
+						if [ ! -z "$_opt_data" ]; then
+							_args[$_multi]="$_opt_data"
+						elif [ -z "$2" ]; then
+							echo -e "Data option must have an argument: $_opt" >&2
+							help
+						else
+							_args[$_multi]="$2"
+							shift
+						fi
+					else
+						if [ ! -z "$_opt_data" ]; then
+							echo -e "Non data option cannot have an argument: $_opt" >&2
+							help
+						fi
+						_args[$_multi]=true
+						if [ "$_opt" == "-h" ]; then
+							_args[$_opt_single]=true
+						fi
+					fi
+					_hit=true
+				fi
+				local _opt="$_opt_old"
+			done
 		done
 
 		# Tmp global args
