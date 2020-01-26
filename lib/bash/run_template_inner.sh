@@ -220,10 +220,9 @@ function help_print() {
 	if $_short; then
 		echo -e "$_options" | xargs -d "\n" -n 2 | column -s "$short_delimiter" -t
 	else
-
 		oIFS="$IFS"
-		_options="$(echo -e "$_options" | tr "\n" "¤")"
-		IFS=¤ _options=($_options)
+		printf -v _options "$_options"
+		IFS=$'\n' _options=($_options)
 		IFS="$oIFS"
 
 		for ((i = 0; i < ${#_options[@]}; i++)); do
@@ -323,12 +322,22 @@ function get_key() {
 }
 
 function arg_parse() {
+	if $recurse; then
+		recurse=false
+		arg_parse $@
+	fi
+
 	# Tmp global vars
+	declare -A _args=()
+	# declare -n options_arr_singles=()
+	# declare -n options_arr_singles=()
+	# declare -n options_arr_singles=()
+
+	# Local variables
 	local _single=""
 	local _multi=""
 	local _data=""
 	local _hit=false
-	declare -A _args=()
 
 	while [[ $# -gt 0 ]]; do
 		local _opt="$1"
@@ -397,6 +406,7 @@ function arg_parse() {
 }
 
 function parse() {
+	recurse=false
 	arg_parse_pre "$@"
 	arg_parse "$@"
 	arg_parse_post "$@"
