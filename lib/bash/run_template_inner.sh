@@ -154,12 +154,23 @@ function add_option() {
 		options_max_len=$new_len
 	fi
 
-	if [ ! -z "$_value" ] && [ ! -z "$_default" ]; then
+	if [ ! -z "$_default" ]; then
+		if [ -z "$_value" ]; then
+			if [ ! -z "$(grep -o "^true$\|^0$" <<< "$_default")" ]; then
+				_default=true
+			elif [ ! -z "$(grep -o "^false$\|^1$" <<< "$_default")" ]; then
+				_default=false
+			else
+				echo "Bool argument can only have true and false as default value: $_default"
+				add_option_help
+			fi
+		fi
+		args[$_multi]="$_default"
+
 		if [ ! -z "$_info" ]; then
 			_info+=" "
 		fi
 		_info+="$default_col[default: $_default]$reset_col"
-		args[$_multi]="$_default"
 	fi
 
 	options_arr_singles+=("$_single")
@@ -406,9 +417,11 @@ function arg_parse_post() {
 }
 
 function print_args() {
+	local out=""
 	for x in "${!args[@]}"; do
-		echo -e "$x:\t${args[$x]}"
+		out+="\n$x:${args[$x]}"
 	done
+	echo -e "$out" | tail +2 | sort | column -t -s ":"
 }
 
 function arg_parse() {
@@ -498,7 +511,12 @@ function arg_parse() {
 							echo -e "Non data option cannot have an argument: $_opt" >&2
 							help
 						fi
-						_args[$_multi]=true
+						if [ ! -z "$_default" ] && $_default; then
+							_args[$_multi]=false
+						else
+							_args[$_multi]=true
+						fi
+
 						if [ "-$_opt" == "-h" ]; then
 							_args[h]=true
 						fi
