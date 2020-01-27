@@ -2,46 +2,81 @@
 
 tmpdir="/tmp/"
 tmpfile="${tmpdir}head_tmp.png"
-image="$HOME/.local/share/icons/xlock/locked.png"
-lib="$HOME/.local/lib/xlock/individual_lock.sh"
-main="${tmpdir}head_0.png"
-extended="${tmpdir}head_1.png"
+overlay_img="$HOME/.local/share/icons/xlock/locked.png"
+
+pre_png="${tmpdir}head_"
+post_png=".png"
 out="${tmpdir}screen.png"
-rm -f $out $main $extended
 
-. $lib
+debug=false
 
-function blur() {
-	convert $1 -blur 0x8 $1
+function timeit() {
+	echo -ne "$@:\t"
+	{ time { {
+		$@
+		TIMEFORMAT=$stat%2U;
+	} 2>&3; } 2>&1; } 3>&2
+}
+
+function hw_info() {
+	info="$(xdpyinfo -ext all 2>/dev/null | sed '/^  head #/!d;s///')"
+	num_screens="$(echo "$info" | wc -l)"
+	declare -gA hw_infos=()
+
+	while IFS=' :x@,' read i w h x y; do
+		hw_infos+=([${i}w]=$w [${i}h]=$h [${i}x]=$x [${i}y]=$y)
+	done <<< "$info"
+}
+
+function get_info() {
+	echo "${hw_infos[$1$2]}"
+}
+
+function screenshot() {
+	for i in $(seq 0 $((num_screens - 1))); do
+		import -window root \
+			-crop "$(get_info $i w)x$(get_info $i h)+$(get_info $i x)+$(get_info $i y)" \
+			"/tmp/head_$i.png"
+		if $debug; then echo "import -window root -crop "$(get_info $i w)x$(get_info $i h)+$(get_info $i x)+$(get_info $i y)" \"/tmp/head_$i.png\""; fi
+	done
+}
+
+function blurred() {
+	convert $pre_png$1$post_png -blur 0x8 $pre_png$1$post_png
 }
 
 function overlay() {
-	if [[ -f $image ]]; then
-		convert $1 $image -gravity center -composite -matte $1
+	if [[ -f $overlay_img ]]; then
+		convert $pre_png$1$post_png $overlay_img -gravity center -composite -matte $pre_png$1$post_png
 	fi
 }
 
 function combine() {
-	width="$((${main_info[w]} + ${extended_info[w]}))"
-	heigth="${main_info[h]}"
-	ext_x="${extended_info[x]}"
-	ext_y="${extended_info[y]}"
+	width="$(get_info 0 w)"
+	heigth="$(get_info 0 h)"
+	main="${pre_png}0$post_png"
+	extended=""
 
-	convert -page "${width}x${heigth}+0+0" $1 \
-			-page "+$ext_x+$ext_y" $2 \
-			-flatten $out
+	for i in $(seq 1 $((num_screens - 1))); do
+		width=$(($width + $(get_info $i w)))
+		extended+="-page +$(get_info $i x)+$(get_info $i y) $pre_png$i$post_png "
+	done
+
+	convert -page "${width}x${heigth}+0+0" $main $extended -flatten $out
 }
 
+timeit hw_info
+timeit screenshot
 
-blur $main
-overlay $main
+for i in $(seq 0 $((num_screens - 1))); do
+	timeit blurred $i
+	timeit overlay $i
+done
 
-if [ -e $extended ]; then
-	blur $extended
-	overlay $extended
-	combine $main $extended
+if [ "$num_screens" == 1 ]; then
+	mv ${pre_png}0$post_png $out
 else
-	mv $main $out
+	timeit combine
 fi
 
 i3lock -u -i $out
