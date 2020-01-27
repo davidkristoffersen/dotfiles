@@ -183,7 +183,6 @@ function help() {
 function help_strings() {
 	if [ "$1" == "short" ]; then
 		local short=true
-		short_delimiter="/"
 	else
 		local short=false
 	fi
@@ -197,9 +196,6 @@ function help_strings() {
 	done
 
 	options="${headers[o]}"
-	# if $short; then
-		# options+="\n"
-	# fi
 	for ((i = 0; i < "${#options_arr_singles[@]}"; i += 1)); do
 		local _single=true
 		if [ ! -z "${options_arr_singles[i]}" ]; then
@@ -225,12 +221,10 @@ function help_strings() {
 		if [ ! -z "${options_arr_infos[i]}" ]; then
 			lines="$(echo -e "${options_arr_infos[$i]}")"
 			while IFS= read -r line; do
+				options+="\n$info_tabs$line"
 				if $short; then
-					# options+="\n$short_delimiter$line"
-					options+="\n$info_tabs$line"
 					break
 				fi
-				options+="\n$info_tabs$line"
 			done <<< "$lines"
 		fi
 	done
@@ -322,7 +316,7 @@ function help_print() {
 }
 
 #########################
-#   Completion funcs	#
+#   COMPLETION FUNCS	#
 #########################
 
 function path_to_var() {
@@ -365,7 +359,29 @@ complete -o nosort -F $completion_func ./$completion_script
 }
 
 #########################
-#   Argument parsing	#
+#   CLIENT FUNCTIONS	#
+#########################
+
+function key_exists() {
+	eval '[ ${'args'[$1]+true} ]'
+}
+
+function get_key() {
+	if key_exists $1; then
+		echo "${args[$1]}"
+	else
+		echo false
+	fi
+}
+
+function set_key() {
+	if key_exists $1; then
+		eval "$1=${args[$1]}"
+	fi
+}
+
+#########################
+#   ARGUMENT PARSING	#
 #########################
 
 function arg_parse_pre() {
@@ -395,24 +411,6 @@ function print_args() {
 	done
 }
 
-function key_exists() {
-	eval '[ ${'args'[$1]+true} ]'
-}
-
-function get_key() {
-	if key_exists $1; then
-		echo "${args[$1]}"
-	else
-		echo false
-	fi
-}
-
-function set_key() {
-	if key_exists $1; then
-		eval "$1=${args[$1]}"
-	fi
-}
-
 function arg_parse() {
 	if $recurse; then
 		recurse=false
@@ -437,6 +435,7 @@ function arg_parse() {
 		local _opt_data
 		local _opt_single=false
 		local _opt_multi=false
+		local _debug=false
 
 		_hit=false
 		IFS='=' read -r _opt_flag _opt_data <<< "$_opt"
@@ -444,7 +443,7 @@ function arg_parse() {
 			_opt="$_opt_flag"
 		fi
 
-		# echo "OPT: $_opt"
+		if $_debug; then echo "OPT: $_opt"; fi
 		if [ "${_opt:0:2}" == "--" ]; then
 			local _opt_is_single=false
 			local _opt_singles="."
@@ -458,7 +457,7 @@ function arg_parse() {
 			_multi="${options_arr_multies[i]}"
 			_data="${options_arr_datas[i]}"
 			_default="${options_arr_defaults[i]}"
-			# echo "-$_single, --$_multi <$_data> [default: $_default]"
+			if $_debug; then echo "-$_single, --$_multi <$_data> [default: $_default]"; fi
 
 			if $_opt_is_single; then
 				_opt_singles="$(echo "${_opt:1:${#_opt}}")"
@@ -469,6 +468,7 @@ function arg_parse() {
 				if $_opt_is_single; then
 					local _opt_single="${_opt_singles:$k:1}"
 				fi
+				if $_debug; then echo "single: $_opt_single"; fi
 				if ([ ! -z "$_single" ] && [ "-$_opt_single" == "-$_single" ]) || [ "$_opt" == "--$_multi" ]; then
 					if $_opt_is_single; then
 						if [ ! -z "$_data" ] && (($k < ${#_opt_singles} - 1)); then
@@ -477,6 +477,7 @@ function arg_parse() {
 						fi
 						_opt="$_opt_single"
 					fi
+					if $_debug; then echo "opt: $_opt"; fi
 
 					if [ -z "$_default" ] && [ ${_args[$_multi]+true} ]; then
 						echo -e "Argument already exists: '$_opt'\n" >&2
@@ -498,8 +499,8 @@ function arg_parse() {
 							help
 						fi
 						_args[$_multi]=true
-						if [ "$_opt" == "-h" ]; then
-							_args[$_opt_single]=true
+						if [ "-$_opt" == "-h" ]; then
+							_args[h]=true
 						fi
 					fi
 					_hit=true
