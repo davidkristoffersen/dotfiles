@@ -22,7 +22,7 @@ function help_vars() {
 }
 
 function completion_vars() {
-	completion_enable=false
+	completion_enable=true
 	completion_path="$HOME/.bash_completion.d"
 }
 
@@ -33,7 +33,6 @@ function completion_vars() {
 function help_init() {
 	help_vars
 	printf -v info_tabs '\t%.0s' $(seq 1 $num_tabs)
-
 
 	completion_vars
 	if $completion_enable; then
@@ -326,13 +325,22 @@ function help_print() {
 #   Completion funcs	#
 #########################
 
+function path_to_var() {
+	echo -e "$1" | xxd -p | tr -d '\n'
+}
+
+function var_to_path() {
+	echo -e "$1" | xxd -r -p
+}
+
 function completion_parse() {
 	completion_src="$(pwd)/$script"
 	completion_script="$script"
 
-	completion_format="$(pwd | cut -c 2- | tr / -)"
-	completion_file="$completion_path/$completion_format-completion_file_$script"
-	completion_func="$completion_format-completion_func_$script"
+	local path="$(pwd)"
+	completion_format="$(path_to_var "$path")"
+	completion_file="$completion_path/completion_file-$completion_format-$script"
+	completion_func="completion_func-$completion_format-$script"
 
 	mkdir -p "$completion_path"
 	touch $completion_file
