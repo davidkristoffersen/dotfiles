@@ -1,20 +1,47 @@
 #!/bin/bash
 
 tmpdir="/tmp/"
+tmpfile="${tmpdir}head_tmp.png"
 image="$HOME/.local/share/icons/xlock/locked.png"
+lib="$HOME/.local/lib/xlock/individual_lock.sh"
+main="${tmpdir}head_0.png"
+extended="${tmpdir}head_1.png"
+out="${tmpdir}screen.png"
+rm -f $out $main $extended
 
-sh "$HOME/.local/lib/xlock/individual_lock.sh"
+. $lib
 
-convert $tmpdir/head_0.png -scale 10% -scale 1000% $tmpdir/head_0.png
+function blur() {
+	convert $1 -blur 0x8 $1
+}
 
-[[ -f $image ]] && convert $tmpdir/head_0.png $image -gravity center -composite -matte $tmpdir/head_0.png
+function overlay() {
+	if [[ -f $image ]]; then
+		convert $1 $image -gravity center -composite -matte $1
+	fi
+}
 
-if [ -e $tmpdir/head_1.png ]; then
-	convert $tmpdir/head_1.png -scale 10% -scale 1000% $tmpdir/head_1.png
-	[[ -f $image ]] && convert $tmpdir/head_1.png $image -gravity center -composite -matte $tmpdir/head_1.png
-	convert $tmpdir/head_0.png $tmpdir/head_1.png +append $tmpdir/screen.png
+function combine() {
+	width="$((${main_info[w]} + ${extended_info[w]}))"
+	heigth="${main_info[h]}"
+	ext_x="${extended_info[x]}"
+	ext_y="${extended_info[y]}"
+
+	convert -page "${width}x${heigth}+0+0" $1 \
+			-page "+$ext_x+$ext_y" $2 \
+			-flatten $out
+}
+
+
+blur $main
+overlay $main
+
+if [ -e $extended ]; then
+	blur $extended
+	overlay $extended
+	combine $main $extended
 else
-	mv $tmpdir/head_0.png $tmpdir/screen.png
+	mv $main $out
 fi
 
-i3lock -u -i $tmpdir/screen.png
+i3lock -u -i $out
