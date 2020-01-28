@@ -21,7 +21,6 @@ let g:pathogen_disabled = []
 " call add(g:pathogen_disabled, 'i3-syntax')
 " call add(g:pathogen_disabled, 'ale')
 " call add(g:pathogen_disabled, 'git-blame')
-" call add(g:pathogen_disabled, 'i3-syntax')
 call add(g:pathogen_disabled, 'nerdtree')
 call add(g:pathogen_disabled, 'nerdtree-git-plugin')
 call add(g:pathogen_disabled, 'omnisharp-vim')
