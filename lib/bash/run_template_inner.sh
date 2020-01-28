@@ -18,7 +18,7 @@ function help_vars() {
 	tab_len=4
 	num_tabs=3
 	script="$(basename "$0")"
-	title_name="$title_col$script$1:$reset_col"
+	title_name="$script"
 }
 
 function completion_vars() {
@@ -29,6 +29,10 @@ function completion_vars() {
 #################
 #   HELP INIT   #
 #################
+
+function gen_title() {
+	title="$title_col$title_name:$reset_col $title_body"
+}
 
 function help_init() {
 	help_vars
@@ -43,7 +47,7 @@ function help_init() {
 	if [ ! -z "$1" ]; then
 		title_body="$1"
 	fi
-	title="$title_name $title_body"
+	gen_title
 
 	declare -gA headers=([u]="USAGE"
 						[o]="OPTIONS"
@@ -54,11 +58,12 @@ function help_init() {
 
 	options_arr=()
 	options_arr_singles=()
-	options_arr_multies=()
+	options_arr_multis=()
 	options_arr_infos=()
-	options_arr_datas=()
+	options_arr_values=()
 	options_arr_defaults=()
-	options_arrs_string="options_arr_singles options_arr_multies options_arr_infos options_arr_datas options_arr_defaults"
+	options_arr_subcmds=()
+	options_arrs_string="options_arr_singles options_arr_multis options_arr_infos options_arr_values options_arr_defaults options_arr_subcmds"
 	completion_flags=""
 	declare -gA args=()
 
@@ -77,12 +82,44 @@ function add_option_help() {
 	exit
 }
 
+function add_subcmd() {
+	eval "subcmd_$1=true"
+
+	# completion_vars
+	# if $completion_enable; then
+		# completion_parse
+	# fi
+
+	title_body="Subcmd title"
+	# if [ ! -z "$1" ]; then
+		# title_body="$1"
+	# fi
+	title_name="$title_name-$1"
+	gen_title
+
+	# declare -gA headers=([u]="USAGE"
+						# [o]="OPTIONS"
+						# [s]="SUBCOMMANDS"
+	# )
+
+	usage_arr=("$script $1 [OPTIONS]")
+	eval "$1_options_arrs_string=\"\""
+	for _var in $options_arrs_string; do
+		eval "$1_options_arrs_string+=\"$1_$_var \""
+	done
+
+	add_option -s h -m help -i "Print this help message." --subcmd $1
+	add_option -m print_args -i "Print argument values." --subcmd $1
+}
+
 function add_option() {
 	local _single=""
 	local _multi=""
 	local _info=""
 	local _value=""
 	local _default=""
+	local _subcmd=false
+	local _subcmd_name=""
 
 	while [[ $# -gt 0 ]]; do
 		opt="$1"
@@ -130,6 +167,18 @@ function add_option() {
 				shift
 				shift
 				;;
+			--subcmd)
+				if [ -z "$2" ]; then
+					return
+				fi
+				_subcmd=true
+				_subcmd_name="$2"
+				if ! eval "[ \"\$subcmd_$2\" == \"true\" ]"; then
+					add_subcmd $2
+				fi
+				shift
+				shift
+				;;
 			*)
 				add_option_help
 				;;
@@ -174,11 +223,16 @@ function add_option() {
 		_info+="$default_col[default: $_default]$reset_col"
 	fi
 
-	options_arr_singles+=("$_single")
-	options_arr_multies+=("$_multi")
-	options_arr_infos+=("$_info")
-	options_arr_datas+=("$_value")
-	options_arr_defaults+=("$_default")
+	for _var in $options_arrs_string; do
+		local _type="_$(echo "$_var" | cut -d '_' -f 3- | head -c -2)"
+		local _type_eval="$(eval echo "\$$_type")"
+		if $_subcmd; then
+			eval "${_subcmd_name}_$_var+=(\"$_type_eval\")"
+			echo "eval \"${_subcmd_name}_$_var+=(\"$_type_eval\")\""
+		else
+			eval "$_var+=(\"$_type_eval\")"
+		fi
+	done
 }
 
 #################
@@ -186,7 +240,7 @@ function add_option() {
 #################
 
 function help() {
-	help_strings $# $@ $options_arrs_string
+	help_strings $@
 	help_print $@
 	exit 0
 }
@@ -199,6 +253,10 @@ function help_strings() {
 		local _short=false
 	fi
 
+	for _var in $@; do
+		eval $(ilcp _$_var $_var)
+	done
+
 	for key in "${!headers[@]}"; do
 		headers[$key]="$header_col${headers[$key]}:$reset_col"
 	done
@@ -208,30 +266,30 @@ function help_strings() {
 	done
 
 	options="${headers[o]}"
-	for ((i = 0; i < "${#options_arr_singles[@]}"; i += 1)); do
+	for ((i = 0; i < "${#_options_arr_singles[@]}"; i += 1)); do
 		local _single=true
-		if [ ! -z "${options_arr_singles[i]}" ]; then
-			printf -v options "$options\n\t${option_col}-${options_arr_singles[i]}$reset_col"
+		if [ ! -z "${_options_arr_singles[i]}" ]; then
+			printf -v options "$options\n\t${option_col}-${_options_arr_singles[i]}$reset_col"
 		else
 			printf -v options "$options\n    $option_col$reset_col\t"
 			_single=false
 		fi
 
-		if [ ! -z "${options_arr_multies[i]}" ]; then
+		if [ ! -z "${_options_arr_multis[i]}" ]; then
 			if $_single; then
 				options+=", "
 			fi
-			printf -v options "$options${option_col}--${options_arr_multies[i]}$reset_col"
+			printf -v options "$options${option_col}--${_options_arr_multis[i]}$reset_col"
 		fi
 
-		if [ ! -z "${options_arr_datas[i]}" ]; then
-			printf -v options "$options${option_col} <${options_arr_datas[i]}>$reset_col"
+		if [ ! -z "${_options_arr_values[i]}" ]; then
+			printf -v options "$options${option_col} <${_options_arr_values[i]}>$reset_col"
 		else
 			printf -v options "$options${option_col}$reset_col"
 		fi
 
-		if [ ! -z "${options_arr_infos[i]}" ]; then
-			lines="$(echo -e "${options_arr_infos[$i]}")"
+		if [ ! -z "${_options_arr_infos[i]}" ]; then
+			lines="$(echo -e "${_options_arr_infos[$i]}")"
 			while IFS= read -r line; do
 				options+="\n$info_tabs$line"
 				if $_short; then
@@ -239,6 +297,10 @@ function help_strings() {
 				fi
 			done <<< "$lines"
 		fi
+	done
+
+	for _var in $@; do
+		eval $(igcp $_var _$_var)
 	done
 }
 
@@ -438,6 +500,8 @@ function arg_parse() {
 		arg_parse $@
 	fi
 
+	local _subcmd=$1
+	shift
 	local _option_num=$1
 	shift
 	local _arg_num=$#
@@ -445,7 +509,11 @@ function arg_parse() {
 	local _var_args="${@:$(($_option_num + 1)):$_var_num}"
 	local _option_last=false
 	for _var in $_var_args; do
-		eval $(ilcp _$_var $_var)
+		local var=$_var
+		if $_subcmd; then
+			local _var="$(echo "$_var" | cut -d '_' -f 2-)"
+		fi
+		eval $(ilcp _$_var $var)
 	done
 
 	# Local variables
@@ -490,8 +558,8 @@ function arg_parse() {
 
 		for ((i = 0; i < "${#_options_arr_singles[@]}"; i += 1)); do
 			_single="${_options_arr_singles[i]}"
-			_multi="${_options_arr_multies[i]}"
-			_data="${_options_arr_datas[i]}"
+			_multi="${_options_arr_multis[i]}"
+			_data="${_options_arr_values[i]}"
 			_default="${_options_arr_defaults[i]}"
 			$_debug && echo -e "\n-$_single, --$_multi <$_data> [default: $_default]"
 
@@ -566,7 +634,11 @@ function arg_parse() {
 
 		# Tmp global args
 		for _var in $_var_args; do
-			igcp $_var _$_var
+			local var=$_var
+			if $_subcmd; then
+				local _var="$(echo "$_var" | cut -d '_' -f 2-)"
+			fi
+			igcp $var _$_var
 		done
 
 		if ! $_hit; then
@@ -576,7 +648,7 @@ function arg_parse() {
 			help_short=true
 			help $_var_args
 		elif key_exists help; then
-			help
+			help $_var_args
 		fi
 		shift
 	done
@@ -591,7 +663,8 @@ function arg_parse() {
 function parse() {
 	recurse=false
 	arg_parse_pre "$@"
-	arg_parse $# "$@" $options_arrs_string
+	echo -e "STRING: $cache_options_arrs_string"
+	arg_parse true $# "$@" $cache_options_arrs_string
 	arg_parse_post "$@"
 
 	cd "$pre_lib_cd"
