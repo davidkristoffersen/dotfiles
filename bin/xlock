@@ -8,6 +8,8 @@ pre_png="${tmpdir}head_"
 post_png=".png"
 out="${tmpdir}screen.png"
 
+laptop_pos="center"
+
 debug=false
 
 function timeit() {
@@ -23,12 +25,23 @@ function timeit() {
 }
 
 function hw_info() {
+	if [ "$(autorandr --current)" == "home" ]; then
+		laptop_pos="right"
+	elif [ "$(autorandr --current)" == "office" ]; then
+		laptop_pos="left"
+	fi
+	echo "laptop_pos: $laptop_pos"
+
 	info="$(xdpyinfo -ext all 2>/dev/null | sed '/^  head #/!d;s///')"
 	num_screens="$(echo "$info" | wc -l)"
 	declare -gA hw_infos=()
 
 	while IFS=' :x@,' read i w h x y; do
+		if [ "$laptop_pos" == "left" ]; then
+			i=$(((i+1)%2))
+		fi
 		hw_infos+=([${i}w]=$w [${i}h]=$h [${i}x]=$x [${i}y]=$y)
+		echo "hw_infos+=([${i}w]=$w [${i}h]=$h [${i}x]=$x [${i}y]=$y)"
 	done <<< "$info"
 }
 
@@ -41,6 +54,7 @@ function screenshot() {
 		import -window root \
 			-crop "$(get_info $i w)x$(get_info $i h)+$(get_info $i x)+$(get_info $i y)" \
 			"/tmp/head_$i.png"
+		echo "-crop \"$(get_info $i w)x$(get_info $i h)+$(get_info $i x)+$(get_info $i y)\""
 	done
 }
 
@@ -58,15 +72,21 @@ function overlay() {
 function combine() {
 	width="$(get_info 0 w)"
 	heigth="$(get_info 0 h)"
+	x="$(get_info 0 x)"
+	y="$(get_info 0 y)"
 	main="${pre_png}0$post_png"
 	extended=""
 
 	for i in $(seq 1 $((num_screens - 1))); do
 		width=$(($width + $(get_info $i w)))
+		if (($(get_info $i h) > $heigth)); then
+			heigth=$(get_info $i h)
+		fi
 		extended+="-page +$(get_info $i x)+$(get_info $i y) $pre_png$i$post_png "
 	done
 
-	convert -page "${width}x${heigth}+0+0" $main $extended -flatten $out
+	convert -page "${width}x${heigth}+0+$y" $main $extended -flatten $out
+	echo "convert -page \"${width}x${heigth}+0+0\" $main $extended -flatten $out"
 }
 
 timeit hw_info
