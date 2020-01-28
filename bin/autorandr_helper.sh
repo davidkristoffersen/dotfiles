@@ -37,7 +37,7 @@ while IFS= read -r line; do
 	fi
 done <<< "$screens_info"
 
-profiles="$(ls -A1 $autorandr_config)"
+profiles="$(autorandr --detected)"
 for profile in $profiles; do
 	config_edid="${autorandr_config}/${profile}/edid.hex"
 	if [ ! -f "$config_edid" ]; then
