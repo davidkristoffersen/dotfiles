@@ -17,7 +17,7 @@ function lib_args() {
 	# Create initial variables
 	help_init "Example title text"
 
-	# Add optio
+	# Add option
 	add_option -s a -m alpha	-d "54"		-v "number"	-i "ALSO VERY MUCH Make bool true Long text is incoming on this line you should be prepared yes indeed oh man this is scary ho nn"
 	add_option -s b -m bravo	-d "true"				-i "Make bool true Long text is incoming on this line you should be prepared too as well though it is soon"
 	add_option 		-m charlie							-i "Make bool true Long text is incoming on this line you should be prepared too as well though it is soon anvm aga muva nuvag vuag  vv vvmv gmvulv uqgmvu q  vugmuv luavgmln uvagma lwamuv awmlva vlawa vmlawvavu mlauvwavgmula uvgm avuvmg lmvu vugmluvgmlv uamvlu amlamuvla uvgmlavmgaluvamuv lamuvgla uvgmalv avlgmauvl gmauvl agmuv amuvg auvmlgaluvgmal uvglaguvvau nua mgn gmn gm gmnauuv vu mvlua uvlamvu avlamv alvmwav lamuva"
@@ -27,9 +27,10 @@ function lib_args() {
 	add_option -s s -m sierra	-d "1"					-i "on this line yeis soon"
 	add_option -s q -m quit		-d "0"					-i "on this line yeis soon"
 
+	# Subcommand
 	add_subcmd cache "Cache subcmd title"
-	add_option -s n -m new		-d "34"		-v "number"	-i "This is a subcmd option" --subcmd "cache"
-	add_option -s x -m xtra		-d "true"				-i "This is another subcmd option" --subcmd "cache"
+	add_option --subcmd cache -s n -m new	-d "34"		-v "number"	-i "This is a subcmd option"
+	add_option --subcmd cache -s x -m xtra	-d "true"				-i "This is another subcmd option"
 }
 
 #
