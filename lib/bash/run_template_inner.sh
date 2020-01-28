@@ -31,7 +31,7 @@ function completion_vars() {
 #################
 
 function gen_title() {
-	title="$title_col$title_name:$reset_col $title_body"
+	echo -e "$title_col$title_name:$reset_col $title_body"
 }
 
 function help_init() {
@@ -47,7 +47,7 @@ function help_init() {
 	if [ ! -z "$1" ]; then
 		title_body="$1"
 	fi
-	gen_title
+	title="$(gen_title)"
 
 	declare -gA headers=([u]="USAGE"
 						[o]="OPTIONS"
@@ -55,6 +55,7 @@ function help_init() {
 	)
 
 	usage_arr=("$script [OPTIONS]")
+	subcmd_arr=()
 
 	options_arr=()
 	options_arr_singles=()
@@ -67,6 +68,7 @@ function help_init() {
 	completion_flags=""
 	declare -gA args=()
 	subcmd=""
+	subcmd_first=true
 
 	options_max_len=0
 	add_option -s h -m help -i "Print this help message."
@@ -83,7 +85,12 @@ function add_option_help() {
 	exit
 }
 
-function add_subcmd() {
+function add_subcmd_help() {
+	echo -e "add_subcmd name title"
+	exit
+}
+
+function _add_subcmd() {
 	eval "subcmd_$1=true"
 
 	# completion_vars
@@ -92,18 +99,27 @@ function add_subcmd() {
 	# fi
 
 	title_body="Subcmd title"
-	# if [ ! -z "$1" ]; then
-		# title_body="$1"
-	# fi
+	if [ ! -z "$2" ]; then
+		title_body="$2"
+	fi
+
 	title_name="$title_name-$1"
-	gen_title
+	eval "$1_title=\"$(gen_title)\""
 
-	# declare -gA headers=([u]="USAGE"
-						# [o]="OPTIONS"
-						# [s]="SUBCOMMANDS"
-	# )
+	declare -A headers=([u]="USAGE"
+						[o]="OPTIONS"
+						[s]="SUBCOMMANDS"
+	)
+	agcp $1_headers headers
 
-	usage_arr=("$script $1 [OPTIONS]")
+	if $subcmd_first; then
+		usage_arr+=("$script <SUBCOMMAND>")
+		subcmd_first=false
+	fi
+	subcmd_arr+="$1"
+
+	eval "$1_usage_arr=(\"$script $1\")"
+
 	eval "$1_options_arrs_string=\"\""
 	for _var in $options_arrs_string; do
 		eval "$1_options_arrs_string+=\"$1_$_var \""
@@ -112,6 +128,19 @@ function add_subcmd() {
 	add_option -s h -m help -i "Print this help message." --subcmd $1
 	add_option -m print_args -i "Print argument values." --subcmd $1
 	add_option -m tmp --new_subcmd $1
+}
+
+function add_subcmd() {
+	if [ ! "$#" -ge "2" ]; then
+		add_subcmd_help
+	fi
+
+	if eval "[ \"\$subcmd_$2\" == \"true\" ]"; then
+		echo "Subcommand already exists: $2"
+		add_subcmd_help
+	fi
+
+	_add_subcmd "$@"
 }
 
 function add_option() {
@@ -123,6 +152,7 @@ function add_option() {
 	local _subcmd_exists=false
 	local _subcmd_new=false
 	local _subcmd=""
+	local _debug=false
 
 	while [[ $# -gt 0 ]]; do
 		opt="$1"
@@ -174,11 +204,12 @@ function add_option() {
 				if [ -z "$2" ]; then
 					return
 				fi
+				if ! eval "[ \"\$subcmd_$2\" == \"true\" ]"; then
+					echo "Subcommand has not been created: $2"
+					add_subcmd_help
+				fi
 				_subcmd_exists=true
 				_subcmd="$2"
-				if ! eval "[ \"\$subcmd_$2\" == \"true\" ]"; then
-					add_subcmd $2
-				fi
 				shift
 				shift
 				;;
@@ -243,11 +274,11 @@ function add_option() {
 				_type_eval=""
 			fi
 			eval "${_subcmd}_$_var+=(\"$_type_eval\")"
-			echo "eval \"${_subcmd}_$_var+=(\"$_type_eval\")\""
+			$_debug && echo "eval \"${_subcmd}_$_var+=(\"$_type_eval\")\""
 		elif $_subcmd_new; then
 			if [ "$_type" == "_subcmd" ]; then
 				eval "$_var+=(\"$_type_eval\")"
-				echo "eval \"$_var+=(\"$_type_eval\")\""
+				$_debug && echo "eval \"$_var+=(\"$_type_eval\")\""
 			fi
 		else
 			eval "$_var+=(\"$_type_eval\")"
@@ -280,10 +311,19 @@ function help_strings() {
 	for key in "${!headers[@]}"; do
 		headers[$key]="$header_col${headers[$key]}:$reset_col"
 	done
+
 	usage="${headers[u]}"
 	for u in "${usage_arr[@]}"; do
-		usage="$usage\n\t$u"
+		usage+="\n\t$u"
 	done
+
+	subcmds="${headers[s]}"
+	for s in "${subcmd_arr[@]}"; do
+		subcmds+="\n\t${option_col}$s${reset_col}"
+	done
+	if ((${#subcmd_arr[@]} == 0)); then
+		subcmds=""
+	fi
 
 	options="${headers[o]}"
 	for ((i = 0; i < "${#_options_arr_singles[@]}"; i += 1)); do
@@ -335,6 +375,7 @@ function help_print() {
 	local _title="$title"
 	local _usage="$usage"
 	local _options="$options"
+	local _subcmds="$subcmds"
 
 	echo -e "$_title\n"
 	echo -e "$_usage\n"
@@ -407,6 +448,10 @@ function help_print() {
 			fi
 		fi
 	done
+
+	if [ ! -z "$_subcmds" ]; then
+		echo -e "\n$_subcmds"
+	fi
 }
 
 #########################
@@ -528,6 +573,7 @@ function arg_parse() {
 	local _option_num=$1
 	shift
 
+	local _debug=false
 	local _arg_num=$#
 	local _var_num=$(($# - $_option_num))
 	local _var_args="${@:$(($_option_num + 1)):$_var_num}"
@@ -543,11 +589,15 @@ function arg_parse() {
 	for ((s = 0; s < "${#_options_arr_subcmds[@]}"; s += 1)); do
 		_subcmd="${_options_arr_subcmds[s]}"
 		if [ "$1" == "$_subcmd" ]; then
-			echo "Subcommand: $1"
+			$_debug && echo "Subcommand: $1"
 			subcmd=$1
+			igcp usage_arr $1_usage_arr
+			eval "title=\$$1_title"
+			subcmd_arr=()
+			declare -gA args=()
+
 			shift
 			local string="$(eval "echo \"\$cache_options_arrs_string\"")"
-			echo "arg_parse true $((_option_num-1)) \"${@:1:$((_option_num-1))}\" $string"
 			arg_parse true $((_option_num-1)) "${@:1:$((_option_num-1))}" $string
 			return
 		fi
@@ -560,7 +610,6 @@ function arg_parse() {
 	local _subcmd=""
 	local _hit=false
 	help_short=false
-	local _debug=true
 
 	eval $(alcp _args args)
 
@@ -694,14 +743,10 @@ function arg_parse() {
 	if key_exists print_args; then
 		print_args
 	fi
-
-	echo $@
 }
 
 function parse() {
 	arg_parse_pre "$@"
-	# echo -e "STRING: $cache_options_arrs_string"
-	echo "PARSE: arg_parse false $# \"$@\" $options_arrs_string"
 	arg_parse false $# "$@" $options_arrs_string
 	arg_parse_post "$@"
 
