@@ -21,7 +21,7 @@ AfterEnum: true,
 # Editor
 export SYSTEMD_EDITOR="vim"
 export EDITOR="/usr/bin/vim"
-export PAGER="$HOME/.vim/bundle/vimpager/vimpager"
+# export PAGER="$HOME/.vim/bundle/vimpager/vimpager"
 export MYVIMRC="$HOME/.vimrc"
 
 # Applications
