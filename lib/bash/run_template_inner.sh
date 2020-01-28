@@ -58,6 +58,7 @@ function help_init() {
 	options_arr_infos=()
 	options_arr_datas=()
 	options_arr_defaults=()
+	options_arrs_string="options_arr_singles options_arr_multies options_arr_infos options_arr_datas options_arr_defaults"
 	completion_flags=""
 	declare -gA args=()
 
@@ -185,17 +186,17 @@ function add_option() {
 #################
 
 function help() {
-	help_strings $@
+	help_strings $# $@ $options_arrs_string
 	help_print $@
 	exit 0
 }
 
 # Creating printable strings
 function help_strings() {
-	if [ "$1" == "short" ]; then
-		local short=true
+	if $help_short; then
+		local _short=true
 	else
-		local short=false
+		local _short=false
 	fi
 
 	for key in "${!headers[@]}"; do
@@ -233,7 +234,7 @@ function help_strings() {
 			lines="$(echo -e "${options_arr_infos[$i]}")"
 			while IFS= read -r line; do
 				options+="\n$info_tabs$line"
-				if $short; then
+				if $_short; then
 					break
 				fi
 			done <<< "$lines"
@@ -243,7 +244,7 @@ function help_strings() {
 
 # Printing help menu
 function help_print() {
-	if [ "$1" == "short" ]; then
+	if $help_short; then
 		local _short=true
 	else
 		local _short=false
@@ -404,19 +405,19 @@ function arg_parse_pre() {
 
 function agcp() {
 	local _string=$(declare -p $2)
-	eval "declare -gA $1=\"\${_string#*=}\""
+	eval "declare -gA $1=\${_string#*=}"
 }
 function alcp() {
 	local _string=$(declare -p $2)
-	echo "declare -A $1=\"${_string#*=}\""
+	echo "declare -A $1=${_string#*=}"
 }
 function igcp() {
 	local _string=$(declare -p $2)
-	eval "declare -ga $1=\"\${_string#*=}\""
+	eval "declare -ga $1=\${_string#*=}"
 }
 function ilcp() {
 	local _string=$(declare -p $2)
-	echo "declare -a $1=\"${_string#*=}\""
+	echo "declare -a $1=${_string#*=}"
 }
 
 function arg_parse_post() {
@@ -437,29 +438,40 @@ function arg_parse() {
 		arg_parse $@
 	fi
 
-	# Tmp global vars
-	arrg=("h" "e" "l" "l" "o")
-	igcp arr arrg
-	eval $(ilcp _arr arrg)
-	eval $(alcp _args args)
-
-	# declare -a _options_arr_singles=()
-	# declare -n options_arr_singles=()
-	# declare -n options_arr_singles=()
+	local _option_num=$1
+	shift
+	local _arg_num=$#
+	local _var_num=$(($# - $_option_num))
+	local _var_args="${@:$(($_option_num + 1)):$_var_num}"
+	local _option_last=false
+	for _var in $_var_args; do
+		eval $(ilcp _$_var $_var)
+	done
 
 	# Local variables
 	local _single=""
 	local _multi=""
 	local _data=""
 	local _hit=false
+	help_short=false
+	local _debug=false
+
+	eval $(alcp _args args)
 
 	while [[ $# -gt 0 ]]; do
+		if (($_arg_num - $# == $_option_num)); then
+			break
+		fi
+		if (($_arg_num - $# == $_option_num - 1)); then
+			_option_last=true
+		fi
+		$_debug && echo "_option_last: $_option_last"
+
 		local _opt="$1"
 		local _opt_flag
 		local _opt_data
 		local _opt_single=false
 		local _opt_multi=false
-		local _debug=false
 
 		_hit=false
 		IFS='=' read -r _opt_flag _opt_data <<< "$_opt"
@@ -467,7 +479,7 @@ function arg_parse() {
 			_opt="$_opt_flag"
 		fi
 
-		if $_debug; then echo "OPT: $_opt"; fi
+		$_debug && echo -e "\n=============\nOPT: $_opt\n============="
 		if [ "${_opt:0:2}" == "--" ]; then
 			local _opt_is_single=false
 			local _opt_singles="."
@@ -476,12 +488,12 @@ function arg_parse() {
 			local _opt_is_single=true
 		fi
 
-		for ((i = 0; i < "${#options_arr_singles[@]}"; i += 1)); do
-			_single="${options_arr_singles[i]}"
-			_multi="${options_arr_multies[i]}"
-			_data="${options_arr_datas[i]}"
-			_default="${options_arr_defaults[i]}"
-			if $_debug; then echo "-$_single, --$_multi <$_data> [default: $_default]"; fi
+		for ((i = 0; i < "${#_options_arr_singles[@]}"; i += 1)); do
+			_single="${_options_arr_singles[i]}"
+			_multi="${_options_arr_multies[i]}"
+			_data="${_options_arr_datas[i]}"
+			_default="${_options_arr_defaults[i]}"
+			$_debug && echo -e "\n-$_single, --$_multi <$_data> [default: $_default]"
 
 			if $_opt_is_single; then
 				_opt_singles="$(echo "${_opt:1:${#_opt}}")"
@@ -492,60 +504,77 @@ function arg_parse() {
 				if $_opt_is_single; then
 					local _opt_single="${_opt_singles:$k:1}"
 				fi
-				if $_debug; then echo "single: $_opt_single"; fi
+				$_debug && echo "single: $_opt_single"
 				if ([ ! -z "$_single" ] && [ "-$_opt_single" == "-$_single" ]) || [ "$_opt" == "--$_multi" ]; then
 					if $_opt_is_single; then
 						if [ ! -z "$_data" ] && (($k < ${#_opt_singles} - 1)); then
 							echo "Single combined data flag has to be at the end: $_opt"
-							help
+							help $_var_args
 						fi
 						_opt="$_opt_single"
 					fi
-					if $_debug; then echo "opt: $_opt"; fi
+					$_debug && echo "opt: $_opt"
 
 					if [ -z "$_default" ] && [ ${_args[$_multi]+true} ]; then
 						echo -e "Argument already exists: '$_opt'\n" >&2
-						help
+						help $_var_args
 					fi
 					if [ ! -z "$_data" ]; then
 						if [ ! -z "$_opt_data" ]; then
+							$_debug && echo "Data=: hit"
 							_args[$_multi]="$_opt_data"
-						elif [ -z "$2" ]; then
+							agcp args _args
+						elif [ -z "$2" ] || $_option_last; then
 							echo -e "Data option must have an argument: $_opt" >&2
-							help
+							help $_var_args
 						else
+							$_debug && echo "Data: hit"
 							_args[$_multi]="$2"
+							agcp args _args
+							_hit=true
 							shift
+							break
 						fi
 					else
 						if [ ! -z "$_opt_data" ]; then
 							echo -e "Non data option cannot have an argument: $_opt" >&2
-							help
+							help $_var_args
 						fi
 						if [ ! -z "$_default" ] && $_default; then
+							$_debug && echo "Bool default: hit"
 							_args[$_multi]=false
+							agcp args _args
 						else
+							$_debug && echo "Bool: hit"
 							_args[$_multi]=true
+							agcp args _args
 						fi
 
 						if [ "-$_opt" == "-h" ]; then
 							_args[h]=true
+							agcp args _args
 						fi
 					fi
 					_hit=true
 				fi
 				local _opt="$_opt_old"
 			done
+			if $_hit; then
+				break
+			fi
 		done
 
 		# Tmp global args
-		agcp args _args
+		for _var in $_var_args; do
+			igcp $_var _$_var
+		done
 
 		if ! $_hit; then
 			echo -e "Invalid argument: '$_opt'\n" >&2
-			help
+			help $_var_args
 		elif key_exists h; then
-			help "short"
+			help_short=true
+			help $_var_args
 		elif key_exists help; then
 			help
 		fi
@@ -556,12 +585,13 @@ function arg_parse() {
 		print_args
 	fi
 
+	echo $@
 }
 
 function parse() {
 	recurse=false
 	arg_parse_pre "$@"
-	arg_parse "$@"
+	arg_parse $# "$@" $options_arrs_string
 	arg_parse_post "$@"
 
 	cd "$pre_lib_cd"
