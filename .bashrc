@@ -39,9 +39,9 @@ function source_test() {
 }
 
 # Source profile if debug mode is enabled
-if source_test $profile && `debug_bash.sh -k debug_profile`; then
-	source "$profile"
-fi
+# if source_test $profile && `debug_bash.sh -k debug_profile`; then
+	# source "$profile"
+# fi
 
 for bash_file in ${bash_files[@]}; do
 	# Do not source if case and if test is true
@@ -55,9 +55,10 @@ for bash_file in ${bash_files[@]}; do
 			;;
 		uvcluster)
 			# If not uvcluster session
-			if [ -z "`ping -c 1 uvcluster 2>/dev/null`" ]; then
+			# TODO: Fix ping can lag up terminal
+			# if [ -z "`ping -c 1 uvcluster 2>/dev/null`" ]; then
 				continue
-			fi
+			# fi
 			;;
 		*)
 			;;
