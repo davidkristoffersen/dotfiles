@@ -66,6 +66,7 @@ function help_init() {
 	options_arrs_string="options_arr_singles options_arr_multis options_arr_infos options_arr_values options_arr_defaults options_arr_subcmds"
 	completion_flags=""
 	declare -gA args=()
+	subcmd=""
 
 	options_max_len=0
 	add_option -s h -m help -i "Print this help message."
@@ -110,6 +111,7 @@ function add_subcmd() {
 
 	add_option -s h -m help -i "Print this help message." --subcmd $1
 	add_option -m print_args -i "Print argument values." --subcmd $1
+	add_option -m tmp --new_subcmd $1
 }
 
 function add_option() {
@@ -118,8 +120,9 @@ function add_option() {
 	local _info=""
 	local _value=""
 	local _default=""
-	local _subcmd=false
-	local _subcmd_name=""
+	local _subcmd_exists=false
+	local _subcmd_new=false
+	local _subcmd=""
 
 	while [[ $# -gt 0 ]]; do
 		opt="$1"
@@ -171,11 +174,20 @@ function add_option() {
 				if [ -z "$2" ]; then
 					return
 				fi
-				_subcmd=true
-				_subcmd_name="$2"
+				_subcmd_exists=true
+				_subcmd="$2"
 				if ! eval "[ \"\$subcmd_$2\" == \"true\" ]"; then
 					add_subcmd $2
 				fi
+				shift
+				shift
+				;;
+			--new_subcmd)
+				if [ -z "$2" ]; then
+					return
+				fi
+				_subcmd_new=true
+				_subcmd="$2"
 				shift
 				shift
 				;;
@@ -226,9 +238,17 @@ function add_option() {
 	for _var in $options_arrs_string; do
 		local _type="_$(echo "$_var" | cut -d '_' -f 3- | head -c -2)"
 		local _type_eval="$(eval echo "\$$_type")"
-		if $_subcmd; then
-			eval "${_subcmd_name}_$_var+=(\"$_type_eval\")"
-			echo "eval \"${_subcmd_name}_$_var+=(\"$_type_eval\")\""
+		if $_subcmd_exists; then
+			if [ "$_type" == "_subcmd" ]; then
+				_type_eval=""
+			fi
+			eval "${_subcmd}_$_var+=(\"$_type_eval\")"
+			echo "eval \"${_subcmd}_$_var+=(\"$_type_eval\")\""
+		elif $_subcmd_new; then
+			if [ "$_type" == "_subcmd" ]; then
+				eval "$_var+=(\"$_type_eval\")"
+				echo "eval \"$_var+=(\"$_type_eval\")\""
+			fi
 		else
 			eval "$_var+=(\"$_type_eval\")"
 		fi
@@ -436,6 +456,14 @@ complete -o nosort -F $completion_func ./$completion_script
 #   CLIENT FUNCTIONS	#
 #########################
 
+function subcmd_exists() {
+	if [ "$subcmd" == "$1" ]; then
+		eval true
+	else
+		eval false
+	fi
+}
+
 function key_exists() {
 	eval '[ ${'args'[$1]+true} ]'
 }
@@ -495,34 +523,44 @@ function print_args() {
 }
 
 function arg_parse() {
-	if $recurse; then
-		recurse=false
-		arg_parse $@
-	fi
-
-	local _subcmd=$1
+	local _subcmd_exists=$1
 	shift
 	local _option_num=$1
 	shift
+
 	local _arg_num=$#
 	local _var_num=$(($# - $_option_num))
 	local _var_args="${@:$(($_option_num + 1)):$_var_num}"
 	local _option_last=false
 	for _var in $_var_args; do
 		local var=$_var
-		if $_subcmd; then
+		if $_subcmd_exists; then
 			local _var="$(echo "$_var" | cut -d '_' -f 2-)"
 		fi
 		eval $(ilcp _$_var $var)
+	done
+
+	for ((s = 0; s < "${#_options_arr_subcmds[@]}"; s += 1)); do
+		_subcmd="${_options_arr_subcmds[s]}"
+		if [ "$1" == "$_subcmd" ]; then
+			echo "Subcommand: $1"
+			subcmd=$1
+			shift
+			local string="$(eval "echo \"\$cache_options_arrs_string\"")"
+			echo "arg_parse true $((_option_num-1)) \"${@:1:$((_option_num-1))}\" $string"
+			arg_parse true $((_option_num-1)) "${@:1:$((_option_num-1))}" $string
+			return
+		fi
 	done
 
 	# Local variables
 	local _single=""
 	local _multi=""
 	local _data=""
+	local _subcmd=""
 	local _hit=false
 	help_short=false
-	local _debug=false
+	local _debug=true
 
 	eval $(alcp _args args)
 
@@ -635,7 +673,7 @@ function arg_parse() {
 		# Tmp global args
 		for _var in $_var_args; do
 			local var=$_var
-			if $_subcmd; then
+			if $_subcmd_exists; then
 				local _var="$(echo "$_var" | cut -d '_' -f 2-)"
 			fi
 			igcp $var _$_var
@@ -661,10 +699,10 @@ function arg_parse() {
 }
 
 function parse() {
-	recurse=false
 	arg_parse_pre "$@"
-	echo -e "STRING: $cache_options_arrs_string"
-	arg_parse true $# "$@" $cache_options_arrs_string
+	# echo -e "STRING: $cache_options_arrs_string"
+	echo "PARSE: arg_parse false $# \"$@\" $options_arrs_string"
+	arg_parse false $# "$@" $options_arrs_string
 	arg_parse_post "$@"
 
 	cd "$pre_lib_cd"
