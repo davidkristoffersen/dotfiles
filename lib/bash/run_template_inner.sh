@@ -403,13 +403,20 @@ function arg_parse_pre() {
 }
 
 function agcp() {
-	eval "$2_string=\$(declare -p $2)"
-	eval "declare -gA $1=\"\${$2_string#*=}\""
+	local _string=$(declare -p $2)
+	eval "declare -gA $1=\"\${_string#*=}\""
 }
-
 function alcp() {
-	eval "$2_string=\$(declare -p $2)"
-	eval "declare -gA $1=\"\${$2_string#*=}\""
+	local _string=$(declare -p $2)
+	echo "declare -A $1=\"${_string#*=}\""
+}
+function igcp() {
+	local _string=$(declare -p $2)
+	eval "declare -ga $1=\"\${_string#*=}\""
+}
+function ilcp() {
+	local _string=$(declare -p $2)
+	echo "declare -a $1=\"${_string#*=}\""
 }
 
 function arg_parse_post() {
@@ -431,8 +438,12 @@ function arg_parse() {
 	fi
 
 	# Tmp global vars
-	alcp _args args
-	# declare -n options_arr_singles=()
+	arrg=("h" "e" "l" "l" "o")
+	igcp arr arrg
+	eval $(ilcp _arr arrg)
+	eval $(alcp _args args)
+
+	# declare -a _options_arr_singles=()
 	# declare -n options_arr_singles=()
 	# declare -n options_arr_singles=()
 
@@ -552,5 +563,6 @@ function parse() {
 	arg_parse_pre "$@"
 	arg_parse "$@"
 	arg_parse_post "$@"
+
 	cd "$pre_lib_cd"
 }
