@@ -18,19 +18,23 @@ function timeit() {
 		{ time { {
 			$@
 			echo -ne "\t"
-			TIMEFORMAT=$stat%2U;
+			TIMEFORMAT="${stat}Sec: %2E CPU: %2U";
 		} 2>&3; } 2>&1; } 3>&2
 	else
 		$@
 	fi
 }
 
-function hw_info() {
-	if [ "$(autorandr --current)" == "home" ]; then
+function get_autorandr_profile() {
+	local profile="$(autorandr_profile.sh)"
+	if [ "$profile" == "home" ]; then
 		laptop_pos="right"
-	elif [ "$(autorandr --current)" == "office" ]; then
+	elif [ "$profile" == "office" ]; then
 		laptop_pos="left"
 	fi
+}
+
+function hw_info() {
 	$debug && echo -e "\tlaptop_pos: $laptop_pos"
 
 	info="$(xdpyinfo -ext all 2>/dev/null | sed '/^  head #/!d;s///')"
@@ -52,16 +56,22 @@ function get_info() {
 
 function screenshot() {
 	for i in $(seq 0 $((num_screens - 1))); do
-		import -window root \
-			-crop "$(get_info $i w)x$(get_info $i h)+$(get_info $i x)+$(get_info $i y)" \
-			"/tmp/head_$i.png"
-		$debug && echo -e "\t-crop \"$(get_info $i w)x$(get_info $i h)+$(get_info $i x)+$(get_info $i y)\""
+		local w=$(get_info $i w)
+		local h=$(get_info $i h)
+		local x=$(get_info $i x)
+		local y=$(get_info $i y)
+		local out="/tmp/head_$i.png"
+
+		$debug && echo -e "\t$out:\t${w}x${h}+${x}+${y}"
+		# import -window root -crop "${w}x${h}+${x}+${y}"	"$out"
+		scrot -o -a ${x},${y},${w},${h} $out
 	done
 }
 
 function blurred() {
 	png=$pre_png$1$post_png
-	convert $png -scale 10% -blur 2x2 -resize 1000% $png
+	# convert $png -scale 10% -blur 0x2.5 -resize 1000% $png
+	pixelize.py $png $png 30
 }
 
 function overlay() {
@@ -86,10 +96,11 @@ function combine() {
 		extended+="-page +$(get_info $i x)+$(get_info $i y) $pre_png$i$post_png "
 	done
 
-	convert -page "${width}x${heigth}+0+$y" $main $extended -flatten $out
 	$debug && echo -e "\tconvert -page \"${width}x${heigth}+0+0\" $main $extended -flatten $out"
+	convert -page "${width}x${heigth}+0+$y" $main $extended -flatten $out
 }
 
+timeit get_autorandr_profile
 timeit hw_info
 timeit screenshot
 
