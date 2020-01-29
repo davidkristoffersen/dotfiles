@@ -224,10 +224,12 @@ function add_option() {
 		add_option_help
 	fi
 
-	if [ ! -z "$_single" ]; then
-		completion_flags+="-$_single "
+	if [ -z "$_subcmd" ]; then
+		if [ ! -z "$_single" ]; then
+			completion_flags+="-$_single "
+		fi
+		completion_flags+="--$_multi "
 	fi
-	completion_flags+="--$_multi "
 
 	local new_len="$(($tab_len + 4 + ${#_multi} + 3))"
 	if [ ! -z "$_value" ]; then
@@ -461,7 +463,7 @@ function completion_parse() {
 
 	local path="$(pwd)"
 	completion_format="$(path_to_var "$path")"
-	completion_file="$completion_path/completion_file-$completion_format-$script"
+	completion_file="$completion_path/completion_file_$script-$completion_format-$script"
 	completion_func="completion_func-$completion_format-$script"
 
 	mkdir -p "$completion_path"
