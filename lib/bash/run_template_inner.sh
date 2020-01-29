@@ -55,7 +55,6 @@ function help_init() {
 	)
 
 	usage_arr=("$script [OPTIONS]")
-	subcmd_arr=()
 
 	options_arr=()
 	options_arr_singles=()
@@ -64,7 +63,8 @@ function help_init() {
 	options_arr_values=()
 	options_arr_defaults=()
 	options_arr_subcmds=()
-	options_arrs_string="options_arr_singles options_arr_multis options_arr_infos options_arr_values options_arr_defaults options_arr_subcmds"
+	options_arr_subcmds_infos=()
+	options_arrs_string="options_arr_singles options_arr_multis options_arr_infos options_arr_values options_arr_defaults options_arr_subcmds options_arr_subcmds_infos"
 	completion_flags=""
 	declare -gA args=()
 	subcmd=""
@@ -116,7 +116,8 @@ function _add_subcmd() {
 		usage_arr+=("$script <SUBCOMMAND>")
 		subcmd_first=false
 	fi
-	subcmd_arr+="$1"
+	options_arr_subcmds+="$1"
+	options_arr_subcmds_infos+="$2"
 
 	eval "$1_usage_arr=(\"$script $1\")"
 
@@ -318,10 +319,13 @@ function help_strings() {
 	done
 
 	subcmds="${headers[s]}"
-	for s in "${subcmd_arr[@]}"; do
-		subcmds+="\n\t${option_col}$s${reset_col}"
+	for ((i = 0; i < "${#options_arr_subcmds[@]}"; i += 1)); do
+		if [ ! -z "${options_arr_subcmds[i]}" ]; then
+			subcmds+="\n\t${option_col}${options_arr_subcmds[i]}${reset_col}"
+			subcmds+="\t${options_arr_subcmds_infos[i]}"
+		fi
 	done
-	if ((${#subcmd_arr[@]} == 0)); then
+	if ((${#options_arr_subcmds[@]} == 0)); then
 		subcmds=""
 	fi
 
@@ -587,13 +591,13 @@ function arg_parse() {
 	done
 
 	for ((s = 0; s < "${#_options_arr_subcmds[@]}"; s += 1)); do
-		_subcmd="${_options_arr_subcmds[s]}"
+		local _subcmd="${_options_arr_subcmds[s]}"
+		local _subcmd_info="${_options_arr_subcmds_infos[s]}"
 		if [ "$1" == "$_subcmd" ]; then
 			$_debug && echo "Subcommand: $1"
 			subcmd=$1
 			igcp usage_arr $1_usage_arr
 			eval "title=\$$1_title"
-			subcmd_arr=()
 			declare -gA args=()
 
 			shift
@@ -607,7 +611,6 @@ function arg_parse() {
 	local _single=""
 	local _multi=""
 	local _data=""
-	local _subcmd=""
 	local _hit=false
 	help_short=false
 
