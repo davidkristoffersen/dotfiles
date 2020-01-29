@@ -18,7 +18,6 @@ function help_vars() {
 	tab_len=4
 	num_tabs=3
 	script="$(basename "$0")"
-	title_name="$script"
 }
 
 function completion_vars() {
@@ -47,6 +46,7 @@ function help_init() {
 	if [ ! -z "$1" ]; then
 		title_body="$1"
 	fi
+	title_name="$script"
 	title="$(gen_title)"
 
 	declare -gA headers=([u]="USAGE"
@@ -103,7 +103,7 @@ function _add_subcmd() {
 		title_body="$2"
 	fi
 
-	title_name="$title_name-$1"
+	title_name="$script-$1"
 	eval "$1_title=\"$(gen_title)\""
 
 	declare -A headers=([u]="USAGE"
@@ -117,8 +117,8 @@ function _add_subcmd() {
 		subcmd_first=false
 	fi
 
-	options_arr_subcmds+="$1"
-	options_arr_subcmds_infos+="$2"
+	options_arr_subcmds+=("$1")
+	options_arr_subcmds_infos+=("$2")
 
 	eval "$1_usage_arr=(\"$script $1\")"
 
@@ -259,7 +259,7 @@ function add_option() {
 	for _var in $options_arrs_string; do
 		local _type="_$(echo "$_var" | cut -d '_' -f 3- | head -c -2)"
 		local _type_eval="$(eval echo "\$$_type")"
-		if [ "$_type" == "_subcmd" ]; then
+		if [ "$_type" == "_subcmd" ] || [ "$_type" == "_subcmds_info" ]; then
 			continue
 		fi
 		if [ ! -z "$_subcmd" ]; then
@@ -306,7 +306,7 @@ function help_strings() {
 	for ((i = 0; i < "${#_options_arr_subcmds[@]}"; i += 1)); do
 		if [ ! -z "${_options_arr_subcmds[i]}" ]; then
 			subcmds+="\n\t${option_col}${_options_arr_subcmds[i]}${reset_col}"
-			subcmds+="\t${_options_arr_subcmds_infos[i]}"
+			subcmds+="/\t${_options_arr_subcmds_infos[i]}"
 		fi
 	done
 	if ((${#_options_arr_subcmds[@]} == 0)); then
@@ -438,7 +438,8 @@ function help_print() {
 	done
 
 	if [ ! -z "$_subcmds" ]; then
-		echo -e "\n$_subcmds"
+		echo
+		echo -e "\n$_subcmds" | column -s '/' -t
 	fi
 }
 

@@ -27,10 +27,20 @@ function lib_args() {
 	add_option -s s -m sierra	-d "1"					-i "on this line yeis soon"
 	add_option -s q -m quit		-d "0"					-i "on this line yeis soon"
 
-	# Subcommand
+	# Subcommands
 	add_subcmd cache "Cache subcmd title"
 	add_option --subcmd cache -s n -m new	-d "34"		-v "number"	-i "This is a subcmd option"
 	add_option --subcmd cache -s x -m xtra	-d "true"				-i "This is another subcmd option"
+
+	add_subcmd config "Config utility"
+	add_option --subcmd config -s a -m abc				-v "number"	-i "This C is a subcmd option"
+	add_option --subcmd config -s b -m beta	-d "false"				-i "This C subcmd option"
+	add_option --subcmd config -s x -m xorg							-i "This C option"
+
+	add_subcmd distributer "distributer utility"
+	add_option --subcmd distributer -s a -m abc				-v "number"	-i "This D is a subcmd option"
+	add_option --subcmd distributer -s b -m beta	-d "false"				-i "This D subcmd option"
+	add_option --subcmd distributer -s x -m xorg							-i "This D option"
 }
 
 #
