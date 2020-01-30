@@ -38,9 +38,9 @@ function lib_args() {
 	add_option --subcmd config -s x -m xorg							-i "This C option"
 
 	add_subcmd distributer "distributer utility"
-	add_option --subcmd distributer -s a -m abc				-v "number"	-i "This D is a subcmd option"
-	add_option --subcmd distributer -s b -m beta	-d "false"				-i "This D subcmd option"
-	add_option --subcmd distributer -s x -m xorg							-i "This D option"
+	add_option --subcmd distributer -s m -m massive				-v "number"	-i "This D is a subcmd option"
+	add_option --subcmd distributer -s n -m negative -d "false"				-i "This D subcmd option"
+	add_option --subcmd distributer -s z -m zeta							-i "This D option"
 }
 
 #
