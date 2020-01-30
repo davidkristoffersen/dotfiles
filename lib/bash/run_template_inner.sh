@@ -93,10 +93,9 @@ function add_subcmd_help() {
 function _add_subcmd() {
 	eval "subcmd_$1=true"
 
-	# completion_vars
-	# if $completion_enable; then
-		# completion_parse
-	# fi
+	if $completion_enable; then
+		completion_parse_subcmd $1
+	fi
 
 	title_body="Subcmd title"
 	if [ ! -z "$2" ]; then
@@ -224,12 +223,14 @@ function add_option() {
 		add_option_help
 	fi
 
-	if [ -z "$_subcmd" ]; then
-		if [ ! -z "$_single" ]; then
-			completion_flags+="-$_single "
-		fi
-		completion_flags+="--$_multi "
+	local _completion_flags_pre=""
+	if [ ! -z "$_subcmd" ]; then
+		_completion_flags_pre="${_subcmd}_"
 	fi
+	if [ ! -z "$_single" ]; then
+		eval "${_completion_flags_pre}completion_flags+=\"-$_single \""
+	fi
+	eval "${_completion_flags_pre}completion_flags+=\"--$_multi \""
 
 	local new_len="$(($tab_len + 4 + ${#_multi} + 3))"
 	if [ ! -z "$_value" ]; then
@@ -468,24 +469,51 @@ function completion_parse() {
 
 	mkdir -p "$completion_path"
 	touch $completion_file
-}
+	declare -gA completion_code_subcmds=()
 
-function generate_completion_file() {
-	echo -e "#!/usr/bin/env bash
+	completion_code="#!/usr/bin/env bash
 function $completion_func() {
 	local _src=\"$completion_src\"
 	local _caller=\"\$(readlink -f \"\$1\")\"
 	local _in_path=\"$(which $script 2>&1)\"
+"
+}
+
+function completion_parse_subcmd() {
+	eval "$1_completion_flags=\"\""
+	eval "completion_code_subcmds[\"$1\"]=\"$1_completion_flags\""
+}
+
+function generate_completion_file() {
+	local _debug=false
+
+	for x in "${!completion_code_subcmds[@]}"; do
+		local completion_code_subcmds_names+="$x "
+		eval "completion_code_subcmds_flags+=\"\n\tlocal _subcmds_$x=\\\"\$${completion_code_subcmds[$x]}\\\"\""
+	done
+	completion_code_subcmds_flags="$(echo -e "$completion_code_subcmds_flags" | tail +2)"
+
+	completion_code="$completion_code
+	completion_code_subcmds_names=\"$completion_code_subcmds_names\"
+${completion_code_subcmds_flags[@]}
 
 	if [ \"\$_caller\" == \"\$_src\" ] || [ -x \"\$_in_path\" ]; then
-		local _flags=\"$completion_flags\"
+		local _flags=\"$completion_flags$completion_code_subcmds_names\"
+		for _subcmd in \$completion_code_subcmds_names; do
+			if [ \"\$_subcmd\" == \"\${COMP_WORDS[1]}\" ]; then
+				eval \"_flags=\\\$_subcmds_\$_subcmd\"
+			fi
+		done
 		COMPREPLY=(\$(compgen -W \"\$_flags\" -- \"\${COMP_WORDS[COMP_CWORD]}\"))
 	fi
 }
 
 complete -o nosort -F $completion_func $completion_script
 complete -o nosort -F $completion_func ./$completion_script
-" > $completion_file
+"
+
+	$_debug && echo -e "$completion_code"
+	echo -e "$completion_code" > $completion_file
 }
 
 #########################
