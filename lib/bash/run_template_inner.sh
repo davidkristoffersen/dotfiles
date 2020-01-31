@@ -494,14 +494,18 @@ function generate_completion_file() {
 	completion_code_subcmds_flags="$(echo -e "$completion_code_subcmds_flags" | tail +2)"
 
 	completion_code="$completion_code
-	completion_code_subcmds_names=\"$completion_code_subcmds_names\"
+	local _completion_code_subcmds_names=\"$completion_code_subcmds_names\"
 ${completion_code_subcmds_flags[@]}
 
 	if [ \"\$_caller\" == \"\$_src\" ] || [ -x \"\$_in_path\" ]; then
-		local _flags=\"$completion_flags$completion_code_subcmds_names\"
-		for _subcmd in \$completion_code_subcmds_names; do
-			if [ \"\$_subcmd\" == \"\${COMP_WORDS[1]}\" ]; then
+		local _flags=\"$completion_flags\"
+		for _subcmd in \$_completion_code_subcmds_names; do
+			if [[ \"\$_subcmd\" == \"\${COMP_WORDS[1]}\"* ]]; then
+				_flags+=\" \$_subcmd\"
+			fi
+			if ((\$COMP_CWORD != 1)) && [ \"\$_subcmd\" == \"\${COMP_WORDS[1]}\" ]; then
 				eval \"_flags=\\\$_subcmds_\$_subcmd\"
+				break
 			fi
 		done
 		COMPREPLY=(\$(compgen -W \"\$_flags\" -- \"\${COMP_WORDS[COMP_CWORD]}\"))
@@ -509,8 +513,7 @@ ${completion_code_subcmds_flags[@]}
 }
 
 complete -o nosort -F $completion_func $completion_script
-complete -o nosort -F $completion_func ./$completion_script
-"
+complete -o nosort -F $completion_func ./$completion_script"
 
 	$_debug && echo -e "$completion_code"
 	echo -e "$completion_code" > $completion_file
