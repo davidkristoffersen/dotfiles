@@ -10,7 +10,7 @@ out="${tmpdir}screen.png"
 
 laptop_pos="center"
 
-debug=true
+debug=false
 
 function timeit() {
 	if $debug; then
@@ -74,7 +74,7 @@ function blurred() {
 
 function pixelize() {
 	local _png=$pre_png$1$post_png
-	pixelize.py $_png $_png 20
+	pixelize.py $_png $_png 15
 }
 
 function overlay() {
@@ -109,7 +109,7 @@ timeit hw_info
 timeit screenshot
 
 for i in $(seq 0 $((num_screens - 1))); do
-	# timeit blurred $i
+	timeit blurred $i
 	timeit pixelize $i
 	timeit overlay $i
 done
