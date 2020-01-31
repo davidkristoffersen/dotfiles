@@ -10,7 +10,7 @@ out="${tmpdir}screen.png"
 
 laptop_pos="center"
 
-debug=false
+debug=true
 
 function timeit() {
 	if $debug; then
@@ -63,20 +63,24 @@ function screenshot() {
 		local out="/tmp/head_$i.png"
 
 		$debug && echo -e "\t$out:\t${w}x${h}+${x}+${y}"
-		# import -window root -crop "${w}x${h}+${x}+${y}"	"$out"
 		scrot -o -a ${x},${y},${w},${h} $out
 	done
 }
 
 function blurred() {
-	png=$pre_png$1$post_png
-	# convert $png -scale 10% -blur 0x2.5 -resize 1000% $png
-	pixelize.py $png $png 30
+	local _png=$pre_png$1$post_png
+	gm convert $_png -scale 10% -blur 0x2.5 -resize 1000% $_png
+}
+
+function pixelize() {
+	local _png=$pre_png$1$post_png
+	pixelize.py $_png $_png 20
 }
 
 function overlay() {
+	local _file="$pre_png$1$post_png"
 	if [[ -f $overlay_img ]]; then
-		convert $pre_png$1$post_png $overlay_img -gravity center -composite -matte $pre_png$1$post_png
+		gm composite -matte -gravity center $overlay_img $_file $_file
 	fi
 }
 
@@ -105,7 +109,8 @@ timeit hw_info
 timeit screenshot
 
 for i in $(seq 0 $((num_screens - 1))); do
-	timeit blurred $i
+	# timeit blurred $i
+	timeit pixelize $i
 	timeit overlay $i
 done
 
