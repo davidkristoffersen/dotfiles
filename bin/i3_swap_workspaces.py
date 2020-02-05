@@ -1,11 +1,31 @@
 #!/usr/bin/env python
 # Swap workspaces on two monitors
-import i3
+from i3ipc import Connection, Event
+from pylogger import Pylogger
 
-# collect active outputs
-to_be_swapped = [output for output in i3.get_outputs() if output['active']]
-# only swap when there are two active outputs
-if len(to_be_swapped) == 2:
-    for output in to_be_swapped:
-        i3.workspace(output['current_workspace'])
-        i3.command('move', 'workspace to output right')
+logger = Pylogger()
+
+def swap():
+    i3 = Connection()
+
+    focused = i3.get_tree().find_focused().workspace().name
+    logger.log("focused: " + focused)
+
+    outputs = [output.current_workspace for output in i3.get_outputs() if output.active]
+    if not len(outputs) == 2:
+        return
+
+    for output in outputs:
+        if not output == focused:
+            to_focus = output
+        logger.log("out: " + output)
+        i3.command('workspace ' + output)
+        i3.command('move ' + 'workspace to output right')
+
+    logger.log("to_focus: " + to_focus)
+    i3.command('workspace ' + to_focus)
+
+if __name__ == "__main__":
+    logger.clean()
+    swap()
+    logger.finalize()
