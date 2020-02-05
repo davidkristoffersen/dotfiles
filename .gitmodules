@@ -46,3 +46,6 @@
 [submodule ".vim/bundle/vimpager"]
 	path = .vim/bundle/vimpager
 	url = https://github.com/rkitover/vimpager.git
+[submodule ".vim/bundle/i3config.vim"]
+	path = .vim/bundle/i3config.vim
+	url = https://github.com/davidkristoffersen/i3config.vim.git
