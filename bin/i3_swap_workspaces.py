@@ -1,31 +1,29 @@
 #!/usr/bin/env python
 # Swap workspaces on two monitors
-from i3ipc import Connection, Event
-from pylogger import Pylogger
-
-logger = Pylogger()
+from i3ipc import Connection
+import os
 
 def swap():
     i3 = Connection()
 
-    focused = i3.get_tree().find_focused().workspace().name
-    logger.log("focused: " + focused)
-
-    outputs = [output.current_workspace for output in i3.get_outputs() if output.active]
+    # Get workspace objects
+    focused = i3.get_tree().find_focused().workspace()
+    outputs = [output for output in i3.get_outputs() if output.active]
     if not len(outputs) == 2:
         return
 
+    # First workspace is focused
+    if not outputs[0].current_workspace == focused.name:
+        outputs[0], outputs[1] = outputs[1], outputs[0]
+    focus_workspace = outputs[1].current_workspace
+
+    # Swap workspaces
     for output in outputs:
-        if not output == focused:
-            to_focus = output
-        logger.log("out: " + output)
-        i3.command('workspace ' + output)
+        i3.command('workspace ' + output.current_workspace)
         i3.command('move ' + 'workspace to output right')
 
-    logger.log("to_focus: " + to_focus)
-    i3.command('workspace ' + to_focus)
+    # Focus cursor on new workspace
+    os.system("focused=`xdotool getwindowfocus`; eval `xdotool getwindowgeometry --shell $focused`; x=`expr $WIDTH / 2`; y=`expr $HEIGHT / 2`; xdotool mousemove -window $focused $x $y")
 
 if __name__ == "__main__":
-    logger.clean()
     swap()
-    logger.finalize()
