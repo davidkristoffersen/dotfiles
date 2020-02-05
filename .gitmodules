@@ -49,3 +49,6 @@
 [submodule ".vim/bundle/i3config.vim"]
 	path = .vim/bundle/i3config.vim
 	url = https://github.com/davidkristoffersen/i3config.vim.git
+[submodule ".vim/bundle/vim-trailing-whitespace"]
+	path = .vim/bundle/vim-trailing-whitespace
+	url = https://github.com/davidkristoffersen/vim-trailing-whitespace.git
