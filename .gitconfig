@@ -12,7 +12,7 @@
 	st = status
 	credz = config credential.helper store
 	df = diff --word-diff
-	submodulepull = "!f() { git submodule foreach \"(git checkout master; git pull)\"; }; f"
+	submodulepull = "!f() { submodulepull.sh; }; f"
 [core]
 	editor = vim
 [credential]
