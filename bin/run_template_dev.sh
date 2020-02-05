@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 function script() {
-	set_key data
-	if key_exists data; then
-		echo "Data: $(get_key data)"
+	set_key delta
+	if key_exists delta; then
+		echo "Delta: $(get_key delta)"
 	fi
 
 	if subcmd_exists cache; then
