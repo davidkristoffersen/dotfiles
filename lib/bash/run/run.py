@@ -40,24 +40,42 @@ def modify(json):
     json = DotMap(json)
 
     json.args.body.file = gen_default_type('a')
+    json.args.body.file.header.text = 'FILE...'
+    json.args.body.file.body.text = 'File(s) to manage'
 
     cache = gen_default_json()
     cache.title.header.text = "CACHE"
     json.subcmds.body.cache = gen_default_type('s')
+    json.subcmds.body.cache.header.text = 'cache'
+    json.subcmds.body.cache.body.text = 'Manage cached data'
     json.subcmds.cmd.cache = cache
 
     config = gen_default_json()
     config.title.header.text = "CONFIG"
     json.subcmds.body.config = gen_default_type('s')
+    json.subcmds.body.config.header.text = 'config'
+    json.subcmds.body.config.body.text = 'Manage settings'
     json.subcmds.cmd.config = config
 
     cache_config = gen_default_json()
     cache_config.title.header.text = "CACHE_CONFIG"
     json.subcmds.cmd.cache.subcmds.body.cache_config = gen_default_type('s')
+    json.subcmds.cmd.cache.subcmds.body.cache_config.header.text = 'cache_config'
+    json.subcmds.cmd.cache.subcmds.body.cache_config.body.text = 'Manage cache settings'
     json.subcmds.cmd.cache.subcmds.cmd.cache_config = cache_config
 
     json = DotMap(json)
     return json
+
+def colorize(text, col):
+    return Color('{' + col + '}' + text + '{/' + col + '}')
+
+def _print_json(json, num_tabs, body=True):
+    print(num_tabs, colorize(json.header.text + json.sep.text, json.header.col), end='')
+    if body:
+        print(colorize(json.body.text, json.body.col))
+    else:
+        print()
 
 def print_json(json, rec=0):
     num_tabs = '\t' * rec
@@ -71,34 +89,34 @@ def print_json(json, rec=0):
 
     # Title
     print()
-    print(num_tabs + t.header.text + t.sep.text + t.body.text)
+    _print_json(t, num_tabs)
     print()
 
     # Usages
-    print(num_tabs + u.header.text + u.sep.text)
+    _print_json(u, num_tabs, body=False)
     for _u in u.body:
-        print(num_tabs + _u.header.text + _u.sep.text + _u.body.text)
+        _print_json(_u, _num_tabs)
     print()
 
     # Options
-    print(num_tabs + o.header.text + o.sep.text)
+    _print_json(o, num_tabs, body=False)
     for _o in o.body.values():
-        print(_num_tabs + _o.header.text + _o.sep.text + _o.body.text)
+        _print_json(_o, _num_tabs)
     print()
 
-    # args
-    print(num_tabs + a.header.text + a.sep.text)
+    # Args
+    _print_json(a, num_tabs, body=False)
     for _a in a.body.values():
-        print(_num_tabs + _a.header.text + _a.sep.text + _a.body.text)
-    print()
-
-    # args
-    print(num_tabs + s.header.text + s.sep.text)
-    for _s in s.body.values():
-        print(_num_tabs + _s.header.text + _s.sep.text + _s.body.text)
+        _print_json(_a, _num_tabs)
     print()
 
     # Subcmds
+    _print_json(s, num_tabs, body=False)
+    for _s in s.body.values():
+        _print_json(_s, _num_tabs)
+    print()
+
+    # Recurse subcmds
     for subcmd in s.cmd.values():
         print_json(subcmd, rec=rec+1)
     print()

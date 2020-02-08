@@ -25,7 +25,7 @@ default_usages = {
 }
 
 default_option = {
-    'header': _default_text(text='option', col='greel'),
+    'header': _default_text(text='option', col='green'),
     'single': _default_text(col='green'),
     'multi': _default_text(col='green'),
     'value': _default_text(col='green'),
