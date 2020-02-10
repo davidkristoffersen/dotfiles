@@ -1,36 +1,51 @@
 #!/usr/bin/env bash
 
+function format() {
+	while IFS= read -r line; do
+		out+="$2$line$3"
+	done <<< "$1"
+}
+
 function update() {
 	f="\e[2m"
 	b="\e[1m"
-	r="\e[m"
+	r="\e[0m"
 	path="$(echo $1 | awk '{print $1}')"
 	git_path="$(echo $1 | awk '{print $2}')"
+	out=""
 
 	cd $path
 
 	origin="$(git remote get-url origin)"
-	echo -e "$b$git_path$r -> $origin"
+	format "$git_path" $b "$r\n"
+	format "$origin" " ↳ " "\n"
 
-	echo -e "${f}git checkout master$r"
-	git checkout master
-	echo -e "${f}git pull$r"
-	git pull
+	format "git checkout master" $r$f "$r\n"
+	format "$(git checkout master 2>&1)" $r "$r\n"
+	format "git pull" $r$f "$r\n"
+	format "$(git pull 2>&1)" "$r" "\n"
 
 	upstream_exist="$(git remote show | grep ^upstream$)"
 	if [ ! -z "$upstream_exist" ]; then
 		upstream="$(git remote get-url upstream)"
-		echo -e "${b}Fork$r -> $upstream"
-		echo -e "${f}git fetch upstream$r"
-		git fetch upstream
-		echo -e "${f}git merge upstream/master master$r"
-		git merge upstream/master master
-		fi
-	echo
+		format "Fork" "$b\t" "$r\n"
+		format "$upstream" "\t ↳ " "\n"
+		format "git fetch upstream" "$r$f\t" "$r\n"
 
+		tmp="$(git fetch upstream 2>&1)"
+		if [ ! -z "$tmp" ]; then
+			format "$tmp" "$r\t" "\n"
+		fi
+
+		format "git merge upstream/master master" "$r$f\t" "$r\n"
+		format "$(git merge upstream/master master 2>&1)" "$r\t" "\n"
+	fi
+
+	echo -e "$out"
 	cd - 1>/dev/null
 }
 export -f update
+export -f format
 
 if ! [ -d .git ] || ! git rev-parse --git-dir > /dev/null 2>&1; then
 	echo "fatal: not a git repository (or any parent up to mount point /)" >&2
@@ -46,5 +61,6 @@ fi
 path="$(pwd)"
 args="$(echo ${submodules[@]} | tr ' ' "\n" | xargs -I {} echo "$path/{} {}")"
 
-out="$(echo "$args" | parallel 'update 2>&1')"
+tagstring='\033[30;3{=$_=++$::color%8=}m'
+out="$(echo "$args" | parallel --tagstring $tagstring 'update 2>&1')"
 echo -e "$out"
