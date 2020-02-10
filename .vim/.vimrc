@@ -77,10 +77,10 @@ set ignorecase			" ignore case
 set smartcase			" use case when uppercase
 
 " HARD TABS
-set tabstop=4                       " tab width
+set tabstop=4						 " tab width
 set softtabstop=0 noexpandtab
-set shiftwidth=4                    " shift width
-set autoindent                      " auto indentation
+set shiftwidth=4					" shift width
+set autoindent						" auto indentation
 set breakindent						" Indents word-wrapped lines as much as the 'parent' line
 " Ensures word-wrap does not split words
 set formatoptions=l
@@ -92,8 +92,8 @@ au BufEnter,BufRead *.conf setf dosini
 au BufEnter,BufRead *.rasi setf css
 
 " UNDO HISTORY
-set undofile                    " use an undo file
-set undodir=$HOME/.vim/undo        " undo file path
+set undofile					" use an undo file
+set undodir=$HOME/.vim/undo		" undo file path
 set undolevels=1000
 set undoreload=10000
 
@@ -105,10 +105,10 @@ vnoremap < <gv
 
 " OS clipboard
 function! ClipboardYank()
-  call system('xclip -i -selection clipboard', @@)
+	call system('xclip -i -selection clipboard', @@)
 endfunction
 function! ClipboardPaste()
-  let @@ = system('xclip -o -selection clipboard')
+	let @@ = system('xclip -o -selection clipboard')
 endfunction
 
 vnoremap <silent> y y:call ClipboardYank()<cr>
@@ -151,7 +151,7 @@ endfunction
 " Remove soft tabs
 nmap <leader>T :%s/\s\s\s\s/\t/g<cr>
 " Remove hard tabs
-nmap <leader>h :%s/\t/    /g<cr>
+nmap <leader>h :%s/\t/	/g<cr>
 
 " Move tab next
 nnoremap <leader>} :tabm +1<cr>
@@ -179,9 +179,9 @@ nnoremap <leader>rc :edit \| noh<cr>
 " ALT KEY
 " Mapping Alt keycode to POSIX standar Alt keycode
 for i in range(char2nr('a'), char2nr('z'))
-    let i = nr2char(i)
-    exec "set <A-".i.">=\e".i
-    exec "imap \e".i." <A-".i.">"
+	let i = nr2char(i)
+	exec "set <A-".i.">=\e".i
+	exec "imap \e".i." <A-".i.">"
 endfor
 " Move lines up or down with <A-{j/k}>
 nnoremap <A-j> :m+<CR>==
@@ -193,16 +193,16 @@ inoremap <A-k> <Esc>:m-2<CR>==gi
 
 " MAPS: SUBJECT SPECIFIC
 " INF_3910
-nnoremap <leader>iu :Silent        /home/david/studies/semester_6/inf_3910/inf_3910-project/scripts_mic/run.sh u<cr>
-" nnoremap <leader>iiu :Silent    /home/david/studies/semester_6/inf_3910/inf_3910-project/scripts_mic/run.sh uu %<cr>
+nnoremap <leader>iu :Silent		/home/david/studies/semester_6/inf_3910/inf_3910-project/scripts_mic/run.sh u<cr>
+" nnoremap <leader>iiu :Silent	/home/david/studies/semester_6/inf_3910/inf_3910-project/scripts_mic/run.sh uu %<cr>
 nnoremap <leader>iiu :call Upload()<cr>
-nnoremap <leader>id :Silent        /home/david/studies/semester_6/inf_3910/inf_3910-project/scripts_mic/run.sh d<cr>
-nnoremap <leader>iid :Silent    /home/david/studies/semester_6/inf_3910/inf_3910-project/scripts_mic/run.sh dd %<cr>
-nnoremap <leader>is :Silent        /home/david/studies/semester_6/inf_3910/inf_3910-project/scripts_mic/run.sh s<cr>
-nnoremap <leader>ik :Silent        /home/david/studies/semester_6/inf_3910/inf_3910-project/scripts_mic/run.sh k<cr>
+nnoremap <leader>id :Silent		/home/david/studies/semester_6/inf_3910/inf_3910-project/scripts_mic/run.sh d<cr>
+nnoremap <leader>iid :Silent	/home/david/studies/semester_6/inf_3910/inf_3910-project/scripts_mic/run.sh dd %<cr>
+nnoremap <leader>is :Silent		/home/david/studies/semester_6/inf_3910/inf_3910-project/scripts_mic/run.sh s<cr>
+nnoremap <leader>ik :Silent		/home/david/studies/semester_6/inf_3910/inf_3910-project/scripts_mic/run.sh k<cr>
 
 function! g:Upload()
-    exec 'Silent /home/david/studies/semester_6/inf_3910/inf_3910-project/scripts_mic/run.sh uu ' . expand('%:p')
+	exec 'Silent /home/david/studies/semester_6/inf_3910/inf_3910-project/scripts_mic/run.sh uu ' . expand('%:p')
 endfunction
 
 " COMMANDS
@@ -218,21 +218,79 @@ nnoremap <leader>tp :call Toggle_val("set_paste")<cr>
 nnoremap <leader>tn :call Toggle_val("set_number")<cr>
 nnoremap <leader>tc :call Toggle_val("spell_check")<cr>
 nnoremap <leader>ts :call Toggle_val("syntastic")<cr>
-let g:toggles = {'set_paste':    [1, 'set paste', 'set nopaste'],
-            \'set_number':    [1, 'set nonumber', 'set number'],
-            \'spell_check':    [1, 'set nospell', 'set spell spelllang=en_us',],
-            \'syntastic':    [1, 'SyntasticToggleMode', 'SyntasticToggleMode',],
-            \}
+let g:toggles = {'set_paste':	[1, 'set paste', 'set nopaste'],
+			\'set_number':	[1, 'set nonumber', 'set number'],
+			\'spell_check':	[1, 'set nospell', 'set spell spelllang=en_us',],
+			\'syntastic':	[1, 'SyntasticToggleMode', 'SyntasticToggleMode',],
+			\}
 function! g:Toggle_val(cmd)
-    let g:toggles[a:cmd][0] = xor(g:toggles[a:cmd][0], 1)
-    if g:toggles[a:cmd][0] == 0
-        execute g:toggles[a:cmd][1]
-        echo g:toggles[a:cmd][1]
-    else
-        execute g:toggles[a:cmd][2]
-        echo g:toggles[a:cmd][2]
-    endif
+	let g:toggles[a:cmd][0] = xor(g:toggles[a:cmd][0], 1)
+	if g:toggles[a:cmd][0] == 0
+		execute g:toggles[a:cmd][1]
+		echo g:toggles[a:cmd][1]
+	else
+		execute g:toggles[a:cmd][2]
+		echo g:toggles[a:cmd][2]
+	endif
 endfunction
+
+function! s:_TextEnableCodeSnip(filetype,start,end,textSnipHl) abort
+	let ft=toupper(a:filetype)
+	let group='textGroup'.ft
+	if exists('b:current_syntax')
+		let s:current_syntax=b:current_syntax
+		" Remove current syntax definition, as some syntax files (e.g. cpp.vim)
+		" do nothing if b:current_syntax is defined.
+		unlet b:current_syntax
+	endif
+	execute 'syntax include @'.group.' syntax/'.a:filetype.'.vim'
+	try
+		execute 'syntax include @'.group.' after/syntax/'.a:filetype.'.vim'
+	catch
+	endtry
+	if exists('s:current_syntax')
+		let b:current_syntax=s:current_syntax
+	else
+		unlet b:current_syntax
+	endif
+	let l:exec = "syntax region textSnip" . ft . " matchgroup=" . a:textSnipHl . " keepend"
+		\ . " start=" . "'" . a:start . "'"
+		\ . " end=" . "'" . a:end . "'"
+		\ . " contains=@" . group
+	execute l:exec
+endfunction
+
+function! g:TextEnableCodeSnip(filetype) abort
+	let l:wrap = '```'
+	let l:sep = ''
+	let l:pre = ''
+	let l:post = '$'
+	let l:scmnt = 'SpecialComment'
+
+	let l:cmnt = g:CommenterGetCommentList()
+
+	let l:cmnt[0] = substitute(l:cmnt[0], '\\', '', 'g')
+	let l:cmnt[1] = substitute(l:cmnt[1], '\\', '', 'g')
+	let l:cmnt[0] = substitute(l:cmnt[0], '''', '\\''', 'g')
+	let l:cmnt[1] = substitute(l:cmnt[1], '''', '\\''', 'g')
+
+	if l:cmnt[1] != ''
+		let l:cmnt[1] = ' ' . l:cmnt[1]
+	endif
+
+	let l:pre = l:cmnt[0] . ' ' . l:wrap . l:pre . l:sep . a:filetype . l:cmnt[1]
+	let l:post = l:cmnt[0] . ' ' . l:post . l:wrap . l:sep . a:filetype . l:cmnt[1]
+	call s:_TextEnableCodeSnip(a:filetype, l:pre, l:post, l:scmnt)
+endfunction
+
+function! s:_TextEnableCodeSnipAll()
+	let l:langs = g:CommenterGetLanguages()
+	for l:lang in l:langs
+		call g:TextEnableCodeSnip(l:lang)
+	endfor
+endfunction
+
+au BufEnter * :call s:_TextEnableCodeSnipAll()
 
 "
 " PLUGINS
@@ -311,11 +369,11 @@ endfunction
 " VIMPAGER
 function! g:Plugin_vimpager()
 	if !exists('g:vimpager')
-	  let g:vimpager = {}
+		let g:vimpager = {}
 	endif
 
 	if !exists('g:less')
-	  let g:less     = {}
+		let g:less	 = {}
 	endif
 	let g:less.enabled = 0
 endfunction
