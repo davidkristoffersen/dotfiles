@@ -20,4 +20,5 @@
 [merge "ignore"]
 	driver = true
 [color]
-	ui = auto
+	ui = always
+	branch = auto
