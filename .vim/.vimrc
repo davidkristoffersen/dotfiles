@@ -31,10 +31,12 @@ call add(g:pathogen_disabled, 'omnisharp-vim')
 " call add(g:pathogen_disabled, 'vim-commenter')
 " call add(g:pathogen_disabled, 'vim-fugitive')
 " call add(g:pathogen_disabled, 'vim-indent-guides')
+" call add(g:pathogen_disabled, 'vim-ingo-library')
 " call add(g:pathogen_disabled, 'vim-javascript')
 " call add(g:pathogen_disabled, 'vim-jsx')
 call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
 " call add(g:pathogen_disabled, 'vimpager')
+" call add(g:pathogen_disabled, 'vim-SyntaxRange')
 " call add(g:pathogen_disabled, 'vim-trailing-whitespace')
 
 " Load all plugins
@@ -234,64 +236,6 @@ function! g:Toggle_val(cmd)
 	endif
 endfunction
 
-function! s:_TextEnableCodeSnip(filetype,start,end,textSnipHl) abort
-	let ft=toupper(a:filetype)
-	let group='textGroup'.ft
-	if exists('b:current_syntax')
-		let s:current_syntax=b:current_syntax
-		" Remove current syntax definition, as some syntax files (e.g. cpp.vim)
-		" do nothing if b:current_syntax is defined.
-		unlet b:current_syntax
-	endif
-	execute 'syntax include @'.group.' syntax/'.a:filetype.'.vim'
-	try
-		execute 'syntax include @'.group.' after/syntax/'.a:filetype.'.vim'
-	catch
-	endtry
-	if exists('s:current_syntax')
-		let b:current_syntax=s:current_syntax
-	else
-		unlet b:current_syntax
-	endif
-	let l:exec = "syntax region textSnip" . ft . " matchgroup=" . a:textSnipHl . " keepend"
-		\ . " start=" . "'" . a:start . "'"
-		\ . " end=" . "'" . a:end . "'"
-		\ . " contains=@" . group
-	execute l:exec
-endfunction
-
-function! g:TextEnableCodeSnip(filetype) abort
-	let l:wrap = '```'
-	let l:sep = ''
-	let l:pre = ''
-	let l:post = '$'
-	let l:scmnt = 'SpecialComment'
-
-	let l:cmnt = g:CommenterGetCommentList()
-
-	let l:cmnt[0] = substitute(l:cmnt[0], '\\', '', 'g')
-	let l:cmnt[1] = substitute(l:cmnt[1], '\\', '', 'g')
-	let l:cmnt[0] = substitute(l:cmnt[0], '''', '\\''', 'g')
-	let l:cmnt[1] = substitute(l:cmnt[1], '''', '\\''', 'g')
-
-	if l:cmnt[1] != ''
-		let l:cmnt[1] = ' ' . l:cmnt[1]
-	endif
-
-	let l:pre = l:cmnt[0] . ' ' . l:wrap . l:pre . l:sep . a:filetype . l:cmnt[1]
-	let l:post = l:cmnt[0] . ' ' . l:post . l:wrap . l:sep . a:filetype . l:cmnt[1]
-	call s:_TextEnableCodeSnip(a:filetype, l:pre, l:post, l:scmnt)
-endfunction
-
-function! s:_TextEnableCodeSnipAll()
-	let l:langs = g:CommenterGetLanguages()
-	for l:lang in l:langs
-		call g:TextEnableCodeSnip(l:lang)
-	endfor
-endfunction
-
-au BufEnter * :call s:_TextEnableCodeSnipAll()
-
 "
 " PLUGINS
 "
@@ -376,6 +320,56 @@ function! g:Plugin_vimpager()
 		let g:less	 = {}
 	endif
 	let g:less.enabled = 0
+endfunction
+
+" SYNTAXRANGE
+function! g:Plugin_vim_SyntaxRange()
+	function! g:TextEnableCodeSnip(filetype) abort
+		let l:ft = &ft
+		if l:ft == a:filetype
+			return
+		endif
+
+		let l:wrap = ''
+		let l:cpre = '```'
+		let l:pre = ''
+		let l:post = '$'
+		let l:sep = ''
+		let l:match_group = 'NonText'
+		let l:cmnt_set = 'y'
+
+		let l:cmnt = g:CommenterGetCommentList()
+
+		let l:cmnt[0] = substitute(l:cmnt[0], '\\', '', 'g')
+		let l:cmnt[1] = substitute(l:cmnt[1], '\\', '', 'g')
+		let l:cmnt[0] = substitute(l:cmnt[0], '''', '\\''', 'g')
+		let l:cmnt[1] = substitute(l:cmnt[1], '''', '\\''', 'g')
+
+		if l:cmnt[1] != ''
+			let l:cmnt[1] = ' ' . l:cmnt[1]
+		endif
+		let l:cmnt[0] = l:cmnt[0] . ' '
+		if l:cmnt_set == 'n'
+			let l:cmnt[0] = ''
+			let l:cmnt[1] = ''
+		endif
+
+		let l:pre =	l:cmnt[0] . l:wrap . l:pre	. l:sep . l:cpre . a:filetype . l:wrap . l:cmnt[1]
+		let l:post =l:cmnt[0] . l:wrap . l:post	. l:sep . l:cpre . a:filetype . l:wrap . l:cmnt[1]
+
+		let l:cmd = "call SyntaxRange#Include('" . l:pre . "', '" . l:post . "', '" . a:filetype . "', '" . l:match_group . "')"
+		" echo l:cmd
+		exec l:cmd
+	endfunction
+
+	function! s:_TextEnableCodeSnipAll()
+		let l:langs = g:CommenterGetLanguages()
+		for l:lang in l:langs
+			call g:TextEnableCodeSnip(l:lang)
+		endfor
+	endfunction
+
+	" au VimEnter * call s:_TextEnableCodeSnipAll()
 endfunction
 
 " PLUGINS MANAGEMENT
