@@ -4,17 +4,16 @@ function script() {
 	set_key config
 	set_key src
 	set_key dst
-	echo "config: $config"
-	echo "src: $src"
-	echo "dst: $dst"
+	dst="$config/$dst"
+	src="$config/$src"
 
 	vars="variables fonts network audio screens"
-	vars+=" app_launchers applications navigation"
+	vars+=" app_launcher applications navigation"
 	vars+=" workspaces appearance config modes"
 	vars+=" status_bar autostart_applications"
 	dst_code=""
 	gen_vars
-	format_vars > /dev/null
+	format_vars > $dst
 }
 
 function format_vars() {
@@ -90,7 +89,7 @@ $e nitrogen --restore
 $b $m+$s+s $e i3_swap_workspaces.py
 EOF
 
-	read -r -d '' app_launchers << EOF
+	read -r -d '' app_launcher << EOF
 # Rofi
 $b $m+d exec rofi -show run
 EOF
@@ -183,14 +182,14 @@ bindsym $m+$s+plus scratchpad show
 EOF
 
 # $```i3config
-local wnames="$(seq 1 9)"
+local wnames="$(seq 0 9)"
 local wsn="workspaces number"
 local mctwsn="move container to workspace number"
 local rwt="rename workspace to"
 
 wsn="$(echo -n $wnames | xargs -d ' ' -I {} echo "$b $m+{} $wsn {}")"
-mctwsn="$(echo -n $wnames | xargs -d ' ' -I {} echo "$b $m+{} $mctwsn {}")"
-rwt="$(echo -n $wnames | xargs -d ' ' -I {} echo "$b $m+{} $rwt {}")"
+mctwsn="$(echo -n $wnames | xargs -d ' ' -I {} echo "$b $m+$s+{} $mctwsn {}")"
+rwt="$(echo -n $wnames | xargs -d ' ' -I {} echo "$b $m+$a+{} $rwt {}")"
 # ```i3config
 	read -r -d '' workspaces << EOF
 # Switch to workspace
@@ -254,6 +253,7 @@ mode "resize" {
 $b $m+r mode "resize"
 EOF
 	read -r -d '' status_bar << EOF
+# i3bar
 bar {
 	status_command i3status
 }
