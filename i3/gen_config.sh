@@ -39,7 +39,7 @@ function gen_vars() {
 	local e="\$e"
 	local b="\$b"
 
-# ```i3config
+	# ```i3config
 	read -r -d '' variables << EOF
 # Super
 set \$m Mod4
@@ -60,7 +60,9 @@ EOF
 $e nm-applet
 EOF
 
-refresh_i3status="\$refresh_i3status"
+	# $```i3config
+	refresh_i3status="\$refresh_i3status"
+	# ```i3config
 	read -r -d '' audio << EOF
 # Use pactl to adjust volume in PulseAudio.
 set \$refresh_i3status killall -SIGUSR1 i3status
@@ -104,8 +106,9 @@ $b $m+b exec chromium
 $b $m+space $e toggle_xkbmap.sh
 EOF
 
-
-local mwto="move workspace to output"
+	# $```i3config
+	local mwto="move workspace to output"
+	# ```i3config
 	read -r -d '' navigation << EOF
 # Change focus
 # Tiling / floating
@@ -181,16 +184,16 @@ bindsym $m+$s+minus move scratchpad
 bindsym $m+$s+plus scratchpad show
 EOF
 
-# $```i3config
-local wnames="$(seq 0 9)"
-local wsn="workspaces number"
-local mctwsn="move container to workspace number"
-local rwt="rename workspace to"
+	# $```i3config
+	local wnames="$(seq 0 9)"
+	local wsn="workspaces number"
+	local mctwsn="move container to workspace number"
+	local rwt="rename workspace to"
 
-wsn="$(echo -n $wnames | xargs -d ' ' -I {} echo "$b $m+{} $wsn {}")"
-mctwsn="$(echo -n $wnames | xargs -d ' ' -I {} echo "$b $m+$s+{} $mctwsn {}")"
-rwt="$(echo -n $wnames | xargs -d ' ' -I {} echo "$b $m+$a+{} $rwt {}")"
-# ```i3config
+	wsn="$(echo -n $wnames | xargs -d ' ' -I {} echo "$b $m+{} $wsn {}")"
+	mctwsn="$(echo -n $wnames | xargs -d ' ' -I {} echo "$b $m+$s+{} $mctwsn {}")"
+	rwt="$(echo -n $wnames | xargs -d ' ' -I {} echo "$b $m+$a+{} $rwt {}")"
+	# ```i3config
 	read -r -d '' workspaces << EOF
 # Switch to workspace
 $wsn
@@ -201,6 +204,7 @@ $mctwsn
 # Rename focused workspace
 $rwt
 EOF
+
 	read -r -d '' appearance << EOF
 # Gaps size
 gaps inner 20
@@ -220,6 +224,7 @@ client.background       #ffffff
 # App specific
 # for_window [class="^Chromium$" title=" - Chromium$"] border 1
 EOF
+
 	read -r -d '' config << EOF
 # Reload config
 $b $m+$s+c reload
@@ -230,6 +235,7 @@ $b $m+$s+r restart
 # Exit i3
 $b $m+$s+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 EOF
+
 	read -r -d '' modes << EOF
 # Resize windows
 mode "resize" {
@@ -252,12 +258,14 @@ mode "resize" {
 }
 $b $m+r mode "resize"
 EOF
+
 	read -r -d '' status_bar << EOF
 # i3bar
 bar {
 	status_command i3status
 }
 EOF
+
 	read -r -d '' autostart_applications << EOF
 # exec chromium
 EOF
