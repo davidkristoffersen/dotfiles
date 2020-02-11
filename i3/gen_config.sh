@@ -33,21 +33,16 @@ EOF
 }
 
 function gen_vars() {
-	local m="\$m"
-	local s="\$s"
-	local a="\$a"
-	local e="\$e"
-	local b="\$b"
+	local m="Mod4"
+	local s="Shift"
+	local a="Mod1"
+	local e="exec --no-startup-id"
+	local b="bindsym"
 
 	# ```i3config
 	read -r -d '' variables << EOF
-# Super
-set \$m Mod4
-set \$s Shift
-# Alt
-set \$a Mod1
-set \$e exec --no-startup-id
-set \$b bindsym
+# Mod1: Alt
+# Mod4: Super
 EOF
 
 	read -r -d '' fonts << EOF
