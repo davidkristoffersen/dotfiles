@@ -52,3 +52,9 @@
 [submodule ".vim/bundle/vim-trailing-whitespace"]
 	path = .vim/bundle/vim-trailing-whitespace
 	url = https://github.com/davidkristoffersen/vim-trailing-whitespace.git
+[submodule ".vim/bundle/vim-ingo-library"]
+	path = .vim/bundle/vim-ingo-library
+	url = https://github.com/inkarkat/vim-ingo-library.git
+[submodule ".vim/bundle/vim-SyntaxRange"]
+	path = .vim/bundle/vim-SyntaxRange
+	url = https://github.com/inkarkat/vim-SyntaxRange.git
