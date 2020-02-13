@@ -69,6 +69,11 @@ path_add "$HOME/bin"
 path_add "$HOME/.local/bin"
 # Cargo's bin
 path_add "$HOME/.cargo/bin"
+# Basher's bin
+path_add "$HOME/.basher/bin"
 
 # Make path global
 export PATH="$PATH"
+
+# Initialize basher
+eval "$(basher init -)"
