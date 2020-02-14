@@ -22,16 +22,23 @@ function hostname_master() {
 	tracepath -b 129.242.16.30 | grep "$name" | grep -e '^ 1:'
 }
 
-function ll() {
-	ls_sorted -l false
+function lll() {
+	ls_sorted false -lh $@
 }
-
+function lla() {
+	ls_sorted true -lh $@
+}
+function ll() {
+	ls_sorted false -h $@
+}
 function la() {
-	ls_sorted -l true
+	ls_sorted true -h $@
 }
 
 function ls_sorted() {
-	local files="$(ls -A1F)"
+	local show_hidden="$1"
+	local sub_dir=false
+	local files="$(ls -A1F $3)"
 
 	local hidden="$(echo "$files" | grep -e "^\.")"
 	local normal="$(echo "$files" | grep -ve "^\.")"
@@ -51,17 +58,24 @@ function ls_sorted() {
 	local hidden_f="$(echo "$hidden" | grep -ve "[/@*|]$")"
 	local normal_f="$(echo "$normal" | grep -ve "[/@*|]$")"
 
-	if $2; then
+	if $show_hidden; then
 		files="$hidden_d $hidden_s $hidden_p $hidden_e $hidden_f "
 	else
 		files=""
 	fi
 	files+="$normal_d $normal_s $normal_p $normal_e $normal_f "
 
-	ls $1 -FUd --color=always $files
+	if [ -d "$3" ]; then
+		sub_dir=true
+		cd "$3"
+	fi
+	ls $2 -FUd --color=always $files
+	if $sub_dir; then
+		cd - >/dev/null
+	fi
 }
 
-export -f ll la ls_sorted
+export -f lll lla ll la
 
 function move_cursor() {
 	[ ${#@} == 2 ] && true; check_error $? nargs
