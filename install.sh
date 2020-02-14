@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function link_file() {
-	[ ${#@} == 3 ] && true; check_errs $? nargs
+	[ ${#@} == 3 ] && true; check_error $? nargs
 	local name="$(basename $1)"
 	local src="$DOTFILES/$1"
 	local dst="$HOME/$2"
@@ -11,8 +11,8 @@ function link_file() {
 	local desc_long="${BLUE}$desc_long${RESET}\n"
 
 	printf "$desc_long"
-	printf "rm -rf \"$dst\"\n"; check_errs $?
-	printf "ln -s \"$src\" \"$dst\"\n"; check_errs $?
+	printf "\trm -rf \"$dst\"\n"; check_error $?
+	printf "\tln -s \"$src\" \"$dst\"\n"; check_error $?
 	print_at 3 $OK_POS "${GREEN}OK${RESET}"
 }
 
@@ -20,16 +20,12 @@ OK_POS="$(($(tput cols) - 4))"
 export DOTFILES=$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )
 
 # Dot files in $HOME
-home_dot_files=(.bash_aliases
-				.bash_completion
-				.bash_env
-				.bash_funcs
-				.bash_logout
-				.bash_profile
-				.bash_prompt
-				.bashrc
-				.bash_shopt
+home_dot_files=(.bash_profile
 				.profile
+				.profile.d
+				.bashrc
+				.bashrc.d
+				.bash_logout
 				.gitconfig
 )
 

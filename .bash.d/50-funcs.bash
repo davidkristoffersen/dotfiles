@@ -23,7 +23,7 @@ function hostname_master() {
 }
 
 function move_cursor() {
-	[ ${#@} == 2 ] && true; check_errs $? nargs
+	[ ${#@} == 2 ] && true; check_error $? nargs
 	case $1 in
 		u)
 			printf "\033[$2A"
@@ -44,13 +44,13 @@ function move_cursor() {
 			printf "\033[u"
 			;;
 		*)
-			false; check_errs $? arg $1
+			false; check_error $? arg $1
 			;;
 	esac
 }
 
 function print_at() {
-	[ ${#@} == 3 ] && true; check_errs $? nargs
+	[ ${#@} == 3 ] && true; check_error $? nargs
 	move_cursor s 0
 	move_cursor u $1
 	move_cursor f $2
