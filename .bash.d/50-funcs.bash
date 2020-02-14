@@ -22,6 +22,47 @@ function hostname_master() {
 	tracepath -b 129.242.16.30 | grep "$name" | grep -e '^ 1:'
 }
 
+function ll() {
+	ls_sorted -l false
+}
+
+function la() {
+	ls_sorted -l true
+}
+
+function ls_sorted() {
+	local files="$(ls -A1F)"
+
+	local hidden="$(echo "$files" | grep -e "^\.")"
+	local normal="$(echo "$files" | grep -ve "^\.")"
+
+	local hidden_d="$(echo "$hidden" | grep "/$" | sed 's/.$//')"
+	local normal_d="$(echo "$normal" | grep "/$" | sed 's/.$//')"
+
+	local hidden_s="$(echo "$hidden" | grep "@$" | sed 's/.$//')"
+	local normal_s="$(echo "$normal" | grep "@$" | sed 's/.$//')"
+
+	local hidden_p="$(echo "$hidden" | grep "|$" | sed 's/.$//')"
+	local normal_p="$(echo "$normal" | grep "|$" | sed 's/.$//')"
+
+	local hidden_e="$(echo "$hidden" | grep "\*$" | sed 's/.$//')"
+	local normal_e="$(echo "$normal" | grep "\*$" | sed 's/.$//')"
+
+	local hidden_f="$(echo "$hidden" | grep -ve "[/@*|]$")"
+	local normal_f="$(echo "$normal" | grep -ve "[/@*|]$")"
+
+	if $2; then
+		files="$hidden_d $hidden_s $hidden_p $hidden_e $hidden_f "
+	else
+		files=""
+	fi
+	files+="$normal_d $normal_s $normal_p $normal_e $normal_f "
+
+	ls $1 -FUd --color=always $files
+}
+
+export -f ll la ls_sorted
+
 function move_cursor() {
 	[ ${#@} == 2 ] && true; check_error $? nargs
 	case $1 in
