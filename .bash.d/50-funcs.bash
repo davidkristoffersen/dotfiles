@@ -22,31 +22,6 @@ function hostname_master() {
 	tracepath -b 129.242.16.30 | grep "$name" | grep -e '^ 1:'
 }
 
-function confirm() {
-	printf
-}
-
-check_errs() {
-	if [ "$1" -ne "0" ]; then
-		local desc=""
-		case $2 in
-			nargs)
-				desc="${FUNCNAME[1]}: Invalid number of arguments."
-				;;
-			arg)
-				[ ${#@} == 3 ] && true; check_errs $? nargs
-				desc="${FUNCNAME[1]}: Invalid argument $3"
-				;;
-			*)
-				desc="No description."
-		esac
-		desc=" $desc"
-
-		printf "${RED}Error:${RESET}$desc\n"
-		exit $1
-	fi
-}
-
 function move_cursor() {
 	[ ${#@} == 2 ] && true; check_errs $? nargs
 	case $1 in
@@ -83,4 +58,4 @@ function print_at() {
 	move_cursor r 0
 }
 
-export -f check_errs move_cursor print_at
+export -f move_cursor print_at
