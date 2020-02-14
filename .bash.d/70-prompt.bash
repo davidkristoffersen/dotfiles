@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 PROMPT_COMMAND=__prompt_command # Func to gen PS1 after CMDs
 __prompt_command() {

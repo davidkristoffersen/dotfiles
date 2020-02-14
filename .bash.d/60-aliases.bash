@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Navigation
 # enable color support of ls and also add handy aliases

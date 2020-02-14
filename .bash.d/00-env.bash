@@ -24,14 +24,7 @@
 	&& SSH=true \
 	|| SSH=false
 
-# Is the shell a ssh environment on the uvcluster
-# TODO: ping can lag terminal
-# [ ! -z "`ping -c 1 uvcluster 2>/dev/null`" ] \
-	# && UVCLUSTER=true \
-	# || UVCLUSTER=false
-UVCLUSTER=false
-
-export SHELL_SH SHELL_INTERACTIVE SHELL_LOGIN SSH UVCLUSTER
+export SHELL_SH SHELL_INTERACTIVE SHELL_LOGIN SSH
 
 #
 # COLORS
@@ -62,3 +55,9 @@ function set_colors() {
 }
 
 set_colors
+
+#
+# Dotfiles exports
+#
+
+export DOTFILES="$HOME/.config/config"

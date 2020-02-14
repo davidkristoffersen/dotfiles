@@ -1,16 +1,4 @@
-#!/bin/bash
-
-# List symlinks needed to enable all bash source files
-function bash_sourced_link() {
-	read -e -p "Path to config git repo: " path
-
-	for dest in $BASH_FILES; do
-		src="${path%/}/`basename $dest`"
-		echo "`basename $dest`:"
-		echo "cp $dest $dest.bak"
-		echo -e "ln -sf $src $dest\n"
-	done
-}
+#!/usr/bin/env bash
 
 function code-style-format() {
 	for i in $@; do

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Set number of spaces in tabs
 if $SHELL_INTERACTIVE; then
