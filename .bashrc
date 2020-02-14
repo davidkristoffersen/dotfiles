@@ -18,7 +18,7 @@ declare -a bash_files=( \
 	# Functions
 	funcs \
 	# Completions
-	completion
+	completion \
 	# Cluster exports
 	uvcluster \
 )
