@@ -8,25 +8,24 @@ check_error() {
 	if [ "$1" -ne "0" ]; then
 		local error="$1"
 		shift
-		local desc=" ${FUNCNAME[1]}"
+		local desc="\tFile: ${BASH_SOURCE[1]}\n\tFunc: ${FUNCNAME[1]}"
 		case $1 in
 			nargs)
-				desc=": Invalid number of arguments."
+				desc+="\n\tDesc: Invalid number of arguments."
 				;;
 			arg)
-				[ ${#@} -ne 1 ]; check_errs $? nargs
-				desc=": Invalid argument $2"
+				[ ${#@} -ne 1 ] && local arg="$2" || local arg="(Missing argument)"
+				desc+="\n\tDesc: Invalid argument $arg"
+				;;
+			file)
+				[ ${#@} -ne 1 ] && local arg="$2" || local arg="(Missing argument)"
+				desc+="\n\tDesc: Error in $arg"
 				;;
 			*)
-				if [ ${#@} -gt 1 ]; then
-					shift
-					desc=": $@"
-				else
-					desc=": No description."
-				fi
+				[ ${#@} -ne 0 ] && desc+="\n\tDesc: $@"
 		esac
 
-		printf "${RED}Error:${RESET}$desc\n"
+		printf "${RED}Error:${RESET}\n$desc\n"
 		exit $error
 	fi
 }
