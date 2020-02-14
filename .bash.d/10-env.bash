@@ -55,9 +55,3 @@ function set_colors() {
 }
 
 set_colors
-
-#
-# Dotfiles exports
-#
-
-export DOTFILES="$HOME/.config/config"
