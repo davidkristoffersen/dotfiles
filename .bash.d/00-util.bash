@@ -6,22 +6,28 @@ function confirm() {
 
 check_error() {
 	if [ "$1" -ne "0" ]; then
-		local desc=""
-		case $2 in
+		local error="$1"
+		shift
+		local desc=" ${FUNCNAME[1]}"
+		case $1 in
 			nargs)
-				desc="${FUNCNAME[1]}: Invalid number of arguments."
+				desc=": Invalid number of arguments."
 				;;
 			arg)
-				[ ${#@} == 3 ] && true; check_errs $? nargs
-				desc="${FUNCNAME[1]}: Invalid argument $3"
+				[ ${#@} -ne 1 ]; check_errs $? nargs
+				desc=": Invalid argument $2"
 				;;
 			*)
-				desc="No description."
+				if [ ${#@} -gt 1 ]; then
+					shift
+					desc=": $@"
+				else
+					desc=": No description."
+				fi
 		esac
-		desc=" $desc"
 
 		printf "${RED}Error:${RESET}$desc\n"
-		exit $1
+		exit $error
 	fi
 }
 
