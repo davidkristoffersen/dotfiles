@@ -37,7 +37,23 @@ function la() {
 
 function ls_sorted() {
 	local show_hidden="$1"
+
 	local sub_dir=false
+	if [ ! -z "$3" ]; then
+		if [ -f "$3" ]; then
+			if [ -d "$3" ]; then
+				sub_dir=true
+			else
+				ls $2 $3
+				return
+			fi
+		else
+			ls $2 $3
+			return
+		fi
+		cd "$3"
+	fi
+
 	local files="$(ls -A1F $3)"
 
 	local hidden="$(echo "$files" | grep -e "^\.")"
@@ -65,10 +81,6 @@ function ls_sorted() {
 	fi
 	files+="$normal_d $normal_s $normal_p $normal_e $normal_f "
 
-	if [ -d "$3" ]; then
-		sub_dir=true
-		cd "$3"
-	fi
 	ls $2 -FUd --color=always $files
 	if $sub_dir; then
 		cd - >/dev/null
