@@ -103,6 +103,21 @@ EOF
 
 	# $```i3config
 	local mwto="move workspace to output"
+	declare -Ag vim_arrow=([h]="left" [j]="down" [k]="up" [l]="right")
+	declare -Ag vim_arrow_mirror=([h]="right" [j]="up" [k]="down" [l]="left")
+	nav_type() {
+		local _out=""
+		if [ "$3" == "vim" ]; then
+			for vim in ${!vim_arrow[@]}; do
+				_out+="$1+$vim $2 ${vim_arrow[$vim]}\n"
+			done
+		else
+			for vim in ${!vim[@]}; do
+				_out+="$1+${vim_arrow[$vim]} $2 ${vim_arrow[$vim]}\n"
+			done
+		fi
+		printf "$_out" | column -t
+	}
 	# ```i3config
 	read -r -d '' navigation << EOF
 # Change focus
@@ -114,39 +129,21 @@ $b $m+p focus parent
 $b $m+c focus child
 
 # Vim style
-$b $m+h	focus left
-$b $m+j focus down
-$b $m+k focus up
-$b $m+l focus right
+$(nav_type "$b $m" focus vim)
 # Arrow style
-$b $m+Left	focus left
-$b $m+Down	focus down
-$b $m+Up	focus up
-$b $m+Right	focus right
+$(nav_type "$b $m" focus)
 
 # Move container
 # Vim style
-$b $m+$s+h	move left
-$b $m+$s+j 	move down
-$b $m+$s+k 	move up
-$b $m+$s+l 	move right
+$(nav_type "$b $m+$s" move vim)
 # Arrow style
-$b $m+$s+Left	move left
-$b $m+$s+Down	move down
-$b $m+$s+Up		move up
-$b $m+$s+Right	move right
+$(nav_type "$b $m+$s" move)
 
 # Move workspace
 # Vim style
-$b $m+$a+h	$mwto left
-$b $m+$a+j	$mwto down
-$b $m+$a+k	$mwto up
-$b $m+$a+l	$mwto right
+$(nav_type "$b $m+$a" "$mwto" vim)
 # Arrow style
-$b $m+$a+Left	$mwto left
-$b $m+$a+Down	$mwto down
-$b $m+$a+Up		$mwto up
-$b $m+$a+Right	$mwto right
+$(nav_type "$b $m+$a" "$mwto")
 
 # Mouse
 # Drag floating style
@@ -181,7 +178,7 @@ EOF
 
 	# $```i3config
 	local wnames="$(seq 0 9)"
-	local wsn="workspaces number"
+	local wsn="workspace number"
 	local mctwsn="move container to workspace number"
 	local rwt="rename workspace to"
 
@@ -230,26 +227,42 @@ $b $m+$s+r restart
 # Exit i3
 $b $m+$s+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 EOF
+	# $```i3config
 
+	resize_type() {
+		local grow="resize grow"
+		local shrink="resize shrink"
+		local size="10 px or 10 ppt"
+		local _out=""
+
+		if [ "$1" == "vim" ]; then
+			for vim in ${!vim_arrow[@]}; do
+				_out+="\t$b $vim $grow ${vim_arrow[$vim]} $size; "
+				_out+="$shrink ${vim_arrow_mirror[$vim]} $size\n"
+			done
+		else
+			for vim in ${!vim_arrow[@]}; do
+				_out+="\t$b ${vim_arrow[$vim]} $grow ${vim_arrow[$vim]} $size; "
+				_out+="$shrink ${vim_arrow_mirror[$vim]} $size\n"
+			done
+		fi
+
+		printf "$_out"
+	}
+	# ```i3config
 	read -r -d '' modes << EOF
 # Resize windows
 mode "resize" {
-		# Vim style
-		$b h resize grow left 10 px or 10 ppt; resize shrink right 10 px or 10 ppt
-		$b j resize grow down 10 px or 10 ppt; resize shrink up 10 px or 10 ppt
-		$b k resize grow up 10 px or 10 ppt; resize shrink down 10 px or 10 ppt
-		$b l resize grow right 10 px or 10 ppt; resize shrink left 10 px or 10 ppt
+	# Vim style
+$(resize_type vim)
 
-		# Arrow style
-		$b Left resize grow left 10 px or 10 ppt; resize shrink right 10 px or 10 ppt
-		$b Down resize grow down 10 px or 10 ppt; resize shrink up 10 px or 10 ppt
-		$b Up resize grow up 10 px or 10 ppt; resize shrink down 10 px or 10 ppt
-		$b Right resize grow right 10 px or 10 ppt; resize shrink left 10 px or 10 ppt
+	# Arrow style
+$(resize_type)
 
-		# Exit mode
-		$b Return mode "default"
-		$b Escape mode "default"
-		$b $m+r mode "default"
+	# Exit mode
+	$b Return mode "default"
+	$b Escape mode "default"
+	$b $m+r mode "default"
 }
 $b $m+r mode "resize"
 EOF
