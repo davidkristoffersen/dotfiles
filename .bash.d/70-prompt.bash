@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 prompt_pre() {
-	local pre="$RESET$BYELLOW╭─$RESET"
-	local post="$RESET$BYELLOW╰─$RESET"
+	local pre="╭─"
+	local post="╰─"
 	local -a _pre=("$pre" "$post")
 	declare -p _pre
 }
@@ -35,7 +35,7 @@ prompt_path() {
 		fi
 		((path_it++))
 	done
-	printf "$BBLUE$path$RESET"
+	printf "$path"
 }
 
 prompt_git() {
@@ -44,29 +44,34 @@ prompt_git() {
  	if [ "$branch" == " " ]; then
 		branch=''
 	fi
-	printf "$BMAGENTA$branch$RESET"
+	printf "$branch"
 }
 
 prompt_ssh() {
 	local _out=""
-	_out+="$BYELLOW[$RESET\u$RESET"
+	_out+="$1[$RESET\u$RESET"
 	_out+="$FAINT@$RESET"
-	_out+="${HOSTNAME%%.*}$BYELLOW]$RESET"
-	printf "$out"
+	_out+="${HOSTNAME%%.*}$1]"
+	printf "$_out"
 }
 
 prompt_exit() {
 	local _out=""
 	if [ "$1" != "0" ]; then
-		_out="${RED}</3${RESET}"
+		_out="${RED}</3"
 	else
-		_out="${GREEN}<3${RESET}"
+		_out="${GREEN}<3"
 	fi
 	printf "$_out"
 }
 
 prompt_word() {
-	PS1+="$@ "
+	local _sep=" "
+	local _col="$1"
+	shift
+	local _args="$@"
+	[ -z "$_args" ] && _sep=""
+	PS1+="$RESET$_col$_args$_sep$RESET"
 }
 
 prompt_line() {
@@ -84,23 +89,23 @@ prompt_command() {
 	eval "$(prompt_pre)"
 
 	# Start of line 0
-	prompt_word ${_pre[0]}
+	prompt_word $BYELLOW ${_pre[0]}
 
 	# SSH info
 	if $SSH; then
-		prompt_word $(prompt_ssh)
+		prompt_word $BYELLOW $(prompt_ssh $BYELLOW)
 	fi
 
 	# Git info
-	prompt_word $(prompt_git)
+	prompt_word $BMAGENTA $(prompt_git)
 
 	# Path info
-	prompt_word $(prompt_path)
+	prompt_word $BBLUE $(prompt_path)
 
 	# Exit status info
-	prompt_word $(prompt_exit $EXIT)
+	prompt_word $RESET $(prompt_exit $EXIT)
 
 	# Start of line 1
 	prompt_line
-	prompt_word ${_pre[1]}
+	prompt_word $BYELLOW ${_pre[1]}
 }
