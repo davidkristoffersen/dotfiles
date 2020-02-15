@@ -9,7 +9,9 @@ dotfiles_init() {
 
 dotfiles_conf_init() {
 	local path="$HOME/.dotfiles.bash"
-	echo "export DOTFILES=\"$DOTFILES\"" > $path
+	echo "#!/usr/bin/env bash" > $path
+	echo >> $path
+	echo "export DOTFILES=\"$DOTFILES\"" >> $path
 }
 
 dotfiles_fini() {
