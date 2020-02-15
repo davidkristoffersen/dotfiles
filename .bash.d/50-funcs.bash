@@ -78,7 +78,7 @@ ls_sorted() {
 		files="$hidden_d $normal_d $hidden_s $normal_s $hidden_p $normal_p $hidden_e $hidden_f "
 		files+="$normal_e $normal_f "
 	else
-		files+="$normal_d $normal_s $normal_p $normal_e $normal_f "
+		files="$normal_d $normal_s $normal_p $normal_e $normal_f "
 	fi
 
 	ls $2 -FUd --color=always $files
