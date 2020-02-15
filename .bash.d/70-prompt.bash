@@ -1,27 +1,7 @@
 #!/usr/bin/env bash
 
-PROMPT_COMMAND=__prompt_command # Func to gen PS1 after CMDs
-__prompt_command() {
-    local EXIT="$?"             # This needs to be first
-    PS1=""
-
-    local rcol='\[\e[0m\]'
-    local red='\[\e[0;31m\]'
-    local gre='\[\e[0;32m\]'
-    local byel='\[\e[1;33m\]'
-    local bblu='\[\e[1;34m\]'
-    local bpur='\[\e[1;35m\]'
-	local fbla='\[\e[2m\]'
-
-	# Git branch detection
-	local branch="$(git branch 2>/dev/null | grep '^*' | colrm 1 2) "
- 	if [ "$branch" == " " ]; then
-		branch=''
-	fi
-
-	# Create truncated path
+function prompt_path() {
 	local path=""
-
 	local -a path_arr
 	IFS="/" read -ra path_arr <<< "$(pwd)"
 	local path_len="$((${#path_arr[@]}-1))"
@@ -48,28 +28,69 @@ __prompt_command() {
 		fi
 		((path_it++))
 	done
+	printf "$BBLUE$path$RESET"
+}
 
-	local pre="$rcol$byel╭─ $rcol"
-	local post="$rcol\n$byel╰─$rcol "
+function prompt_git() {
+	# Git branch detection
+	local branch="$(git branch 2>/dev/null | grep '^*' | colrm 1 2) "
+ 	if [ "$branch" == " " ]; then
+		branch=''
+	fi
+	printf "$BMAGENTA$branch$RESET"
+}
 
-    PS1+="$pre"
+function prompt_pre() {
+	local pre="$RESET$BYELLOW╭─ $RESET"
+	local post="$RESET$BYELLOW╰─$RESET"
+	local -a _pre=("$pre" "$post")
+	declare -p _pre
+}
 
-	# Add user and host if it is a ssh session
+function prompt_ssh() {
+	local _out=""
+	_out+="$BYELLOW[$RESET\u$RESET"
+	_out+="$FAINT@$RESET"
+	_out+="${HOSTNAME%%.*}$BYELLOW]$RESET"
+	printf "$out"
+}
+
+function prompt_exit() {
+	local _out=""
+	if [ "$1" != "0" ]; then
+		_out="${RED}</3${RESET}"
+	else
+		_out="${GREEN}<3${RESET}"
+	fi
+	printf "$_out"
+}
+
+PROMPT_COMMAND=__prompt_command # Func to gen PS1 after CMDs
+__prompt_command() {
+	# Previous commands' exit status
+	local EXIT="$?"
+	PS1=""
+
+	# Create start of lines
+	eval "$(prompt_pre)"
+
+	# Start of line 0
+	PS1+="${_pre[0]}"
+
+	# SSH info
 	if $SSH; then
-		PS1+="$byel[$rcol\u$rcol"
-		PS1+="$fbla@$rcol"
-		PS1+="${HOSTNAME%%.*}$byel]$rcol "
+		PS1+="$(prompt_ssh) "
 	fi
 
-	PS1+="$bpur$branch$rcol"
-	PS1+="$bblu$path$rcol "
+	# Git info
+	PS1+="$(prompt_git)"
 
-	# Color based exit status
-    if [ $EXIT != 0 ]; then
-        PS1+="${red}</3${rcol}"
-    else
-        PS1+="${gre}<3${rcol}"
-    fi
+	# Path info
+	PS1+="$(prompt_path) "
 
-    PS1+="$post"
+	# Exit status info
+	PS1+="$(prompt_exit $EXIT)"
+
+	# Start of line 1
+	PS1+="\n${_pre[1]} "
 }
