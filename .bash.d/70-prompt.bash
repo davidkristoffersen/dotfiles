@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+prompt_pre() {
+	local pre="$RESET$BYELLOW╭─$RESET"
+	local post="$RESET$BYELLOW╰─$RESET"
+	local -a _pre=("$pre" "$post")
+	declare -p _pre
+}
+
 prompt_path() {
 	local path=""
 	local -a path_arr
@@ -33,18 +40,11 @@ prompt_path() {
 
 prompt_git() {
 	# Git branch detection
-	local branch="$(git branch 2>/dev/null | grep '^*' | colrm 1 2) "
+	local branch="$(git branch 2>/dev/null | grep '^*' | colrm 1 2)"
  	if [ "$branch" == " " ]; then
 		branch=''
 	fi
 	printf "$BMAGENTA$branch$RESET"
-}
-
-prompt_pre() {
-	local pre="$RESET$BYELLOW╭─ $RESET"
-	local post="$RESET$BYELLOW╰─$RESET"
-	local -a _pre=("$pre" "$post")
-	declare -p _pre
 }
 
 prompt_ssh() {
@@ -65,6 +65,14 @@ prompt_exit() {
 	printf "$_out"
 }
 
+prompt_word() {
+	PS1+="$@ "
+}
+
+prompt_line() {
+	PS1+="\n"
+}
+
 # Environment variable called by bash upon rendering the prompt
 PROMPT_COMMAND=prompt_command
 prompt_command() {
@@ -76,22 +84,23 @@ prompt_command() {
 	eval "$(prompt_pre)"
 
 	# Start of line 0
-	PS1+="${_pre[0]}"
+	prompt_word ${_pre[0]}
 
 	# SSH info
 	if $SSH; then
-		PS1+="$(prompt_ssh) "
+		prompt_word $(prompt_ssh)
 	fi
 
 	# Git info
-	PS1+="$(prompt_git)"
+	prompt_word $(prompt_git)
 
 	# Path info
-	PS1+="$(prompt_path) "
+	prompt_word $(prompt_path)
 
 	# Exit status info
-	PS1+="$(prompt_exit $EXIT)"
+	prompt_word $(prompt_exit $EXIT)
 
 	# Start of line 1
-	PS1+="\n${_pre[1]} "
+	prompt_line
+	prompt_word ${_pre[1]}
 }
