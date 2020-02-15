@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function prompt_path() {
+prompt_path() {
 	local path=""
 	local -a path_arr
 	IFS="/" read -ra path_arr <<< "$(pwd)"
@@ -31,7 +31,7 @@ function prompt_path() {
 	printf "$BBLUE$path$RESET"
 }
 
-function prompt_git() {
+prompt_git() {
 	# Git branch detection
 	local branch="$(git branch 2>/dev/null | grep '^*' | colrm 1 2) "
  	if [ "$branch" == " " ]; then
@@ -40,14 +40,14 @@ function prompt_git() {
 	printf "$BMAGENTA$branch$RESET"
 }
 
-function prompt_pre() {
+prompt_pre() {
 	local pre="$RESET$BYELLOW╭─ $RESET"
 	local post="$RESET$BYELLOW╰─$RESET"
 	local -a _pre=("$pre" "$post")
 	declare -p _pre
 }
 
-function prompt_ssh() {
+prompt_ssh() {
 	local _out=""
 	_out+="$BYELLOW[$RESET\u$RESET"
 	_out+="$FAINT@$RESET"
@@ -55,7 +55,7 @@ function prompt_ssh() {
 	printf "$out"
 }
 
-function prompt_exit() {
+prompt_exit() {
 	local _out=""
 	if [ "$1" != "0" ]; then
 		_out="${RED}</3${RESET}"
@@ -65,8 +65,9 @@ function prompt_exit() {
 	printf "$_out"
 }
 
-PROMPT_COMMAND=__prompt_command # Func to gen PS1 after CMDs
-__prompt_command() {
+# Environment variable called by bash upon rendering the prompt
+PROMPT_COMMAND=prompt_command
+prompt_command() {
 	# Previous commands' exit status
 	local EXIT="$?"
 	PS1=""
