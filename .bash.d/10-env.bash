@@ -43,6 +43,9 @@ function set_colors() {
 	)
 	local pre='\033['
 	export RESET="${pre}m"
+	export BOLD="${pre}1m"
+	export FAINT="${pre}2m"
+	export ITALIC="${pre}3m"
 	export UNDERLINE="${pre}4m"
 	export CROSSEDOUT="${pre}9m"
 
