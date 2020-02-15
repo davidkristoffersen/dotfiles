@@ -1,5 +1,21 @@
 #!/usr/bin/env bash
 
+dotfiles_init() {
+	pwd_org="$(pwd)"
+	local cur="$(dirname "${BASH_SOURCE[0]}")"
+	cd "$cur"
+	export DOTFILES="$(pwd)"
+}
+
+dotfiles_conf_init() {
+	local path="$HOME/.dotfiles.bash"
+	echo "export DOTFILES=\"$DOTFILES\"" > $path
+}
+
+dotfiles_fini() {
+	cd "$pwd_org"
+}
+
 link_file() {
 	[ ${#@} == 3 ] && true; check_error $? nargs
 	local name="$(basename $1)"
@@ -18,9 +34,10 @@ link_file() {
 	print_at 3 $OK_POS "${GREEN}OK${RESET}"
 }
 
-OK_POS="$(($(tput cols) - 4))"
-export DOTFILES=$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )
+dotfiles_init
+dotfiles_conf_init
 
+OK_POS="$(($(tput cols) - 4))"
 # Dot files in $HOME
 home_dot_files=(.bash_profile
 				.profile
@@ -72,3 +89,5 @@ link_file gimprc .gimp-2.0/gimprc "GIMP config"
 # Gitk
 link_file gitk .config/git/gitk "gitk config"
 echo
+
+dotfiles_fini
