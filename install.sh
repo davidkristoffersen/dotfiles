@@ -71,7 +71,7 @@ link_file i3.config .config/i3/config "i3 config"
 link_file rofi.rasi .config/rofi/config.rasi "rofi config"
 
 # Terminator
-link_file terminator.ini .config/config/terminator.ini "terminator config"
+link_file terminator.ini .config/terminator/config "terminator config"
 echo
 
 # Editor
