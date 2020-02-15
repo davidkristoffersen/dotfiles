@@ -75,11 +75,11 @@ ls_sorted() {
 	local normal_f="$(echo "$normal" | grep -ve "[/@*|]$")"
 
 	if $show_hidden; then
-		files="$hidden_d $hidden_s $hidden_p $hidden_e $hidden_f "
+		files="$hidden_d $normal_d $hidden_s $normal_s $hidden_p $normal_p $hidden_e $hidden_f "
+		files+="$normal_e $normal_f "
 	else
-		files=""
+		files+="$normal_d $normal_s $normal_p $normal_e $normal_f "
 	fi
-	files+="$normal_d $normal_s $normal_p $normal_e $normal_f "
 
 	ls $2 -FUd --color=always $files
 	if $sub_dir; then
