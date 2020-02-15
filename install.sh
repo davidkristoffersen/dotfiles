@@ -30,9 +30,16 @@ link_file() {
 	local dirs="$(dirname "$dst")"
 
 	printf "$desc_long"
+
 	printf "\tmkdir -p \"$dirs\"\n"; check_error $?
-	printf "\trm -rf \"$dst\"\n"; check_error $?
+	mkdir -p "$dirs"; check_error $?
+
+	printf "\trm -f \"$dst\"\n"; check_error $?
+	rm -f "$dst"; check_error $?
+
 	printf "\tln -s \"$src\" \"$dst\"\n"; check_error $?
+	ln -s "$src" "$dst"; check_error $?
+
 	print_at 3 $OK_POS "${GREEN}OK${RESET}"
 }
 
@@ -70,7 +77,7 @@ echo
 # Editor
 # Vimrc files
 link_file .vim .vim "vim dir config"
-link_file .vimrc .vim/.vimrc "vim config"
+link_file .vim/.vimrc .vimrc "vim config"
 
 # Latex
 link_file template.latex .config/latex/template.latex "Latex template"
