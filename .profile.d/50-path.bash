@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Add to path if directory exists and is not already in path
-function path_add() {
+path_add() {
 	if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
 		PATH="$1:$PATH"
 	fi
