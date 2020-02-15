@@ -49,8 +49,8 @@ prompt_git() {
 
 prompt_ssh() {
 	local _out=""
-	_out+="$1[$RESET\u$RESET"
-	_out+="$FAINT@$RESET"
+	_out+="$1[$PRESET\u$PRESET"
+	_out+="$PFAINT@$PRESET"
 	_out+="${HOSTNAME%%.*}$1]"
 	printf "$_out"
 }
@@ -58,9 +58,9 @@ prompt_ssh() {
 prompt_exit() {
 	local _out=""
 	if [ "$1" != "0" ]; then
-		_out="${RED}</3"
+		_out="$PRED</3"
 	else
-		_out="${GREEN}<3"
+		_out="$PGREEN<3"
 	fi
 	printf "$_out"
 }
@@ -71,7 +71,7 @@ prompt_word() {
 	shift
 	local _args="$@"
 	[ -z "$_args" ] && _sep=""
-	PS1+="$RESET$_col$_args$_sep$RESET"
+	PS1+="$PRESET$_col$_args$_sep$PRESET"
 }
 
 prompt_line() {
@@ -89,23 +89,23 @@ prompt_command() {
 	eval "$(prompt_pre)"
 
 	# Start of line 0
-	prompt_word $BYELLOW ${_pre[0]}
+	prompt_word $PBYELLOW ${_pre[0]}
 
 	# SSH info
 	if $SSH; then
-		prompt_word $BYELLOW $(prompt_ssh $BYELLOW)
+		prompt_word $PBYELLOW $(prompt_ssh $PBYELLOW)
 	fi
 
 	# Git info
-	prompt_word $BMAGENTA $(prompt_git)
+	prompt_word $PBMAGENTA $(prompt_git)
 
 	# Path info
-	prompt_word $BBLUE $(prompt_path)
+	prompt_word $PBBLUE $(prompt_path)
 
 	# Exit status info
-	prompt_word $RESET $(prompt_exit $EXIT)
+	prompt_word $PRESET $(prompt_exit $EXIT)
 
 	# Start of line 1
 	prompt_line
-	prompt_word $BYELLOW ${_pre[1]}
+	prompt_word $PBYELLOW ${_pre[1]}
 }
