@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function link_file() {
+link_file() {
 	[ ${#@} == 3 ] && true; check_error $? nargs
 	local name="$(basename $1)"
 	local src="$DOTFILES/$1"
