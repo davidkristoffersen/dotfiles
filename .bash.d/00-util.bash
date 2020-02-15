@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function confirm() {
+confirm() {
 	printf "Do you want to execute this cmd? (y/n) "
 }
 

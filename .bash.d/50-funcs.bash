@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function code-style-format() {
+code-style-format() {
 	for i in $@; do
 		backup_pos="/tmp/clang_format_backup/$(basename $i)$(date +%Y.%m.%d-%H:%M:%S).bak"
 		mkdir -p /tmp/clang_format_backup
@@ -9,33 +9,33 @@ function code-style-format() {
 	done
 }
 
-function evalps1() {
+evalps1() {
 	myprompt=${PS1@P}; printf '%s\n' "${myprompt//[$'\001'$'\002']}" | tr '\n' '\0'
 }
 
-function format_patch() {
+format_patch() {
 	git format-patch --base=$1 $1..$2 --stdout > "../patches/patch-$1-$2.patch";
 }
 
-function hostname_master() {
+hostname_master() {
 	name="$1"
 	tracepath -b 129.242.16.30 | grep "$name" | grep -e '^ 1:'
 }
 
-function lll() {
+lll() {
 	ls_sorted false -lh $@
 }
-function lla() {
+lla() {
 	ls_sorted true -lh $@
 }
-function ll() {
+ll() {
 	ls_sorted false -h $@
 }
-function la() {
+la() {
 	ls_sorted true -h $@
 }
 
-function ls_sorted() {
+ls_sorted() {
 	local show_hidden="$1"
 
 	local sub_dir=false
@@ -89,7 +89,7 @@ function ls_sorted() {
 
 export -f lll lla ll la
 
-function move_cursor() {
+move_cursor() {
 	[ ${#@} == 2 ] && true; check_error $? nargs
 	case $1 in
 		u)
@@ -116,7 +116,7 @@ function move_cursor() {
 	esac
 }
 
-function print_at() {
+print_at() {
 	[ ${#@} == 3 ] && true; check_error $? nargs
 	move_cursor s 0
 	move_cursor u $1

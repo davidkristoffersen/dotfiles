@@ -30,7 +30,7 @@ export SHELL_SH SHELL_INTERACTIVE SHELL_LOGIN SSH
 # COLORS
 #
 
-function set_colors() {
+set_colors() {
 	# Colors
 	declare -A colors=([black]=30
 						[red]=31
