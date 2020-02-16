@@ -111,6 +111,22 @@ ls_sorted() {
 
 export -f lll lla ll la
 
+tree_dotfiles() {
+	local _root="$(tree -a -I ".git|.vim" $DOTFILES)"
+	local _vim="$(tree -a -I ".git" -L 2 $DOTFILES/.vim/)"
+
+	local _root_meta="$(echo "$_root" | tail -n 1 | awk '{ print $1, " ", $3 }')"
+	local _vim_meta="$(echo "$_vim" | tail -n 1 | awk '{ print $1, " ", $3 }')"
+	local _dirs="$((${_root_meta%% *} + ${_vim_meta%% *}))"
+	local _files="$((${_root_meta##* } + ${_vim_meta##* }))"
+
+	printf "$_root" | head -n -2
+	printf "$_vim" | head -n -2
+	printf "\n$_dirs directories, $_files files\n"
+}
+
+export -f tree_dotfiles
+
 move_cursor() {
 	[ ${#@} == 2 ] && true; check_error $? nargs
 	case $1 in
