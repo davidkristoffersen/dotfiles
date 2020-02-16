@@ -5,6 +5,7 @@ dotfiles_init() {
 	local cur="$(dirname "${BASH_SOURCE[0]}")"
 	cd "$cur"
 	export DOTFILES="$(pwd)"
+	OK_POS="$(($(tput cols) - 4))"
 }
 
 dotfiles_conf_init() {
@@ -32,71 +33,77 @@ link_file() {
 	printf "$desc_long"
 
 	printf "\tmkdir -p \"$dirs\"\n"; check_error $?
-	mkdir -p "$dirs"; check_error $?
+	# mkdir -p "$dirs"; check_error $?
 
 	printf "\trm -f \"$dst\"\n"; check_error $?
-	rm -f "$dst"; check_error $?
+	# rm -f "$dst"; check_error $?
 
 	printf "\tln -s \"$src\" \"$dst\"\n"; check_error $?
-	ln -s "$src" "$dst"; check_error $?
+	# ln -s "$src" "$dst"; check_error $?
 
 	print_at 3 $OK_POS "${GREEN}OK${RESET}"
 }
 
-dotfiles_init
-dotfiles_conf_init
+link_home() {
+	# Dot files in $HOME
+	home_dot_files=(.bash_profile
+					.profile
+					.profile.d
+					.bashrc
+					.bash.d
+					.bash_logout
+					.gitconfig
+					.tmux.conf
+	)
 
-OK_POS="$(($(tput cols) - 4))"
-# Dot files in $HOME
-home_dot_files=(.bash_profile
-				.profile
-				.profile.d
-				.bashrc
-				.bash.d
-				.bash_logout
-				.gitconfig
-				.tmux.conf
-)
+	for home_dot_file in ${home_dot_files[@]}; do
+		link_file $home_dot_file $home_dot_file "$home_dot_file"
+	done
+	echo
 
-for home_dot_file in ${home_dot_files[@]}; do
-	link_file $home_dot_file $home_dot_file "$home_dot_file"
-done
-echo
+	# Session management
+	# I3
+	link_file i3.config .config/i3/config "i3 config"
 
-# Session management
-# I3
-link_file i3.config .config/i3/config "i3 config"
+	# Rofi
+	link_file rofi.rasi .config/rofi/config.rasi "rofi config"
 
-# Rofi
-link_file rofi.rasi .config/rofi/config.rasi "rofi config"
+	# Terminator
+	link_file terminator.ini .config/terminator/config "terminator config"
+	echo
 
-# Terminator
-link_file terminator.ini .config/terminator/config "terminator config"
-echo
+	# Editor
+	# Vimrc files
+	link_file .vim .vim "vim dir config"
+	link_file .vim/.vimrc .vimrc "vim config"
 
-# Editor
-# Vimrc files
-link_file .vim .vim "vim dir config"
-link_file .vim/.vimrc .vimrc "vim config"
+	# Latex
+	link_file template.latex .config/latex/template.latex "Latex template"
+	echo
 
-# Latex
-link_file template.latex .config/latex/template.latex "Latex template"
-echo
+	# CLI programs
+	# SQLite
+	link_file .sqliterc.sql .sqliterc "SQLite config"
 
-# CLI programs
-# SQLite
-link_file .sqliterc.sql .sqliterc "SQLite config"
+	# Htop
+	link_file htoprc .config/htop/htoprc "htop config"
+	echo
 
-# Htop
-link_file htoprc .config/htop/htoprc "htop config"
-echo
+	# GUI programs
+	# GIMP
+	link_file gimprc .gimp-2.0/gimprc "GIMP config"
 
-# GUI programs
-# GIMP
-link_file gimprc .gimp-2.0/gimprc "GIMP config"
+	# Gitk
+	link_file gitk .config/git/gitk "gitk config"
+	echo
+}
 
-# Gitk
-link_file gitk .config/git/gitk "gitk config"
-echo
+main() {
+	dotfiles_init
+	dotfiles_conf_init
 
-dotfiles_fini
+	link_home
+
+	dotfiles_fini
+}
+main
