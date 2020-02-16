@@ -8,13 +8,17 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 alias tree='tree -C'
+alias cp="cp -i"                          # confirm before overwriting something
+alias df='df -h'                          # human-readable sizes
+alias free='free -m'                      # show sizes in MB
 
 alias srcbash="source $HOME/.bashrc"
 alias bashrc="vim $HOME/.bashrc"
-alias bashconfig="vim -p `echo $HOME/.bash* | xargs -n 1 | grep -ve ".bash_history\|.bash_logout" | xargs`"
-alias vimrc='vim $MYVIMRC'
-alias vim_plugins="cd $HOME/.config/config/.vim/bundle"
-alias config="cd $HOME/.config/config"
+alias bashconfig="vim -p $(echo .bashrc .bash.d/*.bash)"
+alias profileconfig="vim -p $(echo .profile .profile.d/*.bash)"
+alias vimrc="vim $MYVIMRC"
+alias vim_plugins="cd $HOME/.vim/bundle"
+alias dotfiles="cd $DOTFILES"
 
 alias c='clear'
 
