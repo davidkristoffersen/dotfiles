@@ -109,7 +109,7 @@ ls_sorted() {
 	fi
 }
 
-export -f lll lla ll la
+export -f _lll _lla _ll _la
 
 tree_dotfiles() {
 	local _root="$(tree -a -I ".git|.vim" $DOTFILES)"
