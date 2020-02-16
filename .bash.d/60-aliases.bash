@@ -12,6 +12,12 @@ alias cp="cp -i"                          # confirm before overwriting something
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 
+# Listing
+alias lll="exa -ls type --git"
+alias lla="exa -las type --git"
+alias ll="exa -s type --git"
+alias la="exa -as type --git"
+
 alias srcbash="source $HOME/.bashrc"
 alias bashrc="vim $HOME/.bashrc"
 alias bashconfig="vim -p $(echo .bashrc .bash.d/*.bash)"

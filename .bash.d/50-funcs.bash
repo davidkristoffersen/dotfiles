@@ -44,16 +44,16 @@ extract() {
 	fi
 }
 
-lll() {
+_lll() {
 	ls_sorted false -lh $@
 }
-lla() {
+_lla() {
 	ls_sorted true -lh $@
 }
-ll() {
+_ll() {
 	ls_sorted false -h $@
 }
-la() {
+_la() {
 	ls_sorted true -h $@
 }
 
