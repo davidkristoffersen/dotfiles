@@ -48,4 +48,6 @@ export XDG_CACHE_HOME="$HOME/.cache"
 # /usr/src
 export XDG_SRC_HOME="$HOME/.src"
 # /usr/bin
-export XDG_SCRIPT_HOME="$HOME/.local/bin"
+export XDG_BIN_HOME="$HOME/.local/bin"
+# /usr/lib
+export XDG_LIB_HOME="$HOME/.local/lib"
