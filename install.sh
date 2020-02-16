@@ -20,7 +20,7 @@ dotfiles_fini() {
 }
 
 link_header() {
-	printf "$FAINT"
+	printf "$RESET$FAINT"
 	printf "#%.0s" $(seq 1 $((${#1} + 4)))
 	printf "\n$FAINT# $RESET$BYELLOW$1$RESET $FAINT#\n"
 	printf "#%.0s" $(seq 1 $((${#1} + 4)))
@@ -36,11 +36,28 @@ create_path() {
 	mkdir -p "$1"; check_error $?
 }
 
+rm_file() {
+	printf "\trm -f \"$1\"\n"; check_error $?
+	rm -f "$1"; check_error $?
+}
+
+_link_file() {
+	printf "\tln -s \"$1\" \"$2\"\n"; check_error $?
+	ln -s "$1" "$2"; check_error $?
+}
+
+path_set_pre() {
+	case $1 in
+		/*) printf "$1" ;;
+		*) printf "$2/$1" ;;
+	esac
+}
+
 link_file() {
 	[ ${#@} == 3 ] && true; check_error $? nargs
 	local name="$(basename $1)"
-	local src="$DOTFILES/$1"
-	local dst="$HOME/$2"
+	local src="$(path_set_pre $1 $DOTFILES)"
+	local dst="$(path_set_pre $2 $HOME)"
 	local desc="$3"
 	local desc_long="Replacing $3:\t"
 	local desc_len="${#desc_long}"
@@ -48,13 +65,10 @@ link_file() {
 	local dirs="$(dirname "$dst")"
 
 	printf "$desc_long"
+
 	create_path "$dirs"
-
-	printf "\trm -f \"$dst\"\n"; check_error $?
-	rm -f "$dst"; check_error $?
-
-	printf "\tln -s \"$src\" \"$dst\"\n"; check_error $?
-	ln -s "$src" "$dst"; check_error $?
+	rm_file "$dst"
+	_link_file "$src" "$dst"
 
 	print_at 3 $OK_POS "${GREEN}OK${RESET}"
 }
@@ -134,6 +148,14 @@ update_submodules() {
 	git submodulepull; check_error $?
 }
 
+link_bin() {
+	echo
+	local _scripts="$(ls -A1 bin)"
+	for script in $_scripts; do
+		link_file "bin/$script" "$XDG_SCRIPT_HOME/$script" "$script"
+	done
+}
+
 main() {
 	dotfiles_init
 	dotfiles_conf_init
@@ -146,6 +168,9 @@ main() {
 	echo
 	link_header "Update submodules"
 	update_submodules
+	echo
+	link_header "Shell scripts"
+	link_bin
 
 	dotfiles_fini
 }
