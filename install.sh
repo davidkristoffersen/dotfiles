@@ -52,7 +52,7 @@ home_dot_files=(.bash_profile
 				.profile
 				.profile.d
 				.bashrc
-				.bashrc.d
+				.bash.d
 				.bash_logout
 				.gitconfig
 				.tmux.conf
