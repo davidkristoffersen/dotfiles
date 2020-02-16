@@ -19,6 +19,18 @@ dotfiles_fini() {
 	cd "$pwd_org"
 }
 
+link_header() {
+	printf "$FAINT"
+	printf "#%.0s" $(seq 1 $((${#1} + 4)))
+	printf "\n$FAINT# $RESET$BYELLOW$1$RESET $FAINT#\n"
+	printf "#%.0s" $(seq 1 $((${#1} + 4)))
+	printf "$RESET\n"
+}
+
+link_section() {
+	printf "\n$FAINT# $RESET$BCYAN$1$RESET\n"
+}
+
 link_file() {
 	[ ${#@} == 3 ] && true; check_error $? nargs
 	local name="$(basename $1)"
@@ -33,35 +45,48 @@ link_file() {
 	printf "$desc_long"
 
 	printf "\tmkdir -p \"$dirs\"\n"; check_error $?
-	# mkdir -p "$dirs"; check_error $?
+	mkdir -p "$dirs"; check_error $?
 
 	printf "\trm -f \"$dst\"\n"; check_error $?
-	# rm -f "$dst"; check_error $?
+	rm -f "$dst"; check_error $?
 
 	printf "\tln -s \"$src\" \"$dst\"\n"; check_error $?
-	# ln -s "$src" "$dst"; check_error $?
+	ln -s "$src" "$dst"; check_error $?
 
 	print_at 3 $OK_POS "${GREEN}OK${RESET}"
 }
 
-link_home() {
-	# Dot files in $HOME
-	home_dot_files=(.bash_profile
-					.profile
-					.profile.d
-					.bashrc
-					.bash.d
-					.bash_logout
-					.gitconfig
-					.tmux.conf
+# Bashrc and profile
+link_bash() {
+	local -a profile_arr=(
+		.bash_profile
+		.profile
+		.profile.d
+	)
+	local -a bash_arr=(
+		.bashrc
+		.bash.d
+		.bash_logout
 	)
 
-	for home_dot_file in ${home_dot_files[@]}; do
-		link_file $home_dot_file $home_dot_file "$home_dot_file"
+	link_section "Profile"
+	for profile_arr in ${profile_arr[@]}; do
+		link_file $profile_arr $profile_arr "$profile_arr"
 	done
-	echo
 
-	# Session management
+	link_section "Bash"
+	for bash_arr in ${bash_arr[@]}; do
+		link_file $bash_arr $bash_arr "$bash_arr"
+	done
+}
+
+# Dot files in $HOME
+link_home() {
+	link_section "Git"
+	# Config
+	link_file .gitconfig .gitconfig ".gitconfig"
+
+	link_section "Session management"
 	# I3
 	link_file i3.config .config/i3/config "i3 config"
 
@@ -70,38 +95,41 @@ link_home() {
 
 	# Terminator
 	link_file terminator.ini .config/terminator/config "terminator config"
-	echo
 
-	# Editor
+	# Tmux
+	link_file .tmux.conf .tmux.conf ".tmux.conf"
+
+	link_section "Editor"
 	# Vimrc files
 	link_file .vim .vim "vim dir config"
 	link_file .vim/.vimrc .vimrc "vim config"
 
 	# Latex
 	link_file template.latex .config/latex/template.latex "Latex template"
-	echo
 
-	# CLI programs
+	link_section "CLI programs"
 	# SQLite
 	link_file .sqliterc.sql .sqliterc "SQLite config"
 
 	# Htop
 	link_file htoprc .config/htop/htoprc "htop config"
-	echo
 
-	# GUI programs
+	link_section "GUI programs"
 	# GIMP
 	link_file gimprc .gimp-2.0/gimprc "GIMP config"
 
 	# Gitk
 	link_file gitk .config/git/gitk "gitk config"
-	echo
 }
 
 main() {
 	dotfiles_init
 	dotfiles_conf_init
 
+	link_header "Shell dotfiles"
+	link_bash
+	echo
+	link_header "\$HOME dotfiles"
 	link_home
 
 	dotfiles_fini
