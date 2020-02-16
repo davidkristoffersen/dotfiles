@@ -82,6 +82,9 @@ link_bash() {
 	for bash_arr in ${bash_arr[@]}; do
 		link_file $bash_arr $bash_arr "$bash_arr"
 	done
+
+	. .profile; check_error $?
+	. .bashrc; check_error $?
 }
 
 # $HOME dotfiles
@@ -126,6 +129,11 @@ link_home() {
 	link_file gitk .config/git/gitk "gitk config"
 }
 
+update_submodules() {
+	echo
+	git submodulepull; check_error $?
+}
+
 main() {
 	dotfiles_init
 	dotfiles_conf_init
@@ -135,6 +143,9 @@ main() {
 	echo
 	link_header "\$HOME dotfiles"
 	link_home
+	echo
+	link_header "Update submodules"
+	update_submodules
 
 	dotfiles_fini
 }
