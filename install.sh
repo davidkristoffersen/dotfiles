@@ -70,7 +70,7 @@ link_file() {
 	rm_file "$dst"
 	_link_file "$src" "$dst"
 
-	print_at 4 $OK_POS "${GREEN}OK${RESET}"
+	print_at 4 $desc_len "${GREEN}OK${RESET}"
 }
 
 # Shell dotfiles
