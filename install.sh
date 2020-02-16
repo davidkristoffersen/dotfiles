@@ -59,7 +59,7 @@ link_file() {
 	local src="$(path_set_pre $1 $DOTFILES)"
 	local dst="$(path_set_pre $2 $HOME)"
 	local desc="$3"
-	local desc_long="Replacing $3:\t"
+	local desc_long="Replacing $3: "
 	local desc_len="${#desc_long}"
 	local desc_long="${BLUE}$desc_long${RESET}\n"
 	local dirs="$(dirname "$dst")"
@@ -70,7 +70,7 @@ link_file() {
 	rm_file "$dst"
 	_link_file "$src" "$dst"
 
-	print_at 3 $OK_POS "${GREEN}OK${RESET}"
+	print_at 4 $OK_POS "${GREEN}OK${RESET}"
 }
 
 # Shell dotfiles
@@ -150,10 +150,34 @@ update_submodules() {
 
 link_bin() {
 	echo
+	local _path="bin"
+
 	local _scripts="$(ls -A1 bin)"
 	for script in $_scripts; do
-		link_file "bin/$script" "$XDG_SCRIPT_HOME/$script" "$script"
+		link_file "$_path/$script" "$XDG_BIN_HOME/$script" "$script"
 	done
+}
+
+link_lib() {
+	echo
+	local _path="lib"
+
+	# Bash library
+	link_file "$_path/bash" "$XDG_LIB_HOME/bash" "bash script library"
+}
+
+link_share() {
+	echo
+	local _path="share"
+
+	# Bash metadata
+	link_file "$_path/bash-metadata" "$XDG_DATA_HOME/bash-metadata" "bash metadata"
+
+	# Backgrounds
+	link_file "$_path/backgrounds" "$XDG_DATA_HOME/backgrounds" "backgrounds"
+
+	# Rofi themes
+	link_file "$_path/rofi" "$XDG_DATA_HOME/rofi" "rofi themes"
 }
 
 main() {
@@ -171,6 +195,12 @@ main() {
 	echo
 	link_header "Shell scripts"
 	link_bin
+	echo
+	link_header "Shell libraries"
+	link_lib
+	echo
+	link_header "Shell shared data"
+	link_share
 
 	dotfiles_fini
 }
