@@ -31,6 +31,11 @@ link_section() {
 	printf "\n$FAINT# $RESET$BCYAN$1$RESET\n"
 }
 
+create_path() {
+	printf "\tmkdir -p \"$1\"\n"; check_error $?
+	mkdir -p "$1"; check_error $?
+}
+
 link_file() {
 	[ ${#@} == 3 ] && true; check_error $? nargs
 	local name="$(basename $1)"
@@ -43,9 +48,7 @@ link_file() {
 	local dirs="$(dirname "$dst")"
 
 	printf "$desc_long"
-
-	printf "\tmkdir -p \"$dirs\"\n"; check_error $?
-	mkdir -p "$dirs"; check_error $?
+	create_path "$dirs"
 
 	printf "\trm -f \"$dst\"\n"; check_error $?
 	rm -f "$dst"; check_error $?
@@ -56,7 +59,7 @@ link_file() {
 	print_at 3 $OK_POS "${GREEN}OK${RESET}"
 }
 
-# Bashrc and profile
+# Shell dotfiles
 link_bash() {
 	local -a profile_arr=(
 		.bash_profile
@@ -66,6 +69,7 @@ link_bash() {
 	local -a bash_arr=(
 		.bashrc
 		.bash.d
+		.bash_completion.d
 		.bash_logout
 	)
 
@@ -80,7 +84,7 @@ link_bash() {
 	done
 }
 
-# Dot files in $HOME
+# $HOME dotfiles
 link_home() {
 	link_section "Git"
 	# Config
