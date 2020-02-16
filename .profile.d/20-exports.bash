@@ -47,3 +47,5 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 # /usr/src
 export XDG_SRC_HOME="$HOME/.src"
+# /usr/bin
+export XDG_SCRIPT_HOME="$HOME/.local/bin"
