@@ -1,6 +1,6 @@
 configuration {
 	/* Enabled modi */
-	modi:                           "window,drun";
+	modi:                           "window,drun,run";
 	/* Window opacity */
 	/* opacity:                        "100"; */
 	/* Window width */
@@ -204,9 +204,9 @@ configuration {
 	/* The display name of this browser */
 	/* display-ssh:					""; */
 	/* The display name of this browser */
-	/* display-run:					""; */
+	display-run:					"CLI run";
 	/* The display name of this browser */
-	/* display-drun:					""; */
+	display-drun:					"GUI run";
 	/* The display name of this browser */
 	/* display-combi:					""; */
 }
