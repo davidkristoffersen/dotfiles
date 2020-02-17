@@ -1,7 +1,41 @@
+#!/usr/bin/env bash
+
+function script() {
+	set_key config
+	set_key dst
+	dst="$config/$dst"
+
+	vars="all"
+	dst_code=""
+	gen_vars
+	format_vars > $dst
+}
+
+function format_vars() {
+	for var in $vars; do
+		read -r -d '' tmp << EOF
 #
-# ALL
+# $(echo ${var^^} | tr '_' ' ')
 #
 
+$(eval "echo -e \"\$$var\"")
+\n
+EOF
+		dst_code+="$tmp"
+	done
+
+	echo -e "$dst_code" | head -n -2
+}
+
+function gen_vars() {
+	local m="Mod4"
+	local s="Shift"
+	local a="Mod1"
+	local e="exec --no-startup-id"
+	local b="bindsym"
+
+	# ```cfg
+	read -r -d '' all << EOF
 [global]
 	#
 	# DISPLAY
@@ -56,14 +90,14 @@
 	# %i: iconname, w path
 	# %I: iconname, w/o path
 	# %p: progress in %
-	format = "%a\n<b>%s</b>\n%b %p"
+	format = "%a\\\\\\\n<b>%s</b>\\\\\\\n%b %p"
 	# Values: left, center, right
 	alignment = left
 	# Show age when larger than X seconds, disable: -1
 	show_age_threshold = 10
 	# Word wrap within message size
 	word_wrap = yes
-	# Ignore ansi newlines, \n
+	# Ignore ansi newlines, \\\\\\\n
 	ignore_newline = no
 	# Merge duplicate messages
 	stack_duplicates = yes
@@ -150,3 +184,34 @@
 	background = "#191311"
 	timeout = 0
 	#icon = /path/to/icon
+EOF
+	# $```cfg
+}
+
+#
+# ARGUMENTS
+#
+
+function lib_args() {
+	# Create initial variables
+	help_init "Example title text"
+
+	# Add option
+	add_option -s c -m config -v "PATH" -d "$DOTFILES" -i "Dotfiles path"
+	add_option -s d -m dst -v "FILE" -d "dunst.cfg" -i "Dest config"
+}
+
+#
+# TEMPLATE LIBRARY INIT
+#
+
+# Source template library
+lib="$HOME/.local/lib/bash/run_template_inner.sh"
+if [ ! -f "$lib" ]; then echo "Library not found: $lib" >&2; exit; fi
+. $lib
+# Set argument options
+lib_args
+# Parse options
+parse "$@"
+# Run script
+script
