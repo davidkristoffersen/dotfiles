@@ -21,9 +21,11 @@ let g:pathogen_disabled = []
 " call add(g:pathogen_disabled, 'i3-syntax')
 " call add(g:pathogen_disabled, 'ale')
 " call add(g:pathogen_disabled, 'git-blame')
+
 call add(g:pathogen_disabled, 'nerdtree')
 call add(g:pathogen_disabled, 'nerdtree-git-plugin')
 call add(g:pathogen_disabled, 'omnisharp-vim')
+
 " call add(g:pathogen_disabled, 'syntastic')
 " call add(g:pathogen_disabled, 'tagbar')
 " call add(g:pathogen_disabled, 'vim-airline')
@@ -34,8 +36,11 @@ call add(g:pathogen_disabled, 'omnisharp-vim')
 " call add(g:pathogen_disabled, 'vim-ingo-library')
 " call add(g:pathogen_disabled, 'vim-javascript')
 " call add(g:pathogen_disabled, 'vim-jsx')
+
 call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
-" call add(g:pathogen_disabled, 'vimpager')
+" WARNING: Very slow
+call add(g:pathogen_disabled, 'vimpager')
+
 " call add(g:pathogen_disabled, 'vim-SyntaxRange')
 " call add(g:pathogen_disabled, 'vim-trailing-whitespace')
 
