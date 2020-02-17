@@ -170,6 +170,9 @@ nnoremap <leader>] :tabn<cr>
 " Move tab prev
 nnoremap <leader>[ :tabp<cr>
 
+" Reverse search
+nnoremap <Leader>r q:?
+
 " Leader for navigating vimsplit
 nnoremap <leader>j <C-W><C-J>
 nnoremap <leader>k <C-W><C-K>
