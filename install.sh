@@ -6,6 +6,9 @@ dotfiles_init() {
 	cd "$cur"
 	export DOTFILES="$(pwd)"
 	OK_POS="$(($(tput cols) - 4))"
+
+	printf "Install requires sudo: "
+	sudo true
 }
 
 dotfiles_conf_init() {
@@ -31,26 +34,54 @@ link_section() {
 	printf "\n$FAINT# $RESET$BCYAN$1$RESET\n"
 }
 
-create_path() {
-	printf "\tmkdir -p \"$1\"\n"; check_error $?
-	mkdir -p "$1"; check_error $?
-}
-
-rm_file() {
-	printf "\trm -f \"$1\"\n"; check_error $?
-	rm -f "$1"; check_error $?
-}
-
-_link_file() {
-	printf "\tln -s \"$1\" \"$2\"\n"; check_error $?
-	ln -s "$1" "$2"; check_error $?
+path_is_abs() {
+	case $1 in
+		/*) printf true ;;
+		*) printf false ;;
+	esac
 }
 
 path_set_pre() {
-	case $1 in
-		/*) printf "$1" ;;
-		*) printf "$2/$1" ;;
-	esac
+	if $(path_is_abs "$1"); then
+		printf "$1"
+	else
+		printf "$2/$1"
+	fi
+}
+
+link_need_sudo() {
+	if $(path_is_abs $1) && ! [[ "$1" == $HOME* ]]; then
+		printf true
+	else
+		printf false
+	fi
+}
+
+create_path() {
+	local _sudo=""
+	if $(link_need_sudo $1); then
+		_sudo="sudo "
+	fi
+	printf "\t${_sudo}mkdir -p \"$1\"\n"; check_error $?
+	$_sudo mkdir -p "$1"; check_error $?
+}
+
+rm_file() {
+	local _sudo=""
+	if $(link_need_sudo $1); then
+		_sudo="sudo "
+	fi
+	printf "\t${_sudo}rm -f \"$1\"\n"; check_error $?
+	$_sudo rm -f "$1"; check_error $?
+}
+
+_link_file() {
+	local _sudo=""
+	if $(link_need_sudo $1) || $(link_need_sudo $2); then
+		_sudo="sudo "
+	fi
+	printf "\t${_sudo}ln -s \"$1\" \"$2\"\n"; check_error $?
+	$_sudo ln -s "$1" "$2"; check_error $?
 }
 
 link_file() {
@@ -116,6 +147,8 @@ link_home() {
 	link_file terminator.ini .config/terminator/config "terminator config"
 	# Tmux
 	link_file .tmux.conf .tmux.conf ".tmux.conf"
+	# LightDM
+	link_file lightdm.conf /etc/lightdm.conf "lightDM config"
 
 	link_section "CLI configuration"
 	# Readline
