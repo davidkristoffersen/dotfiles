@@ -1,0 +1,24 @@
+$include /etc/inputrc
+# Readline: Library used by Bash and CLI-interface programs to edit and interact with the command line
+
+# Readline wait x ms for additional input when a key is pressed
+set keyseq-timeout 10
+
+# Vim mode
+# Vim keybindings
+set editing-mode vi
+set keymap vi
+# Show mode with cursor type
+set show-mode-in-prompt on
+set vi-ins-mode-string \1\e[6 q\2
+set vi-cmd-mode-string \1\e[2 q\2
+
+# Tabbing
+# Single tab on tab completion
+set show-all-if-ambiguous on
+
+# Colors
+# Color files by types
+set colored-stats on
+# Color the common prefix
+set colored-completion-prefix on
