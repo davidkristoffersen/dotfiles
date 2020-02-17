@@ -110,35 +110,39 @@ link_home() {
 	link_section "Session management"
 	# I3
 	link_file i3.config .config/i3/config "i3 config"
-
 	# Rofi
 	link_file rofi.rasi .config/rofi/config.rasi "rofi config"
-
 	# Terminator
 	link_file terminator.ini .config/terminator/config "terminator config"
-
 	# Tmux
 	link_file .tmux.conf .tmux.conf ".tmux.conf"
+
+	link_section "CLI configuration"
+	# Readline
+	link_file .inputrc .inputrc "readline config"
+	# Xresources
+	link_file .Xresources .Xresources "Xresources config"
+	# xinit
+	link_file .xinitrc .xinitrc "xinit config"
+	# LS_COLOR
+	link_file .dir_colors .dir_colors "LS_COLOR config"
 
 	link_section "Editor"
 	# Vimrc files
 	link_file .vim .vim "vim dir config"
 	link_file .vim/.vimrc .vimrc "vim config"
-
 	# Latex
 	link_file template.latex .config/latex/template.latex "Latex template"
 
 	link_section "CLI programs"
 	# SQLite
 	link_file .sqliterc.sql .sqliterc "SQLite config"
-
 	# Htop
 	link_file htoprc .config/htop/htoprc "htop config"
 
 	link_section "GUI programs"
 	# GIMP
 	link_file gimprc .gimp-2.0/gimprc "GIMP config"
-
 	# Gitk
 	link_file gitk .config/git/gitk "gitk config"
 }
