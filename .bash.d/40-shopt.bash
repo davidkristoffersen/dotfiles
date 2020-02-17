@@ -26,6 +26,9 @@ shopt -s globstar
 # Make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+# Apply dir_colors to LS_COLORS
+[ -f $HOME/.dir_colors ] && eval "$(dircolors $HOME/.dir_colors)"
+
 # Enable programmable completion features
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
