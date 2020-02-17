@@ -28,12 +28,6 @@ EOF
 }
 
 function gen_vars() {
-	local m="Mod4"
-	local s="Shift"
-	local a="Mod1"
-	local e="exec --no-startup-id"
-	local b="bindsym"
-
 	# ```cfg
 	read -r -d '' all << EOF
 [global]

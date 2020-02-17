@@ -8,7 +8,7 @@ function script() {
 	src="$config/$src"
 
 	vars="variables fonts network audio screens"
-	vars+=" app_launcher applications navigation"
+	vars+=" app_launcher notifications applications navigation"
 	vars+=" workspaces appearance config modes"
 	vars+=" status_bar autostart_applications"
 	dst_code=""
@@ -88,8 +88,16 @@ EOF
 
 	read -r -d '' app_launcher << EOF
 # Rofi
-$b $m+d exec rofi
+$b $m+d exec rofi -show drun
 EOF
+
+	read -r -d '' notifications << EOF
+# Kill xfce notification daemon
+$e killall -q xfce4-notifyd
+# Start dunst notification daemon
+$e dunst -config $DOTFILES/dunst.cfg
+EOF
+
 	read -r -d '' applications << EOF
 # Terminal
 $b $m+Return exec terminator
