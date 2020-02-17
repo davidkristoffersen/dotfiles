@@ -184,8 +184,6 @@ nnoremap <leader>c :call CommenterToggle()<cr>
 
 " Save
 nmap <leader>w :w!<cr>
-" Reload vimrc
-nnoremap <leader>rc :edit \| noh<cr>
 
 " ALT KEY
 " Mapping Alt keycode to POSIX standar Alt keycode
