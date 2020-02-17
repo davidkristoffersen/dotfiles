@@ -88,7 +88,7 @@ EOF
 
 	read -r -d '' app_launcher << EOF
 # Rofi
-$b $m+d exec rofi -show run
+$b $m+d exec rofi
 EOF
 	read -r -d '' applications << EOF
 # Terminal
@@ -289,7 +289,7 @@ function lib_args() {
 	help_init "Example title text"
 
 	# Add option
-	add_option -s c -m config -v "PATH" -d "$HOME/.config/config" -i "Config path"
+	add_option -s c -m config -v "PATH" -d "$DOTFILES" -i "Dotfiles path"
 	add_option -s s -m src -v "FILE" -d "i3/i3.config" -i "Src config"
 	add_option -s d -m dst -v "FILE" -d "i3.config" -i "Dest config"
 }
