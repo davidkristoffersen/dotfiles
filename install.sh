@@ -140,15 +140,17 @@ link_home() {
 
 	link_section "Session management"
 	# I3
-	link_file i3.config .config/i3/config "i3 config"
+	link_file i3.config .config/i3/config "i3 config: Window manager"
 	# Rofi
-	link_file rofi.rasi .config/rofi/config.rasi "rofi config"
+	link_file rofi.rasi .config/rofi/config.rasi "rofi config: Application launcher"
 	# Terminator
-	link_file terminator.ini .config/terminator/config "terminator config"
+	link_file terminator.ini .config/terminator/config "terminator config: Terminal emulator"
 	# Tmux
-	link_file .tmux.conf .tmux.conf ".tmux.conf"
+	link_file .tmux.conf .tmux.conf ".tmux.conf: Terminal multiplexer"
 	# LightDM
-	link_file lightdm.conf /etc/lightdm.conf "lightDM config"
+	link_file lightdm.conf /etc/lightdm.conf "light config: Display manager"
+	# Dunst
+	link_file dunst.ini .config/dunst/dunstrc "Dunst config: Notification manager"
 
 	link_section "CLI configuration"
 	# Readline
