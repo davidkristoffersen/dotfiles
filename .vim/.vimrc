@@ -65,6 +65,17 @@ set foldmethod=indent
 set tabpagemax=100
 set shell=bash\ --login			" Execute bashrc aliases in ! mode
 
+" CURSOR
+" Block in normal mode
+let &t_SI = "\e[6 q"
+" Vertical bar in insert mode
+let &t_EI = "\e[2 q"
+" Reset cursor on start:
+autocmd VimEnter * silent !echo -ne "\e[2 q"
+" Horisontal line under insert mode line
+autocmd InsertEnter * set cul
+autocmd InsertLeave * set nocul
+
 " COLORS
 colo desert
 
