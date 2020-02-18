@@ -5,20 +5,24 @@ function script() {
 	set_key dst
 	dst="$config/$dst"
 
-	vars="all"
+	vars="global _display _text _icons"
+	vars+=" _history _advanced experimental"
+	vars+=" shortcuts urgencies examples applications"
 	dst_code=""
 	gen_vars
 	format_vars > $dst
 }
 
 function format_vars() {
+	local _tab=""
 	for var in $vars; do
+		[ "${var:0:1}" == "_" ] && _tab="\t" || _tab=""
 		read -r -d '' tmp << EOF
-#
-# $(echo ${var^^} | tr '_' ' ')
-#
+$_tab#
+$_tab# $(echo ${var^^} | tr '_' ' ')
+$_tab#
 
-$(eval "echo -e \"\$$var\"")
+$(eval "echo -e \"\$_tab\$$var\"")
 \n
 EOF
 		dst_code+="$tmp"
@@ -29,12 +33,11 @@ EOF
 
 function gen_vars() {
 	# ```cfg
-	read -r -d '' all << EOF
+	read -r -d '' global << EOF
 [global]
-	#
-	# DISPLAY
-	#
+EOF
 
+	read -r -d '' _display << EOF
 	# Which monitor the notifications should be displayed on
 	monitor = 0
 	# Notification focus, modes: mouse, keyboard, none
@@ -66,11 +69,9 @@ function gen_vars() {
 	sort = Yes
 	# Keep message for X second when user is idle
 	idle_threshold = 0
+EOF
 
-	#
-	# TEXT
-	#
-
+	read -r -d '' _text << EOF
 	font = SF Pro Text 12
 	# Type: Pixels
 	line_height = 10
@@ -99,31 +100,25 @@ function gen_vars() {
 	hide_duplicates_count = no
 	# Display types: U(urls), A(actions)
 	show_indicators = yes
+EOF
 
-	#
-	# ICONS
-	#
-
+	read -r -d '' _icons << EOF
 	# Types: left, right, off
 	icon_position = left
 	# Type: Pixels
 	max_icon_size = 32
 	# Paths to default icons
-	icon_path = /usr/share/icons/Papirus/16x16/mimetypes/:/usr/share/icons/Papirus/48x48/status/:/usr/share/icons/Papirus/16x16/devices/:/usr/share/icons/Papirus/48x48/notifications/:/usr/share/icons/Papirus/48x48/emblems/
+	icon_path = /usr/share/icons/Papirus/16x16/mimetypes/:/usr/share/icons/Papirus/48x48/status/:/usr/share/icons/Papirus/16x16/devices/:/usr/share/icons/Papirus/48x48/notifications/:/usr/share/icons/Papirus/48x48/emblems/:/tmp/
+EOF
 
-	#
-	# HISTORY
-	#
-
+	read -r -d '' _history << EOF
 	# History notifications, types: yes(sticky), no(timeout)
 	sticky_history = yes
 	# Num notifications in history
 	history_length = 15
+EOF
 
-	#
-	# MISC / ADVANCED
-	#
-
+	read -r -d '' _advanced << EOF
 	# dmenu path
     dmenu = /usr/bin/rofi -dmenu -p dunst:
 	# Browser for opening urls in context menu
@@ -136,12 +131,17 @@ function gen_vars() {
 	class = Dunst
 	# Print a notification on startup
 	startup_notification = false
+EOF
 
-# Experimental features that may not work correctly
+	read -r -d '' experimental << EOF
+# May not work properly
 [experimental]
 	# Calculate the dpi to use on a per-monitor basis
 	per_monitor_dpi = false
+EOF
 
+
+	read -r -d '' shortcuts << EOF
 # Usage: modX+modY+...+key
 # Modifiers: ctrl, mod1(alt), mod2, mod3, mod4(Super)
 [shortcuts]
@@ -153,11 +153,9 @@ function gen_vars() {
 	history = mod4+ctrl+h
 	# Context menu
 	context = mod4+ctrl+d
+EOF
 
-#
-# Urgency specific
-#
-
+	read -r -d '' urgencies << EOF
 [urgency_low]
 	frame_color = "#3B7C87"
 	foreground = "#3B7C87"
@@ -178,46 +176,45 @@ function gen_vars() {
 	background = "#191311"
 	timeout = 0
 	#icon = /path/to/icon
+EOF
 
-#
-# Application specific
-#
-
+	read -r -d '' examples << EOF
 [Example]
 	appname = name
 	desktop_entry = entry
 	summary = summary
+	# "" for ignore
 	format = "%a\\\\\\\n<b>%s</b>\\\\\\\n%b"
-	new_icon = "path"
+	# new_icon = "path"
 	urgency = normal
 	timeout = 0
 	script = "path"
+EOF
+	# $```cfg
+
+	local _notify_general="$DOTFILES/bin/notify_general.sh"
+	# ```cfg
+	read -r -d '' applications << EOF
+[General]
+	appname = notification
+	format = "%s"
 
 [Telegram]
 	appname = telegram-desktop
-	desktop_entry = telegram-desktop
-	format = "T: %a\\\\\\\n<b>%s</b>\\\\\\\n%b"
-	new_icon = telegram-desktop_icon
-	urgency = critical
-	timeout = 0
-	script = "$DOTFILES/bin/notify_test.sh"
-
-[Chromium]
-	appname = Chromium
-	format = ""
-	new_icon = ""
-	urgency = critical
-	script = "$DOTFILES/bin/notify_test.sh"
+	script = "$_notify_general"
 
 [Discord]
 	appname = discord
-	desktop_entry = discord
-	summary = "*"
-	format = "D: %a\\\\\\\n<b>%s</b>\\\\\\\n%b"
-	new_icon = discord_icon
-	urgency = critical
-	timeout = 0
-	script = "$DOTFILES/bin/notify_test.sh"
+	script = "$_notify_general"
+
+[Chromium]
+	appname = Chromium
+	script = "$_notify_general"
+
+[Other]
+	appname = *
+	# Run script on any unknown name
+	script = "$_notify_general"
 EOF
 	# $```cfg
 }
