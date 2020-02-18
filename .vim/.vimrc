@@ -73,9 +73,6 @@ let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
 " Reset cursor on start:
 autocmd VimEnter * silent !echo -ne "\e[2 q"
-" Horisontal line under insert mode line
-autocmd InsertEnter * set cul
-autocmd InsertLeave * set nocul
 
 " COLORS
 colo desert
