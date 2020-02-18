@@ -8,6 +8,7 @@ urgency="$5"
 
 case $appname in
 	Chromium)
+		# Chrome notifica generator: https://tests.peter.sh/notification-generator
 		notify-send -a "notification" -u "$urgency" -i false "WEB"
 		;;
 	telegram-desktop|discord)
