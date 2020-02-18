@@ -22,6 +22,11 @@ hostname_master() {
 	tracepath -b 129.242.16.30 | grep "$name" | grep -e '^ 1:'
 }
 
+xresource_get() {
+	local _args="$(echo $@ | tr ' ' '.')"
+	xrdb -query | grep -i "$_args:" | cut -f 2
+}
+
 # Archive extractor
 extract() {
 	if [ -f $1 ] ; then
