@@ -84,7 +84,7 @@ function gen_vars() {
 	# %i: iconname, w path
 	# %I: iconname, w/o path
 	# %p: progress in %
-	format = "%a\\\\\\\n<b>%s</b>\\\\\\\n%b %p"
+	format = "%a $I\\\\\\\n<b>%s</b>\\\\\\\n%b %p"
 	# Values: left, center, right
 	alignment = left
 	# Show age when larger than X seconds, disable: -1
@@ -125,7 +125,7 @@ function gen_vars() {
 	#
 
 	# dmenu path
-	dmenu = /usr/bin/dmenu -p dunst:
+    dmenu = /usr/bin/rofi -dmenu -p dunst:
 	# Browser for opening urls in context menu
 	browser = /usr/bin/chromium
 	# Rule-defined scripts
@@ -146,13 +146,13 @@ function gen_vars() {
 # Modifiers: ctrl, mod1(alt), mod2, mod3, mod4(Super)
 [shortcuts]
 	# Close notification
-	close = ctrl+space
+	close = mod4+ctrl+c
 	# Close all notifications
-	close_all = ctrl+shift+space
+	close_all = mod4+ctrl+a
 	# Redisplay last message(s)
-	history = ctrl+j
+	history = mod4+ctrl+h
 	# Context menu
-	context = ctrl+shift+period
+	context = mod4+ctrl+d
 
 #
 # Urgency specific
@@ -178,6 +178,46 @@ function gen_vars() {
 	background = "#191311"
 	timeout = 0
 	#icon = /path/to/icon
+
+#
+# Application specific
+#
+
+[Example]
+	appname = name
+	desktop_entry = entry
+	summary = summary
+	format = "%a\\\\\\\n<b>%s</b>\\\\\\\n%b"
+	new_icon = "path"
+	urgency = normal
+	timeout = 0
+	script = "path"
+
+[Telegram]
+	appname = telegram-desktop
+	desktop_entry = telegram-desktop
+	format = "T: %a\\\\\\\n<b>%s</b>\\\\\\\n%b"
+	new_icon = telegram-desktop_icon
+	urgency = critical
+	timeout = 0
+	script = "$DOTFILES/bin/notify_test.sh"
+
+[Chromium]
+	appname = Chromium
+	format = ""
+	new_icon = ""
+	urgency = critical
+	script = "$DOTFILES/bin/notify_test.sh"
+
+[Discord]
+	appname = discord
+	desktop_entry = discord
+	summary = "*"
+	format = "D: %a\\\\\\\n<b>%s</b>\\\\\\\n%b"
+	new_icon = discord_icon
+	urgency = critical
+	timeout = 0
+	script = "$DOTFILES/bin/notify_test.sh"
 EOF
 	# $```cfg
 }
