@@ -64,6 +64,7 @@ set wildmenu					" command line completion
 set foldmethod=indent
 set tabpagemax=100
 set shell=bash\ --login			" Execute bashrc aliases in ! mode
+set rnu							" Relative line numbers
 
 " CURSOR
 " Block in normal mode
