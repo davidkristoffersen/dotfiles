@@ -89,7 +89,7 @@ EOF
 	# Values: left, center, right
 	alignment = left
 	# Show age when larger than X seconds, disable: -1
-	show_age_threshold = 10
+	show_age_threshold = 30
 	# Word wrap within message size
 	word_wrap = yes
 	# Ignore ansi newlines, \\\\\\\n
@@ -209,6 +209,10 @@ EOF
 
 [Chromium]
 	appname = Chromium
+	script = "$_notify_general"
+
+[Spotify]
+	appname = Spotify
 	script = "$_notify_general"
 
 [Other]

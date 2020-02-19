@@ -14,6 +14,9 @@ case $appname in
 	telegram-desktop|discord)
 		notify-send -a "notification" -u "$urgency" -i false "SOCIAL"
 		;;
+	Spotify)
+		notify-send -a "notification" -u "$urgency" -i false "AUDIO"
+		;;
 	notification)
 		;;
 	*)
