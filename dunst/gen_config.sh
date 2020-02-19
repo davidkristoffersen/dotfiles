@@ -200,11 +200,15 @@ EOF
 	format = "%s"
 
 [Telegram]
-	appname = telegram-desktop
+	appname = Telegram Desktop
 	script = "$_notify_general"
 
 [Discord]
 	appname = discord
+	script = "$_notify_general"
+
+[Messenger]
+	appname = messengerport
 	script = "$_notify_general"
 
 [Chromium]
