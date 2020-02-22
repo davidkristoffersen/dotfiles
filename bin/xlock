@@ -10,7 +10,7 @@ out="${tmpdir}screen.png"
 
 laptop_pos="center"
 
-debug=false
+debug=true
 
 function timeit() {
 	if $debug; then
@@ -27,7 +27,7 @@ function timeit() {
 
 function get_autorandr_profile() {
 	local profile="$(autorandr_profile.sh)"
-	if [ "$profile" == "home" ]; then
+	if [[ $profile =~ (home|alta*) ]]; then
 		laptop_pos="right"
 	elif [ "$profile" == "office" ]; then
 		laptop_pos="left"
@@ -100,8 +100,8 @@ function combine() {
 		extended+="-page +$(get_info $i x)+$(get_info $i y) $pre_png$i$post_png "
 	done
 
-	$debug && echo -e "\tconvert -page \"${width}x${heigth}+0+0\" $main $extended -flatten $out"
-	convert -page "${width}x${heigth}+0+$y" $main $extended -flatten $out
+	$debug && echo -e "\tconvert -page \"${width}x${heigth}+$x+$y\" $main $extended -flatten $out"
+	convert -page "${width}x${heigth}+$x+$y" $main $extended -flatten $out
 }
 
 timeit get_autorandr_profile
