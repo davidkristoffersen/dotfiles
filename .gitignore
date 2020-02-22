@@ -1,7 +1,1 @@
-hard_link.sh
-.vim/.netrwhist
-.vim/autoload/
-.vim/spell/
-create_submodules.sh
-submodules.txt
 .secrets/

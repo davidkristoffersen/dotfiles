@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
 function script() {
-	set_key config
-	set_key dst
-	dst="$config/$dst"
+	dst="$DOTFILES/.config/dunst/dunst.cfg"
 
 	vars="global _display _text _icons"
 	vars+=" _history _advanced experimental"
@@ -227,30 +225,5 @@ EOF
 	# $```cfg
 }
 
-#
-# ARGUMENTS
-#
-
-function lib_args() {
-	# Create initial variables
-	help_init "Example title text"
-
-	# Add option
-	add_option -s c -m config -v "PATH" -d "$DOTFILES" -i "Dotfiles path"
-	add_option -s d -m dst -v "FILE" -d "dunst.cfg" -i "Dest config"
-}
-
-#
-# TEMPLATE LIBRARY INIT
-#
-
-# Source template library
-lib="$HOME/.local/lib/bash/run_template_inner.sh"
-if [ ! -f "$lib" ]; then echo "Library not found: $lib" >&2; exit; fi
-. $lib
-# Set argument options
-lib_args
-# Parse options
-parse "$@"
 # Run script
 script

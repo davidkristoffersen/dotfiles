@@ -6,6 +6,7 @@ dotfiles_init() {
 	cd "$cur"
 	export DOTFILES="$(pwd)"
 	OK_POS="$(($(tput cols) - 4))"
+	WRITE=true
 
 	printf "Install requires sudo: "
 	sudo true
@@ -63,7 +64,7 @@ create_path() {
 		_sudo="sudo "
 	fi
 	printf "\t${_sudo}mkdir -p \"$1\"\n"; check_error $?
-	$_sudo mkdir -p "$1"; check_error $?
+	test $WRITE && $_sudo mkdir -p "$1"; check_error $?
 }
 
 rm_file() {
@@ -72,7 +73,7 @@ rm_file() {
 		_sudo="sudo "
 	fi
 	printf "\t${_sudo}rm -f \"$1\"\n"; check_error $?
-	$_sudo rm -f "$1"; check_error $?
+	test $WRITE && $_sudo rm -f "$1"; check_error $?
 }
 
 _link_file() {
@@ -81,7 +82,7 @@ _link_file() {
 		_sudo="sudo "
 	fi
 	printf "\t${_sudo}ln -s \"$1\" \"$2\"\n"; check_error $?
-	$_sudo ln -s "$1" "$2"; check_error $?
+	test $WRITE && $_sudo ln -s "$1" "$2"; check_error $?
 }
 
 link_file() {
@@ -94,18 +95,21 @@ link_file() {
 	local desc_len="${#desc_long}"
 	local desc_long="${BLUE}$desc_long${RESET}\n"
 	local dirs="$(dirname "$dst")"
+	local srcs="$(dirname "$src")"
 
 	printf "$desc_long"
 
 	create_path "$dirs"
+	create_path "$srcs"
 	rm_file "$dst"
 	_link_file "$src" "$dst"
 
-	print_at 4 $desc_len "${GREEN}OK${RESET}"
+	print_at 5 $desc_len "${GREEN}OK${RESET}"
 }
 
 # Shell dotfiles
-link_bash() {
+link_shell() {
+	local _src_path="shell"
 	local -a profile_arr=(
 		.bash_profile
 		.profile
@@ -120,66 +124,68 @@ link_bash() {
 
 	link_section "Profile"
 	for profile_arr in ${profile_arr[@]}; do
-		link_file $profile_arr $profile_arr "$profile_arr"
+		link_file $_src_path/$profile_arr $profile_arr "$profile_arr"
 	done
 
 	link_section "Bash"
 	for bash_arr in ${bash_arr[@]}; do
-		link_file $bash_arr $bash_arr "$bash_arr"
+		link_file $_src_path/$bash_arr $bash_arr "$bash_arr"
 	done
 
-	. .profile; check_error $?
-	. .bashrc; check_error $?
+	# . .profile; check_error $?
+	# . .bashrc; check_error $?
 }
 
 # $HOME dotfiles
 link_home() {
+	local _src_path="home"
+
 	link_section "Git"
 	# Config
-	link_file .gitconfig .gitconfig ".gitconfig"
+	link_file $_src_path/.gitconfig .gitconfig ".gitconfig"
 
 	link_section "Session management"
 	# I3
-	link_file i3.config .config/i3/config "i3 config: Window manager"
+	link_file $_src_path/.config/i3/i3.config .config/i3/config "i3 config - Window manager"
 	# Rofi
-	link_file rofi.rasi .config/rofi/config.rasi "rofi config: Application launcher"
+	link_file $_src_path/.config/rofi/rofi.rasi .config/rofi/config.rasi "rofi config - Application launcher"
 	# Terminator
-	link_file terminator.ini .config/terminator/config "terminator config: Terminal emulator"
+	link_file $_src_path/.config/terminator/terminator.ini .config/terminator/config "terminator config - Terminal emulator"
 	# Tmux
-	link_file .tmux.conf .tmux.conf ".tmux.conf: Terminal multiplexer"
-	# LightDM
-	link_file lightdm.conf /etc/lightdm.conf "light config: Display manager"
+	link_file $_src_path/.tmux.conf .tmux.conf ".tmux.conf - Terminal multiplexer"
 	# Dunst
-	link_file dunst.ini .config/dunst/dunstrc "Dunst config: Notification manager"
+	link_file $_src_path/.config/dunst/dunst.cfg .config/dunst/dunstrc "Dunst config - Notification manager"
+	# LightDM
+	link_file etc/lightdm.conf /etc/lightdm.conf "light config - Display manager"
 
 	link_section "CLI configuration"
 	# Readline
-	link_file .inputrc .inputrc "readline config"
+	link_file $_src_path/.inputrc .inputrc "readline config"
 	# Xresources
-	link_file .Xresources .Xresources "Xresources config"
+	link_file $_src_path/.Xresources .Xresources "Xresources config"
 	# xinit
-	link_file .xinitrc .xinitrc "xinit config"
+	link_file $_src_path/.xinitrc .xinitrc "xinit config"
 	# LS_COLOR
-	link_file .dir_colors .dir_colors "LS_COLOR config"
+	link_file $_src_path/.dir_colors .dir_colors "LS_COLOR config"
 
 	link_section "Editor"
 	# Vimrc files
-	link_file .vim .vim "vim dir config"
-	link_file .vim/.vimrc .vimrc "vim config"
+	link_file $_src_path/.vim .vim "vim dir config"
+	link_file $_src_path/.vim/.vimrc .vimrc "vim config"
 	# Latex
-	link_file template.latex .config/latex/template.latex "Latex template"
+	link_file $_src_path/.config/latex/template.latex .config/latex/template.latex "Latex template"
 
 	link_section "CLI programs"
 	# SQLite
-	link_file .sqliterc.sql .sqliterc "SQLite config"
+	link_file $_src_path/.sqliterc.sql .sqliterc "SQLite config"
 	# Htop
-	link_file htoprc .config/htop/htoprc "htop config"
+	link_file $_src_path/.config/htop/htoprc .config/htop/htoprc "htop config"
 
 	link_section "GUI programs"
 	# GIMP
-	link_file gimprc .gimp-2.0/gimprc "GIMP config"
+	link_file $_src_path/.gimp-2.0/gimprc .gimp-2.0/gimprc "GIMP config"
 	# Gitk
-	link_file gitk .config/git/gitk "gitk config"
+	link_file $_src_path/.config/git/gitk .config/git/gitk "gitk config"
 }
 
 update_submodules() {
@@ -189,34 +195,39 @@ update_submodules() {
 
 link_bin() {
 	echo
-	local _path="bin"
+	local _src_path="bin"
 
-	local _scripts="$(ls -A1 bin)"
+	cd $_src_path
+	local _scripts="$(ls -dA1 **)"
+	cd - >/dev/null
+
 	for script in $_scripts; do
-		link_file "$_path/$script" "$XDG_BIN_HOME/$script" "$script"
+		if [ -f $script ]; then
+			link_file "$_src_path/$script" "$XDG_BIN_HOME/$(basename $script)" "$script"
+		fi
 	done
 }
 
 link_lib() {
 	echo
-	local _path="lib"
+	local _src_path="lib"
 
 	# Bash library
-	link_file "$_path/bash" "$XDG_LIB_HOME/bash" "bash script library"
+	link_file "$_src_path/bash" "$XDG_LIB_HOME/bash" "bash script library"
 }
 
 link_share() {
 	echo
-	local _path="share"
+	local _src_path="share"
 
 	# Bash metadata
-	link_file "$_path/bash-metadata" "$XDG_DATA_HOME/bash-metadata" "bash metadata"
+	link_file "$_src_path/bash-metadata" "$XDG_DATA_HOME/bash-metadata" "bash metadata"
 
 	# Backgrounds
-	link_file "$_path/backgrounds" "$XDG_DATA_HOME/backgrounds" "backgrounds"
+	link_file "$_src_path/backgrounds" "$XDG_DATA_HOME/backgrounds" "backgrounds"
 
 	# Rofi themes
-	link_file "$_path/rofi" "$XDG_DATA_HOME/rofi" "rofi themes"
+	link_file "$_src_path/rofi" "$XDG_DATA_HOME/rofi" "rofi themes"
 }
 
 main() {
@@ -224,13 +235,13 @@ main() {
 	dotfiles_conf_init
 
 	link_header "Shell dotfiles"
-	link_bash
+	link_shell
 	echo
 	link_header "\$HOME dotfiles"
 	link_home
-	echo
-	link_header "Update submodules"
-	update_submodules
+	# echo
+	# link_header "Update submodules"
+	# update_submodules
 	echo
 	link_header "Shell scripts"
 	link_bin

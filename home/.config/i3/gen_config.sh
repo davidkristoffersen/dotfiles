@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 
 function script() {
-	set_key config
-	set_key src
-	set_key dst
-	dst="$config/$dst"
-	src="$config/$src"
+	dst="$DOTFILES/.config/i3/i3.config"
 
 	vars="variables fonts network audio screens"
 	vars+=" app_launcher notifications applications navigation"
@@ -288,31 +284,5 @@ EOF
 # $```i3config
 }
 
-#
-# ARGUMENTS
-#
-
-function lib_args() {
-	# Create initial variables
-	help_init "Example title text"
-
-	# Add option
-	add_option -s c -m config -v "PATH" -d "$DOTFILES" -i "Dotfiles path"
-	add_option -s s -m src -v "FILE" -d "i3/i3.config" -i "Src config"
-	add_option -s d -m dst -v "FILE" -d "i3.config" -i "Dest config"
-}
-
-#
-# TEMPLATE LIBRARY INIT
-#
-
-# Source template library
-lib="$HOME/.local/lib/bash/run_template_inner.sh"
-if [ ! -f "$lib" ]; then echo "Library not found: $lib" >&2; exit; fi
-. $lib
-# Set argument options
-lib_args
-# Parse options
-parse "$@"
 # Run script
 script
