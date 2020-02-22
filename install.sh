@@ -132,8 +132,8 @@ link_shell() {
 		link_file $_src_path/$bash_arr $bash_arr "$bash_arr"
 	done
 
-	# . .profile; check_error $?
-	# . .bashrc; check_error $?
+	. $_src_path/.profile; check_error $?
+	. $_src_path/.bashrc; check_error $?
 }
 
 # $HOME dotfiles
@@ -202,7 +202,7 @@ link_bin() {
 	cd - >/dev/null
 
 	for script in $_scripts; do
-		if [ -f $script ]; then
+		if [ -f $_src_path/$script ]; then
 			link_file "$_src_path/$script" "$XDG_BIN_HOME/$(basename $script)" "$script"
 		fi
 	done
@@ -239,9 +239,9 @@ main() {
 	echo
 	link_header "\$HOME dotfiles"
 	link_home
-	# echo
-	# link_header "Update submodules"
-	# update_submodules
+	echo
+	link_header "Update submodules"
+	update_submodules
 	echo
 	link_header "Shell scripts"
 	link_bin
