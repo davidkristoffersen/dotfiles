@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function script() {
-	dst="$DOTFILES/.config/i3/i3.config"
+	dst="$DOTFILES/home/.config/i3/i3.config"
 
 	vars="variables fonts network audio screens"
 	vars+=" app_launcher notifications applications navigation"

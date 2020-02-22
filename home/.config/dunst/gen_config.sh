@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function script() {
-	dst="$DOTFILES/.config/dunst/dunst.cfg"
+	dst="$DOTFILES/home/.config/dunst/dunst.cfg"
 
 	vars="global _display _text _icons"
 	vars+=" _history _advanced experimental"
