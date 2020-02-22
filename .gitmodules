@@ -1,60 +1,60 @@
 [submodule ".vim/bundle/ale"]
-	path = .vim/bundle/ale
+	path = home/.vim/bundle/ale
 	url = https://github.com/w0rp/ale.git
 [submodule ".vim/bundle/git-blame"]
-	path = .vim/bundle/git-blame
+	path = home/.vim/bundle/git-blame
 	url = https://github.com/zivyangll/git-blame.vim.git
 [submodule ".vim/bundle/nerdtree"]
-	path = .vim/bundle/nerdtree
+	path = home/.vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
 [submodule ".vim/bundle/nerdtree-git-plugin"]
-	path = .vim/bundle/nerdtree-git-plugin
+	path = home/.vim/bundle/nerdtree-git-plugin
 	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
 [submodule ".vim/bundle/syntastic"]
-	path = .vim/bundle/syntastic
+	path = home/.vim/bundle/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
 [submodule ".vim/bundle/tagbar"]
-	path = .vim/bundle/tagbar
+	path = home/.vim/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
 [submodule ".vim/bundle/vim-airline"]
-	path = .vim/bundle/vim-airline
+	path = home/.vim/bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline
 [submodule ".vim/bundle/vim-airline-themes"]
-	path = .vim/bundle/vim-airline-themes
+	path = home/.vim/bundle/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
 [submodule ".vim/bundle/vim-commenter"]
-	path = .vim/bundle/vim-commenter
+	path = home/.vim/bundle/vim-commenter
 	url = https://github.com/davidkristoffersen/vim-commenter.git
 [submodule ".vim/bundle/vim-fugitive"]
-	path = .vim/bundle/vim-fugitive
+	path = home/.vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule ".vim/bundle/vim-indent-guides"]
-	path = .vim/bundle/vim-indent-guides
+	path = home/.vim/bundle/vim-indent-guides
 	url = git://github.com/nathanaelkane/vim-indent-guides.git
 [submodule ".vim/bundle/vim-javascript"]
-	path = .vim/bundle/vim-javascript
+	path = home/.vim/bundle/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git
 [submodule ".vim/bundle/vim-jsx"]
-	path = .vim/bundle/vim-jsx
+	path = home/.vim/bundle/vim-jsx
 	url = https://github.com/mxw/vim-jsx.git
 [submodule ".vim/bundle/vim-nerdtree-tabs"]
-	path = .vim/bundle/vim-nerdtree-tabs
+	path = home/.vim/bundle/vim-nerdtree-tabs
 	url = https://github.com/jistr/vim-nerdtree-tabs.git
 [submodule ".vim/bundle/omnisharp-vim"]
-	path = .vim/bundle/omnisharp-vim
+	path = home/.vim/bundle/omnisharp-vim
 	url = https://github.com/OmniSharp/omnisharp-vim.git
 [submodule ".vim/bundle/vimpager"]
-	path = .vim/bundle/vimpager
+	path = home/.vim/bundle/vimpager
 	url = https://github.com/rkitover/vimpager.git
 [submodule ".vim/bundle/i3config.vim"]
-	path = .vim/bundle/i3config.vim
+	path = home/.vim/bundle/i3config.vim
 	url = https://github.com/davidkristoffersen/i3config.vim.git
 [submodule ".vim/bundle/vim-trailing-whitespace"]
-	path = .vim/bundle/vim-trailing-whitespace
+	path = home/.vim/bundle/vim-trailing-whitespace
 	url = https://github.com/davidkristoffersen/vim-trailing-whitespace.git
 [submodule ".vim/bundle/vim-ingo-library"]
-	path = .vim/bundle/vim-ingo-library
+	path = home/.vim/bundle/vim-ingo-library
 	url = https://github.com/inkarkat/vim-ingo-library.git
 [submodule ".vim/bundle/vim-SyntaxRange"]
-	path = .vim/bundle/vim-SyntaxRange
+	path = home/.vim/bundle/vim-SyntaxRange
 	url = https://github.com/inkarkat/vim-SyntaxRange.git
