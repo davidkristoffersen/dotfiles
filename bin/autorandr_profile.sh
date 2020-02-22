@@ -6,19 +6,6 @@ if [ ! -d "$autorandr_config" ]; then
 	exit
 fi
 
-function get_edid() {
-	local edid_line="$(($(xrandr --props | nl | grep -A 1 "$1 connected" | grep -v "\-\-" | grep "EDID" | awk '{print $1}') + 1))"
-	edid=""
-
-	while IFS= read -r line; do
-		if [ "${line:0:2}" != $'\t\t' ]; then
-			break
-		fi
-		printf -v edid "$edid\n${line:2:$((${#line}-2))}"
-	done <<< "$(xrandr --props | tail +$edid_line)"
-	edid="$(echo "$edid" | tail +2)"
-}
-
 main_name="eDP"
 screens_info="$(xrandr --props | grep -A 1 " connected" | grep -v "\-\-" | awk '{print $1,$2}' | xargs -n 3)"
 
@@ -31,7 +18,7 @@ while IFS= read -r line; do
 		continue
 	fi
 
-	get_edid $name
+	edid="$(autorandr_edid.sh $name)"
 	if [ -z "$is_main" ]; then
 		break
 	fi
