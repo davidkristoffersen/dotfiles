@@ -126,7 +126,6 @@ au!
 autocmd VimEnter * Silent echo -ne "\e[2 q"
 augroup END
 
-
 " MAPS: MODE SPECIFIC
 " Keep selection when indenting/outdenting.
 vnoremap > >gv
@@ -239,6 +238,15 @@ function! g:Upload()
 endfunction
 
 " FUNCTIONS
+" Force syntax
+function! g:ForceSyntax()
+	let l:name=expand('%t')
+	if l:name =~? '^.*.dir_colors.*'
+		set syntax=dircolors
+	endif
+endfunction
+autocmd VimEnter * :call ForceSyntax()
+
 " Toggle commands
 nnoremap <leader>tp :call Toggle_val("set_paste")<cr>
 nnoremap <leader>tn :call Toggle_val("set_number")<cr>
@@ -348,7 +356,7 @@ endfunction
 
 " SYNTAXRANGE
 function! g:Plugin_vim_SyntaxRange()
-	function! g:TextEnableCodeSnip(filetype) abort
+	function! g:SyntaxLang(filetype, bool='enable') abort
 		let l:ft = &ft
 		if l:ft == a:filetype
 			return
@@ -381,7 +389,12 @@ function! g:Plugin_vim_SyntaxRange()
 		let l:pre =	l:cmnt[0] . l:wrap . l:pre	. l:sep . l:cpre . a:filetype . l:wrap . l:cmnt[1]
 		let l:post =l:cmnt[0] . l:wrap . l:post	. l:sep . l:cpre . a:filetype . l:wrap . l:cmnt[1]
 
-		let l:cmd = "call SyntaxRange#Include('" . l:pre . "', '" . l:post . "', '" . a:filetype . "', '" . l:match_group . "')"
+		if a:bool == 'enable'
+			let l:cmd = "call SyntaxRange#Include('" . l:pre . "', '" . l:post . "', '" . a:filetype . "', '" . l:match_group . "')"
+		else
+			let l:cmd = "call SyntaxRange#IncludeEx('start=\"" . l:pre . "\" end=\"" . l:post . "\"', '" . a:filetype . "')"
+		endif
+
 		" echo l:cmd
 		exec l:cmd
 	endfunction
@@ -389,7 +402,7 @@ function! g:Plugin_vim_SyntaxRange()
 	function! s:_TextEnableCodeSnipAll()
 		let l:langs = g:CommenterGetLanguages()
 		for l:lang in l:langs
-			call g:TextEnableCodeSnip(l:lang)
+			call g:SyntaxLang(l:lang, 'enable')
 		endfor
 	endfunction
 
