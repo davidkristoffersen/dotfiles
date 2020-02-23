@@ -168,7 +168,7 @@ endfunction
 " Remove soft tabs
 nmap <leader>T :%s/\s\s\s\s/\t/g<cr>
 " Remove hard tabs
-nmap <leader>h :%s/\t/	/g<cr>
+nmap <leader>H :%s/\t/	/g<cr>
 
 " Move tab next
 nnoremap <leader>} :tabm +1<cr>
@@ -180,7 +180,10 @@ nnoremap <leader>] :tabn<cr>
 nnoremap <leader>[ :tabp<cr>
 
 " Reverse search
-nnoremap <Leader>r q:?
+nnoremap <leader>r q:?
+
+" Clear search
+nnoremap <leader>o :noh<cr>
 
 " Leader for navigating vimsplit
 nnoremap <leader>j <C-W><C-J>
@@ -280,7 +283,7 @@ endfunction
 
 " VIM GIT BLAME
 function! g:Plugin_git_blame()
-	nnoremap <Leader>b :<C-u>call gitblame#echo()<CR>
+	nnoremap <leader>b :<C-u>call gitblame#echo()<CR>
 endfunction
 
 " INDENT GUIDES
