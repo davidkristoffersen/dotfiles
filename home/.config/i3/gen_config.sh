@@ -31,6 +31,7 @@ EOF
 function gen_vars() {
 	local m="Mod4"
 	local s="Shift"
+	local c="Control"
 	local a="Mod1"
 	local e="exec --no-startup-id"
 	local b="bindsym"
@@ -116,8 +117,8 @@ EOF
 				_out+="$1+$vim $2 ${vim_arrow[$vim]}\n"
 			done
 		else
-			for vim in ${!vim[@]}; do
-				_out+="$1+${vim_arrow[$vim]} $2 ${vim_arrow[$vim]}\n"
+			for vim in ${!vim_arrow[@]}; do
+				_out+="$1+${vim_arrow[$vim]^} $2 ${vim_arrow[$vim]}\n"
 			done
 		fi
 		printf "$_out" | column -t
@@ -182,23 +183,47 @@ EOF
 
 	# $```i3config
 	local wnames="$(seq 0 9)"
-	local wsn="workspace number"
-	local mctwsn="move container to workspace number"
-	local rwt="rename workspace to"
 
-	wsn="$(echo -n $wnames | xargs -d ' ' -I {} echo "$b $m+{} $wsn {}")"
-	mctwsn="$(echo -n $wnames | xargs -d ' ' -I {} echo "$b $m+$s+{} $mctwsn {}")"
-	rwt="$(echo -n $wnames | xargs -d ' ' -I {} echo "$b $m+$a+{} $rwt {}")"
+	workspace_type() {
+		for name in $wnames; do
+			echo "$b $1+$name $2 $name"
+		done
+	}
+	workspace_nav() {
+		local _out=""
+		if [ "$1" == "vim" ]; then
+			for name in ${!vim_arrow[@]}; do
+				_out+="$b $2+$name"
+				_out+=" focus parent; focus parent; focus parent; focus parent"
+				_out+="; $3 ${vim_arrow[$name]}"
+				_out+="; focus child; focus child; focus child; focus child\n"
+			done
+		else
+			for name in ${!vim_arrow[@]}; do
+				_out+="$b $2+${vim_arrow[$name]^}"
+				_out+=" focus parent; focus parent; focus parent; focus parent"
+				_out+="; $3 ${vim_arrow[$name]}"
+				_out+="; focus child; focus child; focus child; focus child\n"
+			done
+		fi
+		printf "$_out" | column -t
+	}
 	# ```i3config
 	read -r -d '' workspaces << EOF
 # Switch to workspace
-$wsn
+$(workspace_type $m "workspace number")
 
 # Move focused container to workspace
-$mctwsn
+$(workspace_type $m+$s "move container to workspace number")
 
 # Rename focused workspace
-$rwt
+$(workspace_type $m+$a "rename workspace to")
+
+# Focus directional workspace
+# Vim style
+$(workspace_nav vim $m+$c "focus")
+# Arrow style
+$(workspace_nav arrow $m+$c "focus")
 EOF
 
 	read -r -d '' appearance << EOF
@@ -246,7 +271,7 @@ EOF
 			done
 		else
 			for vim in ${!vim_arrow[@]}; do
-				_out+="\t$b ${vim_arrow[$vim]} $grow ${vim_arrow[$vim]} $size; "
+				_out+="\t$b ${vim_arrow[$vim]^} $grow ${vim_arrow[$vim]} $size; "
 				_out+="$shrink ${vim_arrow_mirror[$vim]} $size\n"
 			done
 		fi
