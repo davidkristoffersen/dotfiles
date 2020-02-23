@@ -15,8 +15,10 @@ alias free='free -m'                      # show sizes in MB
 # Listing
 alias lll="exa -ls type --git"
 alias lla="exa -las type --git"
-alias ll="exa -s type --git"
-alias la="exa -as type --git"
+alias ll="exa -lGs type --git"
+alias la="exa -lGas type --git"
+alias l="exa -s type --git"
+alias a="exa -as type --git"
 
 alias srcall="source $HOME/.bash_profile"
 alias srcbash="source $HOME/.bashrc"
