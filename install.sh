@@ -7,7 +7,7 @@ dotfiles_init() {
 	export DOTFILES="$(pwd)"
 	OK_POS="$(($(tput cols) - 4))"
 	WRITE=true
-	SUBMODULE=false
+	SUBMODULE=true
 
 	printf "Install requires sudo: "
 	echo
@@ -146,54 +146,52 @@ link_shell() {
 
 # $HOME dotfiles
 link_home() {
-	local _src_path="home"
-
 	link_section "Git"
 	# Config
-	link_file $_src_path/.gitconfig .gitconfig ".gitconfig"
+	link_file $DOTFILES_HOME/.gitconfig .gitconfig ".gitconfig"
 
 	link_section "Session management"
 	# I3
-	link_file $_src_path/.config/i3/i3.config .config/i3/config "i3 config - Window manager"
+	link_file $DOTFILES_CONFIG/i3/i3.config .config/i3/config "i3 config - Window manager"
 	# Rofi
-	link_file $_src_path/.config/rofi/rofi.rasi .config/rofi/config.rasi "rofi config - Application launcher"
+	link_file $DOTFILES_CONFIG/rofi/rofi.rasi .config/rofi/config.rasi "rofi config - Application launcher"
 	# Terminator
-	link_file $_src_path/.config/terminator/terminator.ini .config/terminator/config "terminator config - Terminal emulator"
+	link_file $DOTFILES_CONFIG/terminator/terminator.ini .config/terminator/config "terminator config - Terminal emulator"
 	# Tmux
-	link_file $_src_path/.tmux.conf .tmux.conf ".tmux.conf - Terminal multiplexer"
+	link_file $DOTFILES_HOME/.tmux.conf .tmux.conf ".tmux.conf - Terminal multiplexer"
 	# Dunst
-	link_file $_src_path/.config/dunst/dunst.cfg .config/dunst/dunstrc "Dunst config - Notification manager"
+	link_file $DOTFILES_CONFIG/dunst/dunst.cfg .config/dunst/dunstrc "Dunst config - Notification manager"
 	# LightDM
-	link_file etc/lightdm.conf /etc/lightdm.conf "light config - Display manager"
+	link_file $DOTFILES_ETC/lightdm.conf /etc/lightdm.conf "light config - Display manager"
 
 	link_section "CLI configuration"
 	# Readline
-	link_file $_src_path/.inputrc .inputrc "readline config"
+	link_file $DOTFILES_HOME/.inputrc .inputrc "readline config"
 	# Xresources
-	link_file $_src_path/.Xresources .Xresources "Xresources config"
+	link_file $DOTFILES_HOME/.Xresources .Xresources "Xresources config"
 	# xinit
-	link_file $_src_path/.xinitrc .xinitrc "xinit config"
+	link_file $DOTFILES_HOME/.xinitrc .xinitrc "xinit config"
 	# LS_COLOR
-	link_file $_src_path/.dir_colors .dir_colors "LS_COLOR config"
+	link_file $DOTFILES_HOME/.dir_colors .dir_colors "LS_COLOR config"
 
 	link_section "Editor"
 	# Vimrc files
-	link_file $_src_path/.vim .vim "vim dir config"
-	link_file $_src_path/.vim/.vimrc .vimrc "vim config"
+	link_file $DOTFILES_HOME/.vim .vim "vim dir config"
+	link_file $DOTFILES_HOME/.vim/.vimrc .vimrc "vim config"
 	# Latex
-	link_file $_src_path/.config/latex/template.latex .config/latex/template.latex "Latex template"
+	link_file $DOTFILES_CONFIG/latex/template.latex .config/latex/template.latex "Latex template"
 
 	link_section "CLI programs"
 	# SQLite
-	link_file $_src_path/.sqliterc.sql .sqliterc "SQLite config"
+	link_file $DOTFILES_HOME/.sqliterc.sql .sqliterc "SQLite config"
 	# Htop
-	link_file $_src_path/.config/htop/htoprc .config/htop/htoprc "htop config"
+	link_file $DOTFILES_CONFIG/htop/htoprc .config/htop/htoprc "htop config"
 
 	link_section "GUI programs"
 	# GIMP
-	link_file $_src_path/.gimp-2.0/gimprc .gimp-2.0/gimprc "GIMP config"
+	link_file $DOTFILES_HOME/.gimp-2.0/gimprc .gimp-2.0/gimprc "GIMP config"
 	# Gitk
-	link_file $_src_path/.config/git/gitk .config/git/gitk "gitk config"
+	link_file $DOTFILES_CONFIG/git/gitk .config/git/gitk "gitk config"
 }
 
 update_submodules() {
@@ -204,39 +202,36 @@ update_submodules() {
 
 link_bin() {
 	echo
-	local _src_path="bin"
 
-	cd $_src_path
+	cd $DOTFILES_BIN
 	local _scripts="$(ls -dA1 **)"
 	cd - >/dev/null
 
 	for script in $_scripts; do
-		if [ -f $_src_path/$script ]; then
-			link_file "$_src_path/$script" "$XDG_BIN_HOME/$(basename $script)" "$script"
+		if [ -f $DOTFILES_BIN/$script ]; then
+			link_file "$DOTFILES_BIN/$script" "$XDG_BIN_HOME/$(basename $script)" "$script"
 		fi
 	done
 }
 
 link_lib() {
 	echo
-	local _src_path="lib"
 
 	# Bash library
-	link_file "$_src_path/bash" "$XDG_LIB_HOME/bash" "bash script library"
+	link_file "$DOTFILES_LIB/bash" "$XDG_LIB_HOME/bash" "bash script library"
 }
 
 link_share() {
 	echo
-	local _src_path="share"
 
 	# Bash metadata
-	link_file "$_src_path/bash-metadata" "$XDG_DATA_HOME/bash-metadata" "bash metadata"
+	link_file "$DOTFILES_SHARE/bash-metadata" "$XDG_DATA_HOME/bash-metadata" "bash metadata"
 
 	# Backgrounds
-	link_file "$_src_path/backgrounds" "$XDG_DATA_HOME/backgrounds" "backgrounds"
+	link_file "$DOTFILES_SHARE/backgrounds" "$XDG_DATA_HOME/backgrounds" "backgrounds"
 
 	# Rofi themes
-	link_file "$_src_path/rofi" "$XDG_DATA_HOME/rofi" "rofi themes"
+	link_file "$DOTFILES_SHARE/rofi" "$XDG_DATA_HOME/rofi" "rofi themes"
 }
 
 main() {
