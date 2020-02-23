@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+exa_add() {
+	printf "$1=$2:"
+}
+
 exa_dircolors() {
 	local _file="$HOME/.config/exa/.exa_colors"
 	local _file_extra="$HOME/.config/exa/.exa_colors_extra"
@@ -11,9 +15,6 @@ exa_dircolors() {
 
 	local parsed="$(dircolors -b "$_file" | head -n +1 | head -c -3 | tail -c +12)"
 
-	a() {
-		parsed+="$1=$2:"
-	}
 
 	while IFS= read -r line; do
 		if [ -z "$line" ] || [ "${line:0:1}" == "#" ]; then
@@ -21,7 +22,7 @@ exa_dircolors() {
 		fi
 		IFS='#' read -ra line <<< "$line"
 		line="${line[0]}"
-		a $line
+		parsed+="$(exa_add $line)"
 	done < "$_file_extra"
 
 	printf "EXA_COLORS='$parsed';\nexport EXA_COLORS"
