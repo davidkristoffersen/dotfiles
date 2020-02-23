@@ -5,8 +5,6 @@ if [ ! -f $HOME/.exa_colors ]; then
 	exit
 fi
 
-
-
 exa_dircolors() {
 	local parsed="$(dircolors -b ~/.exa_colors | head -n +1 | head -c -3 | tail -c +12)"
 
