@@ -173,6 +173,8 @@ link_home() {
 	link_file $DOTFILES_HOME/.xinitrc .xinitrc "xinit config"
 	# LS_COLOR
 	link_file $DOTFILES_HOME/.dir_colors .dir_colors "LS_COLOR config"
+	# EXA_COLOR
+	link_file $DOTFILES_CONFIG/exa/.dir_colors .exa_colors "EXA_COLOR config"
 
 	link_section "Editor"
 	# Vimrc files
