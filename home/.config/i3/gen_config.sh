@@ -224,6 +224,14 @@ $(workspace_type $m+$a "rename workspace to")
 $(workspace_nav vim $m+$c "focus")
 # Arrow style
 $(workspace_nav arrow $m+$c "focus")
+
+# Focus next/prev workspace on current monitor
+$b $m+$c+n workspace next_on_output
+$b $m+$c+p workspace prev_on_output
+
+# Focus next/prev workspace on all monitors
+$b $m+$c+$a+n workspace next
+$b $m+$c+$a+p workspace prev
 EOF
 
 	read -r -d '' appearance << EOF
