@@ -71,8 +71,6 @@ set rnu							" Relative line numbers
 let &t_SI = "\e[6 q"
 " Vertical bar in insert mode
 let &t_EI = "\e[2 q"
-" Reset cursor on start:
-autocmd VimEnter * silent !echo -ne "\e[2 q"
 
 " COLORS
 colo desert
@@ -113,6 +111,20 @@ set undofile					" use an undo file
 set undodir=$HOME/.vim/undo		" undo file path
 set undolevels=1000
 set undoreload=10000
+
+" COMMANDS
+" Disable \"Hit enter to continue\" in vim run command
+command! -nargs=1 Silent execute 'silent !' . <q-args> | execute 'redraw!'
+
+" Increment/Decrement numbers by search
+" :let i=x0 g/pattern/s//\='pattern'.i/ | let i=i+1/
+
+" AUTO COMMANDS
+" Reset cursor on start:
+augroup myCmds
+au!
+autocmd VimEnter * Silent echo -ne "\e[2 q"
+augroup END
 
 
 " MAPS: MODE SPECIFIC
@@ -225,13 +237,6 @@ nnoremap <leader>ik :Silent		/home/david/studies/semester_6/inf_3910/inf_3910-pr
 function! g:Upload()
 	exec 'Silent /home/david/studies/semester_6/inf_3910/inf_3910-project/scripts_mic/run.sh uu ' . expand('%:p')
 endfunction
-
-" COMMANDS
-" Disable \"Hit enter to continue\" in vim run command
-command! -nargs=1 Silent execute 'silent !' . <q-args> | execute 'redraw!'
-
-" Increment/Decrement numbers by search
-" :let i=x0 g/pattern/s//\='pattern'.i/ | let i=i+1/
 
 " FUNCTIONS
 " Toggle commands
