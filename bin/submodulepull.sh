@@ -16,17 +16,19 @@ function update() {
 
 	cd $path
 
+	rbranch="$(git symbolic-ref --short HEAD)"
 	origin="$(git remote get-url origin)"
 	format "$git_path" $b "$r\n"
 	format "$origin" " ↳ " "\n"
 
-	format "git checkout master" $r$f "$r\n"
-	format "$(git checkout master 2>&1)" $r "$r\n"
+	format "git checkout $rbranch" $r$f "$r\n"
+	format "$(git checkout $rbranch 2>&1)" $r "$r\n"
 	format "git pull" $r$f "$r\n"
 	format "$(git pull 2>&1)" "$r" "\n"
 
 	upstream_exist="$(git remote show | grep ^upstream$)"
 	if [ ! -z "$upstream_exist" ]; then
+		ubranch="master"
 		upstream="$(git remote get-url upstream)"
 		format "Fork" "$b\t" "$r\n"
 		format "$upstream" "\t ↳ " "\n"
@@ -37,8 +39,8 @@ function update() {
 			format "$tmp" "$r\t" "\n"
 		fi
 
-		format "git merge upstream/master master" "$r$f\t" "$r\n"
-		format "$(git merge upstream/master master 2>&1)" "$r\t" "\n"
+		format "git merge upstream/$ubranch $rbranch" "$r$f\t" "$r\n"
+		format "$(git merge upstream/$ubranch $rbranch 2>&1)" "$r\t" "\n"
 	fi
 
 	echo -e "$out"
