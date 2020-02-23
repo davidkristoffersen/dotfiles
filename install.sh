@@ -174,7 +174,8 @@ link_home() {
 	# LS_COLOR
 	link_file $DOTFILES_HOME/.dir_colors .dir_colors "LS_COLOR config"
 	# EXA_COLOR
-	link_file $DOTFILES_CONFIG/exa/.dir_colors .exa_colors "EXA_COLOR config"
+	link_file $DOTFILES_CONFIG/exa/.dir_colors .config/exa/.exa_colors "EXA_COLOR config"
+	link_file $DOTFILES_CONFIG/exa/.dir_colors_extra .config/exa/.exa_colors_extra "EXA_COLOR extra config"
 
 	link_section "Editor"
 	# Vimrc files

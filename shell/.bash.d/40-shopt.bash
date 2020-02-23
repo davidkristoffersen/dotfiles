@@ -30,7 +30,7 @@ shopt -s globstar
 [ -f $HOME/.dir_colors ] && eval "$(dircolors $HOME/.dir_colors)"
 
 # Apply dir_colors to LS_COLORS
-[ -f $HOME/.exa_colors ] && . $DOTFILES_CONFIG/exa/gen_colors.sh
+[ -f $HOME/.config/exa/.exa_colors ] && . $DOTFILES_CONFIG/exa/gen_colors.sh
 
 # Enable programmable completion features
 if ! shopt -oq posix; then
