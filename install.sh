@@ -7,27 +7,25 @@ dotfiles_init() {
 	export DOTFILES="$(pwd)"
 	OK_POS="$(($(tput cols) - 4))"
 	WRITE=true
+	SUBMODULE=false
 
 	printf "Install requires sudo: "
+	echo
 	sudo true
 }
 
 dotfiles_conf_init() {
-	local _path="$HOME/.dotfiles.sh"
+	local _src="$DOTFILES/.dotfiles.sh"
+	local _dst="$HOME/.dotfiles.sh"
 	local _out=""
 	read -r -d '' _out << EOF
 #!/usr/bin/env bash
 
-export DOTFILES="$DOTFILES"
-export DOTFILES_SHELL="$DOTFILES/shell"
-export DOTFILES_HOME="$DOTFILES/home"
-export DOTFILES_CONFIG="$DOTFILES/home/.config"
-export DOTFILES_BIN="$DOTFILES/bin"
-export DOTFILES_LIB="$DOTFILES/lib"
-export DOTFILES_SHARE="$DOTFILES/share"
+export DOTFILES="$DOTFILES"\n
 EOF
-	printf "$_out" > $_path
-	. $_path
+	_out+="$(cat $_src)"
+	printf "$_out" > $_dst
+	. $_dst
 }
 
 dotfiles_fini() {
@@ -200,6 +198,7 @@ link_home() {
 
 update_submodules() {
 	echo
+	$SUBMODULE || return
 	git submodulepull; check_error $?
 }
 
