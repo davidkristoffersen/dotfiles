@@ -2,10 +2,10 @@
 
 . $HOME/.dotfiles.sh
 
-for profile_file in $(ls -A1 $DOTFILES/.profile.d | sort); do
+for profile_file in $(ls -A1 $DOTFILES_SHELL/.profile.d | sort); do
 	if [ "$profile_file" == ".gitignore" ]; then
 		continue
 	fi
 
-	. $DOTFILES/.profile.d/$profile_file
+	. $DOTFILES_SHELL/.profile.d/$profile_file
 done

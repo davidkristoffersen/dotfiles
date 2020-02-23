@@ -13,10 +13,21 @@ dotfiles_init() {
 }
 
 dotfiles_conf_init() {
-	local path="$HOME/.dotfiles.sh"
-	echo "#!/usr/bin/env bash" > $path
-	echo >> $path
-	echo "export DOTFILES=\"$DOTFILES\"" >> $path
+	local _path="$HOME/.dotfiles.sh"
+	local _out=""
+	read -r -d '' _out << EOF
+#!/usr/bin/env bash
+
+export DOTFILES="$DOTFILES"
+export DOTFILES_SHELL="$DOTFILES/shell"
+export DOTFILES_HOME="$DOTFILES/home"
+export DOTFILES_CONFIG="$DOTFILES/home/.config"
+export DOTFILES_BIN="$DOTFILES/bin"
+export DOTFILES_LIB="$DOTFILES/lib"
+export DOTFILES_SHARE="$DOTFILES/share"
+EOF
+	printf "$_out" > $_path
+	. $_path
 }
 
 dotfiles_fini() {
@@ -109,7 +120,6 @@ link_file() {
 
 # Shell dotfiles
 link_shell() {
-	local _src_path="shell"
 	local -a profile_arr=(
 		.bash_profile
 		.profile
@@ -124,16 +134,16 @@ link_shell() {
 
 	link_section "Profile"
 	for profile_arr in ${profile_arr[@]}; do
-		link_file $_src_path/$profile_arr $profile_arr "$profile_arr"
+		link_file $DOTFILES_SHELL/$profile_arr $profile_arr "$profile_arr"
 	done
 
 	link_section "Bash"
 	for bash_arr in ${bash_arr[@]}; do
-		link_file $_src_path/$bash_arr $bash_arr "$bash_arr"
+		link_file $DOTFILES_SHELL/$bash_arr $bash_arr "$bash_arr"
 	done
 
-	. $_src_path/.profile; check_error $?
-	. $_src_path/.bashrc; check_error $?
+	. $DOTFILES_SHELL/.profile; check_error $?
+	. $DOTFILES_SHELL/.bashrc; check_error $?
 }
 
 # $HOME dotfiles
