@@ -25,7 +25,7 @@ exa_dircolors() {
 		parsed+="$(exa_add $line)"
 	done < "$_file_extra"
 
-	printf "EXA_COLORS='$parsed';\nexport EXA_COLORS"
+	export EXA_COLORS="$parsed"
 }
 
-eval "$(exa_dircolors)"
+exa_dircolors
