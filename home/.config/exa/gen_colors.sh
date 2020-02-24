@@ -15,7 +15,6 @@ exa_dircolors() {
 
 	local parsed="$(dircolors -b "$_file" | head -n +1 | head -c -3 | tail -c +12)"
 
-
 	while IFS= read -r line; do
 		if [ -z "$line" ] || [ "${line:0:1}" == "#" ]; then
 			continue
