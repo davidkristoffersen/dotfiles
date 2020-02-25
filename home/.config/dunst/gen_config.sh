@@ -148,7 +148,7 @@ EOF
 	# Close all notifications
 	close_all = mod4+ctrl+a
 	# Redisplay last message(s)
-	history = mod4+ctrl+h
+	history = mod4+ctrl+Tab
 	# Context menu
 	context = mod4+ctrl+d
 EOF

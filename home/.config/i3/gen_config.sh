@@ -92,7 +92,7 @@ EOF
 # Kill xfce notification daemon
 $e killall -q xfce4-notifyd
 # Start dunst notification daemon
-$e dunst -config $DOTFILES/dunst.cfg
+$e dunst -config $HOME/.config/dunst/dunstrc
 EOF
 
 	read -r -d '' applications << EOF
