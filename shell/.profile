@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-. $HOME/.dotfiles.sh
+. $HOME/.dotfiles_meta.sh
 
 for profile_file in $(ls -A1 $DOTFILES_SHELL/.profile.d | sort); do
 	if [ "$profile_file" == ".gitignore" ]; then

@@ -1,3 +1,4 @@
+export DOTFILES_SRC="$DOTFILES/src"
 export DOTFILES_SHELL="$DOTFILES/shell"
 export DOTFILES_HOME="$DOTFILES/home"
 export DOTFILES_CONFIG="$DOTFILES/home/.config"
