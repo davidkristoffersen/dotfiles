@@ -8,7 +8,7 @@ This repository contain all my linux configuration files and scripts
 ## Set repo path
 
 ```bash
-dotfiles="$HOME/dotfiles"
+$ dotfiles="$HOME/dotfiles"
 ```
 
 ## Clone the git repository
