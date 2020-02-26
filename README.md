@@ -3,7 +3,6 @@
 This repository contain all my linux configuration files and scripts
 
 # Installl
-# Setup installation of dotfiles
 
 ## Set repo path
 
