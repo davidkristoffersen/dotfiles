@@ -7,7 +7,7 @@ dotfiles_init() {
 	export DOTFILES="$(pwd)"
 	export DOTFILES_SRC="$DOTFILES/src"
 
-	WRITE=true
+	WRITE=ture
 	SUBMODULE=true
 
 	OK_POS="$(($(tput cols) - 4))"
@@ -18,17 +18,13 @@ dotfiles_init() {
 }
 
 dotfiles_conf_init() {
-	local dotfiles_meta="dotfiles_meta.sh"
-	local _src="$DOTFILES_SRC/$dotfiles_meta"
-	local _dst="$HOME/.$dotfiles_meta"
+	local _src="$DOTFILES_SRC/meta.sh"
+	local _dst="$HOME/.dotfiles_meta.sh"
 
-	local _out=""
-	read -r -d '' _out << EOF
-#!/usr/bin/env bash
-
-export DOTFILES="$DOTFILES"\n\n
-EOF
-	_out+="$(cat $_src)"
+	local _out="export DOTFILES=\"$DOTFILES\""
+	local _pre="$(cat $_src | head -n 2)"
+	local _post="$(cat $_src | tail -n +3)"
+	_out="$_pre\n\n$_out\n\n$_post"
 
 	printf "$_out" > $_dst
 	. $_dst

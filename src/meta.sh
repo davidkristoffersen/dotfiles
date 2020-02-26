@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 export DOTFILES_SRC="$DOTFILES/src"
 export DOTFILES_SHELL="$DOTFILES/shell"
 export DOTFILES_HOME="$DOTFILES/home"
