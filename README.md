@@ -2,22 +2,19 @@
 
 This repository contain all my linux configuration files and scripts
 
-# Installl
+## Installl
 
-## Set repo path
-
+**Set repo path:**  
 ```bash
 $ dotfiles="$HOME/dotfiles"
 ```
 
-## Clone the git repository
-
+**Clone the git repository:**  
 ```bash
 $ git clone https://github.com/davidkristoffersen/dotfiles.git $dotfiles
 ```
 
-## Run the install bash script
-
+**Run the install bash script:**  
 ```bash
 $ cd $dotfiles/src
 $ ./install.sh
