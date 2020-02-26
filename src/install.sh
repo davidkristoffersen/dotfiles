@@ -3,7 +3,7 @@
 dotfiles_init() {
 	pwd_org="$(pwd)"
 	local cur="$(dirname "${BASH_SOURCE[0]}")"
-	cd "$cur"
+	cd "$cur/.."
 	export DOTFILES="$(pwd)"
 	OK_POS="$(($(tput cols) - 4))"
 	WRITE=true
