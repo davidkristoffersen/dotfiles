@@ -228,10 +228,14 @@ $(workspace_nav arrow $m+$c "focus")
 # Focus next/prev workspace on current monitor
 $b $m+$c+n workspace next_on_output
 $b $m+$c+p workspace prev_on_output
+$b $m+$c+Tab workspace next_on_output
+$b $m+$c+$s+Tab workspace prev_on_output
 
 # Focus next/prev workspace on all monitors
 $b $m+$c+$a+n workspace next
 $b $m+$c+$a+p workspace prev
+$b $m+$c+$a+Tab workspace next_on_output
+$b $m+$c+$a+$s+Tab workspace prev_on_output
 EOF
 
 	read -r -d '' appearance << EOF
