@@ -52,3 +52,8 @@ link_home() {
 	# Gitk
 	link_file $DOTFILES_CONFIG/git/gitk .config/git/gitk "gitk config"
 }
+
+. $DOTFILES_SRC/init.sh
+[ $? -ne 0 ] && return 1
+link_home
+. $DOTFILES_SRC/fini.sh

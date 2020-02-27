@@ -71,4 +71,3 @@ link_file() {
 
 	print_at 5 $desc_len "${GREEN}OK${RESET}"
 }
-

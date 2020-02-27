@@ -27,3 +27,8 @@ link_shell() {
 	. $DOTFILES_SHELL/.profile; check_error $?
 	. $DOTFILES_SHELL/.bashrc; check_error $?
 }
+
+. $DOTFILES_SRC/init.sh
+[ $? -ne 0 ] && return 1
+link_shell
+. $DOTFILES_SRC/fini.sh

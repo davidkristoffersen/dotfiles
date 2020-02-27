@@ -13,3 +13,8 @@ link_bin() {
 		fi
 	done
 }
+
+. $DOTFILES_SRC/init.sh
+[ $? -ne 0 ] && return 1
+link_bin
+. $DOTFILES_SRC/fini.sh
