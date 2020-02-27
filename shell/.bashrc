@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 . $HOME/.dotfiles_meta.sh
+[ $? -ne 0 ] && return
 
 for bash_file in $(ls -A1 $DOTFILES_SHELL/.bash.d | sort); do
 	if [ "$bash_file" == ".gitignore" ]; then
