@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 
-dotfiles_init_main() {
-	local _child="$(basename ${BASH_SOURCE[2]})"
-	local _parent="$(basename $0)"
-	if ! [ "$_child" == "$_parent" ]; then
-		return 1
-	fi
-}
-
 dotfiles_init() {
 	pwd_org="$(pwd)"
 	local _cur="$(dirname "${BASH_SOURCE[0]}")"
@@ -38,9 +30,29 @@ dotfiles_conf_init() {
 	printf "$_out" > $_dst
 }
 
-dotfiles_init_main
-[ $? -ne 0 ] && return 1
-dotfiles_init
-dotfiles_conf_init
-. $DOTFILES_SRC/print.sh
-. $DOTFILES_SRC/util.sh
+dotfiles_script() {
+	if [ ! -z "$1" ]; then
+		if [ "$(type -t $1)" == "function" ]; then
+			eval "$1"
+			local _err=$?
+		fi
+		. $DOTFILES_SRC/fini.sh
+		return $_err
+	fi
+}
+
+dotfiles_init_main() {
+	local _child="$(basename ${BASH_SOURCE[2]})"
+	local _parent="$(basename $0)"
+	if ! [ "$_child" == "$_parent" ]; then
+		dotfiles_script $@
+		return $?
+	fi
+
+	dotfiles_init
+	dotfiles_conf_init
+	. $DOTFILES_SRC/print.sh
+	. $DOTFILES_SRC/util.sh
+	dotfiles_script $@
+}
+dotfiles_init_main $@

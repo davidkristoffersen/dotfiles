@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-link_share() {
+dotfiles_share() {
 	echo
 
 	# Bash metadata
@@ -13,7 +13,4 @@ link_share() {
 	link_file "$DOTFILES_SHARE/rofi" "$XDG_DATA_HOME/rofi" "rofi themes"
 }
 
-. $DOTFILES_SRC/init.sh
-[ $? -ne 0 ] && return 1
-link_share
-. $DOTFILES_SRC/fini.sh
+. $DOTFILES_SRC/init.sh dotfiles_share

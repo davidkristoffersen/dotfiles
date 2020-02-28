@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-update_submodules() {
+dotfiles_submodules() {
 	echo
-	$SUBMODULE || return
+
+	$SUBMODULE || return 0
 	git submodulepull; check_error $?
 }
 
-. $DOTFILES_SRC/init.sh
-[ $? -ne 0 ] && return 1
-update_submodules
-. $DOTFILES_SRC/fini.sh
+. $DOTFILES_SRC/init.sh dotfiles_submodules

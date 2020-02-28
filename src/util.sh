@@ -15,7 +15,7 @@ path_set_pre() {
 	fi
 }
 
-link_need_sudo() {
+path_need_sudo() {
 	if $(path_is_abs $1) && ! [[ "$1" == $HOME* ]]; then
 		printf true
 	else
@@ -23,9 +23,9 @@ link_need_sudo() {
 	fi
 }
 
-create_path() {
+path_create() {
 	local _sudo=""
-	if $(link_need_sudo $1); then
+	if $(path_need_sudo $1); then
 		_sudo="sudo "
 	fi
 	printf "\t${_sudo}mkdir -p \"$1\"\n"; check_error $?
@@ -34,7 +34,7 @@ create_path() {
 
 rm_file() {
 	local _sudo=""
-	if $(link_need_sudo $1); then
+	if $(path_need_sudo $1); then
 		_sudo="sudo "
 	fi
 	printf "\t${_sudo}rm -f \"$1\"\n"; check_error $?
@@ -43,7 +43,7 @@ rm_file() {
 
 _link_file() {
 	local _sudo=""
-	if $(link_need_sudo $1) || $(link_need_sudo $2); then
+	if $(path_need_sudo $1) || $(path_need_sudo $2); then
 		_sudo="sudo "
 	fi
 	printf "\t${_sudo}ln -s \"$1\" \"$2\"\n"; check_error $?
@@ -64,8 +64,8 @@ link_file() {
 
 	printf "$desc_long"
 
-	create_path "$dirs"
-	create_path "$srcs"
+	path_create "$dirs"
+	path_create "$srcs"
 	rm_file "$dst"
 	_link_file "$src" "$dst"
 

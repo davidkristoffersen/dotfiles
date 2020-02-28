@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 # $HOME dotfiles
-link_home() {
-	link_section "Git"
+dotfiles_home() {
+	print_section "Git"
 	# Config
 	link_file $DOTFILES_HOME/.gitconfig .gitconfig ".gitconfig"
 
-	link_section "Session management"
+	print_section "Session management"
 	# I3
 	link_file $DOTFILES_CONFIG/i3/i3.config .config/i3/config "i3 config - Window manager"
 	# Rofi
@@ -20,7 +20,7 @@ link_home() {
 	# LightDM
 	link_file $DOTFILES_ETC/lightdm.conf /etc/lightdm.conf "light config - Display manager"
 
-	link_section "CLI configuration"
+	print_section "CLI configuration"
 	# Readline
 	link_file $DOTFILES_HOME/.inputrc .inputrc "readline config"
 	# Xresources
@@ -33,27 +33,24 @@ link_home() {
 	link_file $DOTFILES_CONFIG/exa/.dir_colors .config/exa/.exa_colors "EXA_COLOR config"
 	link_file $DOTFILES_CONFIG/exa/.dir_colors_extra .config/exa/.exa_colors_extra "EXA_COLOR extra config"
 
-	link_section "Editor"
+	print_section "Editor"
 	# Vimrc files
 	link_file $DOTFILES_HOME/.vim .vim "vim dir config"
 	link_file $DOTFILES_HOME/.vim/.vimrc .vimrc "vim config"
 	# Latex
 	link_file $DOTFILES_CONFIG/latex/template.latex .config/latex/template.latex "Latex template"
 
-	link_section "CLI programs"
+	print_section "CLI programs"
 	# SQLite
 	link_file $DOTFILES_HOME/.sqliterc.sql .sqliterc "SQLite config"
 	# Htop
 	link_file $DOTFILES_CONFIG/htop/htoprc .config/htop/htoprc "htop config"
 
-	link_section "GUI programs"
+	print_section "GUI programs"
 	# GIMP
 	link_file $DOTFILES_HOME/.gimp-2.0/gimprc .gimp-2.0/gimprc "GIMP config"
 	# Gitk
 	link_file $DOTFILES_CONFIG/git/gitk .config/git/gitk "gitk config"
 }
 
-. $DOTFILES_SRC/init.sh
-[ $? -ne 0 ] && return 1
-link_home
-. $DOTFILES_SRC/fini.sh
+. $DOTFILES_SRC/init.sh dotfiles_home

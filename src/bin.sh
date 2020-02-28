@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-link_bin() {
+dotfiles_bin() {
 	echo
 
 	cd $DOTFILES_BIN
@@ -14,7 +14,4 @@ link_bin() {
 	done
 }
 
-. $DOTFILES_SRC/init.sh
-[ $? -ne 0 ] && return 1
-link_bin
-. $DOTFILES_SRC/fini.sh
+. $DOTFILES_SRC/init.sh dotfiles_bin
