@@ -25,7 +25,7 @@ check_error() {
 				[ ${#@} -ne 0 ] && desc+="\n\tDesc: $@"
 		esac
 
-		printf "${RED}Error:${RESET}\n$desc\n"
+		printf "${RED}Error: $error${RESET}\n$desc\n"
 		exit $error
 	fi
 }
