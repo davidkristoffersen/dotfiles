@@ -16,6 +16,8 @@ main() {
 	. $DOTFILES_SRC/share.sh; check_error $?
 	print_header "Update submodules" "\n"
 	. $DOTFILES_SRC/repo.sh; check_error $?
+	print_header "Privat files" "\n"
+	. $DOTFILES_SRC/private.sh; check_error $?
 
 	. $DOTFILES_SRC/fini.sh
 }

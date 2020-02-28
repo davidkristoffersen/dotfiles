@@ -23,13 +23,24 @@ path_need_sudo() {
 	fi
 }
 
+eval_cmd() {
+	local _cmd="$1"
+	shift
+	local _args="$@"
+
+	$PRINT && printf "\t$_cmd $_args\n"
+	! $WRITE || $_cmd $_args; check_error $?
+	return 0
+}
+
 path_create() {
 	local _sudo=""
 	if $(path_need_sudo $1); then
 		_sudo="sudo "
 	fi
-	printf "\t${_sudo}mkdir -p \"$1\"\n"; check_error $?
-	test $WRITE && $_sudo mkdir -p "$1"; check_error $?
+	$PRINT && printf "\t${_sudo}mkdir -p \"$1\"\n"
+	! $WRITE || $_sudo mkdir -p "$1"; check_error $?
+	return 0
 }
 
 rm_file() {
@@ -37,8 +48,23 @@ rm_file() {
 	if $(path_need_sudo $1); then
 		_sudo="sudo "
 	fi
-	printf "\t${_sudo}rm -f \"$1\"\n"; check_error $?
-	test $WRITE && $_sudo rm -f "$1"; check_error $?
+	$PRINT && printf "\t${_sudo}rm -f \"$1\"\n"
+	! $WRITE || $_sudo rm -f "$1"; check_error $?
+	return 0
+}
+
+create_file() {
+	local _path="$1"
+	shift
+	local _sudo=""
+	if $(path_need_sudo $_path); then
+		_sudo="sudo "
+	fi
+	$PRINT && printf "\t${_sudo}touch \"$_path\"\n"
+	! $WRITE || $_sudo touch "$_path"; check_error $?
+	$PRINT && printf "\t${_sudo}printf \"$@\" > \"$_path\"\n"
+	! $WRITE || $_sudo printf "$@" > "$_path"; check_error $?
+	return 0
 }
 
 _link_file() {
@@ -46,8 +72,9 @@ _link_file() {
 	if $(path_need_sudo $1) || $(path_need_sudo $2); then
 		_sudo="sudo "
 	fi
-	printf "\t${_sudo}ln -s \"$1\" \"$2\"\n"; check_error $?
-	test $WRITE && $_sudo ln -s "$1" "$2"; check_error $?
+	$PRINT && printf "\t${_sudo}ln -s \"$1\" \"$2\"\n"
+	! $WRITE || $_sudo ln -s "$1" "$2"; check_error $?
+	return 0
 }
 
 link_file() {
@@ -68,6 +95,5 @@ link_file() {
 	path_create "$srcs"
 	rm_file "$dst"
 	_link_file "$src" "$dst"
-
-	print_at 5 $desc_len "${GREEN}OK${RESET}"
+	# print_at 5 $desc_len "${GREEN}OK${RESET}"
 }

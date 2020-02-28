@@ -8,6 +8,7 @@ dotfiles_init() {
 	export DOTFILES_SRC="$DOTFILES/src"
 	. $DOTFILES_SRC/meta.sh
 
+	PRINT=true
 	WRITE=true
 	SUBMODULE=true
 
@@ -35,6 +36,8 @@ dotfiles_script() {
 		if [ "$(type -t $1)" == "function" ]; then
 			eval "$1"
 			local _err=$?
+		else
+			local _err=1
 		fi
 		. $DOTFILES_SRC/fini.sh
 		return $_err
