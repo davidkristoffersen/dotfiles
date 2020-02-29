@@ -289,6 +289,7 @@
 		"xorg-xwd",
 		"xss-lock",
 		"yelp",
-		"zsh"
+		"zsh",
+		"ntp"
 	]
 }
