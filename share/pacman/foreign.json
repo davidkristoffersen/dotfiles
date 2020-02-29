@@ -1,6 +1,5 @@
 {
-	"other": [
-	],
+	"other": [],
 	"whitelist": [
 		"pcloud-drive",
 		"aurutils",
