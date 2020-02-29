@@ -5,9 +5,9 @@
     },
     "other": {},
     "whitelist": {
-        "aurutils": {"desc": ""},
-        "pcloud-drive": {"desc": ""},
-        "spotify": {"desc": ""},
-        "srandrd-git": {"desc": ""}
+        "aurutils": {"desc": "AUR helper"},
+        "pcloud-drive": {"desc": "Cloud storage"},
+        "spotify": {"desc": "Music streaming"},
+        "srandrd-git": {"desc": "GUI monitor setup"}
     }
 }
