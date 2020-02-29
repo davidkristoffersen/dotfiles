@@ -1,8 +1,8 @@
 # Manjaro dotfiles
 
-This repository contain all my linux configuration files and scripts
+This repository contain all my Linux configuration files and scripts
 
-## Installl
+## Install
 
 **Set repo path:**  
 ```bash
