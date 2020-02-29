@@ -30,7 +30,6 @@ eval_cmd() {
 
 	$PRINT && printf "\t$_cmd $_args\n"
 	! $WRITE || $_cmd $_args; check_error $?
-	return 0
 }
 
 path_create() {
@@ -40,7 +39,6 @@ path_create() {
 	fi
 	$PRINT && printf "\t${_sudo}mkdir -p \"$1\"\n"
 	! $WRITE || $_sudo mkdir -p "$1"; check_error $?
-	return 0
 }
 
 rm_file() {
@@ -50,7 +48,6 @@ rm_file() {
 	fi
 	$PRINT && printf "\t${_sudo}rm -f \"$1\"\n"
 	! $WRITE || $_sudo rm -f "$1"; check_error $?
-	return 0
 }
 
 create_file() {
@@ -64,7 +61,6 @@ create_file() {
 	! $WRITE || $_sudo touch "$_path"; check_error $?
 	$PRINT && printf "\t${_sudo}printf \"$@\" > \"$_path\"\n"
 	! $WRITE || $_sudo printf "$@" > "$_path"; check_error $?
-	return 0
 }
 
 _link_file() {
@@ -74,7 +70,6 @@ _link_file() {
 	fi
 	$PRINT && printf "\t${_sudo}ln -s \"$1\" \"$2\"\n"
 	! $WRITE || $_sudo ln -s "$1" "$2"; check_error $?
-	return 0
 }
 
 link_file() {
