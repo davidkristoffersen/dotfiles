@@ -3,7 +3,8 @@
 	"whitelist": [
 		"pcloud-drive",
 		"aurutils",
-		"spotify"
+		"spotify",
+		"srandrd-git"
 	],
 	"blacklist": [
 		"xf86-input-keyboard",
