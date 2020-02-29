@@ -1,13 +1,13 @@
 {
-	"blacklist": [
-		"xf86-input-keyboard",
-		"xf86-input-mouse"
-	],
-	"other": [],
-	"whitelist": [
-		"aurutils",
-		"pcloud-drive",
-		"spotify",
-		"srandrd-git"
-	]
+	"blacklist": {
+		"xf86-input-keyboard": {"desc": ""},
+		"xf86-input-mouse": {"desc": ""}
+	},
+	"other": {},
+	"whitelist": {
+		"aurutils": {"desc": ""},
+		"pcloud-drive": {"desc": ""},
+		"spotify": {"desc": ""},
+		"srandrd-git": {"desc": ""}
+	}
 }
