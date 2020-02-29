@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-main() {
-	. $DOTFILES_SRC/init.sh
-	[ $? -ne 0 ] && return 1
-
+dotfiles_install() {
 	print_header "Shell dotfiles"
 	. $DOTFILES_SRC/shell.sh
 	print_header "\$HOME dotfiles" "\n"
@@ -18,7 +15,5 @@ main() {
 	. $DOTFILES_SRC/repo.sh; check_error $?
 	print_header "Privat files" "\n"
 	. $DOTFILES_SRC/private.sh; check_error $?
-
-	. $DOTFILES_SRC/fini.sh
 }
-main
+. $DOTFILES_SRC/init.sh "dotfiles_install"
