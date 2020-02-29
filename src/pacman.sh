@@ -3,7 +3,7 @@
 dotfiles_pacman() {
 	# AUR helper
 	print_section "yay"
-	sudo pacman -S yay
+	echo "sudo pacman -S yay"
 
 	# AUR packages
 	print_section "AUR"
@@ -14,7 +14,7 @@ dotfiles_pacman() {
 
 	# Native packages
 	print_section "Native" "\n"
-	# pacman_manager.py native print
+	pacman_manager.py native print
 	echo
 	_pkgs="$(pacman_manager.py native)"
 	echo "sudo pacman -S $_pkgs"
