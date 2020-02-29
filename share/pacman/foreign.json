@@ -1,0 +1,13 @@
+{
+	"other": [
+	],
+	"whitelist": [
+		"pcloud-drive",
+		"aurutils",
+		"spotify"
+	],
+	"blacklist": [
+		"xf86-input-keyboard",
+		"xf86-input-mouse"
+	]
+}
