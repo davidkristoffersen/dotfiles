@@ -15,5 +15,7 @@ dotfiles_install() {
 	. $DOTFILES_SRC/repo.sh; check_error $?
 	print_header "Privat files" "\n"
 	. $DOTFILES_SRC/private.sh; check_error $?
+	print_header "Pacman packages" "\n"
+	. $DOTFILES_SRC/pacman.sh; check_error $?
 }
 . $DOTFILES_SRC/init.sh "dotfiles_install"
