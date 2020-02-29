@@ -5,7 +5,9 @@ dotfiles_private() {
 	local _name="dotfiles_secrets"
 	# Clone repo
 	local _repo="https://github.com/davidkristoffersen/$_name.git"
-	eval_cmd "git clone $_repo" "$DOTFILES_PRIVATE/$_name"
+	if [ ! -d "$DOTFILES_PRIVATE/$_name" ]; then
+		eval_cmd "git clone $_repo" "$DOTFILES_PRIVATE/$_name"
+	fi
 	# Link repo
 	link_file $DOTFILES_PRIVATE/$_name .$_name "repo"
 	# Shell source
