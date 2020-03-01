@@ -8,7 +8,6 @@ from _ctypes import PyObj_FromPtr
 from string import ascii_lowercase as letters
 import json
 import re
-import sys
 from tabulate import tabulate
 
 class NoIndent(object):
@@ -60,10 +59,10 @@ def default_pkg(name):
     return {"desc": ""}
 
 def update_file(path, pkgs):
-    with open(path.out, 'r') as f:
+    with open(path, 'r') as f:
         body = load_f(f)
         all_pkgs = [p for val in body.values() for p in val.keys()]
-        for pkg in pkgs.out.split('\n')[:-1]:
+        for pkg in pkgs.split('\n')[:-1]:
             if not pkg in all_pkgs:
                 print(pkg + " (w, b, o): ", end='')
                 inp = input()
@@ -80,29 +79,34 @@ def update_file(path, pkgs):
             for key2, val in body[key].items():
                 body_f[key][key2] = NoIndent(val)
         body_f = str(json.dumps(body_f, cls=MyEncoder, sort_keys=True, indent=4))
-        BashCmd("echo '" + body_f + "' > " + path.out)
+        BashCmd("echo '" + body_f + "' > " + path)
     return body['whitelist']
 
 def print_file(pkgs):
-    if len(sys.argv) > 2 and sys.argv[2] == "print":
-        out = []
-        for key, val in pkgs.items():
-            out.append([key, val['desc']])
-        print(tabulate(out, headers=['Name', 'Description']))
-    else:
-        for key, val in pkgs.items():
-            print(key, end=' ')
+    ret = {}
+    out = []
+    for key, val in pkgs.items():
+        out.append([key, val['desc']])
+    ret['t'] = tabulate(out, headers=['Name', 'Description'])
+    out = ""
+    for key, val in pkgs.items():
+        out += key + ' '
+    ret['l'] = out
+    return ret
 
 if __name__ == "__main__":
-    path = "$DOTFILES_SHARE/pacman"
-    foreign_path = BashCmd("echo -n " + path + "/foreign.json")
-    native_path = BashCmd("echo -n " + path + "/native.json")
+    path = "$DOTFILES_SHARE/pacman/"
+    path = BashCmd("echo -n " + path).out
+    for (name, pacman) in [('native', 'n'), ('foreign', 'm')]:
+        json_path = path + name + ".json"
+        list_path = path + name + ".txt"
+        table_path = path + name + "_table.txt"
+        pkgs = BashCmd("sudo pacman -Qqett" + pacman).out
 
-    if len(sys.argv) > 1 and sys.argv[1] == "foreign":
-        foreign_pkgs = BashCmd("sudo pacman -Qqettm")
-        foreign_install = update_file(foreign_path, foreign_pkgs)
-        print_file(foreign_install)
-    else:
-        native_pkgs = BashCmd("sudo pacman -Qqettn")
-        native_install = update_file(native_path, native_pkgs)
-        print_file(native_install)
+        install = update_file(json_path, pkgs)
+        out = print_file(install)
+
+        with open(list_path, 'w') as f:
+            f.write(out['l'])
+        with open(table_path, 'w') as f:
+            f.write(out['t'])

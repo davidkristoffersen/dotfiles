@@ -1,0 +1,6 @@
+Name          Description
+------------  -----------------
+aurutils      AUR helper
+pcloud-drive  Cloud storage
+spotify       Music streaming
+srandrd-git   GUI monitor setup
