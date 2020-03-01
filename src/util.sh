@@ -90,5 +90,4 @@ link_file() {
 	path_create "$srcs"
 	rm_file "$dst"
 	_link_file "$src" "$dst"
-	# print_at 5 $desc_len "${GREEN}OK${RESET}"
 }

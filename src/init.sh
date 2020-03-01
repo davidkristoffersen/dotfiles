@@ -12,8 +12,6 @@ dotfiles_init() {
 	WRITE=true
 	SUBMODULE=true
 
-	OK_POS="$(($(tput cols) - 4))"
-
 	printf "Install requires sudo: "
 	echo
 	sudo true
