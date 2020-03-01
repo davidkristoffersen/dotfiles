@@ -5,18 +5,20 @@ dotfiles_pacman() {
 	print_section "yay"
 	echo "sudo pacman -S yay"
 
+	local _pkg_path="$DOTFILES_SHARE/pacman"
+
 	# AUR packages
 	print_section "AUR"
-	pacman_manager.py foreign print
-	echo
-	local _pkgs="$(pacman_manager.py foreign)"
+	$PRINT && cat "$_pkg_path/foreign_table.txt"
+	$PRINT && echo -e "\n"
+	local _pkgs="$(cat "$_pkg_path/foreign.txt")"
 	echo "yay -S $_pkgs"
 
 	# Native packages
 	print_section "Native" "\n"
-	pacman_manager.py native print
-	echo
-	_pkgs="$(pacman_manager.py native)"
+	$PRINT && cat "$_pkg_path/native_table.txt"
+	$PRINT && echo -e "\n"
+	_pkgs="$(cat "$_pkg_path/native.txt")"
 	echo "sudo pacman -S $_pkgs"
 }
 
