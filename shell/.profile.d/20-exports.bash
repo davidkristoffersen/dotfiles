@@ -30,6 +30,10 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 # Gimp tk config
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+# Dotnet root
+export DOTNET_ROOT="$HOME/.src/dotnet_sdk"
+# Dotnet paket install fix
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true
 # Dotnet restore fix
 export DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0
 
