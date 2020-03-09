@@ -9,6 +9,7 @@
 " buffer management
 " new c file setup
 " persistence
+" bash syntax exit error on startup
 
 " OS
 set clipboard=unnamedplus		" OS-wide clipboard
@@ -65,6 +66,7 @@ set foldmethod=indent
 set tabpagemax=100
 set shell=bash\ --login			" Execute bashrc aliases in ! mode
 set rnu							" Relative line numbers
+
 
 " CURSOR
 " Block in normal mode
