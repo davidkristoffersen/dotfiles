@@ -98,6 +98,7 @@ EOF
 	read -r -d '' applications << EOF
 # Terminal
 $b $m+Return exec terminator
+# $b $m+Return exec alacritty
 
 # Browser
 $b $m+b exec chromium

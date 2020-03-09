@@ -13,6 +13,8 @@ dotfiles_home() {
 	link_file $DOTFILES_CONFIG/rofi/rofi.rasi .config/rofi/config.rasi "rofi config - Application launcher"
 	# Terminator
 	link_file $DOTFILES_CONFIG/terminator/terminator.ini .config/terminator/config "terminator config - Terminal emulator"
+	# Alacritty
+	link_file $DOTFILES_CONFIG/alacritty/alacritty.yml .config/alacritty/alacritty.yml "Alacritty config - Terminal emulator"
 	# Tmux
 	link_file $DOTFILES_HOME/.tmux.conf .tmux.conf ".tmux.conf - Terminal multiplexer"
 	# Dunst
