@@ -166,10 +166,12 @@
         "xiccd": {"desc": ""}
     },
     "other": {
+        "alacritty": {"desc": ""},
         "arduino": {"desc": ""},
         "autoconf": {"desc": ""},
         "automake": {"desc": ""},
         "bison": {"desc": ""},
+        "bochs": {"desc": ""},
         "converseen": {"desc": ""},
         "cura": {"desc": ""},
         "entr": {"desc": ""},
