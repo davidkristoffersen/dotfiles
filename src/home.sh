@@ -20,7 +20,7 @@ dotfiles_home() {
 	# Dunst
 	link_file $DOTFILES_CONFIG/dunst/dunst.cfg .config/dunst/dunstrc "Dunst config - Notification manager"
 	# LightDM
-	link_file $DOTFILES_ETC/lightdm.conf /etc/lightdm.conf "light config - Display manager"
+	link_file $DOTFILES_ETC/lightdm.conf /etc/lightdm.conf "lightdm config - Display manager"
 
 	print_section "CLI configuration"
 	# Readline
