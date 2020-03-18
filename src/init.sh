@@ -10,8 +10,8 @@ dotfiles_init() {
 
 	SUDO=true
 	PRINT=true
-	WRITE=false
-	SUBMODULE=false
+	WRITE=true
+	SUBMODULE=true
 
 	sudo -K
 }
