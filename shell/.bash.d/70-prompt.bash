@@ -49,7 +49,7 @@ prompt_git() {
 
 prompt_ssh() {
 	local _out=""
-	_out+="$1[$PRESET\u$PRESET"
+	_out+="$1[$PRESET\\\u$PRESET"
 	_out+="$PFAINT@$PRESET"
 	_out+="${HOSTNAME%%.*}$1]"
 	printf "$_out"
