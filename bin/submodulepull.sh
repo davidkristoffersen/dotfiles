@@ -49,6 +49,20 @@ function update() {
 export -f update
 export -f format
 
+function par() {
+	tagstring='\033[30;3{=$_=++$::color%8=}m'
+	out="$(echo "$args" | parallel --tagstring $tagstring 'update 2>&1')"
+	echo -e "$out"
+}
+
+function seq() {
+	while IFS= read -r line; do
+		f1="$(awk '{print $1}' <<< "$line")"
+		f2="$(awk '{print $2}' <<< "$line")"
+		update $f1 $f2
+	done <<< "$(echo $args | xargs -n 2)"
+}
+
 if ! [ -d .git ] || ! git rev-parse --git-dir > /dev/null 2>&1; then
 	echo "fatal: not a git repository (or any parent up to mount point /)" >&2
 	exit
@@ -63,6 +77,5 @@ fi
 path="$(pwd)"
 args="$(echo ${submodules[@]} | tr ' ' "\n" | xargs -I {} echo "$path/{} {}")"
 
-tagstring='\033[30;3{=$_=++$::color%8=}m'
-out="$(echo "$args" | parallel --tagstring $tagstring 'update 2>&1')"
-echo -e "$out"
+which parallel 2>/dev/null 1>/dev/null
+[ $? -eq 0 ] && par || seq
