@@ -3,7 +3,7 @@
 dotfiles_config() {
 	SUDO=true
 	PRINT=true
-	WRITE=false
-	SUBMODULE=false
+	WRITE=true
+	SUBMODULE=true
 }
 dotfiles_config
