@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+sudo_activate() {
+	sudo -n true 2> /dev/null
+	if [ $? -ne 0 ]; then
+		printf "\tInstall requires sudo:\n\t" >&2
+		sudo -v
+	fi
+}
+
 path_is_abs() {
 	case $1 in
 		/*) printf true ;;
@@ -16,11 +24,18 @@ path_set_pre() {
 }
 
 path_need_sudo() {
+	local _err="0"
 	if $(path_is_abs $1) && ! [[ "$1" == $HOME* ]]; then
-		printf true
+		if $SUDO; then
+			sudo_activate
+			sudo -n true 2> /dev/null
+			_err="$?"
+		fi
+		printf "true"
 	else
-		printf false
+		printf "false"
 	fi
+	return $_err
 }
 
 eval_cmd() {
@@ -32,44 +47,55 @@ eval_cmd() {
 	! $WRITE || $_cmd $_args; check_error $?
 }
 
-path_create() {
+sudo_set() {
 	local _sudo=""
-	if $(path_need_sudo $1); then
+	tmp="$($1 "$2")"
+	local _err="$?"
+	if $tmp; then
+		[ $_err -ne 0 ] && return 1
+		! $SUDO && return 1
 		_sudo="sudo "
 	fi
-	$PRINT && printf "\t${_sudo}mkdir -p \"$1\"\n"
-	! $WRITE || $_sudo mkdir -p "$1"; check_error $?
+	printf "$_sudo"
+}
+
+path_create() {
+	tmp="$(sudo_set path_need_sudo "$1")"
+	[ $? -ne 0 ] && return 1
+
+	$PRINT && printf "\t${tmp}mkdir -p \"$1\"\n"
+	! $WRITE || $tmp mkdir -p "$1"; check_error $?
 }
 
 rm_file() {
-	local _sudo=""
-	if $(path_need_sudo $1); then
-		_sudo="sudo "
-	fi
-	$PRINT && printf "\t${_sudo}rm -f \"$1\"\n"
-	! $WRITE || $_sudo rm -f "$1"; check_error $?
+	tmp="$(sudo_set path_need_sudo "$1")"
+	[ $? -ne 0 ] && return 1
+
+	$PRINT && printf "\t${tmp}rm -f \"$1\"\n"
+	! $WRITE || $tmp rm -f "$1"; check_error $?
 }
 
 create_file() {
+	tmp="$(sudo_set path_need_sudo "$1")"
+	[ $? -ne 0 ] && return 1
+
 	local _path="$1"
 	shift
-	local _sudo=""
-	if $(path_need_sudo $_path); then
-		_sudo="sudo "
-	fi
-	$PRINT && printf "\t${_sudo}touch \"$_path\"\n"
-	! $WRITE || $_sudo touch "$_path"; check_error $?
-	$PRINT && printf "\t${_sudo}printf \"$@\" > \"$_path\"\n"
-	! $WRITE || $_sudo printf "$@" > "$_path"; check_error $?
+	$PRINT && printf "\t${tmp}touch \"$_path\"\n"
+	! $WRITE || $tmp touch "$_path"; check_error $?
+	$PRINT && printf "\t${tmp}printf \"$@\" > \"$_path\"\n"
+	! $WRITE || $tmp printf "$@" > "$_path"; check_error $?
 }
 
 _link_file() {
-	local _sudo=""
-	if $(path_need_sudo $1) || $(path_need_sudo $2); then
-		_sudo="sudo "
-	fi
-	$PRINT && printf "\t${_sudo}ln -s \"$1\" \"$2\"\n"
-	! $WRITE || $_sudo ln -s "$1" "$2"; check_error $?
+	tmp1="$(sudo_set path_need_sudo "$1")"
+	[ $? -ne 0 ] && return 1
+	tmp2="$(sudo_set path_need_sudo "$2")"
+	[ $? -ne 0 ] && return 1
+	[ "$tmp2" == "sudo " ] && tmp1=$tmp2
+
+	$PRINT && printf "\t${tmp1}ln -s \"$1\" \"$2\"\n"
+	! $WRITE || $tmp1 ln -s "$1" "$2"; check_error $?
 }
 
 link_file() {
@@ -86,8 +112,8 @@ link_file() {
 
 	printf "$desc_long"
 
-	path_create "$dirs"
-	path_create "$srcs"
-	rm_file "$dst"
+	path_create "$dirs"; [ $? -ne 0 ] && return
+	path_create "$srcs"; [ $? -ne 0 ] && return
+	rm_file "$dst"; [ $? -ne 0 ] && return
 	_link_file "$src" "$dst"
 }

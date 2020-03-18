@@ -8,13 +8,12 @@ dotfiles_init() {
 	export DOTFILES_SRC="$DOTFILES/src"
 	. $DOTFILES_SRC/meta.sh
 
+	SUDO=true
 	PRINT=true
-	WRITE=true
-	SUBMODULE=true
+	WRITE=false
+	SUBMODULE=false
 
-	printf "Install requires sudo: "
-	echo
-	sudo true
+	sudo -K
 }
 
 dotfiles_conf_init() {
