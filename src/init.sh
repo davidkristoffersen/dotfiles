@@ -5,18 +5,11 @@ dotfiles_init() {
 	local _cur="$(dirname "${BASH_SOURCE[0]}")"
 	cd "$_cur/.."
 	export DOTFILES="$(pwd)"
-	export DOTFILES_SRC="$DOTFILES/src"
-	. $DOTFILES_SRC/meta.sh
-
-	SUDO=true
-	PRINT=true
-	WRITE=true
-	SUBMODULE=true
-
+	. $DOTFILES/src/meta.sh
 	sudo -K
 }
 
-dotfiles_conf_init() {
+dotfiles_meta_init() {
 	local _src="$DOTFILES_SRC/meta.sh"
 	local _dst="$HOME/.dotfiles_meta.sh"
 
@@ -42,15 +35,14 @@ dotfiles_script() {
 }
 
 dotfiles_init_main() {
-	local _child="$(basename ${BASH_SOURCE[2]})"
-	local _parent="$(basename $0)"
-	if ! [ "$_child" == "$_parent" ]; then
+	if [ ! "$2" == "install" ]; then
 		dotfiles_script $@
 		return $?
 	fi
 
 	dotfiles_init
-	dotfiles_conf_init
+	dotfiles_meta_init
+	. $DOTFILES_SRC/config.sh
 	. $DOTFILES_SRC/print.sh
 	. $DOTFILES_SRC/util.sh
 	dotfiles_script $@
