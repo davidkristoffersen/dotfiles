@@ -35,7 +35,7 @@ dotfiles_script() {
 }
 
 dotfiles_init_main() {
-	if [ ! "$2" == "install" ]; then
+	if [ ! -z "$2"]; then
 		dotfiles_script $@
 		return $?
 	fi

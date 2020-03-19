@@ -16,4 +16,4 @@ dotfiles_install_server() {
 	print_header "Privat files" "\n"
 	. $DOTFILES_SRC/private.sh; check_error $?
 }
-. $DOTFILES_SRC/init.sh "dotfiles_install_server" "install"
+. $DOTFILES_SRC/init.sh "dotfiles_install_server"

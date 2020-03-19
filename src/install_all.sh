@@ -18,4 +18,4 @@ dotfiles_install_all() {
 	print_header "Pacman packages" "\n"
 	. $DOTFILES_SRC/pacman.sh; check_error $?
 }
-. $DOTFILES_SRC/init.sh "dotfiles_install_all" "install"
+. $DOTFILES_SRC/init.sh "dotfiles_install_all"
