@@ -9,21 +9,33 @@ check_error() {
 		local error="$1"
 		shift
 		local desc="\tFile: ${BASH_SOURCE[1]}\n\tFunc: ${FUNCNAME[1]}"
-		case $1 in
-			nargs)
-				desc+="\n\tDesc: Invalid number of arguments."
-				;;
-			arg)
-				[ ${#@} -ne 1 ] && local arg="$2" || local arg="(Missing argument)"
-				desc+="\n\tDesc: Invalid argument $arg"
-				;;
-			file)
-				[ ${#@} -ne 1 ] && local arg="$2" || local arg="(Missing argument)"
-				desc+="\n\tDesc: Error in $arg"
-				;;
-			*)
-				[ ${#@} -ne 0 ] && desc+="\n\tDesc: $@"
-		esac
+		echo $@, $2
+		while (( "$#" )); do
+			case "$1" in
+				nargs)
+					desc+="\n\tDesc: Invalid number of arguments."
+					shift
+					;;
+				arg)
+					[ ${#@} -gt 1 ] && local arg="$2" && shift || local arg="(Missing argument)"
+					desc+="\n\tDesc: Invalid argument $arg"
+					shift
+					;;
+				file)
+					[ ${#@} -gt 1 ] && local arg="$2" && shift || local arg="(Missing argument)"
+					desc+="\n\tDesc: Error in $arg"
+					shift
+					;;
+				line)
+					[ ${#@} -gt 1 ] && local arg="$2" && shift || local arg="(Missing argument)"
+					desc+="\n\tLine: $arg"
+					shift
+					;;
+				*)
+					[ ${#@} -ne 0 ] && desc+="\n\tDesc: $@"
+					break
+			esac
+		done
 
 		printf "${RED}Error: $error${RESET}\n$desc\n"
 		exit $error
