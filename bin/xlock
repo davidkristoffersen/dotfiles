@@ -12,7 +12,7 @@ laptop_pos="center"
 
 debug=true
 
-function timeit() {
+timeit() {
 	if $debug; then
 		echo -ne "$@:\n"
 		{ time { {
@@ -25,8 +25,10 @@ function timeit() {
 	fi
 }
 
-function get_autorandr_profile() {
+get_autorandr_profile() {
 	local profile="$(autorandr_profile.sh)"
+	config="$(autorandr_manage.sh -c $profile)"
+
 	if [[ $profile =~ (home|alta*) ]]; then
 		laptop_pos="right"
 	elif [ "$profile" == "office" ]; then
@@ -34,11 +36,12 @@ function get_autorandr_profile() {
 	fi
 }
 
-function hw_info() {
+hw_info() {
 	$debug && echo -e "\tlaptop_pos: $laptop_pos"
 
 	info="$(xdpyinfo -ext all 2>/dev/null | sed '/^  head #/!d;s///')"
 	num_screens="$(echo "$info" | wc -l)"
+
 	declare -gA hw_infos=()
 
 	while IFS=' :x@,' read i w h x y; do
@@ -50,62 +53,75 @@ function hw_info() {
 	done <<< "$info"
 }
 
-function get_info() {
+get_info() {
 	echo "${hw_infos[$1$2]}"
 }
 
-function screenshot() {
+json_config() {
+	if [ $# -eq 1 ]; then
+		jq -r '.["'$1'"]' <<< "$config"
+	elif [ $# -eq 2 ]; then
+		jq -r '.["'$1'"]["'$2'"]' <<< "$config"
+	elif [ $3 == "list" ]; then
+		jq -r '.["'$1'"]['$2']' <<< "$config"
+	fi
+}
+
+screenshot() {
+	num_screens="$(json_config num_screens)"
 	for i in $(seq 0 $((num_screens - 1))); do
-		local w=$(get_info $i w)
-		local h=$(get_info $i h)
-		local x=$(get_info $i x)
-		local y=$(get_info $i y)
+		local screen="$(json_config screens $i list)"
 		local out="/tmp/head_$i.png"
 
+		local w="$(json_config $screen w)"
+		local h="$(json_config $screen h)"
+		local x="$(json_config $screen x)"
+		local y="$(json_config $screen y)"
 		$debug && echo -e "\t$out:\t${w}x${h}+${x}+${y}"
+
 		scrot -o -a ${x},${y},${w},${h} $out
 	done
 }
 
-function blurred() {
+blurred() {
 	local _png=$pre_png$1$post_png
 	gm convert $_png -scale 10% -blur 0x2.5 -resize 1000% $_png
 }
 
-function pixelize() {
+pixelize() {
 	local _png=$pre_png$1$post_png
 	pixelize.py $_png $_png 15
 }
 
-function overlay() {
+overlay() {
 	local _file="$pre_png$1$post_png"
 	if [[ -f $overlay_img ]]; then
 		gm composite -matte -gravity center $overlay_img $_file $_file
 	fi
 }
 
-function combine() {
-	width="$(get_info 0 w)"
-	heigth="$(get_info 0 h)"
-	x="$(get_info 0 x)"
-	y="$(get_info 0 y)"
+combine() {
+	width="$(json_config max_w)"
+	heigth="$(json_config max_h)"
+	min_x="$(json_config min_x)"
+	min_y="$(json_config min_y)"
 	main="${pre_png}0$post_png"
 	extended=""
 
 	for i in $(seq 1 $((num_screens - 1))); do
-		width=$(($width + $(get_info $i w)))
-		if (($(get_info $i h) > $heigth)); then
-			heigth=$(get_info $i h)
+		local screen="$(json_config screens $i list)"
+		if (($(json_config $screen h) > $heigth)); then
+			heigth=$(json_config $screen h)
 		fi
-		extended+="-page +$(get_info $i x)+$(get_info $i y) $pre_png$i$post_png "
+		extended+="-page +$(json_config $screen x)+$(json_config $screen y) $pre_png$i$post_png "
 	done
 
-	$debug && echo -e "\tconvert -page \"${width}x${heigth}+$x+$y\" $main $extended -flatten $out"
-	convert -page "${width}x${heigth}+$x+$y" $main $extended -flatten $out
+	$debug && echo -e "\tconvert -page \"${width}x${heigth}+$min_x+$min_y\" $main $extended -flatten $out"
+	convert -page "${width}x${heigth}+$min_x+$min_y" $main $extended -flatten $out
 }
 
 timeit get_autorandr_profile
-timeit hw_info
+# timeit hw_info
 timeit screenshot
 
 for i in $(seq 0 $((num_screens - 1))); do
@@ -120,4 +136,4 @@ else
 	timeit combine
 fi
 
-i3lock -u -i $out
+# i3lock -u -i $out
