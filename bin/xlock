@@ -81,10 +81,9 @@ combine() {
 
 	for i in $(seq 1 $((num_screens - 1))); do
 		local screen="$(json_config screens $i list)"
-		if (($(json_config $screen h) > $heigth)); then
-			heigth=$(json_config $screen h)
-		fi
-		extended+="-page +$(json_config $screen x)+$(json_config $screen y) $pre_png$i$post_png "
+		local x="$(json_config $screen x)"
+		local y="$(json_config $screen y)"
+		extended+="-page +$x+$y $pre_png$i$post_png "
 	done
 
 	$debug && echo -e "\tconvert -page \"${width}x${heigth}+$min_x+$min_y\" $main $extended -flatten $out"
