@@ -106,4 +106,4 @@ else
 	timeit combine
 fi
 
-# i3lock -u -i $out
+i3lock -u -i $out
