@@ -8,8 +8,6 @@ pre_png="${tmpdir}head_"
 post_png=".png"
 out="${tmpdir}screen.png"
 
-laptop_pos="center"
-
 debug=true
 
 timeit() {
@@ -28,33 +26,6 @@ timeit() {
 get_autorandr_profile() {
 	local profile="$(autorandr_profile.sh)"
 	config="$(autorandr_manage.sh -c $profile)"
-
-	if [[ $profile =~ (home|alta*) ]]; then
-		laptop_pos="right"
-	elif [ "$profile" == "office" ]; then
-		laptop_pos="left"
-	fi
-}
-
-hw_info() {
-	$debug && echo -e "\tlaptop_pos: $laptop_pos"
-
-	info="$(xdpyinfo -ext all 2>/dev/null | sed '/^  head #/!d;s///')"
-	num_screens="$(echo "$info" | wc -l)"
-
-	declare -gA hw_infos=()
-
-	while IFS=' :x@,' read i w h x y; do
-		if [ "$laptop_pos" == "left" ]; then
-			i=$(((i+1)%2))
-		fi
-		hw_infos+=([${i}w]=$w [${i}h]=$h [${i}x]=$x [${i}y]=$y)
-		$debug && echo -e "\thw_infos+=([${i}w]=$w [${i}h]=$h [${i}x]=$x [${i}y]=$y)"
-	done <<< "$info"
-}
-
-get_info() {
-	echo "${hw_infos[$1$2]}"
 }
 
 json_config() {
@@ -121,7 +92,6 @@ combine() {
 }
 
 timeit get_autorandr_profile
-# timeit hw_info
 timeit screenshot
 
 for i in $(seq 0 $((num_screens - 1))); do

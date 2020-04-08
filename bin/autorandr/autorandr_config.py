@@ -23,9 +23,6 @@ def main():
 
     json = {}
     key = ""
-    pos_x = [0, 0]
-    pos_y = [0, 0]
-    dim = [0, 0]
     num_screens = 0
     screens = []
     primary = ""
@@ -43,29 +40,47 @@ def main():
             screens.remove(key)
         elif words[0] == 'pos':
             pos = words[1].split('x')
-            pos_x = set_pos(pos_x, int(pos[0]))
-            pos_y = set_pos(pos_y, int(pos[1]))
             json[key]['x'] = int(pos[0])
             json[key]['y'] = int(pos[1])
         elif words[0] == 'mode':
             _dim = words[1].split('x')
-            dim = set_dim(dim, int(_dim[0]), int(_dim[1]))
-            json[key]['w'] = dim[0]
-            json[key]['h'] = dim[1]
+            json[key]['w'] = int(_dim[0])
+            json[key]['h'] = int(_dim[1])
         elif words[0] == 'primary':
             primary = key
         elif words[0] == 'rate':
             json[key]['fps'] = ' '.join(words[1:])
 
     json['num_screens'] = num_screens
-    json['min_x'] = pos_x[0]
-    json['max_x'] = pos_x[1]
-    json['min_y'] = pos_y[0]
-    json['max_y'] = pos_y[1]
-    json['max_w'] = dim[0]
-    json['max_h'] = dim[1]
     json['screens'] = screens
     json['primary'] = primary
+
+    min_x, max_x = 0, 0
+    min_y, max_y = 0, 0
+    _w, _h = 0, 0
+
+    for screen in json['screens']:
+        data = json[screen]
+        if data['x'] < min_x:
+            min_x = data['x']
+        elif data['x'] > max_x:
+            max_x = data['x']
+        if data['y'] < min_y:
+            min_y = data['y']
+        elif data['y'] > max_y:
+            max_y = data['y']
+        if data['x'] + data['w'] > _w:
+            _w += data['x'] + data['w'] - _w
+        if data['y'] + data['h'] > _h:
+            _h += data['y'] + data['h'] - _h
+
+    json['min_x'] = min_x
+    json['max_x'] = max_x
+    json['min_y'] = min_y
+    json['max_y'] = max_y
+    json['max_w'] = _w
+    json['max_h'] = _h
+
     print(dumps(json))
 
 if __name__ == "__main__":
