@@ -27,6 +27,8 @@ def main():
     pos_y = [0, 0]
     dim = [0, 0]
     num_screens = 0
+    screens = []
+    primary = ""
 
     for line in sys.argv[1].split('\n'):
         words = line.split(' ')
@@ -34,9 +36,11 @@ def main():
             key = words[1]
             json[key] = {}
             num_screens += 1
+            screens.append(key)
         elif words[0] == 'off':
             del json[key]
             num_screens -= 1
+            screens.remove(key)
         elif words[0] == 'pos':
             pos = words[1].split('x')
             pos_x = set_pos(pos_x, int(pos[0]))
@@ -48,8 +52,10 @@ def main():
             dim = set_dim(dim, int(_dim[0]), int(_dim[1]))
             json[key]['dim_y'] = dim[0]
             json[key]['dim_x'] = dim[1]
-        else:
-            json[key][words[0]] = ' '.join(words[1:])
+        elif words[0] == 'primary':
+            primary = key
+        elif words[0] == 'rate':
+            json[key]['fps'] = ' '.join(words[1:])
 
     json['num_screens'] = num_screens
     json['min_pos_x'] = pos_x[0]
@@ -58,6 +64,8 @@ def main():
     json['max_pos_y'] = pos_y[1]
     json['dim_y'] = dim[0]
     json['dim_x'] = dim[1]
+    json['screens'] = screens
+    json['primary'] = primary
     print(dumps(json))
 
 if __name__ == "__main__":
