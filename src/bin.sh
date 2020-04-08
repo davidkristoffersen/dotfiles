@@ -4,6 +4,7 @@ dotfiles_bin() {
 	echo
 
 	cd $DOTFILES_BIN
+	shopt -s globstar
 	local _scripts="$(ls -dA1 **)"
 	cd - >/dev/null
 
