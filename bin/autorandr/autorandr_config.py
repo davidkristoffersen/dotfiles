@@ -41,17 +41,21 @@ def main():
             pos = words[1].split('x')
             pos_x = set_pos(pos_x, int(pos[0]))
             pos_y = set_pos(pos_y, int(pos[1]))
-            json[key][words[0]] = ' '.join(words[1:])
+            json[key]['pos_x'] = int(pos[0])
+            json[key]['pos_y'] = int(pos[1])
         elif words[0] == 'mode':
             _dim = words[1].split('x')
             dim = set_dim(dim, int(_dim[0]), int(_dim[1]))
-            json[key][words[0]] = ' '.join(words[1:])
+            json[key]['dim_y'] = dim[0]
+            json[key]['dim_x'] = dim[1]
         else:
             json[key][words[0]] = ' '.join(words[1:])
 
     json['num_screens'] = num_screens
-    json['pos_x'] = pos_x
-    json['pos_y'] = pos_y
+    json['min_pos_x'] = pos_x[0]
+    json['min_pos_y'] = pos_y[0]
+    json['max_pos_x'] = pos_x[1]
+    json['max_pos_y'] = pos_y[1]
     json['dim_y'] = dim[0]
     json['dim_x'] = dim[1]
     print(dumps(json))
