@@ -31,9 +31,8 @@ test "$name"; check_error $? argv name
 
 arandr
 if test $rename; then
-	echo $rename
 	autorandr -r $rename; check_error $? line $LINENO
 fi
 
-echo $force $name
 autorandr $force -s $name; check_error $? line $LINENO
+autorandr_config.sh $name; check_error $? line $LINENO
