@@ -45,25 +45,25 @@ def main():
             pos = words[1].split('x')
             pos_x = set_pos(pos_x, int(pos[0]))
             pos_y = set_pos(pos_y, int(pos[1]))
-            json[key]['pos_x'] = int(pos[0])
-            json[key]['pos_y'] = int(pos[1])
+            json[key]['x'] = int(pos[0])
+            json[key]['y'] = int(pos[1])
         elif words[0] == 'mode':
             _dim = words[1].split('x')
             dim = set_dim(dim, int(_dim[0]), int(_dim[1]))
-            json[key]['dim_y'] = dim[0]
-            json[key]['dim_x'] = dim[1]
+            json[key]['w'] = dim[0]
+            json[key]['h'] = dim[1]
         elif words[0] == 'primary':
             primary = key
         elif words[0] == 'rate':
             json[key]['fps'] = ' '.join(words[1:])
 
     json['num_screens'] = num_screens
-    json['min_pos_x'] = pos_x[0]
-    json['min_pos_y'] = pos_y[0]
-    json['max_pos_x'] = pos_x[1]
-    json['max_pos_y'] = pos_y[1]
-    json['dim_y'] = dim[0]
-    json['dim_x'] = dim[1]
+    json['min_x'] = pos_x[0]
+    json['max_x'] = pos_x[1]
+    json['min_y'] = pos_y[0]
+    json['max_y'] = pos_y[1]
+    json['max_w'] = dim[0]
+    json['max_h'] = dim[1]
     json['screens'] = screens
     json['primary'] = primary
     print(dumps(json))

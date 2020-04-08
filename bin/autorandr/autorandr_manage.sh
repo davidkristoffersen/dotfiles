@@ -4,6 +4,7 @@ help() {
 	printf "Usage: $(basename $0) [OPTIONS] NAME\n"
 	printf "\t-r|--rename:\tRename profile\n"
 	printf "\t-f|--force:\t\tForce update profile\n"
+	printf "\t-c|--config:\t\tPrint config json file\n"
 	printf "\t-h|--help:\t\tPrint this help message.\n"
 	exit
 }
@@ -18,6 +19,10 @@ while (( "$#" )); do
 			force="--force"
 			shift
 			;;
+		-c|--config)
+			config="true"
+			shift
+			;;
 		-h|--help)
 			help
 			;;
@@ -28,6 +33,11 @@ while (( "$#" )); do
 	esac
 done
 test "$name"; check_error $? argv name
+
+if test $config; then
+	cat $HOME/.config/autorandr/$name/config.json
+	exit
+fi
 
 arandr
 if test $rename; then
