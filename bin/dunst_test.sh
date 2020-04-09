@@ -4,7 +4,7 @@ dunst_proc() {
 	pkill dunst
 	killall -q xfce4-notifyd
 	printf "\nNEW RUN\n"
-	dunst -print -config $DOTFILES/dunst.cfg 2>&1
+	dunst -print -config $DOTFILES_CONFIG/dunst/dunst.cfg 2>&1
 }
 
 if [ ! -z "$1" ]; then
