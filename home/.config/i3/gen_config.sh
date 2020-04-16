@@ -71,7 +71,8 @@ $e autorandr_helper.sh
 $b $m+$s+m $e autorandr_helper.sh
 
 # Lock
-$b $m+$s+o $e xlock
+$b $m+$s+o exec xlock
+# $b $m+$s+o exec chromium
 
 # Kill focused window
 $b $m+$s+q kill
@@ -209,6 +210,21 @@ EOF
 		fi
 		printf "$_out" | column -t
 	}
+	workspace_swap() {
+		local _out=""
+		if [ "$1" == "vim" ]; then
+			for name in ${!vim_arrow[@]}; do
+				_out+="$b $2+$name"
+				_out+="; $3 ${vim_arrow[$name]}\n"
+			done
+		else
+			for name in ${!vim_arrow[@]}; do
+				_out+="$b $2+${vim_arrow[$name]^}"
+				_out+="; $3 ${vim_arrow[$name]}\n"
+			done
+		fi
+		printf "$_out" | column -t
+	}
 	# ```i3config
 	read -r -d '' workspaces << EOF
 # Switch to workspace
@@ -225,6 +241,12 @@ $(workspace_type $m+$a "rename workspace to")
 $(workspace_nav vim $m+$c "focus")
 # Arrow style
 $(workspace_nav arrow $m+$c "focus")
+
+# swap directional workspace
+# Vim style
+$(workspace_swap vim $m+$s+$c "$e i3_swap_workspaces.py")
+# Arrow style
+$(workspace_swap arrow $m+$s+$c "$e i3_swap_workspaces.py")
 
 # Focus next/prev workspace on current monitor
 $b $m+$c+n workspace next_on_output
