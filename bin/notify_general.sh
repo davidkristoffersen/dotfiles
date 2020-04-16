@@ -17,7 +17,7 @@ case "$appname" in
 	Spotify)
 		notify-send -a "notification" -u "$urgency" -i false "AUDIO"
 		;;
-	notification)
+	notification|dunstify)
 		;;
 	*)
 		notify-send -a "notification" -u "critical" -i false "UNKNOWN NAME: $appname"

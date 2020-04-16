@@ -217,6 +217,10 @@ EOF
 	appname = Spotify
 	script = "$_notify_general"
 
+[Dunstiny]
+	appname = dunstify
+	script = "$_notify_general"
+
 [Other]
 	appname = *
 	# Run script on any unknown name
