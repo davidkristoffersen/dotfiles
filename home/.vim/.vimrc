@@ -20,7 +20,7 @@ let g:pathogen_plugins = system("ls -A1 $HOME/.vim/bundle")
 " Set disabled plugins
 let g:pathogen_disabled = []
 " call add(g:pathogen_disabled, 'i3-syntax')
-" call add(g:pathogen_disabled, 'ale')
+call add(g:pathogen_disabled, 'ale')
 " call add(g:pathogen_disabled, 'git-blame')
 
 call add(g:pathogen_disabled, 'nerdtree')
@@ -35,8 +35,8 @@ call add(g:pathogen_disabled, 'omnisharp-vim')
 " call add(g:pathogen_disabled, 'vim-fugitive')
 " call add(g:pathogen_disabled, 'vim-indent-guides')
 " call add(g:pathogen_disabled, 'vim-ingo-library')
-" call add(g:pathogen_disabled, 'vim-javascript')
-" call add(g:pathogen_disabled, 'vim-jsx')
+call add(g:pathogen_disabled, 'vim-javascript')
+call add(g:pathogen_disabled, 'vim-jsx')
 
 call add(g:pathogen_disabled, 'vim-nerdtree-tabs')
 " WARNING: Very slow
@@ -141,11 +141,11 @@ function! ClipboardPaste()
 	let @@ = system('xclip -o -selection clipboard')
 endfunction
 
-vnoremap <silent> y y:call ClipboardYank()<cr>
-vnoremap <silent> d d:call ClipboardYank()<cr>
-nnoremap <silent> p :call ClipboardPaste()<cr>p
-onoremap <silent> y y:call ClipboardYank()<cr>
-onoremap <silent> d d:call ClipboardYank()<cr>
+" vnoremap <silent> y y:call ClipboardYank()<cr>
+" vnoremap <silent> d d:call ClipboardYank()<cr>
+" nnoremap <silent> p :call ClipboardPaste()<cr>p
+" onoremap <silent> y y:call ClipboardYank()<cr>
+" onoremap <silent> d d:call ClipboardYank()<cr>
 
 " Disable Arrow keys in Escape mode
 noremap <up> <nop>
