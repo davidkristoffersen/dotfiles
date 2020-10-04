@@ -81,6 +81,10 @@ if ((${#submodules[@]} == 0)); then
 	exit
 fi
 
+if [ -z "$(git submodule summary)" ]; then
+	git submodule update --init --recursive
+fi
+
 path="$(pwd)"
 args="$(echo ${submodules[@]} | tr ' ' "\n" | xargs -I {} echo "$path/{} {}")"
 
