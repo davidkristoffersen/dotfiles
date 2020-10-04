@@ -1,3 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
-xrdb -merge $HOME/.Xresources
+if $XDISPLAY; then
+	xrdb -merge $HOME/.Xresources
+fi

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 # Formatting
 export CLANG_FORMAT_CONFIG='{

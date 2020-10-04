@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 code-style-format() {
 	for i in $@; do
@@ -23,8 +23,10 @@ hostname_master() {
 }
 
 xresource_get() {
-	local _args="$(echo $@ | tr ' ' '.')"
-	xrdb -query | grep -i "$_args:" | cut -f 2
+	if $XDISPLAY; then
+		local _args="$(echo $@ | tr ' ' '.')"
+		xrdb -query | grep -i "$_args:" | cut -f 2
+	fi
 }
 
 # Archive extractor

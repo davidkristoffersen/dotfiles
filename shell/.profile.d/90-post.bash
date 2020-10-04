@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 # Initialize basher
-eval "$(basher init -)"
+# eval "$(basher init -)"

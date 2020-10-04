@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 # Add to path if directory exists and is not already in path
 path_add() {
