@@ -16,8 +16,14 @@ function update() {
 
 	cd $path
 
-	# rbranch="$(git symbolic-ref --short HEAD)"
-	rbranch="master"
+	# Check if head is detached
+	git symbolic-ref -q HEAD 1>& /dev/null
+	if [ "$?" != "0" ]; then
+		rbranch="$(git branch | grep -v ^* | head -n 1 | awk '{$1=$1};1')"
+	else
+		rbranch="$(git branch --show-current)"
+	fi
+
 	origin="$(git remote get-url origin)"
 	format "$git_path" $b "$r\n"
 	format "$origin" " ↳ " "\n"
