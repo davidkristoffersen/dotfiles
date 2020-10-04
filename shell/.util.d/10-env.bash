@@ -77,3 +77,11 @@ set_colors() {
 }
 
 set_colors
+
+#
+# DOTFILES REPO STATUS
+#
+
+[ ! -z "$(cd $DOTFILES; git submodule summary; cd - >& /dev/null)" ] \
+	&& SUBMODULE_INIT=true \
+	|| SUBMODULE_INIT=false
