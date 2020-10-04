@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 dotfiles_install_init() {
 	export DOTFILES="$(cd $(dirname "${BASH_SOURCE[0]}")/..; pwd)"

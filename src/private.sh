@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 dotfiles_private() {
 	print_section "Secret dotfiles"

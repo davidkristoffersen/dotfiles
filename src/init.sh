@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 dotfiles_init() {
 	pwd_org="$(pwd)"

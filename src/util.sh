@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 sudo_activate() {
 	sudo -n true 2> /dev/null

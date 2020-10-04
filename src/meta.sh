@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 export DOTFILES_SRC="$DOTFILES/src"
 export DOTFILES_SHELL="$DOTFILES/shell"

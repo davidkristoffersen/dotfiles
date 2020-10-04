@@ -1,7 +1,19 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
+
+get_dist_id() {
+	cat /etc/os-release | grep ^ID= | awk -F= '{print $2}'
+}
 
 dotfiles_pacman() {
-	# AUR helper
+	# Check distribution id
+	print_section "Distribution id"
+	if [ "$get_dist_id()" != "arch" ]; then
+		echo "Not Arch Linux. Skipping..."
+		return
+	fi
+	return
+
+	# AUR helpeS
 	print_section "yay"
 	echo "sudo pacman -S yay"
 

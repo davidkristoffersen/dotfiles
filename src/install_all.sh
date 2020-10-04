@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 dotfiles_install_all() {
 	print_header "Shell dotfiles"
