@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 function format() {
 	while IFS= read -r line; do
@@ -16,7 +16,8 @@ function update() {
 
 	cd $path
 
-	rbranch="$(git symbolic-ref --short HEAD)"
+	# rbranch="$(git symbolic-ref --short HEAD)"
+	rbranch="master"
 	origin="$(git remote get-url origin)"
 	format "$git_path" $b "$r\n"
 	format "$origin" " ↳ " "\n"
