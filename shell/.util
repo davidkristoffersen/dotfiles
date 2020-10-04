@@ -1,0 +1,22 @@
+#!/usr/bin/bash
+
+_util() {
+	. $HOME/.dotfiles_meta.sh
+	[ $? -ne 0 ] && return
+
+	for bash_file in $(ls -A1 $DOTFILES_SHELL/.util.d | sort); do
+		if [ "$bash_file" == ".gitignore" ]; then
+			continue
+		elif [[ $bash_file == 00-*.bash ]]; then
+			. $DOTFILES_SHELL/.util.d/$bash_file
+			continue
+		fi
+
+		. $DOTFILES_SHELL/.util.d/$bash_file; check_error 0
+	done
+
+	export SHELL_UTIL=true
+}
+
+_util
+unset -f _util

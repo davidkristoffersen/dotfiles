@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 confirm() {
 	printf "Do you want to execute this cmd? (y/n) "

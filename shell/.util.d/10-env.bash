@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 #
 # ENVIRONMENT STATUS
@@ -24,7 +24,12 @@
 	&& SSH=true \
 	|| SSH=false
 
-export SHELL_SH SHELL_INTERACTIVE SHELL_LOGIN SSH
+# Is X active
+xhost >& /dev/null \
+	&& XDISPLAY=true \
+	|| XDISPLAY=false
+
+export SHELL_SH SHELL_INTERACTIVE SHELL_LOGIN SSH XDISPLAY
 
 #
 # COLORS
