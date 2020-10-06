@@ -12,7 +12,9 @@
 	st = status
 	credz = config credential.helper store
 	df = diff --word-diff
-	submodulepull = "!f() { submodulepull.sh; }; f"
+	submodulepull = "!f() { submodulepull.sh $@; }; f"
+	editConfig = "!f() { vim $(git rev-parse --git-path config); }; f"
+	viewConfig = "!f() { cat $(git rev-parse --git-path config); }; f"
 [core]
 	editor = vim
 [credential]
