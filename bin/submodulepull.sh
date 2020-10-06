@@ -2,7 +2,7 @@
 
 function format() {
 	while IFS= read -r line; do
-		if [ "$func" == "par" ]; then
+		if [ "$func" != "seq" ]; then
 			out+="$2$line$3"
 		else
 			echo -en "$2$line$3"
@@ -95,12 +95,12 @@ function update() {
 			format "$tmp" "$r\t" "\n"
 		fi
 
-		if [ "$func" == "seq" ]; then
+		if [ "$2" == "seq" ]; then
 			rebase $ubranch
 		fi
 	fi
 
-	if [ "$func" == "par" ]; then
+	if [ "$2" != "seq" ]; then
 		echo -e "$out"
 	fi
 	cd - 1>/dev/null
@@ -109,7 +109,6 @@ export -f update
 export -f format
 
 function par() {
-	func="par"
 	tagstring='\033[30;3{=$_=++$::color%8=}m'
 	out="$(echo "$args" | parallel --tagstring $tagstring 'update 2>&1')"
 	echo -e "$out"
@@ -120,7 +119,7 @@ function seq() {
 	while IFS= read -r line; do
 		f1="$(awk '{print $1}' <<< "$line")"
 		f2="$(awk '{print $2}' <<< "$line")"
-		update "$f1 $f2"
+		update "$f1 $f2" "seq"
 		echo
 	done <<< "$(echo $args | xargs -n 2)"
 }
