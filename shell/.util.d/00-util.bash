@@ -12,10 +12,17 @@ check_error_help() {
 	printf "\tfile:\tError in (file)\n"
 	printf "\tline:\tLine number (line)\n"
 	printf "\thelp:\tPrint this help message.\n"
-	exit $error
+
+	if [ "$1" != "true" ]; then
+		exit $error
+	fi
 }
 
 check_error() {
+	if [ "$#" -eq "0" ]; then
+		check_error_help true
+		return
+	fi
 	if [ "$1" -ne "0" ]; then
 		local error="$1"
 		shift
