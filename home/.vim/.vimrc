@@ -1,5 +1,5 @@
 fun VimrcInit()
-	source $HOME/.vim/.vim.d/general.vim
+	source $HOME/.vim/.vim.d/options.vim
 	source $HOME/.vim/.vim.d/highlight.vim
 	source $HOME/.vim/.vim.d/pathogen.vim
 	source $HOME/.vim/.vim.d/commands.vim
