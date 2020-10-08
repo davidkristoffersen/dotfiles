@@ -56,13 +56,5 @@ fun GeneralInit()
 	filetype on			" On edit: Do filetype detection
 	filetype plugin on	" On edit: Load ftplugin files with matching filetype
 	filetype indent on	" On edit: Load indent files with matching filetype
-
-	" AUTO COMMANDS
-	au BufLeave,FocusLost * silent! wa	" Autosave on not using the window
-
-	" Filetype specific
-	au Filetype python setl et ts=4 sw=4 softtabstop=4	" Python
-	au BufEnter,BufRead *.conf setf dosini 				" Conf files have dosini syntax
-	au BufEnter,BufRead *.rasi setf css					" Rasi files have css syntax
 endfun
 call GeneralInit()
