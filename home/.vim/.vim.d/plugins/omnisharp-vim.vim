@@ -1,4 +1,4 @@
-fun! s:plugin()
+fu s:plugin()
 	" Stdio version of OmniSharp-roslyn
 	let g:OmniSharp_server_stdio = 1
 	" Update semantic highlighting after all text changes
@@ -11,6 +11,6 @@ fun! s:plugin()
 		\ longest,	" Don't autoselect first option
 		\ menuone,	" Show menu on only one option
 		\ preview	" Show extra documentation info
-endfun
+endf
 
 call s:plugin()

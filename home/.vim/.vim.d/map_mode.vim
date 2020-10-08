@@ -1,4 +1,4 @@
-fun MapInit()
+fu MapInit()
 	" Keep selection when indenting
 	vnoremap > >gv
 	vnoremap < <gv
@@ -37,6 +37,6 @@ fun MapInit()
 	" nnoremap <silent> p :call ClipboardPaste()<cr>p
 	" onoremap <silent> y y:call ClipboardYank()<cr>
 	" onoremap <silent> d d:call ClipboardYank()<cr>
-endfun
+endf
 
 call MapInit()

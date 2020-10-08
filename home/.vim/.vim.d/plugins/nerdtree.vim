@@ -1,4 +1,4 @@
-fun! s:plugin()
+fu s:plugin()
 	" NERDTree will be on a new tab
 	let g:nerdtree_tabs_open_on_console_startup=1
 	" Do not display files
@@ -12,6 +12,6 @@ fun! s:plugin()
 
 	" Open NERDTree
 	nnoremap <leader>n :NERDTreeTabsToggle<CR>
-endfun
+endf
 
 call s:plugin()

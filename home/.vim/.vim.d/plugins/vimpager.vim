@@ -1,4 +1,4 @@
-fun! s:plugin()
+fu s:plugin()
 	if !exists('g:vimpager')
 		let g:vimpager = {}
 	endif
@@ -7,6 +7,6 @@ fun! s:plugin()
 		let g:less = {}
 	endif
 	let g:less.enabled = 0
-endfun
+endf
 
 call s:plugin()

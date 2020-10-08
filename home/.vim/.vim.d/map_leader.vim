@@ -1,4 +1,4 @@
-fun MapLeaderInit()
+fu MapLeaderInit()
 	" Extended normal mode commands
 	noremap <leader>jj 50j<C-e><cr>
 	noremap <leader>kk 50k<C-y><cr>
@@ -43,6 +43,6 @@ fun MapLeaderInit()
 
 	" Save
 	nmap <leader>w :w!<cr>
-endfun
+endf
 
 call MapLeaderInit()

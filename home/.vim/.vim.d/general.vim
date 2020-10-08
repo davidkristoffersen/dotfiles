@@ -1,4 +1,4 @@
-fun GeneralInit()
+fu GeneralInit()
 	" LAYOUT
 	set tabpagemax=100		" Maximum #tabs
 	set laststatus=2		" Always show status line
@@ -59,6 +59,6 @@ fun GeneralInit()
 	filetype on			" On edit: Do filetype detection
 	filetype plugin on	" On edit: Load ftplugin files with matching filetype
 	filetype indent on	" On edit: Load indent files with matching filetype
-endfun
+endf
 
 call GeneralInit()

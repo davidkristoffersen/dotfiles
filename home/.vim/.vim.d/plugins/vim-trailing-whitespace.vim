@@ -1,6 +1,6 @@
-fun! s:plugin()
+fu s:plugin()
 	" Fix whitespace for entire file
 	nmap <leader>F :FixWhitespace<CR>
-endfun
+endf
 
 call s:plugin()

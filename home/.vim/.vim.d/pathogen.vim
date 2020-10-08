@@ -1,4 +1,4 @@
-fun PathogenInit()
+fu PathogenInit()
 	let l:home = $HOME
 	let g:pathogen_plugins = split(system('ls -A1 ' . l:home . '/.vim/bundle'))
 	let g:pathogen_disabled = []
@@ -55,6 +55,6 @@ fun PathogenInit()
 			exec 'source' . l:file
 		endif
 	endfor
-endfun
+endf
 
 call PathogenInit()

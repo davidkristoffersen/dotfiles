@@ -1,6 +1,6 @@
-fun! s:plugin()
+fu s:plugin()
 	" Available 'c' checkers
 	let g:syntastic_c_checkers = ['gcc', 'mpicc']
-endfun
+endf
 
 call s:plugin()

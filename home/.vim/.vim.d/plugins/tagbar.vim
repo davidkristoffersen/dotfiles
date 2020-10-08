@@ -1,6 +1,6 @@
-fun! s:plugin()
+fu s:plugin()
 	" Toggle state of tagbar
 	nmap <leader>t :TagbarToggle<CR>
-endfun
+endf
 
 call s:plugin()

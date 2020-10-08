@@ -1,5 +1,5 @@
-fun! s:plugin()
-	function! g:SyntaxLang(filetype, bool='enable') abort
+fu s:plugin()
+	fu g:SyntaxLang(filetype, bool='enable') abort
 		let l:ft = &ft
 		if l:ft == a:filetype
 			return
@@ -40,16 +40,16 @@ fun! s:plugin()
 
 		" echo l:cmd
 		exec l:cmd
-	endfunction
+	endf
 
-	function! s:_TextEnableCodeSnipAll()
+	fu s:TextEnableCodeSnipAll()
 		let l:langs = g:CommenterGetLanguages()
 		for l:lang in l:langs
 			call g:SyntaxLang(l:lang, 'enable')
 		endfor
-	endfunction
+	endf
 
 	" au VimEnter * call s:_TextEnableCodeSnipAll()
-endfun
+endf
 
 call s:plugin()

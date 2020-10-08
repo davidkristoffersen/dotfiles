@@ -1,6 +1,6 @@
-fun! s:plugin()
+fu s:plugin()
 	" Use omnisharp for c# files
 	let g:ale_linters = { 'cs': ['OmniSharp'] }
-endfun
+endf
 
 call s:plugin()

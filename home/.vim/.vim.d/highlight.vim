@@ -1,4 +1,4 @@
-fun HighlightInit()
+fu HighlightInit()
 	colo desert	" Color scheme
 
 	" Search menu not selected
@@ -13,6 +13,6 @@ fun HighlightInit()
 	hi Visual ctermfg=248 ctermbg=16
 	" Error highlighting
 	hi Error ctermfg=Red ctermbg=black
-endfun
+endf
 
 call HighlightInit()
