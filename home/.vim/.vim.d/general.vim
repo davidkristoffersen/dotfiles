@@ -37,6 +37,9 @@ fun GeneralInit()
 	set nofoldenable		" All folds are open
 	set foldmethod=indent	" Lines with equal indent create a fold
 	set backspace=2			" Backspace on indent, eol and start of insert
+	set timeout				" Timeout on :mappings and key codes
+	set ttimeoutlen=50		" Timeout in ms
+	let g:mapleader = " "	" Leader set to space
 
 	" UNDO
 	set undofile				" Use an undo history file
