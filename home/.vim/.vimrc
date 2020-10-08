@@ -8,4 +8,5 @@ fun VimrcInit()
 	source $HOME/.vim/.vim.d/functions.vim
 	source $HOME/.vim/.vim.d/practical.vim
 endfun
+
 call VimrcInit()

@@ -57,4 +57,5 @@ fun GeneralInit()
 	filetype plugin on	" On edit: Load ftplugin files with matching filetype
 	filetype indent on	" On edit: Load indent files with matching filetype
 endfun
+
 call GeneralInit()

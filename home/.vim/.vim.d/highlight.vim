@@ -14,4 +14,5 @@ fun HighlightInit()
 	" Error highlighting
 	hi Error ctermfg=Red ctermbg=black
 endfun
+
 call HighlightInit()

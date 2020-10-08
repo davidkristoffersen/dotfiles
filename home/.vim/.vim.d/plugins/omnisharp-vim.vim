@@ -11,4 +11,5 @@ fun! s:plugin()
 	" Remove 'preview' if you don't want to see any documentation whatsoever.
 	set completeopt=longest,menuone,preview
 endfun
+
 call s:plugin()

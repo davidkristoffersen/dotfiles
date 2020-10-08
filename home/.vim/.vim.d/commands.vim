@@ -20,5 +20,6 @@ fun AutoCommandsInit()
 	au BufEnter,BufRead *.conf setf dosini 				" Conf files have dosini syntax
 	au BufEnter,BufRead *.rasi setf css					" Rasi files have css syntax
 endfun
+
 call CommandsInit()
 call AutoCommandsInit()

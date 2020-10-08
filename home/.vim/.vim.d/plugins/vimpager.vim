@@ -8,4 +8,5 @@ fun! s:plugin()
 	endif
 	let g:less.enabled = 0
 endfun
+
 call s:plugin()

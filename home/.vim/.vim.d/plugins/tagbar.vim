@@ -6,4 +6,5 @@ fun! s:plugin()
 	function! g:Plugin_vim_trailing_whitespace()
 	nmap <leader>F :FixWhitespace<CR>
 endfun
+
 call s:plugin()

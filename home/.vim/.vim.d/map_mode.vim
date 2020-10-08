@@ -24,4 +24,5 @@ fun MapInit()
 	inoremap <left> <nop>
 	inoremap <right> <nop>V
 endfun
+
 call MapInit()

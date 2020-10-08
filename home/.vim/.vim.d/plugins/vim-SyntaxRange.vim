@@ -51,4 +51,5 @@ fun! s:plugin()
 
 	" au VimEnter * call s:_TextEnableCodeSnipAll()
 endfun
+
 call s:plugin()

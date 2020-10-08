@@ -56,4 +56,5 @@ fun PathogenInit()
 		endif
 	endfor
 endfun
+
 call PathogenInit()

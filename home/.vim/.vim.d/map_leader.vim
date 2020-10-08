@@ -1,6 +1,5 @@
-" MAPS: LEADER SPECIFIC
 fun MapLeaderInit()
-	let mapleader = " "
+	let g:mapleader = " "
 	" Time before keykode or leader terminated
 	set timeout ttimeoutlen=50
 
@@ -55,4 +54,5 @@ fun MapLeaderInit()
 	inoremap <A-j> <Esc>:m+<CR>==gi
 	inoremap <A-k> <Esc>:m-2<CR>==gi
 endfun
+
 call MapLeaderInit()

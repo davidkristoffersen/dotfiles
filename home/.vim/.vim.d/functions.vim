@@ -48,4 +48,5 @@ fun FunctionsInit()
 		endfor
 	endfunction
 endfun
+
 call FunctionsInit()

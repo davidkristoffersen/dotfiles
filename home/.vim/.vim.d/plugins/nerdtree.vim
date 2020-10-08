@@ -13,4 +13,5 @@ fun! s:plugin()
 	" Leader map for opening NERDTree
 	nnoremap <leader>n :NERDTreeTabsToggle<CR>
 endfun
+
 call s:plugin()
