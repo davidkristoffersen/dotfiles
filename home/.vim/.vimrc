@@ -1,4 +1,4 @@
-fun VimrcInit()
+fu VimrcInit()
 	source $HOME/.vim/.vim.d/options.vim
 	source $HOME/.vim/.vim.d/highlight.vim
 	source $HOME/.vim/.vim.d/pathogen.vim
@@ -7,6 +7,6 @@ fun VimrcInit()
 	source $HOME/.vim/.vim.d/map_leader.vim
 	source $HOME/.vim/.vim.d/functions.vim
 	source $HOME/.vim/.vim.d/practical.vim
-endfun
+endf
 
 call VimrcInit()
