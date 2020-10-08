@@ -1,3 +1,4 @@
-function! g:Plugin_git_blame()
+fun! s:plugin()
 	nnoremap <leader>b :<C-u>call gitblame#echo()<CR>
-endfunction
+endfun
+call s:plugin()

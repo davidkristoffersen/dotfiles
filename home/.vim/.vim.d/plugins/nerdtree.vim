@@ -1,4 +1,4 @@
-function! g:Plugin_nerdtree()
+fun! s:plugin()
 	" NERDTree will be on new tab
 	let g:nerdtree_tabs_open_on_console_startup=1
 	" Do not display files
@@ -12,4 +12,5 @@ function! g:Plugin_nerdtree()
 
 	" Leader map for opening NERDTree
 	nnoremap <leader>n :NERDTreeTabsToggle<CR>
-endfunction
+endfun
+call s:plugin()

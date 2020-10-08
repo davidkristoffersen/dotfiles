@@ -1,4 +1,4 @@
-function! g:Plugin_vim_SyntaxRange()
+fun! s:plugin()
 	function! g:SyntaxLang(filetype, bool='enable') abort
 		let l:ft = &ft
 		if l:ft == a:filetype
@@ -50,4 +50,5 @@ function! g:Plugin_vim_SyntaxRange()
 	endfunction
 
 	" au VimEnter * call s:_TextEnableCodeSnipAll()
-endfunction
+endfun
+call s:plugin()

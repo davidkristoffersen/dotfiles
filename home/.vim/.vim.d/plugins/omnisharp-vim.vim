@@ -1,4 +1,4 @@
-function! g:Plugin_omnisharp_vim()
+fun! s:plugin()
 	" Use the stdio version of OmniSharp-roslyn:
 	let g:OmniSharp_server_stdio = 1
 	" Update semantic highlighting after all text changes
@@ -10,4 +10,5 @@ function! g:Plugin_omnisharp_vim()
 	" Don't autoselect first omnicomplete option, show options even if there is only one
 	" Remove 'preview' if you don't want to see any documentation whatsoever.
 	set completeopt=longest,menuone,preview
-endfunction
+endfun
+call s:plugin()

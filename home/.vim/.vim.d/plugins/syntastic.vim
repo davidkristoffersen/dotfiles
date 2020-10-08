@@ -1,3 +1,4 @@
-function! g:Plugin_syntastic()
+fun! s:plugin()
 	let g:syntastic_c_checkers = ['gcc', 'mpicc']
-endfunction
+endfun
+call s:plugin()
