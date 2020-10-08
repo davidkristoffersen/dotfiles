@@ -11,7 +11,6 @@ dotfiles_pacman() {
 		echo "Not Arch Linux. Skipping..."
 		return
 	fi
-	return
 
 	# AUR helpeS
 	print_section "yay"
