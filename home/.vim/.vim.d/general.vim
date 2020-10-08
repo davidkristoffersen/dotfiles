@@ -1,49 +1,61 @@
-" GENERAL
-set nocompatible				" disable compatibility
-set encoding=utf-8
-filetype off
-filetype plugin indent on		" file specific scripts
-filetype plugin on		" file specific scripts
-syntax on						" syntax highlighting
-set number						" line numbers
-set backspace=2					" normal backspace
-let loaded_matchparen = 0		" disable syntax matching parenthesis
-set nofoldenable				" disable folding
-set wrap linebreak nolist		" wrap word for word
-set noswapfile					" ahhh the zen
-au BufLeave,FocusLost * silent! wa	" auto save when user is not using the window
-set wildmenu					" command line completion
-set foldmethod=indent
-set tabpagemax=100
-set shell=bash\ --login			" Execute bashrc aliases in ! mode
-set rnu							" Relative line numbers
+" LAYOUT
+set tabpagemax=100		" Maximum #tabs
+set laststatus=2		" Always show status line
+set number				" Line numbers
+set relativenumber		" Relative line numbers
+set numberwidth=4		" Relative line numbers
+set wildmenu			" Command line completion
 
-" STATUS LINE
-set laststatus=2		" always show status line
+" LINE WRAP
+set wrap linebreak		" Wrap word for word
+set formatoptions+=l	" Ensures word-wrap does not split words
+
+" HIGHLIGHT
+set nolist					" Do not print tab and eol characters
+syntax on					" Syntax highlighting
+let g:loaded_matchparen = 0	" Disable syntax matching () and {}
+
+" INDENT
+set tabstop=4			" #Spaces in tab character
+set softtabstop=0		" #Space in tab while editing
+set shiftwidth=4		" #Spaces in auto indent
+set shiftround			" Round indent to multiple of shiftwidth
+set autoindent			" Current indent is applied to the next
+set breakindent			" Current indent is applied to wrapeed line
+set nopaste				" If on: Pasting from other windows include indenting
 
 " SEARCH
-set hlsearch			" highlight all matches
-set incsearch			" instant highlight
-set ignorecase			" ignore case
-set smartcase			" use case when uppercase
+set hlsearch			" Highlight all matches
+set incsearch			" Instant highlight
+set ignorecase			" Ignore case
+set smartcase			" Use case when uppercase
 
-" HARD TABS
-set tabstop=4						 " tab width
-set softtabstop=0 noexpandtab
-set shiftwidth=4					" shift width
-set autoindent						" auto indentation
-set breakindent						" Indents word-wrapped lines as much as the 'parent' line
-" Ensures word-wrap does not split words
-set formatoptions=l
-set lbr
-au Filetype python setl et ts=4 sw=4 softtabstop=4
-" Conf files have dosini syntax
-au BufEnter,BufRead *.conf setf dosini
-" Rasi files have css syntax
-au BufEnter,BufRead *.rasi setf css
+" EDIT
+set nofoldenable		" All folds are open
+set foldmethod=indent	" Lines with equal indent create a fold
+set backspace=2			" Backspace on indent, eol and start of insert
 
-" UNDO HISTORY
-set undofile					" use an undo file
-set undodir=$HOME/.vim/undo		" undo file path
-set undolevels=1000
-set undoreload=10000
+" UNDO
+set undofile				" Use an undo history file
+set undodir=$HOME/.vim/undo	" Undo file path
+set undolevels=1000			" Max #undo
+set undoreload=10000		" Max #lines in buffer to save for undo upon reload
+
+" META
+set nocompatible			" Disable VI compatibility
+set encoding=utf-8			" Character encoding
+set noswapfile				" Do not generate swap file
+set shell=bash\ --login		" Execute bashrc aliases in ! mode
+
+" FILETYPE
+filetype on			" On edit: Do filetype detection
+filetype plugin on	" On edit: Load ftplugin files with matching filetype
+filetype indent on	" On edit: Load indent files with matching filetype
+
+" AUTO COMMANDS
+au BufLeave,FocusLost * silent! wa	" Autosave on not using the window
+
+" Filetype specific
+au Filetype python setl et ts=4 sw=4 softtabstop=4	" Python
+au BufEnter,BufRead *.conf setf dosini 				" Conf files have dosini syntax
+au BufEnter,BufRead *.rasi setf css					" Rasi files have css syntax
