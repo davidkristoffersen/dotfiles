@@ -7,10 +7,10 @@ fu s:plugin()
 	let g:OmniSharp_timeout = 5
 	" Set preview window height for viewing documentation
 	set previewheight=5
-	set completeopt=
-		\ longest,	" Don't autoselect first option
-		\ menuone,	" Show menu on only one option
-		\ preview	" Show extra documentation info
+	" Don't autoselect first option
+	" Show menu on only one option
+	" Show extra documentation info
+	set completeopt=longest,menuone,preview
 endf
 
 call s:plugin()
