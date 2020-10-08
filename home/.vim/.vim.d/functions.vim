@@ -28,5 +28,24 @@ fun FunctionsInit()
 			echo g:toggles[a:cmd][2]
 		endif
 	endfunction
+
+	" OS clipboard
+	function! ClipboardYank()
+		call system('xclip -i -selection clipboard', @@)
+	endfunction
+	function! ClipboardPaste()
+		let @@ = system('xclip -o -selection clipboard')
+	endfunction
+
+	function! g:ManyDown()
+		for i in range(50)
+			exec "normal j\<C-e>"
+		endfor
+	endfunction
+	function! g:ManyUp()
+		for i in range(50)
+			exec "normal k\<C-y>"
+		endfor
+	endfunction
 endfun
 call FunctionsInit()
