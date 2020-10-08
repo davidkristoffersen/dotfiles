@@ -9,6 +9,7 @@
 	lgs = "!f() { num=10; if [ ! -z $1 ]; then num=$1; fi; git lg | head -n $num; }; f"
 	pushm = push origin master
 	pullm = pull origin master
+	rebaseKeepDates = rebase --committer-date-is-author-date
 	st = status
 	credz = config credential.helper store
 	df = diff --word-diff
