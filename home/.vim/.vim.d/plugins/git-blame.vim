@@ -1,5 +1,6 @@
 fun! s:plugin()
-	nnoremap <leader>b :<C-u>call gitblame#echo()<CR>
+	" Echo current line's git blame
+	nnoremap <leader>b :call gitblame#echo()<CR>
 endfun
 
 call s:plugin()

@@ -1,16 +1,16 @@
 fun! s:plugin()
-	" NERDTree will be on new tab
+	" NERDTree will be on a new tab
 	let g:nerdtree_tabs_open_on_console_startup=1
 	" Do not display files
 	let NERDTreeIgnore = ['\.pyc$', '__pycache__$']
-	" Width in number of characters
+	" Width #characters
 	let NERDTreeWinSize = 20
-	" Cleaner ui
+	" Clean ui
 	let NERDTreeMinimalUI = 1
 	" Unicode arrows
 	let NERDTreeDirArrows = 1
 
-	" Leader map for opening NERDTree
+	" Open NERDTree
 	nnoremap <leader>n :NERDTreeTabsToggle<CR>
 endfun
 

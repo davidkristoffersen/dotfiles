@@ -1,5 +1,5 @@
 fun! s:plugin()
-	" Tell ALE to use OmniSharp for linting C# files, and no other linters.
+	" Use omnisharp for c# files
 	let g:ale_linters = { 'cs': ['OmniSharp'] }
 endfun
 

@@ -4,7 +4,7 @@ fun! s:plugin()
 	endif
 
 	if !exists('g:less')
-		let g:less	 = {}
+		let g:less = {}
 	endif
 	let g:less.enabled = 0
 endfun
