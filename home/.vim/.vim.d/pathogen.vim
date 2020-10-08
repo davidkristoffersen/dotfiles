@@ -7,7 +7,7 @@ fu PathogenInit()
 	"
 	" ENABLED PLUGINS
 	"
-	
+
 	" call add(g:pathogen_enabled, 'ale')
 	call add(g:pathogen_enabled, 'git-blame')
 	call add(g:pathogen_enabled, 'i3config.vim')
