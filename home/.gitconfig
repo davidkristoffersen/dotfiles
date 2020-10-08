@@ -18,6 +18,7 @@
 	viewConfig = "!f() { cat $(git rev-parse --git-path config); }; f"
 [core]
 	editor = vim
+	autocrlf = input
 [credential]
 	helper = store --file ~/.git-credentials
 [merge "ignore"]
