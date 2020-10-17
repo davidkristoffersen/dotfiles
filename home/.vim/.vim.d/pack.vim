@@ -21,4 +21,18 @@ fu PackInit()
 	" packadd vimpager " WARNING: Very slow
 endf
 
+fu PluginsInit()
+	call AleInit()
+	call GitBlameInit()
+	" call NERDtreeInit()
+	" call OmnisharpInit()
+	call SyntasticInit()
+	call TagbarInit()
+	call VimIndentGuidesInit()
+	call VimSyntaxRangeInit()
+	call VimTrailingWhiteSpaceInit()
+	" call VimpagerInit()
+endf
+
 call PackInit()
+call PluginsInit()
