@@ -19,6 +19,8 @@ path_add "$HOME/.basher/bin"
 path_add "$HOME/.src/dotnet_sdk"
 # Dotnet tools
 path_add "$HOME/.dotnet/tools"
+# Fzf's bin
+path_add "$HOME/.src/.fzf/bin"
 
 # Make path global
 export PATH="$PATH"
