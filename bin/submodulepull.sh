@@ -124,39 +124,51 @@ function seq() {
 	done <<< "$(echo $args | xargs -n 2)"
 }
 
-if ! [ -d .git ] || ! git rev-parse --git-dir > /dev/null 2>&1; then
-	echo "fatal: not a git repository (or any parent up to mount point /)" >&2
-	exit
-fi
-
-submodules=($(git submodule | awk '{print $2}'))
-if ((${#submodules[@]} == 0)); then
-	echo "fatal: repo has no submodules" >&2
-	exit
-fi
-
-if [ -z "$(git submodule summary)" ]; then
-	git submodule update --init --recursive
-fi
-
-path="$(pwd)"
-if [ "$1" == "--single" ]; then
-	if [ -z "$2" ]; then
+function main() {
+	submodules=($(git submodule | awk '{print $2}'))
+	if ((${#submodules[@]} == 0)); then
+		echo "fatal: repo has no submodules" >&2
 		exit
 	fi
-	module="$(git submodule | awk '{print $2}' | grep /$2$)"
-	if [ -z "$module" ]; then
-		echo "Module does not exist: $2"
+
+	if [ -z "$(git submodule summary)" ]; then
+		git submodule update --init --recursive
+	fi
+
+	if [ "$1" == "--single" ]; then
+		if [ -z "$2" ]; then
+			exit
+		fi
+		module="$(git submodule | awk '{print $2}' | grep /$2$)"
+		if [ -z "$module" ]; then
+			echo "Module does not exist: $2"
+			exit
+		fi
+		args="$path/$module $module"
+	else
+		args="$(echo ${submodules[@]} | tr ' ' "\n" | xargs -I {} echo "$path/{} {}")"
+	fi
+
+	which parallel 2>/dev/null 1>/dev/null
+	if [ $? -eq 0 ] && [ "$1" != "--seq" ] && [ "$1" != "--single" ]; then
+		par
+	else
+		seq
+	fi
+}
+
+function init() {
+	path_bak="$(pwd)"
+
+	if ! [ -d .git ] || ! git rev-parse --git-dir > /dev/null 2>&1; then
+		echo "fatal: not a git repository (or any parent up to mount point /)" >&2
 		exit
 	fi
-	args="$path/$module $module"
-else
-	args="$(echo ${submodules[@]} | tr ' ' "\n" | xargs -I {} echo "$path/{} {}")"
-fi
+	cd "$(git rev-parse --show-toplevel)"
+	path="$(pwd)"
+	main $@
 
-which parallel 2>/dev/null 1>/dev/null
-if [ $? -eq 0 ] && [ "$1" != "--seq" ] && [ "$1" != "--single" ]; then
-	par
-else
-	seq
-fi
+	cd "$path_bak"
+}
+
+init $@
