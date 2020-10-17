@@ -8,25 +8,30 @@ fu PathogenInit()
 	" ENABLED PLUGINS
 	"
 
-	call add(g:pathogen_enabled, 'ale')
-	call add(g:pathogen_enabled, 'git-blame')
-	call add(g:pathogen_enabled, 'i3config.vim')
+	" call add(g:pathogen_enabled, 'ale')
+	" call add(g:pathogen_enabled, 'git-blame')
+	" call add(g:pathogen_enabled, 'i3config.vim')
+
 	" call add(g:pathogen_enabled, 'nerdtree')
 	" call add(g:pathogen_enabled, 'nerdtree-git-plugin')
 	" call add(g:pathogen_enabled, 'omnisharp-vim')
-	call add(g:pathogen_enabled, 'syntastic')
-	call add(g:pathogen_enabled, 'tagbar')
-	call add(g:pathogen_enabled, 'vim-SyntaxRange')
-	call add(g:pathogen_enabled, 'vim-airline')
-	call add(g:pathogen_enabled, 'vim-airline-themes')
-	call add(g:pathogen_enabled, 'vim-commenter')
-	call add(g:pathogen_enabled, 'vim-fugitive')
-	call add(g:pathogen_enabled, 'vim-indent-guides')
-	call add(g:pathogen_enabled, 'vim-ingo-library')
+
+	" call add(g:pathogen_enabled, 'syntastic')
+	" call add(g:pathogen_enabled, 'tagbar')
+	" call add(g:pathogen_enabled, 'vim-SyntaxRange')
+	" call add(g:pathogen_enabled, 'vim-airline')
+	" call add(g:pathogen_enabled, 'vim-airline-themes')
+	" call add(g:pathogen_enabled, 'vim-commenter')
+	" call add(g:pathogen_enabled, 'vim-fugitive')
+	" call add(g:pathogen_enabled, 'vim-indent-guides')
+	" call add(g:pathogen_enabled, 'vim-ingo-library')
+
 	" call add(g:pathogen_enabled, 'vim-javascript')
 	" call add(g:pathogen_enabled, 'vim-jsx')
 	" call add(g:pathogen_enabled, 'vim-nerdtree-tabs')
-	call add(g:pathogen_enabled, 'vim-trailing-whitespace')
+
+	" call add(g:pathogen_enabled, 'vim-trailing-whitespace')
+
 	" call add(g:pathogen_enabled, 'vimpager') " WARNING: Very slow
 
 	"
