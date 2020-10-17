@@ -60,6 +60,17 @@ function seq() {
 }
 
 function main() {
+	git diff --exit-code
+	if [ "$?" -ne "0" ]; then
+		echo "There are some unstaged changes"
+		exit
+	fi
+	git diff --cached --exit-code
+	if [ "$?" -ne "0" ]; then
+		echo "There are some uncommitted changes"
+		exit
+	fi
+
 	submodules=($(git submodule | awk '{print $2}'))
 	if ((${#submodules[@]} == 0)); then
 		echo "fatal: repo has no submodules" >&2
