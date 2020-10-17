@@ -1,6 +1,6 @@
 fu PackInit()
 	packadd ale
-	packadd git-blame
+	packadd git-blame.vim
 	packadd i3config.vim
 	" packadd nerdtree
 	" packadd nerdtree-git-plugin
