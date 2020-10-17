@@ -3,11 +3,6 @@
 	url = https://github.com/w0rp/ale.git
 	branch = master
 	master = master
-[submodule ".vim/bundle/git-blame"]
-	path = home/.vim/bundle/git-blame
-	url = https://github.com/zivyangll/git-blame.vim.git
-	branch = master
-	master = master
 [submodule ".vim/bundle/nerdtree"]
 	path = home/.vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
