@@ -1,5 +1,7 @@
 fu PackInit()
 	packadd ale
+	packadd fzf
+	packadd fzf.vim
 	packadd git-blame.vim
 	packadd i3config.vim
 	" packadd nerdtree
