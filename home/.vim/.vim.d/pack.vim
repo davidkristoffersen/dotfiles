@@ -36,5 +36,5 @@ fu PluginsInit()
 	" call VimpagerInit()
 endf
 
-call PackInit()
 call PluginsInit()
+call PackInit()
