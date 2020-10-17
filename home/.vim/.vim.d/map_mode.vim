@@ -30,8 +30,8 @@ fu MapInit()
 	inoremap <A-k> <Esc>:m-2<CR>==gi
 
 	" Os clipboard
-	vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!cat ~/.vimbuffer \| clip.exe <CR><CR>
-	map <C-v> :r ~/.vimbuffer<CR>
+	" vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!cat ~/.vimbuffer \| clip.exe <CR><CR>
+	" map <C-v> :r ~/.vimbuffer<CR>
 	" vnoremap <silent> y y:call ClipboardYank()<cr>
 	" vnoremap <silent> d d:call ClipboardYank()<cr>
 	" nnoremap <silent> p :call ClipboardPaste()<cr>p
