@@ -98,3 +98,9 @@
 	url = https://github.com/inkarkat/vim-SyntaxRange.git
 	branch = stable
 	stable = stable
+[submodule "home/.vim/plugged/fzf"]
+	path = home/.vim/plugged/fzf
+	url = https://github.com/junegunn/fzf.git
+[submodule "home/.vim/plugged/fzf.vim"]
+	path = home/.vim/plugged/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
