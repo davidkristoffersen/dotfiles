@@ -16,35 +16,32 @@ function update() {
 	r="\e[0m"
 	path="$(echo $1 | awk '{print $1}')"
 	git_path="$(echo $1 | awk '{print $2}')"
+	name="$(basename $git_path)"
 	out=""
 
-	format "$path - $git_path" $r$b "$r\n"
-	format $force $r$f "$r\n"
-	return
+	format "Removing: $git_path" $r$b "$r\n"
 
-	cd $path
+	format "git config -f .git/config --remove-section submodule.$name" $r$f "$r\n"
+	git config -f .git/config --remove-section submodule.$name
+	format "git config -f .gitmodules --remove-section submodule.$name" $r$f "$r\n"
+	git config -f .gitmodules --remove-section submodule.$name
 
-	# Check if head is detached
-	git symbolic-ref -q HEAD 1>& /dev/null
-	if [ "$?" != "0" ]; then
-		obranch="$(git branch | grep -v ^* | head -n 1 | awk '{$1=$1};1')"
-	else
-		obranch="$(git branch --show-current)"
+	format "git rm --cached $git_path" $r$f "$r\n"
+	git rm --cached $git_path
+
+	format "git commit -m \"Removed submodule: $name\"" $r$f "$r\n"
+	git commit -m "Removed submodule: $name"
+
+	if ! $force; then
+		format "Force rm local repo? (y/N): " "$r$f" "$r"
+		read do_force_rm </dev/tty
 	fi
-
-	origin="$(git remote get-url origin)"
-	format "$git_path" $b "$r\n"
-	format "$origin" " ↳ " "\n"
-
-	format "git checkout $obranch" $r$f "$r\n"
-	format "$(git checkout $obranch 2>&1)" $r "$r\n"
-	format "git pull" $r$f "$r\n"
-	format "$(git pull 2>&1)" "$r" "\n"
-
-	if [ "$2" != "seq" ]; then
-		echo -e "$out"
+	if $force || ([ "$do_force_rm" == "y" ] || [ "$do_force_rm" == "Y" ]); then
+		format "rm -rf "$git_path"" $r$f "$r\n"
+		rm -rf "$git_path"
+		format "rm -rf .git/modules/"$name"" $r$f "$r\n"
+		rm -rf .git/modules/"$name"
 	fi
-	cd - 1>/dev/null
 }
 export -f update
 export -f format
