@@ -21,10 +21,10 @@ function update() {
 
 	format "Removing: $git_path" $r$b "$r\n"
 
-	format "git config -f .git/config --remove-section submodule.$name" $r$f "$r\n"
-	git config -f .git/config --remove-section submodule.$name
-	format "git config -f .gitmodules --remove-section submodule.$name" $r$f "$r\n"
-	git config -f .gitmodules --remove-section submodule.$name
+	format "git config -f .git/config --remove-section submodule.$git_path" $r$f "$r\n"
+	git config -f .git/config --remove-section submodule.$git_path
+	format "git config -f .gitmodules --remove-section submodule.$git_path" $r$f "$r\n"
+	git config -f .gitmodules --remove-section submodule.$git_path
 
 	format "git rm --cached $git_path" $r$f "$r\n"
 	git rm --cached $git_path
