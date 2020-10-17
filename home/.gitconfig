@@ -14,6 +14,7 @@
 	credz = config credential.helper store
 	df = diff --word-diff
 	submodulepull = "!f() { submodulepull.sh $@; }; f"
+	submodulerm = "!f() { submodulerm.sh $@; }; f"
 	editConfig = "!f() { vim $(git rev-parse --git-path config); }; f"
 	viewConfig = "!f() { cat $(git rev-parse --git-path config); }; f"
 [core]
