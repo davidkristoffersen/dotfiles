@@ -104,6 +104,3 @@
 [submodule "home/.vim/plugged/fzf.vim"]
 	path = home/.vim/plugged/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
-[submodule "home/.vim/pack/general/opt/vim-surround"]
-	path = home/.vim/pack/general/opt/vim-surround
-	url = https://github.com/tpope/vim-surround.git
