@@ -10,11 +10,11 @@ _fzf() {
 
 	# Completion file
 	if [[ $- == *i* ]]; then
-		source "$HOME/.src/.fzf/shell/completion.bash" 2> /dev/null; check_error $?
+		source "$DOTFILES/home/.vim/pack/general/opt/fzf/shell/completion.bash" 2> /dev/null;  check_error $?
 	fi
 
 	# Apply key bindings
-	source "$HOME/.src/.fzf/shell/key-bindings.bash"; check_error $?
+	source "$DOTFILES/home/.vim/pack/general/opt/fzf/shell/key-bindings.bash"; check_error $?
 }
 
 _fzf
