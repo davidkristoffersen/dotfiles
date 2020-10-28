@@ -15,6 +15,8 @@ _fzf() {
 
 	# Apply key bindings
 	source "$DOTFILES/home/.vim/pack/general/opt/fzf/shell/key-bindings.bash"; check_error $?
+
+	fzf_update() { $DOTFILES/home/.vim/pack/general/opt/fzf/install --bin; }
 }
 
 _fzf
