@@ -41,6 +41,8 @@ dotfiles_home() {
 	link_file $DOTFILES_HOME/.vim/.vimrc .vimrc "vim config"
 	# Latex
 	link_file $DOTFILES_CONFIG/latex/template.latex .config/latex/template.latex "Latex template"
+	# Pylint
+	link_file $DOTFILES_HOME/.pylintrc .pylintrc "Pylint config"
 
 	print_section "CLI programs"
 	# SQLite
