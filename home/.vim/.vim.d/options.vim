@@ -41,6 +41,10 @@ fu GeneralInit()
 	set ttimeoutlen=50		" Timeout in ms
 	let g:mapleader = " "	" Leader set to space
 
+	" NAVIGATE
+	set splitright			" Open new file on the right
+	set splitbelow			" Open new file below
+
 	" UNDO
 	set undofile				" Use an undo history file
 	set undodir=$HOME/.vim/undo	" Undo file path

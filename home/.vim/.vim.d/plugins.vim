@@ -3,6 +3,10 @@ fu AleInit()
 	let g:ale_linters = { 'cs': ['OmniSharp'] }
 endf
 
+fu FzfInit()
+
+endf
+
 fu GitBlameInit()
 	" Echo current line's git blame
 	nnoremap <leader>b :call gitblame#echo()<CR>

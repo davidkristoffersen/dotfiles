@@ -19,14 +19,30 @@ fu MapLeaderInit()
 	nnoremap <leader>] :tabn<cr>
 	" Move tab prev
 	nnoremap <leader>[ :tabp<cr>
+	" Fuzzy open file at tab next
+	nnoremap <leader>f] :tabe <bar> Files<cr>
+	" Fuzzy open file at tab prev
+	nnoremap <leader>f[ :tabe <bar> tabm -1 <bar> Files<cr>
 
-	" Reverse search
-	nnoremap <leader>r q:?
+	" Fuzzy lines search
+	nnoremap <leader>fl :BLines<cr>
+	" Fuzzy file search
+	nnoremap <leader>ff :Files<cr>
+	" Fuzzy history search
+	nnoremap <leader>fF :History<cr>
+	" Fuzzy command search
+	nnoremap <leader>fr :History:<cr>
+	" Fuzzy search search
+	nnoremap <leader>f/ :History/<cr>
 
 	" Clear search
 	nnoremap <leader>o :noh<cr>
 
-	" Leader for navigating vimsplit
+	" Opening vimsplit
+	nnoremap <leader>fh :split <bar> Files<cr>
+	nnoremap <leader>fv :vsplit <bar> Files<cr>
+
+	" Navigating vimsplit
 	nnoremap <leader>j :wincmd j<CR>
 	nnoremap <leader>k :wincmd k<CR>
 	nnoremap <leader>l :wincmd l<CR>
@@ -43,6 +59,10 @@ fu MapLeaderInit()
 
 	" Save
 	nmap <leader>w :w!<cr>
+	" Save and quit
+	nmap <leader>q :wq<cr>
+	" Force quit
+	nmap <leader>Q :q<cr>
 endf
 
 call MapLeaderInit()

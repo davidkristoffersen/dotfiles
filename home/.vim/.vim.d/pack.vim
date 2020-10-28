@@ -26,6 +26,7 @@ endf
 
 fu PluginsInit()
 	call AleInit()
+	call FzfInit()
 	call GitBlameInit()
 	call NerdCommenterInit()
 	" call NERDtreeInit()
