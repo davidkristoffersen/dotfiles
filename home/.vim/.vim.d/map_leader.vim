@@ -39,7 +39,7 @@ fu MapLeaderInit()
 	nnoremap <leader>ts :SyntasticToggleMode<cr>
 
 	" Comment out/in line
-	nnoremap <leader>c :call CommenterToggle()<cr>
+	" nnoremap <leader>c :call CommenterToggle()<cr>
 
 	" Save
 	nmap <leader>w :w!<cr>

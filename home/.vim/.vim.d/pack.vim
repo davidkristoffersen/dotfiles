@@ -4,6 +4,7 @@ fu PackInit()
 	packadd fzf.vim
 	packadd git-blame.vim
 	packadd i3config.vim
+	packadd nerdcommenter
 	" packadd nerdtree
 	" packadd nerdtree-git-plugin
 	" packadd omnisharp-vim
@@ -12,7 +13,7 @@ fu PackInit()
 	packadd vim-SyntaxRange
 	packadd vim-airline
 	packadd vim-airline-themes
-	packadd vim-commenter
+	" packadd vim-commenter
 	packadd vim-fugitive
 	packadd vim-indent-guides
 	packadd vim-ingo-library
@@ -26,6 +27,7 @@ endf
 fu PluginsInit()
 	call AleInit()
 	call GitBlameInit()
+	call NerdCommenterInit()
 	" call NERDtreeInit()
 	" call OmnisharpInit()
 	call SyntasticInit()

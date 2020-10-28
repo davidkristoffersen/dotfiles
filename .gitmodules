@@ -64,3 +64,6 @@
 [submodule "home/.vim/pack/general/opt/fzf.vim"]
 	path = home/.vim/pack/general/opt/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
+[submodule "home/.vim/pack/general/opt/nerdcommenter"]
+	path = home/.vim/pack/general/opt/nerdcommenter
+	url = https://github.com/preservim/nerdcommenter.git
