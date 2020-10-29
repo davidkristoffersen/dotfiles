@@ -67,3 +67,9 @@
 [submodule "home/.vim/pack/general/opt/nerdcommenter"]
 	path = home/.vim/pack/general/opt/nerdcommenter
 	url = https://github.com/preservim/nerdcommenter.git
+[submodule "home/.vim/pack/general/opt/vim-prettier"]
+	path = home/.vim/pack/general/opt/vim-prettier
+	url = https://github.com/prettier/vim-prettier.git
+[submodule "home/.vim/pack/general/opt/vim-bufferline"]
+	path = home/.vim/pack/general/opt/vim-bufferline
+	url = https://github.com/bling/vim-bufferline.git
