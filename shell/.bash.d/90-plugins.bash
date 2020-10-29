@@ -16,7 +16,21 @@ _fzf() {
 	# Apply key bindings
 	source "$DOTFILES/home/.vim/pack/general/opt/fzf/shell/key-bindings.bash"; check_error $?
 
-	fzf_update() { $DOTFILES_HOME/.vim/pack/general/opt/fzf/install --bin; }
+	fzf_update() {
+		$DOTFILES_HOME/.vim/pack/general/opt/fzf/install --bin
+	}
+
+	fzf_open_single() {
+		_file="$(fzf -m --height 60%)" \
+			&& history -s "vim $_file" \
+			&& vim $_file
+	}
+
+	fzf_open_multi() {
+		_files="$(fzf -m --height 60%)" \
+			&& history -s "vim -p $(xargs <<< "$_files")" \
+			&& vim -p $_files
+	}
 }
 
 _fzf
