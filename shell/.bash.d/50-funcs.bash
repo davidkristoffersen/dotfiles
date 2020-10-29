@@ -132,7 +132,16 @@ tree_dotfiles() {
 	printf "\n$_dirs directories, $_files files\n"
 }
 
-export -f tree_dotfiles
+pwd_list() {
+	dir_list="$(pwd | tr '/' ' ' | xargs -n 1)"
+	path=""
+	while IFS= read -r line; do
+		path="$path/$line"
+		echo "$path"
+	done <<< "$dir_list"
+}
+
+export -f tree_dotfiles pwd_list
 
 move_cursor() {
 	[ ${#@} == 2 ] && true; check_error $? nargs

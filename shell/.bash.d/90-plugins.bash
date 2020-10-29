@@ -31,6 +31,26 @@ _fzf() {
 			&& history -s "vim -p $(xargs <<< "$_files")" \
 			&& vim -p $_files
 	}
+
+	fzf_upwards_pwd() {
+		paths="$(pwd_list)"
+		len="$(($(wc -l <<< "$paths") + 2))"
+		basenames=""
+		i=2
+		while IFS= read -r line; do
+			num_dots="$(($len - $i + 1))"
+			num_spaces="$(($i - 1))"
+			dots="$(printf '.%.0s' $(seq 1 $num_dots))"
+			spaces="$(printf ' %.0s' $(seq 1 $num_spaces))"
+			basenames="$basenames\n$dots$spaces$(basename "$line")"
+			((i++))
+		done <<< "$paths"
+		basenames="$(echo -e "$basenames" | tail -n +2 | tac)"
+		basenames_numbers="$(echo -ne "$basenames" | cat -n)"
+		match="$(echo -e "$basenames" | fzf)"
+		number="$(echo -e "$basenames_numbers" | grep -e "$match$")"
+		echo $number
+	}
 }
 
 _fzf
