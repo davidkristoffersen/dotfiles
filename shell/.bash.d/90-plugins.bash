@@ -16,8 +16,19 @@ _fzf() {
 	# Apply key bindings
 	source "$DOTFILES/home/.vim/pack/general/opt/fzf/shell/key-bindings.bash"; check_error $?
 
-	fzf_update() { $DOTFILES/home/.vim/pack/general/opt/fzf/install --bin; }
+	fzf_update() { $DOTFILES_HOME/.vim/pack/general/opt/fzf/install --bin; }
 }
 
 _fzf
 unset -f _fzf
+
+_vim-prettier() {
+	vim-prettier_update() {
+		cd $DOTFILES_HOME/.vim/pack/general/opt/vim-prettier
+		yarn
+		cd - > /dev/null
+	}
+}
+
+_vim-prettier
+unset -f _vim-prettier
