@@ -24,6 +24,8 @@ fu MapLeaderInit()
 	" Fuzzy open file at tab prev
 	nnoremap <leader>f[ :tabe <bar> tabm -1 <bar> Files<cr>
 
+	" Fuzzy lines and files search
+	nnoremap <leader>fg :Rg<cr>
 	" Fuzzy lines search
 	nnoremap <leader>fl :BLines<cr>
 	" Fuzzy file search
