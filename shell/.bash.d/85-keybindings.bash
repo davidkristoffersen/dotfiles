@@ -1,6 +1,9 @@
 #'/usr/bin/bash
 
 if $SHELL_INTERACTIVE; then
+	# Fuzzy cd upwards cwd
+	bind -m vi-command '"\eC": " fzf_upwards_pwd\C-m"'
+	bind -m vi-insert '"\eC": " fzf_upwards_pwd\C-m"'
 	# Fuzzy open one file in vim
 	bind -m vi-command '"\C-f": " fzf_open_single\C-m"'
 	bind -m vi-insert '"\C-f": " fzf_open_single\C-m"'

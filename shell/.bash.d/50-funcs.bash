@@ -133,11 +133,29 @@ tree_dotfiles() {
 }
 
 pwd_list() {
-	dir_list="$(pwd | tr '/' ' ' | xargs -n 1)"
+	pwd | tr '/' ' ' | xargs -n 1 | head -n -1
+}
+
+pwd_full_list() {
+	dir_list="$(pwd_list)"
 	path=""
 	while IFS= read -r line; do
 		path="$path/$line"
 		echo "$path"
+	done <<< "$dir_list"
+}
+
+pwd_dot_list() {
+	dir_list="$(pwd_list)"
+	dir_num="$(wc -l <<< "$dir_list")"
+	i=0
+	while IFS= read -r line; do
+		num_dots="$(($dir_num - $i + 1))"
+		num_spaces="$(($i + 1))"
+		dots="$(printf '.%.0s' $(seq 1 $num_dots))"
+		spaces="$(printf ' %.0s' $(seq 1 $num_spaces))"
+		echo "$dots$spaces$line"
+		((i++))
 	done <<< "$dir_list"
 }
 
