@@ -20,6 +20,7 @@ fu PackInit()
 	" packadd vim-javascript
 	" packadd vim-jsx
 	" packadd vim-nerdtree-tabs
+	packadd vim-prettier
 	packadd vim-trailing-whitespace
 	" packadd vimpager " WARNING: Very slow
 endf
