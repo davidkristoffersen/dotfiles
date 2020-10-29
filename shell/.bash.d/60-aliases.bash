@@ -27,6 +27,7 @@ alias bashconfig="vim -p $(echo $HOME/.bashrc $HOME/.bash.d/*.bash)"
 alias srcprofile="source $HOME/.profile"
 alias profileconfig="vim -p $(echo $HOME/.profile $HOME/.profile.d/*.bash)"
 alias vimrc="vim $MYVIMRC"
+alias vimhome="cd $DOTFILES_HOME/.vim"
 alias vim_plugins="cd $HOME/.vim/bundle"
 alias dotfiles="cd $DOTFILES"
 
