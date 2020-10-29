@@ -1,10 +1,20 @@
 fu AleInit()
-	" Use omnisharp for c# files
-	let g:ale_linters = { 'cs': ['OmniSharp'] }
+	" Enabled linters
+	" let g:ale_linters = { 'cs': ['OmniSharp'] }
+
+	" Enabled fixers
+	let g:ale_fixers = {
+	\	'javascript': ['prettier'],
+	\ 	'css': ['prettier'],
+	\ 	'scss': ['prettier'],
+	\ 	'html': ['prettier'],
+	\ 	'typescript': ['prettier']
+	\ }
+	let g:ale_fix_on_save = 1
 endf
 
 fu FzfInit()
-
+	" let g:airline#extensions#bufferline#enabled = 1
 endf
 
 fu GitBlameInit()
