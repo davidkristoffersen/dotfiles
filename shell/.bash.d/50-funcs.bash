@@ -133,14 +133,17 @@ tree_dotfiles() {
 }
 
 pwd_list() {
-	pwd | tr '/' ' ' | xargs -n 1 | head -n -1
+	echo -e "/\n$(pwd | tr '/' ' ' | xargs -n 1 | head -n -1)"
 }
 
 pwd_full_list() {
 	dir_list="$(pwd_list)"
 	path=""
+	i=0
 	while IFS= read -r line; do
-		path="$path/$line"
+		[ $i -lt 2 ] \
+			&& path="$line" \
+			|| path="$path/$line"
 		echo "$path"
 	done <<< "$dir_list"
 }
