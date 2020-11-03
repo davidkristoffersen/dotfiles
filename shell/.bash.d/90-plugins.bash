@@ -21,13 +21,13 @@ _fzf() {
 	}
 
 	fzf_open_single() {
-		_file="$(fzf -m --height 40%)" \
+		_file="$(fzf -m --reverse --height 40%)" \
 			&& history -s "vim $_file" \
 			&& vim $_file
 	}
 
 	fzf_open_multi() {
-		_files="$(fzf -m --height 40%)" \
+		_files="$(fzf -m --reverse --height 40%)" \
 			&& history -s "vim -p $(xargs <<< "$_files")" \
 			&& vim -p $_files
 	}
@@ -36,7 +36,7 @@ _fzf() {
 		full_paths="$(pwd_full_list | tac)"
 		dot_paths="$(pwd_dot_list | tac)"
 		dot_nums="$(echo -ne "$dot_paths" | cat -n)"
-		match="$(echo -e "$dot_paths" | fzf -m --height 40%)"
+		match="$(echo -e "$dot_paths" | fzf -m --reverse --height 40%)"
 		if [ -z "$match" ]; then
 			return
 		fi

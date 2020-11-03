@@ -150,11 +150,13 @@ pwd_dot_list() {
 	dir_num="$(wc -l <<< "$dir_list")"
 	i=0
 	while IFS= read -r line; do
-		num_dots="$(($dir_num - $i + 1))"
-		num_spaces="$(($i + 1))"
-		dots="$(printf '.%.0s' $(seq 1 $num_dots))"
-		spaces="$(printf ' %.0s' $(seq 1 $num_spaces))"
-		echo "$dots$spaces$line"
+		num_dots="$(($dir_num - $i))"
+		num_spaces="$i"
+		dots="$(printf '.%.0s' $(seq 0 $num_dots))"
+		[ $num_spaces -ne 0 ] \
+			&& spaces="$(printf ' %.0s' $(seq 1 $num_spaces))" \
+			|| spaces=""
+		echo "$spaces$dots $line"
 		((i++))
 	done <<< "$dir_list"
 }
