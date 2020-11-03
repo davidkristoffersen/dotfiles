@@ -60,11 +60,11 @@ fu MapLeaderInit()
 	" nnoremap <leader>c :call CommenterToggle()<cr>
 
 	" Save
-	nmap <leader>w :w!<cr>
+	nmap <leader>w :w<cr>
+	" Quit
+	nmap <leader>q :q<cr>
 	" Save and quit
-	nmap <leader>q :wq<cr>
-	" Force quit
-	nmap <leader>Q :q<cr>
+	nmap <leader>Q :wq<cr>
 endf
 
 call MapLeaderInit()
