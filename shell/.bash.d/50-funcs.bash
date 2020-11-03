@@ -137,13 +137,11 @@ pwd_list() {
 }
 
 pwd_full_list() {
-	dir_list="$(pwd_list)"
+	dir_list="$(pwd_list | tail -n +2)"
 	path=""
-	i=0
+	echo "/"
 	while IFS= read -r line; do
-		[ $i -lt 2 ] \
-			&& path="$line" \
-			|| path="$path/$line"
+		path="$path/$line"
 		echo "$path"
 	done <<< "$dir_list"
 }
