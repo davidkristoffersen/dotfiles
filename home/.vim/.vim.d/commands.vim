@@ -10,9 +10,11 @@ fu AutoCommandsInit()
 	au VimEnter * :call ForceSyntax()		" Force syntax
 
 	" Filetype specific
-	au Filetype python setl et ts=4 sw=4 sts=4	" Python
-	au BufEnter,BufRead *.conf setf dosini		" Conf files have dosini syntax
-	au BufEnter,BufRead *.rasi setf css			" Rasi files have css syntax
+	au Filetype python setl et ts=4 sw=4 sts=4		" Python
+	au Filetype html setl et ts=2 sw=2 sts=2		" Html
+	au Filetype typescript setl et ts=2 sw=2 sts=2	" Typescript
+	au BufEnter,BufRead *.conf setf dosini			" Conf files have dosini syntax
+	au BufEnter,BufRead *.rasi setf css				" Rasi files have css syntax
 endf
 
 call CommandsInit()
