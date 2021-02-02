@@ -58,6 +58,7 @@ fu GeneralInit()
 	set shell=bash\ --login		" Execute bashrc aliases in ! mode
 	set clipboard=unnamedplus	" Use both '+' and '*' register as clipboard
 	set mouse=a					" Enable mouse in all modes
+	set visualbell t_vb=		" Disable bell
 
 	" FILETYPE
 	filetype on			" On edit: Do filetype detection
