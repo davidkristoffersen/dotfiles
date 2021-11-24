@@ -12,7 +12,7 @@ def parse_args():
     parser.add_argument(
         '-s', '--script', choices=['shell', 'home'], help='Script name to install')
     parser.add_argument(
-        '-p', '--pacman', dest='pacman', action='store_true', help='Run pacman install')
+        '-t', '--test', dest='test', action='store_true', help='Run test install')
     parser.add_argument(
         '--server', dest='server', action='store_true', help='Run server install')
     argcomplete.autocomplete(parser)
@@ -20,7 +20,7 @@ def parse_args():
 
 
 def main(**args):
-    install = Install(args['script'], args['pacman'], args['server'])
+    install = Install(args['script'],  args['server'], args['test'])
 
     install.run()
 

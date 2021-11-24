@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import os
 
 from config import *
@@ -10,15 +8,14 @@ from scripts import *
 
 
 class Install():
-    def __init__(self, script=False, pacman=False, server=False):
+    def __init__(self, script=False, server=False, test=False):
         self.script = script
-        self.pacman = pacman
         self.server = server
+        self.test = test
 
         self.script_map = {
             'shell': shell,
             'home': home,
-            'test': test,
             # 'bin': bin,
             # 'lib': lib,
             # 'share': share,
@@ -32,9 +29,10 @@ class Install():
         os.chdir(DOTFILES)
 
     def run(self):
-        print(self.script, self.pacman)
         if self.script:
             self.run_script(self.script_map[self.script], self.script)
+        elif self.test:
+            self.run_script(test, 'test')
         else:
             for name, script in self.script_map.items():
                 self.run_script(script, name)
@@ -56,7 +54,3 @@ class Install():
             out = f'{pre}\n\n{out}\n\n{post}'
 
             write(out, dst)
-
-
-if __name__ == "__main__":
-    pass

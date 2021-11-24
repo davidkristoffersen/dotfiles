@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-'''Home dotfiles'''
-
 from config import *
 from util import *
 from print import *
@@ -74,7 +71,3 @@ def home():
               '.gimp-2.0/gimprc', 'GIMP config')
     # Gitk
     link_file(f'{DOTFILES_CONFIG}/git/gitk', '.config/git/gitk', 'gitk config')
-
-
-if __name__ == "__main__":
-    pass

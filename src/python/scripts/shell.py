@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-'''Shell dotfiles'''
-
 from config import *
 from util import *
 from print import *
@@ -26,7 +23,3 @@ def shell():
 
     print_section("Source")
     source_all()
-
-
-if __name__ == "__main__":
-    pass

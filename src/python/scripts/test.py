@@ -1,13 +1,10 @@
-#!/usr/bin/env python3
-'''Test dotfiles'''
-
 from config import *
 from util import *
 from print import *
 
 
 def test():
-    '''test dotfiles'''
+    '''Test dotfiles'''
     foos = ['.foo', '.foo.d']
     bars = ['.bar', '.bar.d']
 
@@ -18,7 +15,3 @@ def test():
     print_section("Bar")
     for bar in bars:
         link_file(f'{DOTFILES_SHELL}/{bar}', bar, bar)
-
-
-if __name__ == "__main__":
-    pass

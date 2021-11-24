@@ -1,6 +1,3 @@
-#!/usr/bin/env pyhton3
-'''Set global variables'''
-
 import pathlib
 import os
 
