@@ -1,6 +1,6 @@
 from config import *
-from util import *
 from print import *
+from util import *
 
 
 def test():

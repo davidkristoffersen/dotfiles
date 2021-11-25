@@ -1,10 +1,9 @@
 import os
 
 from config import *
-from util import *
 from print import print_header
-
 from scripts import *
+from util import *
 
 
 class Install():

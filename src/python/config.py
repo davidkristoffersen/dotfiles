@@ -1,6 +1,5 @@
-import pathlib
 import os
-
+import pathlib
 
 HOME = os.getenv('HOME')
 DOTFILES = pathlib.Path(__file__).parent.parent.parent.resolve()
