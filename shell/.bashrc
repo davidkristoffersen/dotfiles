@@ -9,7 +9,8 @@ _bashrc() {
 			continue
 		fi
 
-		. $DOTFILES_SHELL/.bash.d/$bash_file; check_error 0
+		. $DOTFILES_SHELL/.bash.d/$bash_file
+		check_error 0
 	done
 
 	export SHELL_BASHRC=true
@@ -17,3 +18,7 @@ _bashrc() {
 
 _bashrc
 unset -f _bashrc
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/david/.sdkman"
+[[ -s "/home/david/.sdkman/bin/sdkman-init.sh" ]] && source "/home/david/.sdkman/bin/sdkman-init.sh"

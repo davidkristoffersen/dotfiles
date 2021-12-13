@@ -5,6 +5,7 @@ import os
 import sys
 from i3ipc import Connection
 
+
 def swap_workspaces():
     """Swap two workspaces"""
     direction = sys.argv[1] if len(sys.argv) > 1 else False
@@ -29,6 +30,7 @@ def swap_workspaces():
     _i3.command('move ' + 'workspace to output ' + direction_opp)
     return True
 
+
 def focus_cursor():
     """Focus cursor on new workspace"""
     cmds = [
@@ -41,11 +43,13 @@ def focus_cursor():
     cmd = ';'.join(cmds)
     os.system(cmd)
 
+
 def main():
     """Main function"""
     if not swap_workspaces():
         return
     focus_cursor()
+
 
 if __name__ == "__main__":
     main()

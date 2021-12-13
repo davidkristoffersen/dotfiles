@@ -10,8 +10,8 @@ prompt_pre() {
 prompt_path() {
 	local path=""
 	local -a path_arr
-	IFS="/" read -ra path_arr <<< "$(pwd)"
-	local path_len="$((${#path_arr[@]}-1))"
+	IFS="/" read -ra path_arr <<<"$(pwd)"
+	local path_len="$((${#path_arr[@]} - 1))"
 	local path_it=-1
 	local path_padd=2
 	if [ $path_len -eq 0 ]; then
@@ -41,7 +41,7 @@ prompt_path() {
 prompt_git() {
 	# Git branch detection
 	local branch="$(git branch 2>/dev/null | grep '^*' | colrm 1 2)"
- 	if [ "$branch" == " " ]; then
+	if [ "$branch" == " " ]; then
 		branch=''
 	fi
 	printf "$branch"

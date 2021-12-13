@@ -1,19 +1,20 @@
 #!/usr/bin/env python
 
-from subprocess import PIPE, run
-from json import load as load_f, dump as dump_f, loads
-from pprint import pprint
-
-from _ctypes import PyObj_FromPtr
-from string import ascii_lowercase as letters
 import json
 import re
+from json import load as load_f
+from subprocess import PIPE, run
+
+from _ctypes import PyObj_FromPtr
 from tabulate import tabulate
+
 
 class NoIndent(object):
     """ Value wrapper. """
+
     def __init__(self, value):
         self.value = value
+
 
 class MyEncoder(json.JSONEncoder):
     FORMAT_SPEC = '@@{}@@'
@@ -39,24 +40,29 @@ class MyEncoder(json.JSONEncoder):
             # see https://stackoverflow.com/a/15012814/355230
             id = int(match.group(1))
             no_indent = PyObj_FromPtr(id)
-            json_obj_repr = json.dumps(no_indent.value, sort_keys=self.__sort_keys)
+            json_obj_repr = json.dumps(
+                no_indent.value, sort_keys=self.__sort_keys)
 
             # Replace the matched id string with json formatted representation
             # of the corresponding Python object.
             json_repr = json_repr.replace(
-                            '"{}"'.format(format_spec.format(id)), json_obj_repr)
+                '"{}"'.format(format_spec.format(id)), json_obj_repr)
 
         return json_repr
 
+
 class BashCmd():
     def __init__(self, cmd):
-        self.result = run(cmd, stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
+        self.result = run(cmd, stdout=PIPE, stderr=PIPE,
+                          universal_newlines=True, shell=True)
         self.ret = self.result.returncode
         self.out = self.result.stdout
         self.err = self.result.stderr
 
+
 def default_pkg(name):
     return {"desc": ""}
+
 
 def update_file(path, pkgs):
     with open(path, 'r') as f:
@@ -78,9 +84,11 @@ def update_file(path, pkgs):
             body_f[key] = {}
             for key2, val in body[key].items():
                 body_f[key][key2] = NoIndent(val)
-        body_f = str(json.dumps(body_f, cls=MyEncoder, sort_keys=True, indent=4))
+        body_f = str(json.dumps(body_f, cls=MyEncoder,
+                     sort_keys=True, indent=4))
         BashCmd("echo '" + body_f + "' > " + path)
     return body['whitelist']
+
 
 def print_file(pkgs):
     ret = {}
@@ -93,6 +101,7 @@ def print_file(pkgs):
         out += key + ' '
     ret['l'] = out
     return ret
+
 
 if __name__ == "__main__":
     path = "$DOTFILES_SHARE/pacman/"

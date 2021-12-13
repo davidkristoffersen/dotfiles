@@ -1,0 +1,287 @@
+{
+  "C_Cpp.clang_format_sortIncludes": true,
+  "C_Cpp.formatting": "vcFormat",
+  "C_Cpp.updateChannel": "Insiders",
+  "C_Cpp.vcFormat.newLine.beforeOpenBrace.block": "sameLine",
+  "C_Cpp.vcFormat.newLine.beforeOpenBrace.function": "sameLine",
+  "C_Cpp.vcFormat.newLine.beforeOpenBrace.lambda": "sameLine",
+  "C_Cpp.vcFormat.newLine.beforeOpenBrace.namespace": "sameLine",
+  "C_Cpp.vcFormat.newLine.beforeOpenBrace.type": "sameLine",
+  "C_Cpp.vcFormat.newLine.closeBraceSameLine.emptyFunction": true,
+  "C_Cpp.vcFormat.newLine.closeBraceSameLine.emptyType": true,
+  "C_Cpp.vcFormat.space.beforeEmptySquareBrackets": true,
+  "C_Cpp.vcFormat.space.beforeInitializerListOpenBrace": true,
+  "C_Cpp.vcFormat.space.betweenEmptyBraces": true,
+  "C_Cpp.vcFormat.space.betweenEmptyLambdaBrackets": true,
+  "[c]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools",
+    "editor.semanticHighlighting.enabled": true,
+    "editor.suggest.insertMode": "replace",
+    "editor.wordBasedSuggestions": false
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 4,
+    "editor.wordWrap": "on",
+    "editor.wrappingIndent": "indent"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "autoDocstring.quoteStyle": "'''",
+  "breadcrumbs.enabled": false,
+  "cSpell.enabled": false,
+  "cSpell.userWords": [
+    "appl",
+    "datetime",
+    "discoverability",
+    "dualog",
+    "elem",
+    "Fogg",
+    "Foggs",
+    "gamification",
+    "inkbar",
+    "interpretivism",
+    "leaderboard",
+    "leaderboards",
+    "mypage",
+    "ngneat",
+    "Precommitment",
+    "Sunstein",
+    "Webmail"
+  ],
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.wordWrap": "on",
+  "editor.autoClosingBrackets": "never",
+  "editor.autoClosingQuotes": "never",
+  "editor.cursorBlinking": "solid",
+  "editor.detectIndentation": false,
+  "editor.fontSize": 13,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": true,
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.hover.delay": 500,
+  "editor.hover.sticky": false,
+  "editor.insertSpaces": false,
+  "editor.lightbulb.enabled": false,
+  "editor.lineHeight": 0,
+  "editor.lineNumbers": "relative",
+  "editor.minimap.enabled": false,
+  "editor.mouseWheelZoom": true,
+  "editor.renderWhitespace": "trailing",
+  "editor.wordWrap": "on",
+  "editor.wrappingIndent": "deepIndent",
+  "editor.wrappingStrategy": "advanced",
+  "files.associations": {
+    "*.bash": "shellscript",
+    "*.h": "c",
+    "*.latex": "latex"
+  },
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.factorypath": true,
+    "**/.project": true,
+    "**/.settings": true
+  },
+  "githubPullRequests.fileListLayout": "tree",
+  "gitlens.currentLine.enabled": false,
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.hovers.enabled": false,
+  "latex-workshop.view.pdf.invertMode.brightness": 0.9,
+  "latex-workshop.view.pdf.invertMode.grayscale": 0.8,
+  "latex-workshop.view.pdf.viewer": "tab",
+  "markdown.extension.list.indentationSize": "inherit",
+  "markdown.preview.scrollEditorWithPreview": false,
+  "markdown.preview.scrollPreviewWithEditor": false,
+  "markdownlint.config": {
+    "header-style": false,
+    "list-marker-space": false,
+    "no-duplicate-header": false,
+    "no-inline-html": false,
+    "single-h1": false,
+    "ul-indent": false
+  },
+  "omnisharp.organizeImportsOnFormat": true,
+  "terminal.integrated.fontSize": 17,
+  "todo-tree.general.tagGroups": {
+    "TEMP": ["TEMP", "TMP"]
+  },
+  "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "XXX", "TEMP", "TMP", "[ ]", "[x]"],
+  "todo-tree.highlights.customHighlight": {
+    "BUG": {
+      "background": "black",
+      "foreground": "orange",
+      "icon": "bug"
+    },
+    "FIXME": {
+      "background": "black",
+      "foreground": "red",
+      "icon": "flame"
+    },
+    "TEMP": {
+      "background": "black",
+      "foreground": "magenta",
+      "icon": "x"
+    },
+    "TODO": {
+      "background": "black",
+      "foreground": "cyan",
+      "icon": "check",
+      "iconColor": "green"
+    }
+  },
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+  "vim.cursorStylePerMode.insert": "line",
+  "vim.cursorStylePerMode.normal": "block",
+  "vim.cursorStylePerMode.replace": "block",
+  "vim.cursorStylePerMode.visual": "block",
+  "vim.handleKeys": {
+    "<C-b>": false,
+    "<C-j>": false,
+    "<C-k>": false
+  },
+  "vim.leader": " ",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "after": [":", "w", "<CR>"],
+      "before": ["<leader>", "w"]
+    },
+    {
+      "after": [":", "q", "<CR>"],
+      "before": ["<leader>", "q"]
+    },
+    {
+      "after": [":", "x", "<CR>"],
+      "before": ["<leader>", "x"]
+    },
+    {
+      "before": ["<leader>", "["],
+      "after": ["m", "a", "%", "m", "b", "%", "r", "]", "`", "b", "r", "[", "`", "a"]
+    },
+    {
+      "after": ["m", "a", "%", "m", "b", "%", "r", "}", "`", "b", "r", "{", "`", "a"],
+      "before": ["<leader>", "{"]
+    },
+    {
+      "after": ["m", "a", "%", "m", "b", "%", "r", ")", "`", "b", "r", "(", "`", "a"],
+      "before": ["<leader>", "("]
+    },
+    {
+      "after": ["i", ":", "s", "t", "a", "r", ":", "<Esc>", "F", ":", "h"],
+      "before": ["<leader>", "P", "s"]
+    },
+    {
+      "after": ["a", ":", "p", "u", "r", "p", "l", "e", "_", "h", "e", "a", "r", "t", ":", "<Esc>", "F", ":", "h"],
+      "before": ["<leader>", "p", "h"]
+    },
+    {
+      "after": ["i", ":", "p", "u", "r", "p", "l", "e", "_", "h", "e", "a", "r", "t", ":", "<Esc>", "F", ":", "h"],
+      "before": ["<leader>", "P", "h"]
+    },
+    {
+      "after": ["a", ":", "w", "h", "i", "t", "e", "_", "c", "h", "e", "c", "k", "_", "m", "a", "r", "k", ":", "<Esc>", "F", ":", "h"],
+      "before": ["<leader>", "p", "u"]
+    },
+    {
+      "after": ["i", ":", "w", "h", "i", "t", "e", "_", "c", "h", "e", "c", "k", "_", "m", "a", "r", "k", ":", "<Esc>", "F", ":", "h"],
+      "before": ["<leader>", "P", "u"]
+    },
+    {
+      "after": ["a", ":", "l", "a", "r", "g", "e", "_", "b", "l", "u", "e", "_", "c", "i", "r", "c", "l", "e", ":", "<Esc>", "F", ":", "h"],
+      "before": ["<leader>", "p", "n"]
+    },
+    {
+      "after": ["i", ":", "l", "a", "r", "g", "e", "_", "b", "l", "u", "e", "_", "c", "i", "r", "c", "l", "e", ":", "<Esc>", "F", ":", "h"],
+      "before": ["<leader>", "P", "n"]
+    },
+    {
+      "after": ["a", ":", "g", "r", "e", "y", "_", "q", "u", "e", "s", "t", "i", "o", "n", ":", "<Esc>", "F", ":", "h"],
+      "before": ["<leader>", "p", "q"]
+    },
+    {
+      "after": ["i", ":", "g", "r", "e", "y", "_", "q", "u", "e", "s", "t", "i", "o", "n", ":", "<Esc>", "F", ":", "h"],
+      "before": ["<leader>", "P", "q"]
+    },
+    {
+      "after": ["a", ":", "x", ":", "<Esc>", "F", ":", "h"],
+      "before": ["<leader>", "p", "d"]
+    },
+    {
+      "after": ["i", ":", "x", ":", "<Esc>", "F", ":", "h"],
+      "before": ["<leader>", "P", "d"]
+    }
+  ],
+  "vim.vimrc.path": "\\\\wsl$\\Ubuntu-20.04\\home\\david\\dotfiles\\home\\.vim\\vscode\\.vimrc",
+  "window.zoomLevel": 1,
+  "workbench.colorCustomizations": {
+    "breadcrumb.background": "#1d1d1d",
+    "breadcrumb.foreground": "#5f5f5f",
+    "contrastActiveBorder": "#00000000",
+    "contrastBorder": "#00000000",
+    "editor.background": "#1d1d1d",
+    "editor.foreground": "#ddd",
+    "editor.inactiveSelectionBackground": "#333",
+    "editor.lineHighlightBackground": "#ff000000",
+    "editor.lineHighlightBorder": "#ff000000",
+    "editor.selectionBackground": "#333",
+    "editorCursor.background": "#000000",
+    "editorCursor.foreground": "#ff3737",
+    "editorGroup.border": "#292929",
+    "editorGroupHeader.tabsBackground": "#1d1d1d",
+    //"breadcrumb.background": "#000000",
+    // Gutter
+    "editorGutter.background": "#1d1d1d",
+    //"editorBracketMatch.background": "#3d3d3d",
+    //"editorBracketMatch.border": "#0000",
+    //"editorIndentGuide.activeBackground": "#414141",
+    "editorIndentGuide.background": "#0000",
+    "editorLineNumber.activeForeground": "#616161",
+    "editorLineNumber.foreground": "#333333",
+    // Scrollbar
+    "editorOverviewRuler.addedForeground": "#0000",
+    "editorOverviewRuler.border": "#1d1d1d",
+    "editorOverviewRuler.deletedForeground": "#0000",
+    "editorOverviewRuler.errorForeground": "#0000",
+    "editorOverviewRuler.modifiedForeground": "#0000",
+    "editorOverviewRuler.selectionHighlightForeground": "#0000",
+    "editorOverviewRuler.warningForeground": "#0000",
+    "focusBorder": "#ff000000",
+    "gitDecoration.addedResourceForeground": "#73c991",
+    "gitDecoration.deletedResourceForeground": "#f88070",
+    "gitDecoration.modifiedResourceForeground": "#e2c08c",
+    "list.activeSelectionBackground": "#161616",
+    "list.activeSelectionBorder": "#161616",
+    "scrollbar.shadow": "#ffffff00",
+    "scrollbarSlider.activeBackground": "#292929",
+    "scrollbarSlider.background": "#2c2c2c",
+    "scrollbarSlider.hoverBackground": "#292929",
+    "sideBar.background": "#1d1d1d",
+    "statusBar.background": "#1d1d1d",
+    "statusBar.foreground": "#9b9b9b",
+    "tab.activeBackground": "#000000",
+    "tab.inactiveBackground": "#1d1d1d",
+    "tab.unfocusedHoverBackground": "#161616",
+    "widget.shadow": "#ffffff00"
+  },
+  "workbench.colorTheme": "Visual Studio 2019 Dark",
+  "workbench.editor.scrollToSwitchTabs": true,
+  "workbench.editor.wrapTabs": true,
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter.notebook.ipynb"
+  },
+  "workbench.iconTheme": "material-icon-theme",
+  "zenMode.hideLineNumbers": false,
+  "zenMode.hideTabs": false
+}

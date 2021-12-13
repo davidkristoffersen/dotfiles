@@ -181,12 +181,10 @@
 % CREATION OF TITLE
 	\date{}
 	\author{
-		% \large{David Kristoffersen}\\ [0.5cm]
-		\large{David Kristoffersen - dkr011@post.uit.no}\\ [0.5cm]
-		% \large{Git brukernavn: davidkristoffersen}\\ [0.5cm]
+		\large{Name - email}\\ [0.5cm]
 		\vspace{-2cm}
 	}
 	\title{
 		\vspace{-2cm}
-		\huge{INF\_3201 - Parallel Programming - Assignment 1}\\ [0.3cm]
+		\huge{title-text}\\ [0.3cm]
 	}

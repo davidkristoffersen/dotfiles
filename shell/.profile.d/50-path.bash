@@ -21,6 +21,8 @@ path_add "$HOME/.src/dotnet_sdk"
 path_add "$HOME/.dotnet/tools"
 # Fzf's bin
 path_add "$HOME/dotfiles/home/.vim/pack/general/opt/fzf/bin"
+# Npm user directory
+path_add "$HOME/.npm-global/bin"
 
 # Make path global
 export PATH="$PATH"

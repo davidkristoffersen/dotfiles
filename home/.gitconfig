@@ -3,7 +3,7 @@
 	name = David Kristoffersen
 	email = david.alta2010@gmail.com
 [push]
-	default = matching
+	default = simple
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	lgs = "!f() { num=10; if [ ! -z $1 ]; then num=$1; fi; git lg | head -n $num; }; f"
@@ -27,3 +27,7 @@
 [color]
 	ui = always
 	branch = auto
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true

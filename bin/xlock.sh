@@ -17,11 +17,11 @@ get_autorandr_profile() {
 
 json_config() {
 	if [ $# -eq 1 ]; then
-		jq -r '.["'$1'"]' <<< "$config"
+		jq -r '.["'$1'"]' <<<"$config"
 	elif [ $# -eq 2 ]; then
-		jq -r '.["'$1'"]["'$2'"]' <<< "$config"
+		jq -r '.["'$1'"]["'$2'"]' <<<"$config"
 	elif [ $3 == "list" ]; then
-		jq -r '.["'$1'"]['$2']' <<< "$config"
+		jq -r '.["'$1'"]['$2']' <<<"$config"
 	fi
 }
 
@@ -42,7 +42,7 @@ screenshot() {
 }
 
 modify_par() {
-	. `which env_parallel.bash`
+	. $(which env_parallel.bash)
 	echo $(seq 0 $((num_screens - 1))) | tr " " "\n" | env_parallel timeit modify
 }
 
@@ -112,7 +112,7 @@ main() {
 }
 
 test_func() {
-	test "$(type $1 2> /dev/null)" || eval "$1(){ \$@; }"
+	test "$(type $1 2>/dev/null)" || eval "$1(){ \$@; }"
 }
 
 # test_func timeit

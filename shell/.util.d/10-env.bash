@@ -29,7 +29,28 @@ xhost >& /dev/null \
 	&& XDISPLAY=true \
 	|| XDISPLAY=false
 
-export SHELL_SH SHELL_INTERACTIVE SHELL_LOGIN SSH XDISPLAY
+# Is the os based on wsl
+[ ! -z "$(uname -r | grep -ie "wsl2$")" ] \
+	&& SHELL_WSL=true \
+	|| SHELL_WSL=false
+
+# Does wsl have gui support
+false && $SHELL_WSL \
+	&& SHELL_WSLG=true \
+	|| SHELL_WSLG=false
+
+# Windows home path
+# && WIN_HOME="$(wslpath "$(wslvar USERPROFILE)")" \
+$SHELL_WSL \
+	&& WIN_HOME="/mnt/c/Users/divad" \
+	|| WIN_HOME=""
+
+# Windows username
+$SHELL_WSL \
+	&& WIN_USERNAME="$(echo "$WIN_HOME" | xargs -I {} basename {})" \
+	|| WIN_USERNAME=""
+
+export SHELL_SH SHELL_INTERACTIVE SHELL_LOGIN SSH XDISPLAY SHELL_WSL SHELL_WSLG WIN_HOME WIN_USERNAME
 
 #
 # COLORS

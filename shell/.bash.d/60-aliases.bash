@@ -15,11 +15,14 @@ alias free='free -m'                      # show sizes in MB
 # Listing
 alias lll="exa -ls type --git"
 alias lla="exa -las type --git"
+alias ld="exa -lDGs type --git"
+alias lda="exa -lDGas type --git"
 alias ll="exa -lGs type --git"
 alias la="exa -lGas type --git"
 alias l="exa -s type --git"
 alias a="exa -as type --git"
 
+# Config
 alias srcall="source $HOME/.bash_profile"
 alias srcbash="source $HOME/.bashrc"
 alias bashrc="vim $HOME/.bashrc"
@@ -31,6 +34,7 @@ alias vimhome="cd $DOTFILES_HOME/.vim"
 alias vim_plugins="cd $HOME/.vim/bundle"
 alias dotfiles="cd $DOTFILES"
 
+# Terminal
 alias c='clear'
 
 # Program specific
@@ -39,3 +43,4 @@ alias lock='i3lock-fancy -pf inconsolata'
 alias python='python3'
 alias pcloud_start='pcloud > /dev/null 2>&1 &'
 alias vless="$PAGER"
+alias xdg-open="open"
