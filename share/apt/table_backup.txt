@@ -1,0 +1,784 @@
+Section                Name                                   Description
+=======                ====                                   ===========
+Unknown                aspnetcore-runtime-5.0
+Unknown                aspnetcore-targeting-pack-5.0
+Unknown                bind9-libs:amd64
+Unknown                binutils-common:amd64
+Unknown                dconf-gsettings-backend:amd64
+Unknown                dotnet-apphost-pack-5.0
+Unknown                dotnet-host
+Unknown                dotnet-hostfxr-5.0
+Unknown                dotnet-runtime-5.0
+Unknown                dotnet-runtime-deps-5.0
+Unknown                dotnet-sdk-5.0
+Unknown                dotnet-targeting-pack-5.0
+Unknown                g++
+Unknown                g++-9
+Unknown                gcc-10-base:amd64
+Unknown                gcc-9-base:amd64
+Unknown                gh
+Unknown                gir1.2-glib-2.0:amd64
+Unknown                glib-networking:amd64
+Unknown                gnome-keyring-pkcs11:amd64
+Unknown                gtk2-engines-pixbuf:amd64
+Unknown                gtk2-engines:amd64
+Unknown                i965-va-driver:amd64
+Unknown                intel-media-va-driver:amd64
+Unknown                linux-libc-dev:amd64
+Unknown                mesa-va-drivers:amd64
+Unknown                mesa-vdpau-drivers:amd64
+Unknown                mesa-vulkan-drivers:amd64
+Unknown                netstandard-targeting-pack-2.1
+Unknown                ocl-icd-libopencl1:amd64
+Unknown                openjdk-11-jdk-headless:amd64
+Unknown                openjdk-11-jdk:amd64
+Unknown                openjdk-11-jre-headless:amd64
+Unknown                openjdk-11-jre:amd64
+Unknown                openjdk-8-jdk-headless:amd64
+Unknown                openjdk-8-jdk:amd64
+Unknown                openjdk-8-jre-headless:amd64
+Unknown                openjdk-8-jre:amd64
+Unknown                p11-kit-modules:amd64
+Unknown                packages-microsoft-prod
+Unknown                perl-openssl-defaults:amd64
+Unknown                python3-newt:amd64
+Unknown                python3-pyrsistent:amd64
+Unknown                python3-tk:amd64
+Unknown                python3.10-minimal
+Unknown                va-driver-all:amd64
+Unknown                vdpau-driver-all:amd64
+Unknown                zlib1g-dev:amd64
+Unknown                zlib1g:amd64
+admin                  adduser                                add and remove users and groups
+admin                  apparmor                               user-space parser utility for AppArmor
+admin                  apt                                    commandline package manager
+admin                  apt-utils                              package management related utility programs
+admin                  at                                     Delayed job execution and batch processing
+admin                  base-files                             Debian base system miscellaneous files
+admin                  base-passwd                            Debian base system master password and group files
+admin                  bolt                                   system daemon to manage thunderbolt 3 devices
+admin                  btrfs-progs                            Checksumming Copy on Write Filesystem utilities
+admin                  cloud-guest-utils                      cloud guest utilities
+admin                  cloud-init                             initialization and customization tool for cloud instances
+admin                  cloud-initramfs-copymods               copy initramfs modules into root filesystem for later use
+admin                  cloud-initramfs-dyn-netconf            write a network interface file in /run for BOOTIF
+admin                  cron                                   process scheduling daemon
+admin                  cryptsetup                             disk encryption support - startup scripts
+admin                  cryptsetup-bin                         disk encryption support - command line tools
+admin                  cryptsetup-initramfs                   disk encryption support - initramfs integration
+admin                  cryptsetup-run                         transitional dummy package for cryptsetup
+admin                  dbus-user-session                      simple interprocess messaging system (systemd --user integration)
+admin                  debconf                                Debian configuration management system
+admin                  debconf-i18n                           full internationalization support for debconf
+admin                  dmeventd                               Linux Kernel Device Mapper event daemon
+admin                  dmsetup                                Linux Kernel Device Mapper userspace library
+admin                  dpkg                                   Debian package management system
+admin                  e2fsprogs                              ext2/ext3/ext4 file system utilities
+admin                  friendly-recovery                      Make recovery boot mode more user-friendly
+admin                  fwupd                                  Firmware update daemon
+admin                  gdisk                                  GPT fdisk text-mode partitioning tool
+admin                  hdparm                                 tune hard disk parameters for high performance
+admin                  hostname                               utility to set/show the host name or domain name
+admin                  init-system-helpers                    helper tools for all init systems
+admin                  kmod                                   tools for managing Linux kernel modules
+admin                  kpartx                                 create device mappings for partitions
+admin                  libpam-modules-bin                     Pluggable Authentication Modules for PAM - helper binaries
+admin                  libpam-runtime                         Runtime support for the PAM library
+admin                  login                                  system login tools
+admin                  logrotate                              Log rotation utility
+admin                  logsave                                save the output of a command in a log file
+admin                  lvm2                                   Linux Logical Volume Manager
+admin                  mdadm                                  tool to administer Linux MD arrays (software RAID)
+admin                  motd-news-config                       Configuration for motd-news shipped in base-files
+admin                  mount                                  tools for mounting and manipulating filesystems
+admin                  multipath-tools                        maintain multipath block device access
+admin                  ncurses-term                           additional terminal type definitions
+admin                  netbase                                Basic TCP/IP networking system
+admin                  overlayroot                            use an overlayfs on top of a read-only root filesystem
+admin                  packagekit                             Provides a package management service
+admin                  parted                                 disk partition manipulator
+admin                  passwd                                 change and administer password and group data
+admin                  pci.ids                                PCI ID Repository
+admin                  pciutils                               PCI utilities
+admin                  policykit-1                            framework for managing administrative policies and privileges
+admin                  pollinate                              seed the pseudo random number generator
+admin                  procps                                 /proc file system utilities
+admin                  psmisc                                 utilities that use the proc file system
+admin                  rsyslog                                reliable system and kernel logging daemon
+admin                  run-one                                run just one instance of a command and its args at a time
+admin                  sg3-utils                              utilities for devices using the SCSI command set
+admin                  sg3-utils-udev                         utilities for devices using the SCSI command set (udev rules)
+admin                  show-motd                              show message of the day in interactive shells
+admin                  sosreport                              Set of tools to gather troubleshooting data from a system
+admin                  squashfs-tools                         Tool to create and append to squashfs filesystems
+admin                  sudo                                   Provide limited super user privileges to specific users
+admin                  sysstat                                system performance tools for Linux
+admin                  systemd                                system and service manager
+admin                  systemd-sysv                           system and service manager - SysV links
+admin                  systemd-timesyncd                      minimalistic service to synchronize local time with NTP servers
+admin                  sysvinit-utils                         System-V-like utilities
+admin                  thin-provisioning-tools                Tools for handling thinly provisioned device-mapper meta-data
+admin                  tmux                                   terminal multiplexer
+admin                  tpm-udev                               udev rules for TPM modules
+admin                  ubuntu-drivers-common                  Detect and install additional Ubuntu driver packages
+admin                  udev                                   /dev/ and hotplug management daemon
+admin                  udisks2                                D-Bus service to access and manipulate storage devices
+admin                  ufw                                    program for managing a Netfilter firewall
+admin                  update-motd                            compliments pam_motd in libpam-modules
+admin                  usb.ids                                USB ID Repository
+admin                  wslu                                   collection of utilities for the Windows 10 Linux Subsystem
+admin                  xfsprogs                               Utilities for managing the XFS filesystem
+admin                  zerofree                               zero free blocks from ext2, ext3 and ext4 file-systems
+devel                  binutils                               GNU assembler, linker and binary utilities
+devel                  binutils-x86-64-linux-gnu              GNU binary utilities, for x86-64-linux-gnu target
+devel                  build-essential                        Informational list of build-essential packages
+devel                  cmake                                  cross-platform, open-source make system
+devel                  cmake-data                             CMake data files (modules, templates and documentation)
+devel                  dbus                                   simple interprocess messaging system (daemon and utilities)
+devel                  default-jdk                            Standard Java or Java compatible Development Kit
+devel                  desktop-file-utils                     Utilities for .desktop files
+devel                  distro-info                            provides information about the distributions' releases
+devel                  distro-info-data                       information about the distributions' releases (data files)
+devel                  gcc                                    GNU C compiler
+devel                  gcc-9                                  GNU C compiler
+devel                  make                                   utility for directing compilation
+devel                  pkg-config                             manage compile and link flags for libraries
+devel                  rake                                   ruby make-like utility
+devel                  snapd                                  Daemon and tooling that enable snap packages
+doc                    bzip2-doc                              high-quality block-sorting file compressor - documentation
+doc                    info                                   Standalone GNU Info documentation browser
+doc                    install-info                           Manage installed documentation in info format
+doc                    man-db                                 tools for reading manual pages
+doc                    manpages                               Manual pages about using a GNU/Linux system
+doc                    manpages-dev                           Manual pages about using GNU/Linux for development
+editors                ed                                     classic UNIX line editor
+editors                nano                                   small, friendly text editor inspired by Pico
+editors                vim                                    Vi IMproved - enhanced vi editor
+editors                vim-common                             Vi IMproved - Common files
+editors                vim-runtime                            Vi IMproved - Runtime files
+editors                vim-tiny                               Vi IMproved - enhanced vi editor - compact version
+editors                xxd                                    tool to make (or reverse) a hex dump
+fonts                  fonts-dejavu-core                      Vera font family derivate with additional characters
+fonts                  fonts-dejavu-extra                     Vera font family derivate with additional characters (extra variants)
+fonts                  fonts-droid-fallback                   handheld device font with extensive style and language support (fallback)
+fonts                  fonts-font-awesome                     iconic font designed for use with Twitter Bootstrap
+fonts                  fonts-freefont-ttf                     Freefont Serif, Sans and Mono Truetype fonts
+fonts                  fonts-lato                             sans-serif typeface family font
+fonts                  fonts-liberation                       Fonts with the same metrics as Times, Arial and Courier
+fonts                  fonts-noto-core                        "No Tofu" font families with large Unicode coverage (core)
+fonts                  fonts-noto-mono                        "No Tofu" monospaced font family with large Unicode coverage
+fonts                  fonts-ubuntu-console                   console version of the Ubuntu Mono font
+fonts                  fonts-urw-base35                       font set metric-compatible with the 35 PostScript Level 2 Base Fonts
+gnome                  accountsservice                        query and manipulate user account information
+gnome                  adwaita-icon-theme                     default icon theme of GNOME (small subset)
+gnome                  gcr                                    GNOME crypto services (daemon and tools)
+gnome                  gnome-keyring                          GNOME keyring services (daemon and tools)
+gnome                  humanity-icon-theme                    Humanity Icon theme
+gnome                  ubuntu-mono                            Ubuntu Mono Icon theme
+httpd                  apache2-bin                            Apache HTTP Server (modules and other binary files)
+httpd                  apache2-data                           Apache HTTP Server (common files)
+httpd                  libapache2-mod-php7.4                  server-side, HTML-embedded scripting language (Apache 2 module)
+interpreters           cpp                                    GNU C preprocessor (cpp)
+interpreters           cpp-9                                  GNU C preprocessor
+interpreters           default-jre                            Standard Java or Java compatible Runtime
+interpreters           default-jre-headless                   Standard Java or Java compatible Runtime (headless)
+interpreters           gawk                                   GNU awk, a pattern scanning and processing language
+interpreters           ruby                                   Interpreter of object-oriented scripting language Ruby (default version)
+interpreters           tcl8.6                                 Tcl (the Tool Command Language) v8.6 - shell
+java                   default-jdk-headless                   Standard Java or Java compatible Development Kit (headless)
+java                   libatk-wrapper-java                    ATK implementation for Java using JNI
+kernel                 linux-base                             Linux image base package
+libdevel               icu-devtools                           Development utilities for International Components for Unicode
+libdevel               libc-dev-bin                           GNU C Library: Development binaries
+libs                   alsa-topology-conf                     ALSA topology configuration files
+libs                   alsa-ucm-conf                          ALSA Use Case Manager configuration files
+libs                   blt                                    graphics extension library for Tcl/Tk - run-time
+libs                   dconf-service                          simple configuration storage system - D-Bus service
+libs                   fontconfig-config                      generic font configuration library - configuration
+libs                   glib-networking-common                 network-related giomodules for GLib - data files
+libs                   glib-networking-services               network-related giomodules for GLib - D-Bus services
+libs                   gsettings-desktop-schemas              GSettings desktop-wide schemas
+libs                   iso-codes                              ISO language, territory, currency, script codes and their translations
+libs                   klibc-utils                            small utilities built with klibc for early boot
+libs                   libasound2-data                        Configuration files and profiles for ALSA drivers
+libs                   libaudit-common                        Dynamic library for security auditing - common files
+libs                   libc-bin                               GNU C Library: Binaries
+libs                   libdjvulibre-text                      Linguistic support files for libdjvulibre
+libs                   libdns-export1109                      Exported DNS Shared Library
+libs                   libdrm-common                          Userspace interface to kernel DRM services -- common files
+libs                   libgdk-pixbuf2.0-bin                   GDK Pixbuf library (thumbnailer)
+libs                   libgdk-pixbuf2.0-common                GDK Pixbuf library - data files
+libs                   libgs9-common                          interpreter for the PostScript language and for PDF - common files
+libs                   libjson-glib-1.0-common                GLib JSON manipulation library (common files)
+libs                   libldap-common                         OpenLDAP common files for libraries
+libs                   libmagic-mgc                           File type determination library using "magic" numbers (compiled magic file)
+libs                   libntfs-3g883                          read/write NTFS driver for FUSE (runtime library)
+libs                   libsecret-common                       Secret store (common files)
+libs                   libsemanage-common                     Common files for SELinux policy management libraries
+libs                   libsgutils2-2                          utilities for devices using the SCSI command set (shared libraries)
+libs                   libsmbios-c2                           Provide access to (SM)BIOS information -- dynamic library
+libs                   libthai-data                           Data files for Thai language support library
+libs                   libtss2-esys0                          TPM2 Software stack library - TSS and TCTI libraries
+libs                   libvolume-key1                         Library for manipulating storage encryption keys and passphrases
+libs                   locales                                GNU C Library: National Language (locale) data [support]
+libs                   perl-modules-5.30                      Core Perl modules
+libs                   tk8.6                                  Tk toolkit for Tcl and X11 v8.6 - windowing shell
+libs                   tk8.6-blt2.5                           graphics extension library for Tcl/Tk - library
+libs                   tzdata                                 time zone and daylight-saving time data
+libs                   uuid-runtime                           runtime components for the Universally Unique ID library
+localization           krb5-locales                           internationalization support for MIT Kerberos
+math                   bc                                     GNU bc arbitrary precision calculator language
+metapackages           init                                   metapackage ensuring an init system is installed
+metapackages           ubuntu-minimal                         Minimal core of Ubuntu
+metapackages           ubuntu-wsl                             Ubuntu on Windows tools - Windows Subsystem for Linux integration
+misc                   at-spi2-core                           Assistive Technology Service Provider Interface (dbus core)
+misc                   byobu                                  text window manager, shell multiplexer, integrated DevOps environment
+misc                   ca-certificates                        Common CA certificates
+misc                   ca-certificates-java                   Common CA certificates (JKS keystore)
+misc                   gtk-update-icon-cache                  icon theme caching utility
+misc                   hicolor-icon-theme                     default fallback theme for FreeDesktop.org icon themes
+misc                   java-common                            Base package for Java runtimes
+misc                   libatk1.0-data                         Common files for the ATK accessibility toolkit
+misc                   libglib2.0-data                        Common files for GLib library
+misc                   libgtk-3-bin                           programs for the GTK graphical user interface library
+misc                   libgtk-3-common                        common files for the GTK graphical user interface library
+misc                   libgtk2.0-bin                          programs for the GTK graphical user interface library
+misc                   libgtk2.0-common                       common files for the GTK graphical user interface library
+misc                   lsb-base                               Linux Standard Base init script functionality
+misc                   lsb-release                            Linux Standard Base version reporting utility
+misc                   lxd-agent-loader                       LXD - VM agent loader
+misc                   p11-kit                                p11-glue utilities
+misc                   pastebinit                             command-line pastebin client
+misc                   poppler-data                           encoding data for the poppler PDF rendering library
+misc                   popularity-contest                     Vote for your favourite packages automatically
+misc                   screen                                 terminal multiplexer with VT100/ANSI terminal emulation
+misc                   shared-mime-info                       FreeDesktop.org shared MIME database and spec
+misc                   ssh-import-id                          securely retrieve an SSH public key and install it locally
+misc                   ubuntu-advantage-tools                 management tools for Ubuntu Advantage
+misc                   ubuntu-keyring                         GnuPG keys of the Ubuntu archive
+net                    apache2-utils                          Apache HTTP Server (utility programs for web servers)
+net                    bind9-dnsutils                         Clients provided with BIND 9
+net                    bind9-host                             DNS Lookup Utility
+net                    ftp                                    classical file transfer client
+net                    iproute2                               networking and traffic control tools
+net                    iptables                               administration tools for packet filtering and NAT
+net                    iputils-ping                           Tools to test the reachability of network hosts
+net                    iputils-tracepath                      Tools to trace the network path to a remote host
+net                    isc-dhcp-client                        DHCP client for automatically obtaining an IP address
+net                    isc-dhcp-common                        common manpages relevant to all of the isc-dhcp packages
+net                    mime-support                           MIME files 'mime.types' & 'mailcap', and support programs
+net                    mtr-tiny                               Full screen ncurses traceroute tool
+net                    net-tools                              NET-3 networking toolkit
+net                    netcat-openbsd                         TCP/IP swiss army knife
+net                    netplan.io                             YAML network configuration abstraction for various backends
+net                    open-iscsi                             iSCSI initiator tools
+net                    openssh-client                         secure shell (SSH) client, for secure access to remote machines
+net                    openssh-server                         secure shell (SSH) server, for secure access from remote machines
+net                    openssh-sftp-server                    secure shell (SSH) sftp server module, for SFTP access from remote machines
+net                    publicsuffix                           accurate, machine-readable list of domain name suffixes
+net                    rsync                                  fast, versatile, remote (and local) file-copying tool
+net                    tcpdump                                command-line network traffic analyzer
+net                    telnet                                 basic telnet client
+otherosfs              dosfstools                             utilities for making and checking MS-DOS FAT filesystems
+otherosfs              ntfs-3g                                read/write NTFS driver for FUSE
+perl                   libalgorithm-diff-perl                 module to find differences between files
+perl                   libalgorithm-diff-xs-perl              module to find differences between files (XS accelerated)
+perl                   libalgorithm-merge-perl                Perl module for three-way merge of textual data
+perl                   libauthen-sasl-perl                    Authen::SASL - SASL Authentication framework
+perl                   libdata-dump-perl                      Perl module to help dump data structures
+perl                   libdpkg-perl                           Dpkg perl modules
+perl                   libencode-locale-perl                  utility to determine the locale encoding
+perl                   liberror-perl                          Perl module for error/exception handling in an OO-ish way
+perl                   libfile-basedir-perl                   Perl module to use the freedesktop basedir specification
+perl                   libfile-desktopentry-perl              Perl module to handle freedesktop .desktop files
+perl                   libfile-fcntllock-perl                 Perl module for file locking with fcntl(2)
+perl                   libfile-listing-perl                   module to parse directory listings
+perl                   libfile-mimeinfo-perl                  Perl module to determine file types
+perl                   libfont-afm-perl                       Font::AFM - Interface to Adobe Font Metrics files
+perl                   libhtml-form-perl                      module that represents an HTML form element
+perl                   libhtml-format-perl                    module for transforming HTML into various formats
+perl                   libhtml-parser-perl                    collection of modules that parse HTML text documents
+perl                   libhtml-tagset-perl                    data tables pertaining to HTML
+perl                   libhtml-tree-perl                      Perl module to represent and create HTML syntax trees
+perl                   libhttp-cookies-perl                   HTTP cookie jars
+perl                   libhttp-daemon-perl                    simple http server class
+perl                   libhttp-date-perl                      module of date conversion routines
+perl                   libhttp-message-perl                   perl interface to HTTP style messages
+perl                   libhttp-negotiate-perl                 implementation of content negotiation
+perl                   libio-html-perl                        open an HTML file with automatic charset detection
+perl                   libio-pty-perl                         Perl module for pseudo tty IO
+perl                   libio-socket-ssl-perl                  Perl module implementing object oriented interface to SSL sockets
+perl                   libio-stringy-perl                     modules for I/O on in-core objects (strings/arrays)
+perl                   libipc-run-perl                        Perl module for running processes
+perl                   libipc-system-simple-perl              Perl module to run commands simply, with detailed diagnostics
+perl                   liblocale-gettext-perl                 module using libc functions for internationalization in Perl
+perl                   liblwp-mediatypes-perl                 module to guess media type for a file or a URL
+perl                   liblwp-protocol-https-perl             HTTPS driver for LWP::UserAgent
+perl                   libmailtools-perl                      modules to manipulate email in perl programs
+perl                   libnet-dbus-perl                       Perl extension for the DBus bindings
+perl                   libnet-http-perl                       module providing low-level HTTP connection client
+perl                   libnet-smtp-ssl-perl                   Perl module providing SSL support to Net::SMTP
+perl                   libnet-ssleay-perl                     Perl module for Secure Sockets Layer (SSL)
+perl                   libsub-name-perl                       module for assigning a new name to referenced sub
+perl                   libtext-charwidth-perl                 get display widths of characters on the terminal
+perl                   libtext-iconv-perl                     module to convert between character sets in Perl
+perl                   libtext-wrapi18n-perl                  internationalized substitute of Text::Wrap
+perl                   libtie-ixhash-perl                     Perl module to order associative arrays
+perl                   libtimedate-perl                       collection of modules to manipulate date/time information
+perl                   libtry-tiny-perl                       module providing minimalistic try/catch
+perl                   liburi-perl                            module to manipulate and access URI strings
+perl                   libwww-perl                            simple and consistent interface to the world-wide web
+perl                   libwww-robotrules-perl                 database of robots.txt-derived permissions
+perl                   libx11-protocol-perl                   Perl module for the X Window System Protocol, version 11
+perl                   libxml-parser-perl                     Perl module for parsing XML files
+perl                   libxml-twig-perl                       Perl module for processing huge XML documents in tree mode
+perl                   libxml-xpathengine-perl                re-usable XPath engine for DOM-like trees
+perl                   perl                                   Larry Wall's Practical Extraction and Report Language
+perl                   perl-base                              minimal Perl system
+php                    php                                    server-side, HTML-embedded scripting language (default)
+php                    php-common                             Common files for PHP packages
+php                    php7.4                                 server-side, HTML-embedded scripting language (metapackage)
+php                    php7.4-cli                             command-line interpreter for the PHP scripting language
+php                    php7.4-common                          documentation, examples and common module for PHP
+php                    php7.4-json                            JSON module for PHP
+php                    php7.4-opcache                         Zend OpCache module for PHP
+php                    php7.4-readline                        readline module for PHP
+python                 python-apt-common                      Python interface to libapt-pkg (locales)
+python                 python3                                interactive high-level object-oriented language (default python3 version)
+python                 python3-apt                            Python 3 interface to libapt-pkg
+python                 python3-astroid                        rebuild a new abstract syntax tree from Python's AST (Python3)
+python                 python3-attr                           Attributes without boilerplate (Python 3)
+python                 python3-blinker                        fast, simple object-to-object and broadcast signaling library
+python                 python3-certifi                        root certificates for validating SSL certs and verifying TLS hosts (python3)
+python                 python3-cffi-backend                   Foreign Function Interface for Python 3 calling C code - runtime
+python                 python3-chardet                        universal character encoding detector for Python3
+python                 python3-configobj                      simple but powerful config file reader and writer for Python 3
+python                 python3-cryptography                   Python library exposing cryptographic recipes and primitives (Python 3)
+python                 python3-dbus                           simple interprocess messaging system (Python 3 interface)
+python                 python3-decorator                      simplify usage of Python decorators by programmers
+python                 python3-dev                            header files and a static library for Python (default)
+python                 python3-distro                         Linux OS platform information API
+python                 python3-distutils                      distutils package for Python 3.x
+python                 python3-gi                             Python 3 bindings for gobject-introspection libraries
+python                 python3-idna                           Python IDNA2008 (RFC 5891) handling (Python 3)
+python                 python3-importlib-metadata             library to access the metadata for a Python package - Python 3.x
+python                 python3-jinja2                         small but fast and easy to use stand-alone template engine
+python                 python3-json-pointer                   resolve JSON pointers - Python 3.x
+python                 python3-jsonpatch                      library to apply JSON patches - Python 3.x
+python                 python3-jsonschema                     An(other) implementation of JSON Schema (Draft 3 and 4) - Python 3.x
+python                 python3-jwt                            Python 3 implementation of JSON Web Token
+python                 python3-lazy-object-proxy              Python 3 fast and thorough lazy object proxy
+python                 python3-lib2to3                        Interactive high-level object-oriented language (lib2to3)
+python                 python3-logilab-common                 useful miscellaneous modules used by Logilab projects (Python3)
+python                 python3-markupsafe                     HTML/XHTML/XML string library for Python 3
+python                 python3-minimal                        minimal subset of the Python language (default python3 version)
+python                 python3-more-itertools                 library with routines for operating on iterables, beyond itertools (Python 3)
+python                 python3-nacl                           Python bindings to libsodium (Python 3)
+python                 python3-netifaces                      portable network interface information - Python 3.x
+python                 python3-oauthlib                       generic, spec-compliant implementation of OAuth for Python3
+python                 python3-openssl                        Python 3 wrapper around the OpenSSL library
+python                 python3-pexpect                        Python 3 module for automating interactive applications
+python                 python3-pkg-resources                  Package Discovery and Resource Access using pkg_resources
+python                 python3-ptyprocess                     Run a subprocess in a pseudo terminal from Python 3
+python                 python3-pygments                       syntax highlighting package written in Python 3
+python                 python3-pymacaroons                    Macaroon library for Python 3
+python                 python3-requests                       elegant and simple HTTP library for Python3, built for human beings
+python                 python3-serial                         pyserial - module encapsulating access for the serial port
+python                 python3-setuptools                     Python3 Distutils Enhancements
+python                 python3-six                            Python 2 and 3 compatibility library (Python 3 interface)
+python                 python3-twisted                        Event-based framework for internet applications
+python                 python3-urllib3                        HTTP library with thread-safe connection pooling for Python3
+python                 python3-wcwidth                        determine printable width of a string on a terminal (Python 3)
+python                 python3-wrapt                          decorators, wrappers and monkey patching. - Python 3.x
+python                 python3-yaml                           YAML parser and emitter for Python3
+python                 python3-zipp                           pathlib-compatible Zipfile object wrapper - Python 3.x
+python                 python3.8                              Interactive high-level object-oriented language (version 3.8)
+python                 python3.8-dev                          Header files and a static library for Python (v3.8)
+python                 python3.8-minimal                      Minimal subset of the Python language (version 3.8)
+ruby                   ruby-minitest                          Ruby test tools supporting TDD, BDD, mocking, and benchmarking
+ruby                   ruby-net-telnet                        telnet client library
+ruby                   ruby-power-assert                      library showing values of variables and method calls in an expression
+ruby                   ruby-test-unit                         unit testing framework for Ruby
+ruby                   ruby-xmlrpc                            XMLRPC library for Ruby
+ruby                   ruby2.7                                Interpreter of object-oriented scripting language Ruby
+ruby                   rubygems-integration                   integration of Debian Ruby packages with Rubygems
+shells                 bash                                   GNU Bourne Again SHell
+shells                 bash-completion                        programmable completion for the bash shell
+shells                 busybox-initramfs                      Standalone shell setup for initramfs
+shells                 busybox-static                         Standalone rescue shell with tons of builtin utilities
+shells                 dash                                   POSIX-compliant shell
+sound                  alsa-utils                             Utilities for configuring and using ALSA
+sound                  pulseaudio-utils                       Command line tools for the PulseAudio sound server
+sound                  sound-theme-freedesktop                freedesktop.org sound theme
+text                   ghostscript                            interpreter for the PostScript language and for PDF
+text                   groff-base                             GNU troff text-formatting system (base system components)
+text                   less                                   pager program similar to more
+text                   sgml-base                              SGML infrastructure and SGML catalog file support
+text                   t1utils                                Collection of simple Type 1 font manipulation programs
+text                   wdiff                                  Compares two files word by word
+universe/admin         apt-transport-https                    transitional package for https support
+universe/admin         open-vm-tools                          Open VMware Tools for virtual machines hosted on VMware (CLI)
+universe/devel         antlr                                  language tool for constructing recognizers, compilers etc
+universe/devel         binutils-arm-none-eabi                 GNU assembler, linker and binary utilities for ARM Cortex-R/M processors
+universe/devel         binutils-avr                           Binary utilities supporting Atmel's AVR targets
+universe/devel         clang-format                           Tool to format C/C++/Obj-C code
+universe/devel         clang-format-10                        Tool to format C/C++/Obj-C code
+universe/devel         dfu-programmer                         device firmware update (DFU) based USB programmer for Atmel chips
+universe/devel         gcc-arm-none-eabi                      GCC cross compiler for ARM Cortex-R/M processors
+universe/devel         gcc-avr                                GNU C compiler (cross compiler for avr)
+universe/devel         groovy                                 Agile dynamic language for the Java Virtual Machine
+universe/devel         junit4                                 JUnit regression test framework for Java
+universe/devel         libantlr-java                          language tool for constructing recognizers, compilers etc (java library)
+universe/devel         libgegl-common                         Generic Graphics Library - common files
+universe/devel         libjsch-java                           Java implementation of the SSH2 protocol
+universe/devel         libjzlib-java                          Java Zlib implementation
+universe/devel         libzvbi-common                         Vertical Blanking Interval decoder (VBI) - common files
+universe/devel         sloccount                              programs for counting physical source lines of code (SLOC)
+universe/devel         teensy-loader-cli                      load and run programs onto your Teensy micro controller
+universe/devel         testng                                 testing framework for Java
+universe/editors       freeplane                              Java program for working with Mind Maps
+universe/editors       yudit-common                           Unicode text editor (arch-independent files)
+universe/electronics   avrdude                                software for programming Atmel AVR microcontrollers
+universe/electronics   dfu-util                               Device firmware update (DFU) USB programmer
+universe/fonts         fonts-adf-accanthis                    Accanthis font of the Arkandis Digital Foundry
+universe/fonts         fonts-adf-berenis                      Berenis font of the Arkandis Digital Foundry
+universe/fonts         fonts-adf-gillius                      Gillius font of the Arkandis Digital Foundry
+universe/fonts         fonts-adf-universalis                  Universalis font of the Arkandis Digital Foundry
+universe/fonts         fonts-cabin                            humanist sans serif font
+universe/fonts         fonts-cantarell                        sans serif font family designed for on-screen readability
+universe/fonts         fonts-comfortaa                        stylish, modern true type font
+universe/fonts         fonts-croscore                         width-compatible fonts for improved on-screen readability
+universe/fonts         fonts-crosextra-caladea                Serif font metric-compatible with the Cambria font
+universe/fonts         fonts-crosextra-carlito                Sans-serif font metric-compatible with Calibri font
+universe/fonts         fonts-ebgaramond                       EB Garamond OpenType fonts
+universe/fonts         fonts-ebgaramond-extra                 EB Garamond Initials and TrueType fonts
+universe/fonts         fonts-freefont-otf                     Freefont Serif, Sans and Mono OpenType fonts
+universe/fonts         fonts-gfs-artemisia                    greek font (Times Greek-like)
+universe/fonts         fonts-gfs-complutum                    ancient Greek font revival from the University of Alcalá, Spain
+universe/fonts         fonts-gfs-didot                        greek font family (Didot revival)
+universe/fonts         fonts-gfs-neohellenic                  modern Greek font family with matching Latin
+universe/fonts         fonts-gfs-olga                         ancient Greek oblique font revival (companion to GFS Didot)
+universe/fonts         fonts-gfs-solomos                      ancient Greek oblique font
+universe/fonts         fonts-go                               high-quality WGL4 TrueType fonts for Go project
+universe/fonts         fonts-junicode                         Unicode font for medievalists (Latin, IPA and Runic)
+universe/fonts         fonts-linuxlibertine                   Linux Libertine family of fonts
+universe/fonts         fonts-lmodern                          OpenType fonts based on Computer Modern
+universe/fonts         fonts-lobster                          bold condensed script with many ligatures and alternates
+universe/fonts         fonts-lobstertwo                       updated and improved family version of the Lobster font
+universe/fonts         fonts-oflb-asana-math                  extended smart Unicode Math font
+universe/fonts         fonts-open-sans                        humanist sans serif typeface by Steve Matteson
+universe/fonts         fonts-roboto-unhinted                  Google's signature family of fonts (unhinted)
+universe/fonts         fonts-sil-gentium                      extended Unicode Latin font ("a typeface for the nations")
+universe/fonts         fonts-sil-gentium-basic                smart Unicode font families (Basic and Book Basic) based on Gentium
+universe/fonts         fonts-sil-gentiumplus                  extended smart font family for Latin, Greek and Cyrillic
+universe/fonts         fonts-sil-gentiumplus-compact          Smart Unicode fonts for Latin, Greek and Cyrillic (tight spacing version)
+universe/fonts         fonts-stix                             Scientific and Technical Information eXchange fonts
+universe/fonts         fonts-texgyre                          OpenType fonts based on URW Fonts
+universe/games         sl                                     Correct you if you type `sl' by mistake
+universe/graphics      feh                                    imlib2 based image viewer
+universe/graphics      gimp                                   GNU Image Manipulation Program
+universe/graphics      gimp-data                              Data files for GIMP
+universe/graphics      graphviz                               rich set of graph drawing tools
+universe/graphics      imagemagick                            image manipulation programs -- binaries
+universe/graphics      imagemagick-6-common                   image manipulation programs -- infrastructure
+universe/graphics      imagemagick-6.q16                      image manipulation programs -- quantum depth Q16
+universe/graphics      libjpeg-progs                          Programs for manipulating JPEG files
+universe/graphics      netpbm                                 Graphics conversion tools between image formats
+universe/interpreters  tcl                                    Tool Command Language (default version) - shell
+universe/java          ant                                    Java based build tool like make
+universe/java          ant-optional                           Java based build tool like make - optional libraries
+universe/java          bnd                                    tool to create and diagnose OSGi bundles
+universe/java          gradle                                 Powerful build system for the JVM
+universe/java          libapache-pom-java                     Maven metadata for all Apache Software projects
+universe/java          libasm-java                            Java bytecode manipulation framework
+universe/java          libatinject-jsr330-api-java            Java API for JSR-330 Dependency Injection
+universe/java          libbindex-java                         OSGi BIndex reader
+universe/java          libbsh-java                            Java scripting environment (BeanShell) Version 2 (library)
+universe/java          libcdi-api-java                        Contexts and Dependency Injection for Java EE
+universe/java          libcommons-lang3-java                  Apache Commons Lang utility classes
+universe/java          libcommons-parent-java                 Maven metadata for Apache Commons project
+universe/java          libdd-plist-java                       Java library for working with property lists
+universe/java          libel-api-java                         Expression Language API
+universe/java          libfelix-framework-java                Felix Framework subproject
+universe/java          libfelix-gogo-runtime-java             Apache Felix Gogo Runtime bundle
+universe/java          libfelix-osgi-obr-java                 OSGi OBR Service API
+universe/java          libfelix-resolver-java                 OSGi Resolver implementation by Apache Felix
+universe/java          libfindbugs-java                       Static java code analyzer to find bugs (Library)
+universe/java          libgeronimo-annotation-1.3-spec-java   Apache Geronimo Common Annotations 1.3 API
+universe/java          libgeronimo-interceptor-3.0-spec-java  Geronimo API implementation of the Interceptor 3.0 spec
+universe/java          libgoogle-gson-java                    Converts Java objects into their JSON representation
+universe/java          libgpars-groovy-java                   open-source concurrency library for Groovy
+universe/java          libgradle-core-java                    Powerful build system for the JVM - Core libraries
+universe/java          libgradle-plugins-java                 Powerful build system for the JVM - All plugins
+universe/java          libguava-java                          Suite of Google common libraries for Java
+universe/java          libguice-java                          lightweight dependency injection framework for Java 5 and above
+universe/java          libhawtjni-runtime-java                Java library that provide JNI code generation
+universe/java          libhttpclient-java                     HTTP/1.1 compliant HTTP agent implementation
+universe/java          libhttpcore-java                       set of low level HTTP transport components for Java
+universe/java          libjansi-java                          Java library for generating and interpreting ANSI escape sequences
+universe/java          libjansi-native-java                   Java library for ANSI escape sequences - native component
+universe/java          libjatl-java                           JATL - Java Anti-Template Language
+universe/java          libjavaewah-java                       Compressed variant of the Java bitset class
+universe/java          libjcommander-java                     Java framework for parsing command line parameters
+universe/java          libjcsp-java                           Java library providing Communicating Sequential Processes (CSP) features
+universe/java          libjformatstring-java                  Java format string compile-time checker
+universe/java          libjgit-java                           Java implementation of GIT version control
+universe/java          libjline2-java                         console input handling in Java
+universe/java          libjna-jni                             Dynamic access of native libraries from Java without JNI (native libs)
+universe/java          libjsoup-java                          Java HTML parser that makes sense of real-world HTML soup
+universe/java          libjsp-api-java                        JavaServer Pages API
+universe/java          libjsr166y-java                        Parallel computation framework for Java
+universe/java          libjsr305-java                         Java library that provides annotations for software defect detection
+universe/java          libkryo-java                           object graph serialization framework for Java
+universe/java          libkxml2-java                          small XML parser, designed for small environments
+universe/java          liblogback-java                        flexible logging library for Java
+universe/java          libmaven-parent-java                   Maven metadata for Apache Maven itself
+universe/java          libmaven-resolver-java                 Library to handle Java artifact repositories
+universe/java          libmaven-shared-utils-java             Replacement for plexus-utils in Maven
+universe/java          libmaven3-core-java                    Core libraries for Maven 3
+universe/java          libminlog-java                         minimal Java logging library
+universe/java          libmultiverse-core-java                Java library implementing Software Transactional Memory (STM)
+universe/java          libnative-platform-java                Java bindings for various native APIs
+universe/java          libnative-platform-jni                 Java bindings for various native APIs - JNI library
+universe/java          libobjenesis-java                      Java library to instantiate a new object of a particular class
+universe/java          libosgi-annotation-java                Java OSGi API - annotation module
+universe/java          libosgi-compendium-java                Java OSGi API - Compendium module
+universe/java          libosgi-core-java                      Java OSGi API - Core module
+universe/java          libplexus-cipher-java                  Plexus Cipher Component used by Maven
+universe/java          libplexus-component-annotations-java   Plexus Component Annotations
+universe/java          libplexus-container-default1.5-java    Plexus Inversion-of-control Container (transitional package)
+universe/java          libplexus-sec-dispatcher-java          Plexus Security Dispatcher Component used by Maven
+universe/java          libplexus-utils2-java                  utilities for the Plexus framework
+universe/java          libpolyglot-maven-java                 modules to enable Maven usage in others JVM languages
+universe/java          libreflectasm-java                     library that provides reflection by using code generation
+universe/java          librhino-java                          Libraries for rhino Java Script Engine
+universe/java          libservlet-api-java                    Java Servlet API
+universe/java          libservlet3.1-java                     Java Servlet API 3.1 (transitional package)
+universe/java          libsimple-http-java                    high-performance, embeddable Java HTTP engine
+universe/java          libsisu-inject-java                    Dependency Injection container for Java
+universe/java          libsisu-plexus-java                    Plexus adapter for the Sisu dependency injection container
+universe/java          libwagon-file-java                     Artifact transport abstraction used in Maven (file provider)
+universe/java          libwagon-http-java                     Artifact transport abstraction used in Maven (HTTP providers)
+universe/java          libwagon-provider-api-java             Artifact transport abstraction used in Maven (Provider API)
+universe/java          libwebsocket-api-java                  Java WebSocket API
+universe/java          libxbean-reflect-java                  plugin based Java application server (xbean-reflect)
+universe/java          libxz-java                             Java library with a complete implementation of XZ data compression
+universe/java          libyaml-snake-java                     YAML parser and emitter for the Java programming language
+universe/javascript    yarnpkg                                Fast, reliable and secure npm alternative
+universe/libdevel      libnewlib-dev                          C library and math library intended for use on embedded systems
+universe/libs          ivy                                    agile dependency manager
+universe/libs          libann0                                Approximate Nearest Neighbor Searching library
+universe/libs          libaopalliance-java                    library for interoperability for Java AOP implementations
+universe/libs          libbcel-java                           Analyze, create, and manipulate (binary) Java class files
+universe/libs          libbcpg-java                           Bouncy Castle generators/processors for OpenPGP
+universe/libs          libbcprov-java                         Bouncy Castle Java Cryptographic Service Provider
+universe/libs          libbsf-java                            Bean Scripting Framework to support scripting languages in Java
+universe/libs          libclang-cpp10                         C++ interface to the Clang library
+universe/libs          libcommons-cli-java                    Command line arguments and options parsing library
+universe/libs          libcommons-codec-java                  encoder and decoders such as Base64 and hexadecimal codec
+universe/libs          libcommons-collections3-java           Apache Commons Collections - Extended Collections API for Java
+universe/libs          libcommons-compress-java               Java API for working with compression and archive formats
+universe/libs          libcommons-io-java                     Common useful IO related classes
+universe/libs          libcommons-lang-java                   Commons Lang - an extension of the java.lang package
+universe/libs          libcommons-logging-java                common wrapper interface for several logging APIs
+universe/libs          libdom4j-java                          Flexible XML framework for Java
+universe/libs          libfontbox-java                        Java font library
+universe/libs          libgimp2.0                             Libraries for the GNU Image Manipulation Program
+universe/libs          libgvc6                                rich set of graph drawing tools - gvc library
+universe/libs          libhamcrest-java                       library of matchers for building test expressions
+universe/libs          libjarjar-java                         repackage third-party jars
+universe/libs          libjaxen-java                          Java XPath engine
+universe/libs          libjcifs-java                          Java library for the CIFS/SMB networking protocol
+universe/libs          libjcip-annotations-java               Java Concurrency In Practice annotations library
+universe/libs          libjna-java                            Dynamic access of native libraries from Java without JNI
+universe/libs          libmypaint-common                      brush library for mypaint - common files
+universe/libs          libnekohtml-java                       NekoHTML - HTML parser for Java
+universe/libs          libnetpbm10                            Graphics conversion tools shared libraries
+universe/libs          libnewlib-arm-none-eabi                C library and math library compiled for bare metal using Cortex A/R/M
+universe/libs          libpdfbox-java                         PDF library for Java
+universe/libs          libplexus-classworlds-java             Class loading utilities for the Plexus framework
+universe/libs          libplexus-container-default-java       Plexus Inversion-of-control Container
+universe/libs          libplexus-interpolation-java           Plexus Interpolation API
+universe/libs          libqdox-java                           Quickly parses declarations and Javadoc from Java source
+universe/libs          libslf4j-java                          Simple Logging Facade for Java
+universe/libs          libxerces2-java                        Validating XML parser for Java with DOM level 3 support
+universe/libs          libxml-commons-external-java           XML Commons external code - DOM, SAX, and JAXP, etc
+universe/libs          libxml-commons-resolver1.1-java        XML entity and URI resolver library
+universe/libs          libxpp3-java                           XML pull parser library for java
+universe/libs          libxstream-java                        Java library to serialize objects to XML and back again
+universe/libs          tk                                     Toolkit for Tcl and X11 (default version) - windowing shell
+universe/math          libgts-bin                             utility binaries for libgts
+universe/math          r-base-core                            GNU R core of statistical computation and graphics system
+universe/misc          java-wrappers                          wrappers for java executables
+universe/otherosfs     avr-libc                               Standard C library for Atmel AVR development
+universe/perl          libtime-duration-perl                  module for rounded or exact English expression of durations
+universe/python        ipython3                               Enhanced interactive Python 3 shell
+universe/python        pylint                                 Python 3 code static checker and UML diagram generator
+universe/python        python-apt                             Python interface to libapt-pkg
+universe/python        python-pip-whl                         Python package installer
+universe/python        python2                                interactive high-level object-oriented language (Python2 version)
+universe/python        python2-minimal                        minimal subset of the Python2 language
+universe/python        python2.7                              Interactive high-level object-oriented language (version 2.7)
+universe/python        python2.7-minimal                      Minimal subset of the Python language (version 2.7)
+universe/python        python3-backcall                       Callback functions for Python
+universe/python        python3-ipython                        Enhanced interactive Python shell (Python 3 version)
+universe/python        python3-ipython-genutils               IPython vestigial utilities for Python 3
+universe/python        python3-isort                          library for sorting Python imports (Python 3)
+universe/python        python3-jedi                           autocompletion tool for Python 3
+universe/python        python3-mccabe                         Python code complexity checker (Python 3)
+universe/python        python3-parso                          Python parser that supports error recovery - Python 3.X
+universe/python        python3-pickleshare                    File system based database that uses Python pickles for Python 3
+universe/python        python3-pip                            Python package installer
+universe/python        python3-prompt-toolkit                 library for building interactive command lines (Python 3)
+universe/python        python3-traitlets                      Lightweight Traits-like package for Python 3
+universe/python        python3-venv                           pyvenv-3 binary for python3 (default python3 version)
+universe/python        python3-wheel                          built-package format for Python
+universe/python        python3.8-venv                         Interactive high-level object-oriented language (pyvenv binary, version 3.8)
+universe/python        python3.9                              Interactive high-level object-oriented language (version 3.9)
+universe/python        python3.9-dev                          Header files and a static library for Python (v3.9)
+universe/python        python3.9-minimal                      Minimal subset of the Python language (version 3.9)
+universe/python        python3.9-venv                         Interactive high-level object-oriented language (pyvenv binary, version 3.9)
+universe/sound         festival                               General multi-lingual speech synthesis system
+universe/tex           dvisvgm                                DVI to SVG converter
+universe/tex           latexmk                                Perl script for running LaTeX the correct number of times
+universe/tex           lmodern                                scalable PostScript and OpenType fonts based on Computer Modern
+universe/tex           preview-latex-style                    extraction of elements from LaTeX documents as graphics
+universe/tex           tex-common                             common infrastructure for building and installing TeX
+universe/tex           tex-gyre                               scalable PostScript and OpenType fonts based on URW Fonts
+universe/tex           texlive-base                           TeX Live: Essential programs and files
+universe/tex           texlive-binaries                       Binaries for TeX Live
+universe/tex           texlive-fonts-extra                    TeX Live: Additional fonts
+universe/tex           texlive-fonts-extra-links              TeX Live:
+universe/tex           texlive-fonts-recommended              TeX Live: Recommended fonts
+universe/tex           texlive-latex-base                     TeX Live: LaTeX fundamental packages
+universe/tex           texlive-latex-extra                    TeX Live: LaTeX additional packages
+universe/tex           texlive-latex-recommended              TeX Live: LaTeX recommended packages
+universe/tex           texlive-pictures                       TeX Live: Graphics, pictures, diagrams
+universe/tex           texlive-plain-generic                  TeX Live: Plain (La)TeX packages
+universe/tex           tipa                                   system for processing phonetic symbols in LaTeX
+universe/text          colordiff                              tool to colorize 'diff' output
+universe/text          figlet                                 Make large character ASCII banners out of ordinary text
+universe/text          gsfonts                                Fonts for the Ghostscript interpreter(s)
+universe/text          pandoc                                 general markup converter
+universe/text          pandoc-data                            general markup converter - data files
+universe/text          zathura                                document viewer with a minimalistic interface
+universe/text          zathura-pdf-poppler                    PDF support for zathura
+universe/utils         bat                                    cat(1) clone with syntax highlighting and git integration
+universe/utils         fd-find                                Simple, fast and user-friendly alternative to find
+universe/utils         fzf                                    general-purpose command-line fuzzy finder
+universe/utils         jq                                     lightweight and flexible command-line JSON processor
+universe/utils         moreutils                              additional Unix utilities
+universe/utils         parallel                               build and execute command lines from standard input in parallel
+universe/utils         ppa-purge                              disables a PPA and reverts to official packages
+universe/utils         pydf                                   colourised df(1)-clone
+universe/utils         ripgrep                                Recursively searches directories for a regex pattern
+universe/utils         silversearcher-ag                      very fast grep-like program, alternative to ack-grep
+universe/utils         tree                                   displays an indented directory tree, in color
+universe/web           lynx                                   classic non-graphical (text-mode) web browser
+universe/web           lynx-common                            shared files for lynx package
+universe/web           nodejs                                 evented I/O for V8 javascript - runtime executable
+universe/x11           xsel                                   command-line tool to access X clipboard and selection buffers
+universe/x11           xterm                                  X terminal emulator
+utils                  bcache-tools                           bcache userspace tools
+utils                  bsdmainutils                           collection of more utilities from FreeBSD
+utils                  bsdutils                               basic utilities from 4.4BSD-Lite
+utils                  bzip2                                  high-quality block-sorting file compressor - utilities
+utils                  console-setup                          console font and keymap setup program
+utils                  console-setup-linux                    Linux specific part of console-setup
+utils                  coreutils                              GNU core utilities
+utils                  cpio                                   GNU cpio -- a program to manage archives of files
+utils                  debianutils                            Miscellaneous utilities specific to Debian
+utils                  diffutils                              File comparison utilities
+utils                  dirmngr                                GNU privacy guard - network certificate management service
+utils                  dmidecode                              SMBIOS/DMI table decoder
+utils                  dpkg-dev                               Debian package development tools
+utils                  eatmydata                              Library and utilities designed to disable fsync and friends
+utils                  eject                                  ejects CDs and operates CD-Changers under Linux
+utils                  ethtool                                display or change Ethernet device settings
+utils                  fakeroot                               tool for simulating superuser privileges
+utils                  fdisk                                  collection of partitioning utilities
+utils                  file                                   Recognize the type of data in a file using "magic" numbers
+utils                  finalrd                                final runtime directory for shutdown
+utils                  findutils                              utilities for finding files--find, xargs
+utils                  fontconfig                             generic font configuration library - support binaries
+utils                  fuse                                   Filesystem in Userspace
+utils                  fwupd-signed                           Linux Firmware Updater EFI signed binary
+utils                  gettext-base                           GNU Internationalization utilities for the base system
+utils                  gnupg                                  GNU privacy guard - a free PGP replacement
+utils                  gnupg-l10n                             GNU privacy guard - localization files
+utils                  gnupg-utils                            GNU privacy guard - utility programs
+utils                  gpg                                    GNU Privacy Guard -- minimalist public key operations
+utils                  gpg-agent                              GNU privacy guard - cryptographic agent
+utils                  gpg-wks-client                         GNU privacy guard - Web Key Service client
+utils                  gpg-wks-server                         GNU privacy guard - Web Key Service server
+utils                  gpgconf                                GNU privacy guard - core configuration utilities
+utils                  gpgsm                                  GNU privacy guard - S/MIME version
+utils                  gpgv                                   GNU privacy guard - signature verification tool
+utils                  grep                                   GNU grep, egrep and fgrep
+utils                  gzip                                   GNU compression utilities
+utils                  htop                                   interactive processes viewer
+utils                  initramfs-tools                        generic modular initramfs generator (automation)
+utils                  initramfs-tools-bin                    binaries used by initramfs-tools
+utils                  initramfs-tools-core                   generic modular initramfs generator (core tools)
+utils                  irqbalance                             Daemon to balance interrupts for SMP systems
+utils                  kbd                                    Linux console font and keytable utilities
+utils                  keyboard-configuration                 system-wide keyboard preferences
+utils                  libcap2-bin                            POSIX 1003.1e capabilities (utilities)
+utils                  libpaper-utils                         library for handling paper characteristics (utilities)
+utils                  libsensors-config                      lm-sensors configuration files
+utils                  lshw                                   information about hardware configuration
+utils                  lsof                                   utility to list open files
+utils                  ltrace                                 Tracks runtime library calls in dynamically linked programs
+utils                  lz4                                    Fast LZ compression algorithm library - tool
+utils                  mawk                                   Pattern scanning and text processing language
+utils                  mlocate                                quickly find files on the filesystem based on their name
+utils                  ncurses-base                           basic terminal type definitions
+utils                  ncurses-bin                            terminal-related programs and man pages
+utils                  networkd-dispatcher                    Dispatcher service for systemd-networkd connection status changes
+utils                  openssl                                Secure Sockets Layer toolkit - cryptographic utility
+utils                  patch                                  Apply a diff file to an original
+utils                  pinentry-curses                        curses-based PIN or pass-phrase entry dialog for GnuPG
+utils                  pinentry-gnome3                        GNOME 3 PIN or pass-phrase entry dialog for GnuPG
+utils                  poppler-utils                          PDF utilities (based on Poppler)
+utils                  powermgmt-base                         common utils for power management
+utils                  readline-common                        GNU readline and history libraries, common files
+utils                  sbsigntool                             Tools to manipulate signatures on UEFI binaries and drivers
+utils                  secureboot-db                          Secure Boot updates for DB and DBX
+utils                  sed                                    GNU stream editor for filtering/transforming text
+utils                  sensible-utils                         Utilities for sensible alternative selection
+utils                  ssl-cert                               simple debconf wrapper for OpenSSL
+utils                  strace                                 System call tracer
+utils                  tar                                    GNU version of the tar archiving utility
+utils                  time                                   GNU time program for measuring CPU resource usage
+utils                  ucf                                    Update Configuration File(s): preserve user changes to config files
+utils                  unzip                                  De-archiver for .zip files
+utils                  usbutils                               Linux USB utilities
+utils                  util-linux                             miscellaneous system utilities
+utils                  whiptail                               Displays user-friendly dialog boxes from shell scripts
+utils                  xdg-user-dirs                          tool to manage well known user directories
+utils                  xdg-utils                              desktop integration utilities from freedesktop.org
+utils                  xz-utils                               XZ-format compression utilities
+utils                  zip                                    Archiver for .zip files
+vcs                    git                                    fast, scalable, distributed revision control system
+vcs                    git-man                                fast, scalable, distributed revision control system (manual pages)
+web                    apache2                                Apache HTTP Server
+web                    curl                                   command line tool for transferring data with URL syntax
+web                    javascript-common                      Base support for JavaScript library packages
+web                    libjs-jquery                           JavaScript library for dynamic web applications
+web                    wget                                   retrieves files from the web
+x11                    dbus-x11                               simple interprocess messaging system (X11 deps)
+x11                    libx11-data                            X11 client-side library
+x11                    plymouth                               boot animation, logger and I/O multiplexer
+x11                    plymouth-theme-ubuntu-text             boot animation, logger and I/O multiplexer - ubuntu text theme
+x11                    x11-common                             X Window System (X.Org) infrastructure
+x11                    x11-utils                              X11 utilities
+x11                    x11-xserver-utils                      X server utilities
+x11                    x11proto-core-dev                      transitional dummy package
+x11                    x11proto-dev                           X11 extension protocols and auxiliary headers
+x11                    xauth                                  X authentication utility
+x11                    xbitmaps                               Base X bitmaps
+x11                    xfonts-encodings                       Encodings for X.Org fonts
+x11                    xfonts-utils                           X Window System font utility programs
+x11                    xkb-data                               X Keyboard Extension (XKB) configuration data
+x11                    xorg-sgml-doctools                     Common tools for building X.Org SGML documentation
+x11                    xtrans-dev                             X transport library (development files)

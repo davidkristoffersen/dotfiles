@@ -1,0 +1,20 @@
+Section              Name                            Description
+=======              ====                            ===========
+Unknown              aspnetcore-runtime-5.0
+Unknown              aspnetcore-targeting-pack-5.0
+Unknown              dotnet-apphost-pack-5.0
+Unknown              dotnet-host
+Unknown              dotnet-hostfxr-5.0
+Unknown              dotnet-runtime-5.0
+Unknown              dotnet-runtime-deps-5.0
+Unknown              dotnet-sdk-5.0
+Unknown              dotnet-targeting-pack-5.0
+Unknown              gh
+Unknown              libnss-systemd:amd64
+Unknown              libpam-gnome-keyring:amd64
+Unknown              libpython3.10-minimal:amd64
+Unknown              netstandard-targeting-pack-2.1
+Unknown              packages-microsoft-prod
+Unknown              python3.10-minimal
+admin                libpam-modules-bin              Pluggable Authentication Modules for PAM - helper binaries
+universe/javascript  yarnpkg                         Fast, reliable and secure npm alternative

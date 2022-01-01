@@ -1,0 +1,59 @@
+Section          Name                        Description
+=======          ====                        ===========
+admin            base-files                  Debian base system miscellaneous files
+admin            base-passwd                 Debian base system master password and group files
+admin            cloud-init                  initialization and customization tool for cloud instances
+admin            hostname                    utility to set/show the host name or domain name
+admin            ncurses-term                additional terminal type definitions
+admin            show-motd                   show message of the day in interactive shells
+admin            sysvinit-utils              System-V-like utilities
+admin            update-motd                 compliments pam_motd in libpam-modules
+admin            wslu                        collection of utilities for the Windows 10 Linux Subsystem
+editors          vim                         Vi IMproved - enhanced vi editor
+fonts            fonts-dejavu-core           Vera font family derivate with additional characters
+libs             fontconfig-config           generic font configuration library - configuration
+metapackages     init                        metapackage ensuring an init system is installed
+metapackages     ubuntu-minimal              Minimal core of Ubuntu
+metapackages     ubuntu-server               The Ubuntu Server system
+metapackages     ubuntu-standard             The Ubuntu standard system
+metapackages     ubuntu-wsl                  Ubuntu on Windows tools - Windows Subsystem for Linux integration
+misc             ssh-import-id               securely retrieve an SSH public key and install it locally
+net              openssh-server              secure shell (SSH) server, for secure access from remote machines
+net              openssh-sftp-server         secure shell (SSH) sftp server module, for SFTP access from remote machines
+python           python-is-python3           symlinks /usr/bin/python to python3
+python           python3                     interactive high-level object-oriented language (default python3 version)
+python           python3-distutils           distutils package for Python 3.x
+python           python3-importlib-metadata  library to access the metadata for a Python package - Python 3.x
+python           python3-jinja2              small but fast and easy to use stand-alone template engine
+python           python3-json-pointer        resolve JSON pointers - Python 3.x
+python           python3-jsonpatch           library to apply JSON patches - Python 3.x
+python           python3-jsonschema          An(other) implementation of JSON Schema (Draft 3 and 4) - Python 3.x
+python           python3-lib2to3             Interactive high-level object-oriented language (lib2to3)
+python           python3-markupsafe          HTML/XHTML/XML string library for Python 3
+python           python3-more-itertools      library with routines for operating on iterables, beyond itertools (Python 3)
+python           python3-nacl                Python bindings to libsodium (Python 3)
+python           python3-pymacaroons         Macaroon library for Python 3
+python           python3-serial              pyserial - module encapsulating access for the serial port
+python           python3-setuptools          Python3 Distutils Enhancements
+python           python3-zipp                pathlib-compatible Zipfile object wrapper - Python 3.x
+shells           bash                        GNU Bourne Again SHell
+shells           dash                        POSIX-compliant shell
+sound            pulseaudio-utils            Command line tools for the PulseAudio sound server
+universe/admin   aptitude                    terminal-based package manager
+universe/python  pylint                      Python 3 code static checker and UML diagram generator
+universe/python  python3-autopep8            tool that automatically formats Python code to conform to PEP 8
+universe/python  python3-pip                 Python package installer
+universe/utils   bat                         cat(1) clone with syntax highlighting and git integration
+universe/utils   parallel                    build and execute command lines from standard input in parallel
+utils            diffutils                   File comparison utilities
+utils            eatmydata                   Library and utilities designed to disable fsync and friends
+utils            findutils                   utilities for finding files--find, xargs
+utils            grep                        GNU grep, egrep and fgrep
+utils            gzip                        GNU compression utilities
+utils            libsensors-config           lm-sensors configuration files
+utils            ncurses-base                basic terminal type definitions
+utils            ncurses-bin                 terminal-related programs and man pages
+vcs              git                         fast, scalable, distributed revision control system
+x11              dbus-x11                    simple interprocess messaging system (X11 deps)
+x11              x11-common                  X Window System (X.Org) infrastructure
+x11              x11-utils                   X11 utilities
