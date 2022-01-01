@@ -2,16 +2,15 @@ aptitude
 base-files
 base-passwd
 bash
-bat
 cloud-init
 dash
 dbus-x11
 diffutils
 eatmydata
+feh
 findutils
 fontconfig-config
 fonts-dejavu-core
-git
 grep
 gzip
 hostname
@@ -24,10 +23,8 @@ openssh-server
 openssh-sftp-server
 parallel
 pulseaudio-utils
-pylint
 python-is-python3
 python3
-python3-autopep8
 python3-distutils
 python3-importlib-metadata
 python3-jinja2
@@ -55,3 +52,4 @@ vim
 wslu
 x11-common
 x11-utils
+zathura

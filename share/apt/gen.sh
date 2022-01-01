@@ -54,27 +54,31 @@ gen_table() {
 }
 
 gen() {
-	[ "$1" == " " ] && post="" || post="$1"
+	dir="$1"
+	post="_$1"
 	names="${@:2:$#-1}"
 
-	csv="$(echo "$names" | tr $'\n' ',')"
+	csv="$(echo "$names" | tr $'\n' ',' | sed 's/,$//')"
 	lines="$names"
 	table="$(gen_table "$names")"
 
-	# echo -e "$csv" >"csv$post.csv"
-	# echo -e "$lines" >"lines$post.txt"
-	echo -e "$table" >"table$post.txt"
+	mkdir -p "$dir"
+	echo -e "$csv" >"$dir/csv$post.csv"
+	echo -e "$lines" >"$dir/lines$post.txt"
+	echo -e "$table" >"$dir/table$post.txt"
 }
 
 main() {
-	# names_manual=$(apt-mark showmanual | sort)
-	# names_all="$(dpkg-query -f '${binary:Package}\n' -W | sort)"
-	# names="$(comm -12 <(echo "$names_all") <(echo "$names_manual"))"
-	# names_backup="$(cat lines_old.txt)"
+	names_manual=$(apt-mark showmanual | sort)
+	names_all="$(dpkg-query -f '${binary:Package}\n' -W | sort)"
+	names="$(comm -12 <(echo "$names_all") <(echo "$names_manual"))"
+	names_backup="$(cat lines_old.txt)"
+	names_history="$(grep -Po '^Commandline: apt install \K.*' /var/log/apt/history.log | xargs -n 1)"
 
-	# gen " " "$names"
-	# gen "_all" "$names_all"
-	# gen "_backup" "$names_backup"
+	gen "intersect" "$names"
+	gen "all" "$names_all"
+	gen "backup" "$names_backup"
+	gen "history" "$names_history"
 }
 
 main

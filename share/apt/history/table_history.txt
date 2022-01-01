@@ -1,0 +1,9 @@
+Section            Name               Description
+=======            ====               ===========
+editors            vim                Vi IMproved - enhanced vi editor
+python             python-is-python3  symlinks /usr/bin/python to python3
+universe/admin     aptitude           terminal-based package manager
+universe/graphics  feh                imlib2 based image viewer
+universe/python    python3-pip        Python package installer
+universe/text      zathura            document viewer with a minimalistic interface
+universe/utils     parallel           build and execute command lines from standard input in parallel
