@@ -72,12 +72,10 @@ main() {
 	names_manual=$(apt-mark showmanual | sort)
 	names_all="$(dpkg-query -f '${binary:Package}\n' -W | sort)"
 	names="$(comm -12 <(echo "$names_all") <(echo "$names_manual"))"
-	names_backup="$(cat lines_old.txt)"
 	names_history="$(grep -Po '^Commandline: apt install \K.*' /var/log/apt/history.log | xargs -n 1)"
 
 	gen "intersect" "$names"
 	gen "all" "$names_all"
-	gen "backup" "$names_backup"
 	gen "history" "$names_history"
 }
 

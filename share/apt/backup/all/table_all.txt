@@ -1,22 +1,13 @@
 Section                Name                                   Description
 =======                ====                                   ===========
-Unknown                aspnetcore-runtime-5.0
-Unknown                aspnetcore-targeting-pack-5.0
+Development            gh                                     GitHub’s official command line tool.
 Unknown                bind9-libs:amd64
 Unknown                binutils-common:amd64
 Unknown                dconf-gsettings-backend:amd64
-Unknown                dotnet-apphost-pack-5.0
-Unknown                dotnet-host
-Unknown                dotnet-hostfxr-5.0
-Unknown                dotnet-runtime-5.0
-Unknown                dotnet-runtime-deps-5.0
-Unknown                dotnet-sdk-5.0
-Unknown                dotnet-targeting-pack-5.0
 Unknown                g++
 Unknown                g++-9
 Unknown                gcc-10-base:amd64
 Unknown                gcc-9-base:amd64
-Unknown                gh
 Unknown                gir1.2-glib-2.0:amd64
 Unknown                glib-networking:amd64
 Unknown                gnome-keyring-pkcs11:amd64
@@ -73,6 +64,7 @@ Unknown                libblockdev-swap2:amd64
 Unknown                libblockdev-utils2:amd64
 Unknown                libblockdev2:amd64
 Unknown                libbluray2:amd64
+Unknown                libboost-iostreams1.71.0:amd64
 Unknown                libbrotli1:amd64
 Unknown                libbsd-dev:amd64
 Unknown                libbsd0:amd64
@@ -105,6 +97,7 @@ Unknown                libcups2:amd64
 Unknown                libcurl3-gnutls:amd64
 Unknown                libcurl4-openssl-dev:amd64
 Unknown                libcurl4:amd64
+Unknown                libcwidget4:amd64
 Unknown                libdatrie1:amd64
 Unknown                libdb5.3:amd64
 Unknown                libdbus-1-3:amd64
@@ -375,6 +368,7 @@ Unknown                libsemanage1:amd64
 Unknown                libsensors5:amd64
 Unknown                libsepol1:amd64
 Unknown                libshine3:amd64
+Unknown                libsigc++-2.0-0v5:amd64
 Unknown                libsigsegv2:amd64
 Unknown                libslang2:amd64
 Unknown                libsm-dev:amd64
@@ -453,6 +447,7 @@ Unknown                libx11-dev:amd64
 Unknown                libx11-xcb1:amd64
 Unknown                libx264-155:amd64
 Unknown                libx265-179:amd64
+Unknown                libxapian30:amd64
 Unknown                libxau-dev:amd64
 Unknown                libxau6:amd64
 Unknown                libxaw7:amd64
@@ -509,7 +504,6 @@ Unknown                linux-libc-dev:amd64
 Unknown                mesa-va-drivers:amd64
 Unknown                mesa-vdpau-drivers:amd64
 Unknown                mesa-vulkan-drivers:amd64
-Unknown                netstandard-targeting-pack-2.1
 Unknown                ocl-icd-libopencl1:amd64
 Unknown                openjdk-11-jdk-headless:amd64
 Unknown                openjdk-11-jdk:amd64
@@ -520,12 +514,10 @@ Unknown                openjdk-8-jdk:amd64
 Unknown                openjdk-8-jre-headless:amd64
 Unknown                openjdk-8-jre:amd64
 Unknown                p11-kit-modules:amd64
-Unknown                packages-microsoft-prod
 Unknown                perl-openssl-defaults:amd64
 Unknown                python3-newt:amd64
 Unknown                python3-pyrsistent:amd64
 Unknown                python3-tk:amd64
-Unknown                python3.10-minimal
 Unknown                va-driver-all:amd64
 Unknown                vdpau-driver-all:amd64
 Unknown                zlib1g-dev:amd64
@@ -577,6 +569,7 @@ admin                  ncurses-term                           additional termina
 admin                  netbase                                Basic TCP/IP networking system
 admin                  overlayroot                            use an overlayfs on top of a read-only root filesystem
 admin                  packagekit                             Provides a package management service
+admin                  packages-microsoft-prod                Apt configuration for packages.microsoft.com
 admin                  parted                                 disk partition manipulator
 admin                  passwd                                 change and administer password and group data
 admin                  pci.ids                                PCI ID Repository
@@ -610,6 +603,8 @@ admin                  usb.ids                                USB ID Repository
 admin                  wslu                                   collection of utilities for the Windows 10 Linux Subsystem
 admin                  xfsprogs                               Utilities for managing the XFS filesystem
 admin                  zerofree                               zero free blocks from ext2, ext3 and ext4 file-systems
+devel                  aspnetcore-runtime-5.0                 Shared Framework for hosting of Microsoft ASP.NET Core applications. It is open source, cross-platform and is supported by Microsoft. We hope you enjoy using it! If you do, please consider joining the active community of developers that are contributing to the project on GitHub (https://github.com/dotnet/aspnetcore). We happily accept issues and PRs.
+devel                  aspnetcore-targeting-pack-5.0          Shared Framework for hosting of Microsoft ASP.NET Core applications. It is open source, cross-platform and is supported by Microsoft. We hope you enjoy using it! If you do, please consider joining the active community of developers that are contributing to the project on GitHub (https://github.com/dotnet/aspnetcore). We happily accept issues and PRs.
 devel                  binutils                               GNU assembler, linker and binary utilities
 devel                  binutils-x86-64-linux-gnu              GNU binary utilities, for x86-64-linux-gnu target
 devel                  build-essential                        Informational list of build-essential packages
@@ -620,13 +615,16 @@ devel                  default-jdk                            Standard Java or J
 devel                  desktop-file-utils                     Utilities for .desktop files
 devel                  distro-info                            provides information about the distributions' releases
 devel                  distro-info-data                       information about the distributions' releases (data files)
+devel                  dotnet-sdk-5.0                         Microsoft .NET SDK 5.0.404
 devel                  gcc                                    GNU C compiler
 devel                  gcc-9                                  GNU C compiler
 devel                  make                                   utility for directing compilation
 devel                  pkg-config                             manage compile and link flags for libraries
 devel                  rake                                   ruby make-like utility
 devel                  snapd                                  Daemon and tooling that enable snap packages
+devel                  yarn                                   Fast, reliable, and secure dependency management.
 doc                    bzip2-doc                              high-quality block-sorting file compressor - documentation
+doc                    git-man                                fast, scalable, distributed revision control system (manual pages)
 doc                    info                                   Standalone GNU Info documentation browser
 doc                    install-info                           Manage installed documentation in info format
 doc                    man-db                                 tools for reading manual pages
@@ -667,6 +665,7 @@ interpreters           gawk                                   GNU awk, a pattern
 interpreters           ruby                                   Interpreter of object-oriented scripting language Ruby (default version)
 interpreters           tcl8.6                                 Tcl (the Tool Command Language) v8.6 - shell
 java                   default-jdk-headless                   Standard Java or Java compatible Development Kit (headless)
+java                   freeplane                              freeplane
 java                   libatk-wrapper-java                    ATK implementation for Java using JNI
 kernel                 linux-base                             Linux image base package
 libdevel               icu-devtools                           Development utilities for International Components for Unicode
@@ -675,6 +674,12 @@ libs                   alsa-topology-conf                     ALSA topology conf
 libs                   alsa-ucm-conf                          ALSA Use Case Manager configuration files
 libs                   blt                                    graphics extension library for Tcl/Tk - run-time
 libs                   dconf-service                          simple configuration storage system - D-Bus service
+libs                   dotnet-apphost-pack-5.0                Microsoft.NETCore.App.Host 5.0.13
+libs                   dotnet-host                            Microsoft .NET Host - 6.0.1
+libs                   dotnet-hostfxr-5.0                     Microsoft .NET Host FX Resolver - 5.0.13 5.0.13
+libs                   dotnet-runtime-5.0                     Microsoft .NET Runtime - 5.0.13 Microsoft.NETCore.App 5.0.13
+libs                   dotnet-runtime-deps-5.0                dotnet-runtime-deps-5.0 5.0.13
+libs                   dotnet-targeting-pack-5.0              Microsoft.NETCore.App.Ref 5.0.0
 libs                   fontconfig-config                      generic font configuration library - configuration
 libs                   glib-networking-common                 network-related giomodules for GLib - data files
 libs                   glib-networking-services               network-related giomodules for GLib - D-Bus services
@@ -702,6 +707,7 @@ libs                   libthai-data                           Data files for Tha
 libs                   libtss2-esys0                          TPM2 Software stack library - TSS and TCTI libraries
 libs                   libvolume-key1                         Library for manipulating storage encryption keys and passphrases
 libs                   locales                                GNU C Library: National Language (locale) data [support]
+libs                   netstandard-targeting-pack-2.1         NETStandard.Library.Ref 2.1.0
 libs                   perl-modules-5.30                      Core Perl modules
 libs                   tk8.6                                  Tk toolkit for Tcl and X11 v8.6 - windowing shell
 libs                   tk8.6-blt2.5                           graphics extension library for Tcl/Tk - library
@@ -766,10 +772,13 @@ perl                   libalgorithm-diff-perl                 module to find dif
 perl                   libalgorithm-diff-xs-perl              module to find differences between files (XS accelerated)
 perl                   libalgorithm-merge-perl                Perl module for three-way merge of textual data
 perl                   libauthen-sasl-perl                    Authen::SASL - SASL Authentication framework
+perl                   libcgi-fast-perl                       CGI subclass for work with FCGI
+perl                   libcgi-pm-perl                         module for Common Gateway Interface applications
 perl                   libdata-dump-perl                      Perl module to help dump data structures
 perl                   libdpkg-perl                           Dpkg perl modules
 perl                   libencode-locale-perl                  utility to determine the locale encoding
 perl                   liberror-perl                          Perl module for error/exception handling in an OO-ish way
+perl                   libfcgi-perl                           helper module for FastCGI
 perl                   libfile-basedir-perl                   Perl module to use the freedesktop basedir specification
 perl                   libfile-desktopentry-perl              Perl module to handle freedesktop .desktop files
 perl                   libfile-fcntllock-perl                 Perl module for file locking with fcntl(2)
@@ -789,6 +798,7 @@ perl                   libhttp-negotiate-perl                 implementation of 
 perl                   libio-html-perl                        open an HTML file with automatic charset detection
 perl                   libio-pty-perl                         Perl module for pseudo tty IO
 perl                   libio-socket-ssl-perl                  Perl module implementing object oriented interface to SSL sockets
+perl                   libio-string-perl                      Emulate IO::File interface for in-core strings
 perl                   libio-stringy-perl                     modules for I/O on in-core objects (strings/arrays)
 perl                   libipc-run-perl                        Perl module for running processes
 perl                   libipc-system-simple-perl              Perl module to run commands simply, with detailed diagnostics
@@ -873,9 +883,14 @@ python                 python3-wcwidth                        determine printabl
 python                 python3-wrapt                          decorators, wrappers and monkey patching. - Python 3.x
 python                 python3-yaml                           YAML parser and emitter for Python3
 python                 python3-zipp                           pathlib-compatible Zipfile object wrapper - Python 3.x
+python                 python3.10-minimal                     Minimal subset of the Python language (version 3.10)
 python                 python3.8                              Interactive high-level object-oriented language (version 3.8)
 python                 python3.8-dev                          Header files and a static library for Python (v3.8)
 python                 python3.8-minimal                      Minimal subset of the Python language (version 3.8)
+python                 python3.9                              Interactive high-level object-oriented language (version 3.9)
+python                 python3.9-dev                          Header files and a static library for Python (v3.9)
+python                 python3.9-minimal                      Minimal subset of the Python language (version 3.9)
+python                 python3.9-venv                         Interactive high-level object-oriented language (pyvenv binary, version 3.9)
 ruby                   ruby-minitest                          Ruby test tools supporting TDD, BDD, mocking, and benchmarking
 ruby                   ruby-net-telnet                        telnet client library
 ruby                   ruby-power-assert                      library showing values of variables and method calls in an expression
@@ -898,6 +913,8 @@ text                   sgml-base                              SGML infrastructur
 text                   t1utils                                Collection of simple Type 1 font manipulation programs
 text                   wdiff                                  Compares two files word by word
 universe/admin         apt-transport-https                    transitional package for https support
+universe/admin         aptitude                               terminal-based package manager
+universe/admin         aptitude-common                        architecture independent files for the aptitude package manager
 universe/admin         open-vm-tools                          Open VMware Tools for virtual machines hosted on VMware (CLI)
 universe/devel         antlr                                  language tool for constructing recognizers, compilers etc
 universe/devel         binutils-arm-none-eabi                 GNU assembler, linker and binary utilities for ARM Cortex-R/M processors
@@ -917,7 +934,6 @@ universe/devel         libzvbi-common                         Vertical Blanking 
 universe/devel         sloccount                              programs for counting physical source lines of code (SLOC)
 universe/devel         teensy-loader-cli                      load and run programs onto your Teensy micro controller
 universe/devel         testng                                 testing framework for Java
-universe/editors       freeplane                              Java program for working with Mind Maps
 universe/editors       yudit-common                           Unicode text editor (arch-independent files)
 universe/electronics   avrdude                                software for programming Atmel AVR microcontrollers
 universe/electronics   dfu-util                               Device firmware update (DFU) USB programmer
@@ -1045,7 +1061,6 @@ universe/java          libwebsocket-api-java                  Java WebSocket API
 universe/java          libxbean-reflect-java                  plugin based Java application server (xbean-reflect)
 universe/java          libxz-java                             Java library with a complete implementation of XZ data compression
 universe/java          libyaml-snake-java                     YAML parser and emitter for the Java programming language
-universe/javascript    yarnpkg                                Fast, reliable and secure npm alternative
 universe/libdevel      libnewlib-dev                          C library and math library intended for use on embedded systems
 universe/libs          ivy                                    agile dependency manager
 universe/libs          libann0                                Approximate Nearest Neighbor Searching library
@@ -1092,6 +1107,8 @@ universe/math          libgts-bin                             utility binaries f
 universe/math          r-base-core                            GNU R core of statistical computation and graphics system
 universe/misc          java-wrappers                          wrappers for java executables
 universe/otherosfs     avr-libc                               Standard C library for Atmel AVR development
+universe/perl          libclass-accessor-perl                 Perl module that automatically generates accessors
+universe/perl          libparse-debianchangelog-perl          parse Debian changelogs and output them in other formats
 universe/perl          libtime-duration-perl                  module for rounded or exact English expression of durations
 universe/python        ipython3                               Enhanced interactive Python 3 shell
 universe/python        pylint                                 Python 3 code static checker and UML diagram generator
@@ -1115,10 +1132,6 @@ universe/python        python3-traitlets                      Lightweight Traits
 universe/python        python3-venv                           pyvenv-3 binary for python3 (default python3 version)
 universe/python        python3-wheel                          built-package format for Python
 universe/python        python3.8-venv                         Interactive high-level object-oriented language (pyvenv binary, version 3.8)
-universe/python        python3.9                              Interactive high-level object-oriented language (version 3.9)
-universe/python        python3.9-dev                          Header files and a static library for Python (v3.9)
-universe/python        python3.9-minimal                      Minimal subset of the Python language (version 3.9)
-universe/python        python3.9-venv                         Interactive high-level object-oriented language (pyvenv binary, version 3.9)
 universe/sound         festival                               General multi-lingual speech synthesis system
 universe/tex           dvisvgm                                DVI to SVG converter
 universe/tex           latexmk                                Perl script for running LaTeX the correct number of times
@@ -1157,7 +1170,6 @@ universe/utils         silversearcher-ag                      very fast grep-lik
 universe/utils         tree                                   displays an indented directory tree, in color
 universe/web           lynx                                   classic non-graphical (text-mode) web browser
 universe/web           lynx-common                            shared files for lynx package
-universe/web           nodejs                                 evented I/O for V8 javascript - runtime executable
 universe/x11           xsel                                   command-line tool to access X clipboard and selection buffers
 universe/x11           xterm                                  X terminal emulator
 utils                  bcache-tools                           bcache userspace tools
@@ -1241,11 +1253,11 @@ utils                  xdg-utils                              desktop integratio
 utils                  xz-utils                               XZ-format compression utilities
 utils                  zip                                    Archiver for .zip files
 vcs                    git                                    fast, scalable, distributed revision control system
-vcs                    git-man                                fast, scalable, distributed revision control system (manual pages)
 web                    apache2                                Apache HTTP Server
 web                    curl                                   command line tool for transferring data with URL syntax
 web                    javascript-common                      Base support for JavaScript library packages
 web                    libjs-jquery                           JavaScript library for dynamic web applications
+web                    nodejs                                 Node.js event-based server-side javascript engine
 web                    wget                                   retrieves files from the web
 x11                    dbus-x11                               simple interprocess messaging system (X11 deps)
 x11                    libx11-data                            X11 client-side library

@@ -1,0 +1,67 @@
+Section            Name                        Description
+=======            ====                        ===========
+Development        gh                          GitHub’s official command line tool.
+Unknown            --fix-missing
+Unknown            --reinstall
+admin              software-properties-common  manage the repositories that you install software from (common)
+devel              build-essential             Informational list of build-essential packages
+devel              cmake                       cross-platform, open-source make system
+devel              default-jdk                 Standard Java or Java compatible Development Kit
+devel              gcc                         GNU C compiler
+devel              pkg-config                  manage compile and link flags for libraries
+libdevel           libedit-dev                 BSD editline and history libraries (development files)
+libdevel           libpoppler-cpp-dev          PDF rendering library -- development files (CPP interface)
+misc               ca-certificates             Common CA certificates
+misc               screen                      terminal multiplexer with VT100/ANSI terminal emulation
+net                net-tools                   NET-3 networking toolkit
+php                php                         server-side, HTML-embedded scripting language (default)
+php                php-common                  Common files for PHP packages
+python             python3-apt                 Python 3 interface to libapt-pkg
+python             python3-apt                 Python 3 interface to libapt-pkg
+python             python3-dev                 header files and a static library for Python (default)
+python             python3.10                  Interactive high-level object-oriented language (version 3.10)
+python             python3.9                   Interactive high-level object-oriented language (version 3.9)
+python             python3.9-dev               Header files and a static library for Python (v3.9)
+python             python3.9-venv              Interactive high-level object-oriented language (pyvenv binary, version 3.9)
+text               wdiff                       Compares two files word by word
+universe/admin     apt-transport-https         transitional package for https support
+universe/admin     aptitude                    terminal-based package manager
+universe/devel     sloccount                   programs for counting physical source lines of code (SLOC)
+universe/games     sl                          Correct you if you type `sl' by mistake
+universe/graphics  feh                         imlib2 based image viewer
+universe/graphics  gimp                        GNU Image Manipulation Program
+universe/graphics  graphviz                    rich set of graph drawing tools
+universe/graphics  imagemagick                 image manipulation programs -- binaries
+universe/java      gradle                      Powerful build system for the JVM
+universe/java      openjdk-8-jre-headless      OpenJDK Java runtime, using Hotspot JIT (headless)
+universe/libs      libhidapi-hidraw0           Multi-Platform library for communication with HID devices (hidraw backend)
+universe/math      r-base                      GNU R statistical computation and graphics system
+universe/python    ipython3                    Enhanced interactive Python 3 shell
+universe/python    python3-pip                 Python package installer
+universe/python    python3-venv                pyvenv-3 binary for python3 (default python3 version)
+universe/sound     festival                    General multi-lingual speech synthesis system
+universe/tex       texlive                     TeX Live: A decent selection of the TeX Live packages
+universe/tex       texlive-extra-utils         TeX Live: TeX auxiliary programs
+universe/tex       texlive-latex-extra         TeX Live: LaTeX additional packages
+universe/text      colordiff                   tool to colorize 'diff' output
+universe/text      figlet                      Make large character ASCII banners out of ordinary text
+universe/text      pandoc                      general markup converter
+universe/text      zathura                     document viewer with a minimalistic interface
+universe/utils     bat                         cat(1) clone with syntax highlighting and git integration
+universe/utils     fd-find                     Simple, fast and user-friendly alternative to find
+universe/utils     jq                          lightweight and flexible command-line JSON processor
+universe/utils     moreutils                   additional Unix utilities
+universe/utils     parallel                    build and execute command lines from standard input in parallel
+universe/utils     ppa-purge                   disables a PPA and reverts to official packages
+universe/utils     pydf                        colourised df(1)-clone
+universe/utils     ripgrep                     Recursively searches directories for a regex pattern
+universe/utils     ripgrep                     Recursively searches directories for a regex pattern
+universe/utils     silversearcher-ag           very fast grep-like program, alternative to ack-grep
+universe/utils     tree                        displays an indented directory tree, in color
+universe/x11       xsel                        command-line tool to access X clipboard and selection buffers
+utils              dirmngr                     GNU privacy guard - network certificate management service
+utils              gnupg                       GNU privacy guard - a free PGP replacement
+utils              mlocate                     quickly find files on the filesystem based on their name
+utils              unzip                       De-archiver for .zip files
+vcs                git                         fast, scalable, distributed revision control system
+web                nodejs                      Node.js event-based server-side javascript engine
