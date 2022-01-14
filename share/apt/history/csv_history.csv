@@ -1,1 +1,1 @@
-vim,aptitude,python-is-python3,python3-pip,parallel,feh,zathura
+apt-transport-https,aptitude,autoconf,avrdude,clang-format,cmake,colordiff,debian-goodies,default-jdk,dfu-programmer,dfu-util,fd-find,feh,festival,figlet,freeplane,fzf,gimp,gradle,graphviz,imagemagick,ipython3,jq,libtool,mlocate,moreutils,net-tools,nodejs,openjdk-8-jre-headless,pandoc,parallel,pkg-config,ppa-purge,pydf,python-is-python3,python3-pip,python3-venv,r-base,ripgrep,sl,sloccount,snap,texlive,texlive-extra-utils,texlive-fonts-extra,texlive-latex-extra,tree,wdiff,xsel,zathura
