@@ -28,6 +28,16 @@ def write(data, dst):
         print(f'Data: {data}')
 
 
+def run_script(path, name, args=[]):
+    '''Return bash cmd stdout'''
+    args = '"' + '" "'.join(args) + '"'
+    cmd = f'./{name} {args}'
+    os.chdir(path)
+    out = subprocess.run(cmd, check=True, shell=True).stdout
+    os.chdir(DOTFILES)
+    return out
+
+
 def bash(cmd):
     '''Return bash cmd stdout'''
     return subprocess.run(cmd, check=True, shell=True).stdout

@@ -5,11 +5,6 @@ from util import *
 
 def apt():
     '''Apt packages'''
-    print_section('Git')
-    # Config
-    link_file(f'{DOTFILES_HOME}/.gitconfig', '.gitconfig', '.gitconfig')
-
-    print_section('Session management')
-    # I3
-    link_file(f'{DOTFILES_CONFIG}/i3/i3.config',
-              '.config/i3/config', 'i3 config - Window manager')
+    print_section('History')
+    run_script(f'{DOTFILES_SHARE}/apt', 'install.sh', ['backup/history/lines_history.txt'])
+    # run_script(f'{DOTFILES_SHARE}/apt', 'install_all.sh', ['backup/history/lines_history.txt'])

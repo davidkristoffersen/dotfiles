@@ -7,9 +7,9 @@ from util import *
 
 
 class Install():
-    def __init__(self, script=False, server=False, test=False):
+    def __init__(self, script=False, apt=False, test=False):
         self.script = script
-        self.server = server
+        self.apt = apt
         self.test = test
 
         self.script_map = {
@@ -30,6 +30,8 @@ class Install():
     def run(self):
         if self.script:
             self.run_script(self.script_map[self.script], self.script)
+        elif self.apt:
+            self.run_script(apt, 'apt')
         elif self.test:
             self.run_script(test, 'test')
         else:

@@ -12,15 +12,15 @@ def parse_args() -> argparse.ArgumentParser:
     parser.add_argument(
         '-s', '--script', choices=['shell', 'home'], help='Script name to install')
     parser.add_argument(
-        '-t', '--test', dest='test', action='store_true', help='Run test install')
+        '-a,', '--apt', dest='apt', action='store_true', help='Run apt install')
     parser.add_argument(
-        '--server', dest='server', action='store_true', help='Run server install')
+        '-t', '--test', dest='test', action='store_true', help='Run test install')
     argcomplete.autocomplete(parser)
     return parser.parse_args()
 
 
 def main(**args):
-    install = Install(args['script'], args['server'], args['test'])
+    install = Install(args['script'], args['apt'], args['test'])
 
     install.run()
 
