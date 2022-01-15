@@ -1,6 +1,6 @@
 from config import *
 from print import *
-from util import *
+from util.crud import *
 
 
 def test():
@@ -11,11 +11,10 @@ def test():
     print_section("Bar")
     create_links(['.bar', '.bar.d'])
 
+
 def create_links(links):
     for link in links:
         if link[-2:] == '.d':
             link_dir(f'{DOTFILES_SHELL}/{link}', link)
         else:
             link_file(f'{DOTFILES_SHELL}/{link}', link)
-
-

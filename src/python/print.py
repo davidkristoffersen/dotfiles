@@ -7,6 +7,7 @@ RESET = '\x1b[m'
 BYELLOW = BOLD + '\x1b[38;2;255;255;0m'
 BCYAN = BOLD + '\x1b[38;2;0;255;255m'
 BLUE = '\x1b[38;2;0;100;200m'
+RED = '\x1b[38;2;200;50;50m'
 
 
 def print_header(name, new_line=True):

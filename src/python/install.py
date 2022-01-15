@@ -3,7 +3,8 @@ import os
 from config import *
 from print import print_header
 from scripts import *
-from util import *
+from util.access import *
+from util.crud import *
 
 
 class Install():
@@ -26,6 +27,7 @@ class Install():
         self.caller_dir = os.getcwd()
         self.script_dir = pathlib.Path(__file__).parent.resolve()
         os.chdir(DOTFILES)
+        deactivate_sudo()
 
     def run(self):
         if self.script:

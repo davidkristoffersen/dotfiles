@@ -1,6 +1,6 @@
 from config import *
 from print import *
-from util import *
+from util.crud import *
 
 
 def home():
