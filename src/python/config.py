@@ -1,8 +1,8 @@
 import os
 import pathlib
 
-HOME = os.getenv('HOME')
-DOTFILES = pathlib.Path(__file__).parent.parent.parent.resolve()
+HOME = str(os.getenv('HOME'))
+DOTFILES = str(pathlib.Path(__file__).parent.parent.parent.resolve())
 
 DOTFILES_SRC = f'{DOTFILES}/src'
 DOTFILES_SHELL = f'{DOTFILES}/shell'
