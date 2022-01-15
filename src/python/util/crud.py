@@ -1,9 +1,8 @@
 import os
 
-from config import *
-from print import *
-
 from .bash import *
+from .config import *
+from .print import *
 from .wrap import *
 
 
@@ -16,7 +15,7 @@ def create_file(path):
 @decor_path
 def create_path(path):
     if not os.path.isdir(path):
-        cmd(f'mkdir -p "{path}"')
+        bash_cmd(f'mkdir -p "{path}"')
 
 
 @decor_path_args(DOTFILES, HOME)
@@ -37,18 +36,18 @@ def link_dir(src, dst, desc=''):
 
 def link(src, dst, desc, is_file=True):
     if desc:
-        print(f'{BLUE}Replacing {desc}:{RESET}')
+        print_info(f'Replacing {desc}:')
     else:
         _type = 'file' if is_file else 'dir'
         desc = base_name(dst)
-        print(f'{BLUE}Replacing {_type} "{desc}":{RESET}')
+        print_info(f'Replacing {_type} "{desc}":')
 
     if os.path.isdir(dst):
         raise NotImplementedError(f'Destination is a directory: "{dst}"')
     create_path(dir_name(dst))
     rm_file(dst)
 
-    cmd(f'ln -s "{src}" "{dst}"')
+    bash_cmd(f'ln -s "{src}" "{dst}"')
 
 
 # Read
@@ -62,12 +61,12 @@ def read(dst):
 def write(data, dst):
     '''Write data to file'''
     with open(dst, 'w') as _f:
-        print(f'Writing to "{dst}"')
-        print(f'Data: {data}')
+        print_debug(f'Writing to "{dst}"')
+        print_trace(f'Data: {data}')
 
 
 # Delete
 @decor_path
 def rm_file(path):
     if os.path.isfile(path):
-        cmd(f'rm "{path}"')
+        bash_cmd(f'rm "{path}"')

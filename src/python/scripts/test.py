@@ -1,6 +1,6 @@
-from config import *
-from print import *
+from util.config import *
 from util.crud import *
+from util.print import *
 
 
 def test():

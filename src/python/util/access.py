@@ -1,11 +1,6 @@
-from config import *
-from print import *
-
 from .bash import *
-
-
-def set_sudo():
-    pass
+from .config import *
+from .print import *
 
 
 def get_path_access(path):
@@ -14,16 +9,12 @@ def get_path_access(path):
 
 
 def activate_sudo(reason=''):
-    try:
-        bash_tmp('sudo -n true 2>/dev/null')
-    except subprocess.CalledProcessError:
+    if not bash_cmd_tmp('sudo -n true 2>/dev/null'):
         reason = reason if reason else 'Install requires sudo:'
-        print(f'{RED}{reason}{RESET}', end='\n\t')
-        try:
-            bash_tmp('sudo -v')
-        except subprocess.CalledProcessError:
+        print_warn(reason, end='\n\t')
+        if not bash_cmd_tmp('sudo -v'):
             raise NotImplementedError('Could not activate sudo')
 
 
 def deactivate_sudo():
-    bash_tmp('sudo -k')
+    bash_cmd_tmp('sudo -k')

@@ -1,5 +1,5 @@
-from config import *
-from print import *
+from .config import *
+from .print import *
 
 
 def base_name(path):

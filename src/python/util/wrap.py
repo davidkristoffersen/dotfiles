@@ -1,8 +1,7 @@
-from config import *
-from print import *
-
 from .access import *
+from .config import *
 from .path import *
+from .print import *
 
 
 def decor_path(func):
@@ -13,9 +12,9 @@ def decor_path(func):
         path = real_path(args[0])
         get_path_access(path)
 
-        # print(f'pre: {func.__name__}({path})')
+        print_trace(f'pre: {func.__name__}({path})')
         func(path)
-        # print(f'post: {func.__name__}({path})')
+        print_trace(f'post: {func.__name__}({path})')
     return inner
 
 
@@ -30,8 +29,8 @@ def decor_path_args(*dargs):
                 args[it] = real_path(args[it], darg)
                 get_path_access(args[it])
 
-            # print(f'pre: {func.__name__}({args})')
+            print_trace(f'pre: {func.__name__}({args})')
             func(*args)
-            # print(f'post: {func.__name__}({args})')
+            print_trace(f'post: {func.__name__}({args})')
         return wrap
     return inner

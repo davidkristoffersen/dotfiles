@@ -1,17 +1,19 @@
 import os
 
-from config import *
-from print import print_header
 from scripts import *
 from util.access import *
+from util.config import *
 from util.crud import *
+from util.print import print_header
+from util.vars import *
 
 
 class Install():
-    def __init__(self, script=False, apt=False, test=False):
+    def __init__(self, script=False, apt=False, test=False, log=False):
         self.script = script
         self.apt = apt
         self.test = test
+        self.log = log
 
         self.script_map = {
             'shell': shell,
@@ -24,12 +26,26 @@ class Install():
             # 'pacman': pacman,
         }
 
+        self.log_map = {
+            'all': 1,
+            'trace': 2,
+            'debug': 3,
+            'info': 4,
+            'category': 5,
+            'warn': 6,
+            'error': 7,
+            'fatal': 8,
+            'off': 9
+        }
+
         self.caller_dir = os.getcwd()
         self.script_dir = pathlib.Path(__file__).parent.resolve()
         os.chdir(DOTFILES)
         deactivate_sudo()
 
     def run(self):
+        if self.log:
+            set_print(LogLevel(self.log_map[self.log]))
         if self.script:
             self.run_script(self.script_map[self.script], self.script)
         elif self.apt:
@@ -42,7 +58,11 @@ class Install():
 
     def run_script(self, func, name):
         print_header(name)
-        func()
+        try:
+            func()
+        except Exception as e:
+            print_error('Something went wrong')
+            raise e
         os.chdir(DOTFILES)
 
         def meta_init(self):
