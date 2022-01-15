@@ -20,5 +20,6 @@ DOTFILES_PRIVATE = f'{DOTFILES}/private'
 global VARS
 VARS = {
     'SUDO': False,
+    'WRITE': False,
     'PRINT': LogLevel.DEBUG
 }

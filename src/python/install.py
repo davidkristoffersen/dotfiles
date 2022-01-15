@@ -9,10 +9,11 @@ from util.vars import *
 
 
 class Install():
-    def __init__(self, script=False, apt=False, test=False, log=False):
+    def __init__(self, script=False, apt=False, test=False, write=False, log=False):
         self.script = script
         self.apt = apt
         self.test = test
+        self.write = write
         self.log = log
 
         self.script_map = {
@@ -46,6 +47,8 @@ class Install():
     def run(self):
         if self.log:
             set_print(LogLevel(self.log_map[self.log]))
+        if self.write:
+            set_write(self.write)
         if self.script:
             self.run_script(self.script_map[self.script], self.script)
         elif self.apt:
