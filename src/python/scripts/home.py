@@ -7,7 +7,7 @@ def home():
     '''Home dotfiles'''
     print_section('Git')
     # Config
-    link_file(f'{DOTFILES_HOME}/.gitconfig', '.gitconfig', '.gitconfig')
+    link_file(f'{DOTFILES_HOME}/.gitconfig', '.gitconfig', 'git config')
 
     print_section('Session management')
     # I3
@@ -50,7 +50,7 @@ def home():
 
     print_section('Editor')
     # Vimrc files
-    link_file(f'{DOTFILES_HOME}/.vim', '.vim', 'vim dir config')
+    link_dir(f'{DOTFILES_HOME}/.vim', '.vim', 'vim dir config')
     link_file(f'{DOTFILES_HOME}/.vim/.vimrc', '.vimrc', 'vim config')
     # Latex
     link_file(f'{DOTFILES_CONFIG}/latex/template.latex',

@@ -5,21 +5,23 @@ from util import *
 
 def shell():
     '''Shell dotfiles'''
-    utils = ['.util', '.util.d']
-    profiles = ['.bash_profile', '.profile', '.profile.d']
-    bashs = ['.bashrc', '.bash.d', '.bash_completion.d', '.bash_logout']
-
     print_section("Util")
-    for util in utils:
-        link_file(f'{DOTFILES_SHELL}/{util}', util, util)
+    create_links(['.util', '.util.d'])
 
     print_section("Profile")
-    for profile in profiles:
-        link_file(f'{DOTFILES_SHELL}/{profile}', profile, profile)
+    create_links(['.bash_profile', '.profile', '.profile.d'])
 
     print_section("Bash")
-    for bash_file in bashs:
-        link_file(f'{DOTFILES_SHELL}/{bash_file}', bash_file, bash_file)
+    create_links(['.bashrc', '.bash.d', '.bash_completion.d', '.bash_logout'])
 
     print_section("Source")
     source_all()
+
+def create_links(links):
+    for link in links:
+        if link[-2:] == '.d':
+            link_dir(f'{DOTFILES_SHELL}/{link}', link)
+        else:
+            link_file(f'{DOTFILES_SHELL}/{link}', link)
+
+
