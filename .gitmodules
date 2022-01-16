@@ -73,6 +73,3 @@
 [submodule "home/.vim/pack/general/opt/vim-bufferline"]
 	path = home/.vim/pack/general/opt/vim-bufferline
 	url = https://github.com/bling/vim-bufferline.git
-[submodule "src/python/colorstring"]
-	path = src/python/colorstring
-	url = https://github.com/simonsolnes/colorstring.git
