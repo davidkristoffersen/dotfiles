@@ -1,5 +1,5 @@
 # from colorstring import Color
-from .config import *
+from .config import VARS
 from .types import *
 
 BOLD = '\x1b[1m'
@@ -14,18 +14,18 @@ ERROR = '\x1b[38;2;255;0;0m'
 
 
 def print_error(msg, end='\n'):
-    if VARS['PRINT'] <= LogLevel.ERROR:
+    if VARS.print <= LogLevel.ERROR:
         print(f'{BOLD}{ERROR}{msg}{RESET}', end=end)
 
 
 def print_warn(msg, end='\n'):
-    if VARS['PRINT'] <= LogLevel.WARN:
+    if VARS.print <= LogLevel.WARN:
         print(f'{RED}{msg}{RESET}', end=end)
 
 
 def print_header(name, new_line=True):
     '''Print header'''
-    if VARS['PRINT'] <= LogLevel.CATEGORY:
+    if VARS.print <= LogLevel.CATEGORY:
         if new_line:
             print()
 
@@ -44,7 +44,7 @@ def print_header(name, new_line=True):
 
 def print_section(name):
     '''Print section'''
-    if VARS['PRINT'] <= LogLevel.CATEGORY:
+    if VARS.print <= LogLevel.CATEGORY:
         print(f'\n{FAINT}# {BCYAN}{name}{RESET}')
         # print(
         #     Color('\n# ', 'faint') +
@@ -53,15 +53,15 @@ def print_section(name):
 
 
 def print_info(msg):
-    if VARS['PRINT'] <= LogLevel.INFO:
+    if VARS.print <= LogLevel.INFO:
         print(f'{BLUE}{msg}{RESET}')
 
 
 def print_debug(msg):
-    if VARS['PRINT'] <= LogLevel.DEBUG:
+    if VARS.print <= LogLevel.DEBUG:
         print(msg)
 
 
 def print_trace(msg):
-    if VARS['PRINT'] <= LogLevel.TRACE:
-        print(msg)
+    if VARS.print <= LogLevel.TRACE:
+        print(f'{FAINT}{msg}{RESET}')

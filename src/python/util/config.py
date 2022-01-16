@@ -1,7 +1,7 @@
 import os
 import pathlib
 
-from .types import *
+from .classes import *
 
 HOME = str(os.getenv('HOME'))
 DOTFILES = str(pathlib.Path(__file__).parent.parent.parent.parent.resolve())
@@ -18,8 +18,4 @@ DOTFILES_PRIVATE = f'{DOTFILES}/private'
 
 
 global VARS
-VARS = {
-    'SUDO': False,
-    'WRITE': False,
-    'PRINT': LogLevel.DEBUG
-}
+VARS = Vars()

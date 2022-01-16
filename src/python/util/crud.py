@@ -11,7 +11,7 @@ from .wrap import *
 def create_file(path, data):
     if os.path.isfile(path):
         raise NotImplementedError(f'File already exist: "{path}"')
-    if VARS['WRITE']:
+    if VARS.write:
         print_info(f'Creating file: "{path}"')
         bash_cmd(f'touch "{path}"')
         bash_cmd(f'printf "{data}" > "{path}"')
@@ -19,14 +19,14 @@ def create_file(path, data):
 
 @decor_path
 def create_path(path):
-    if VARS['WRITE'] and not os.path.isdir(path):
+    if VARS.write and not os.path.isdir(path):
         bash_cmd(f'mkdir -p "{path}"')
 
 
 @decor_path_args(DOTFILES, HOME)
 def link_file(src, dst, desc=''):
     '''Link file'''
-    if not VARS['WRITE']:
+    if not VARS.write:
         return
     if not os.path.isfile(src):
         raise NotImplementedError(f'Source file not found: "{src}"')
@@ -36,7 +36,7 @@ def link_file(src, dst, desc=''):
 @decor_path_args(DOTFILES, HOME)
 def link_dir(src, dst, desc=''):
     '''Link file'''
-    if not VARS['WRITE']:
+    if not VARS.write:
         return
     if not os.path.isdir(src):
         raise NotImplementedError(f'Source directory not found: "{src}"')
@@ -60,24 +60,26 @@ def link(src, dst, desc, is_file=True):
 
 
 # Read
-def read(dst):
+@decor_path
+def read(path):
     '''Read file into list'''
-    with open(dst, 'r') as _f:
+    with open(path, 'r') as _f:
         return _f.read().splitlines()
 
 
 # Update
-def write(data, dst):
+@decor_path
+def write(path, data):
     '''Write data to file'''
-    if not VARS['WRITE']:
+    if not VARS.write:
         return
-    with open(dst, 'w') as _f:
-        print_debug(f'Writing to: "{dst}"')
+    with open(path, 'w') as _f:
+        print_debug(f'Writing to: "{path}"')
         print_trace(f'Data: {data}')
 
 
 # Delete
 @decor_path
 def rm_file(path):
-    if VARS['WRITE'] and os.path.isfile(path):
+    if VARS.write and os.path.isfile(path):
         bash_cmd(f'rm "{path}"')

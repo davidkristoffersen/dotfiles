@@ -5,7 +5,7 @@ from util.access import *
 from util.config import *
 from util.crud import *
 from util.print import print_header
-from util.vars import *
+from util.types import *
 
 
 class Install():
@@ -46,9 +46,9 @@ class Install():
 
     def run(self):
         if self.log:
-            set_print(LogLevel(self.log_map[self.log]))
+            VARS.print = LogLevel(self.log_map[self.log])
         if self.write:
-            set_write(self.write)
+            VARS.write = self.write
         if self.script:
             self.run_script(self.script_map[self.script], self.script)
         elif self.apt:

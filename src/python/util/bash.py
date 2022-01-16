@@ -1,6 +1,7 @@
 import os
 import subprocess
 
+from . import access
 from .config import *
 from .print import *
 
@@ -23,22 +24,25 @@ def run_script(path, name, args=[]):
 def bash_cmd(cmd):
     '''Return bash cmd stdout'''
     try:
-        if VARS['SUDO']:
-            return print_debug(f'\tsudo {cmd}')
-            # return subprocess.run(f'sudo {cmd}', check=True, shell=True)
-        else:
-            return print_debug(f'\t{cmd}')
-            # return subprocess.run(cmd, check=True, shell=True)
+        hardcoded = False
+        if not VARS.sudo and cmd[:5] == 'sudo ':
+            hardcoded = True
+            VARS.set_sudo(True, f'Command requires sudo: "{cmd}"')
+            cmd = cmd[5:]
+        if VARS.sudo:
+            cmd = f'sudo {cmd}'
+        out = print_debug(f'\t{cmd}')
+        # out = subprocess.run(cmd, check=True, shell=True)
+        if hardcoded:
+            VARS.set_sudo(False)
+        return out
     except subprocess.CalledProcessError as e:
         raise NotImplementedError(
             f'Error in bash command: returncode={e.returncode}, stderr={e.stderr}')
 
 
-def bash_cmd_tmp(cmd):
+def bash_sudo_cmd(cmd):
     try:
-        if VARS['SUDO']:
-            return subprocess.run(f'sudo {cmd}', check=True, shell=True)
-        else:
-            return subprocess.run(cmd, check=True, shell=True)
+        return subprocess.run(cmd, check=True, shell=True)
     except subprocess.CalledProcessError:
         return None

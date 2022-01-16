@@ -10,11 +10,11 @@ def decor_path(func):
             raise TypeError(
                 f'{func.__name__}() missing at least 1 required positional argument')
         path = real_path(args[0])
-        get_path_access(path)
+        access = get_path_access(path)
 
-        print_trace(f'pre: {func.__name__}({path})')
-        func(path)
-        print_trace(f'post: {func.__name__}({path})')
+        pre_func(func, (path))
+        decor_sudo(access, f'Path requires sudo access: {path}')(func)(*args)
+        post_func(func, (path))
     return inner
 
 
@@ -25,12 +25,49 @@ def decor_path_args(*dargs):
                 raise TypeError(
                     f'{func.__name__}() missing at least {len(dargs) - len(fargs)} required positional arguments')
             args = list(fargs)
+            access = True
+            sudo_path = ''
             for it, darg in enumerate(dargs):
                 args[it] = real_path(args[it], darg)
-                get_path_access(args[it])
+                if not get_path_access(args[it]):
+                    access = False
+                    sudo_path = args[it]
 
-            print_trace(f'pre: {func.__name__}({args})')
-            func(*args)
-            print_trace(f'post: {func.__name__}({args})')
+            pre_func(func, args)
+            decor_sudo(access, f'Path requires sudo access: {sudo_path}')(
+                func)(*args)
+            post_func(func, args)
         return wrap
     return inner
+
+
+def decor_sudo(access=True, reason=''):
+    def inner(func):
+        def wrap(*args):
+            prev_sudo = VARS.sudo
+            if access and prev_sudo:
+                VARS.set_sudo(False)
+            elif not access and not VARS.sudo:
+                VARS.set_sudo(True, reason)
+
+            func(*args)
+
+            if not VARS.sudo and prev_sudo:
+                VARS.set_sudo(True, 'Sudo timed out')
+            elif VARS.sudo and not prev_sudo:
+                deactivate_sudo()
+        return wrap
+    return inner
+
+
+def pre_func(func, *args):
+    func_trace(func, 'pre: ', args)
+
+
+def post_func(func, *args):
+    func_trace(func, 'post:', args)
+
+
+def func_trace(func, pos, args):
+    sudo = 'sudo ' if VARS.sudo else ''
+    print_trace(f'\t{pos} {sudo}{func.__name__}({args})')
