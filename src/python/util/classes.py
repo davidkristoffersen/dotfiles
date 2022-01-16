@@ -5,6 +5,7 @@ from .types import *
 class Vars():
     sudo = False
     write = False
+    submodule = False
     print = LogLevel.DEBUG
 
     def set_sudo(self, boolean: bool, reason=''):

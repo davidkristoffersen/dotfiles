@@ -1,7 +1,6 @@
 import os
 import subprocess
 
-from . import access
 from .config import *
 from .print import *
 
@@ -23,6 +22,14 @@ def source_profile():
 
 def source_bashrc():
     bash_cmd(f'. {DOTFILES_SHELL}/.bashrc')
+
+
+def getenv(name):
+    return str(os.getenv(name))
+
+
+def setenv(name, value):
+    os.environ[name] = str(value)
 
 
 def run_script(path, name, args=[]):

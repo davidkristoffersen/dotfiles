@@ -10,22 +10,23 @@ from install import *
 def parse_args() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description='Install system')
     parser.add_argument(
-        '-s', '--script', choices=['shell', 'home'], help='Script name to install')
+        '-s', '--script', choices=['shell', 'home', 'bin', 'share', 'lib', 'repo'], help='Script name to install')
     parser.add_argument(
         '-a,', '--apt', dest='apt', action='store_true', help='Run apt install')
     parser.add_argument(
-        '-t', '--test', dest='test', action='store_true', help='Run test install')
+        '--sub', dest='sub', action='store_true', help='Initialize submodules')
     parser.add_argument(
         '-w', '--write', dest='write', action='store_true', help='Do write operations')
     parser.add_argument(
         '-l', '--log', choices=['all', 'trace', 'debug', 'info', 'category', 'warn', 'error', 'fatal', 'off'], help='Set log level')
+    parser.add_argument(
+        '-t', '--test', dest='test', action='store_true', help='Run test install')
     argcomplete.autocomplete(parser)
     return parser.parse_args()
 
 
 def main(**args):
-    install = Install(args['script'], args['apt'],
-                      args['test'], args['write'], args['log'])
+    install = Install(args)
 
     install.run()
 

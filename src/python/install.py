@@ -9,20 +9,21 @@ from util.types import *
 
 
 class Install():
-    def __init__(self, script=False, apt=False, test=False, write=False, log=False):
-        self.script = script
-        self.apt = apt
-        self.test = test
-        self.write = write
-        self.log = log
+    def __init__(self, args):
+        self.script = args['script']
+        self.apt = args['apt']
+        self.write = args['write']
+        self.log = args['log']
+        self.sub = args['sub']
+        self.test = args['test']
 
         self.script_map = {
             'shell': shell,
             'home': home,
-            # 'bin': bin,
-            # 'lib': lib,
-            # 'share': share,
-            # 'repo': repo,
+            'bin': bin,
+            'lib': lib,
+            'share': share,
+            'repo': repo
             # 'private': private,
             # 'pacman': pacman,
         }
@@ -49,6 +50,8 @@ class Install():
             VARS.print = LogLevel(self.log_map[self.log])
         if self.write:
             VARS.write = self.write
+        if self.sub:
+            VARS.submodule = self.sub
         if self.script:
             self.run_script(self.script_map[self.script], self.script)
         elif self.apt:

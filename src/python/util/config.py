@@ -6,6 +6,7 @@ from .classes import *
 HOME = str(os.getenv('HOME'))
 DOTFILES = str(pathlib.Path(__file__).parent.parent.parent.parent.resolve())
 
+
 DOTFILES_SRC = f'{DOTFILES}/src'
 DOTFILES_SHELL = f'{DOTFILES}/shell'
 DOTFILES_HOME = f'{DOTFILES}/home'
