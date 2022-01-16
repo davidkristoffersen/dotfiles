@@ -58,6 +58,7 @@ class Install():
         else:
             for name, script in self.script_map.items():
                 self.run_script(script, name)
+        deactivate_sudo()
 
     def run_script(self, func, name):
         print_header(name)

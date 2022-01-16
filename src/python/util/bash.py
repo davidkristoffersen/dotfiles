@@ -8,7 +8,21 @@ from .print import *
 
 def source_all():
     '''Source all shell files'''
-    print_trace('Sourcing all')
+    source_util()
+    source_profile()
+    source_bashrc()
+
+
+def source_util():
+    bash_cmd(f'. {DOTFILES_SHELL}/.util')
+
+
+def source_profile():
+    bash_cmd(f'. {DOTFILES_SHELL}/.profile')
+
+
+def source_bashrc():
+    bash_cmd(f'. {DOTFILES_SHELL}/.bashrc')
 
 
 def run_script(path, name, args=[]):
