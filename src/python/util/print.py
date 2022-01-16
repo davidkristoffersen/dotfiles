@@ -1,4 +1,3 @@
-# from colorstring import Color
 from .config import VARS
 from .types import *
 
@@ -10,17 +9,17 @@ BYELLOW = BOLD + '\x1b[38;2;255;255;0m'
 BCYAN = BOLD + '\x1b[38;2;0;255;255m'
 BLUE = '\x1b[38;2;0;100;200m'
 RED = '\x1b[38;2;200;50;50m'
-ERROR = '\x1b[38;2;255;0;0m'
+ERROR = BOLD + '\x1b[38;2;255;0;0m'
 
 
 def print_error(msg, end='\n'):
     if VARS.print <= LogLevel.ERROR:
-        print(f'{BOLD}{ERROR}{msg}{RESET}', end=end)
+        printc(ERROR, msg, end)
 
 
 def print_warn(msg, end='\n'):
     if VARS.print <= LogLevel.WARN:
-        print(f'{RED}{msg}{RESET}', end=end)
+        printc(RED, msg, end)
 
 
 def print_header(name, new_line=True):
@@ -31,30 +30,21 @@ def print_header(name, new_line=True):
 
         line = '#' * (len(name) + 4)
 
-        print(RESET + FAINT + line)
-        print(f'# {BYELLOW}{name}{RESET}{FAINT} #')
-        print(line + RESET)
-
-        # print(
-        #     Color(f'{line}\n# ', 'faint') +
-        #     Color(f'{name}', 'bold', 'yellow') +
-        #     Color(f' #\n{line}', 'faint')
-        # )
+        printne(FAINT, line + '\n# ')
+        printne(BYELLOW, name)
+        printc(FAINT, ' #\n' + line)
 
 
 def print_section(name):
     '''Print section'''
     if VARS.print <= LogLevel.CATEGORY:
-        print(f'\n{FAINT}# {BCYAN}{name}{RESET}')
-        # print(
-        #     Color('\n# ', 'faint') +
-        #     Color(name, 'bold', 'cyan')
-        # )
+        printne(FAINT, '\n# ')
+        printc(BCYAN, name)
 
 
 def print_info(msg):
     if VARS.print <= LogLevel.INFO:
-        print(f'{BLUE}{msg}{RESET}')
+        printc(BLUE, msg)
 
 
 def print_debug(msg):
@@ -64,4 +54,12 @@ def print_debug(msg):
 
 def print_trace(msg):
     if VARS.print <= LogLevel.TRACE:
-        print(f'{FAINT}{msg}{RESET}')
+        printc(FAINT, msg)
+
+
+def printne(color, line):
+    print(color + line + RESET, end='')
+
+
+def printc(color, line, end='\n'):
+    print(color + line + RESET, end=end)
