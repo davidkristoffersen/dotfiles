@@ -10,7 +10,7 @@ from install import *
 def parse_args() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description='Install system')
     parser.add_argument(
-        '-s', '--script', choices=['shell', 'home', 'bin', 'lib', 'share',  'repo', 'private'], help='Script name to install')
+        '-s', '--script', choices=['meta', 'shell', 'home', 'bin', 'lib', 'share',  'repo', 'private'], help='Script name to install')
     parser.add_argument(
         '-a,', '--apt', dest='apt', action='store_true', help='Run apt install')
     parser.add_argument(

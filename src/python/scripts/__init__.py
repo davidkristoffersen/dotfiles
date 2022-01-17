@@ -2,6 +2,7 @@ from .apt import apt
 from .bin import bin
 from .home import home
 from .lib import lib
+from .meta import meta
 from .pacman import pacman
 from .private import private
 from .repo import repo

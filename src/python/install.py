@@ -23,6 +23,7 @@ class Install():
         self.pacman = args['pacman']
 
         self.script_map = {
+            'meta': meta,
             'shell': shell,
             'home': home,
             'bin': bin,
@@ -33,6 +34,7 @@ class Install():
         }
 
         self.server_map = {
+            'meta': meta,
             'shell': shell,
             'home': home,
             'bin': bin,
@@ -93,21 +95,8 @@ class Install():
                 choice = input()
                 if choice in ['y', 'Y']:
                     break
-                elif choice in ['n', '']:
-                    sys.exit(1)
                 elif choice in ['t', 'T']:
                     traceback.print_exc()
+                else:
+                    sys.exit(1)
         os.chdir(DOTFILES)
-
-        def meta_init(self):
-            '''Meta init'''
-            src = f'{DOTFILES_SRC}/config.py'
-            dst = f'{HOME}/.dotfiles_meta.sh'
-
-            out = f'export DOTFILES="{DOTFILES}"'
-            src_file = read(src)
-            pre = '\n'.join(src_file[0:2])
-            post = '\n'.join(src_file[2:])
-            out = f'{pre}\n\n{out}\n\n{post}'
-
-            write(out, dst)

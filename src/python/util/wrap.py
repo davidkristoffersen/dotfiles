@@ -13,8 +13,10 @@ def decor_path(func):
         access = get_path_access(path)
 
         pre_func(func, (path))
-        decor_sudo(access, f'Path requires sudo access: {path}')(func)(*args)
+        out = decor_sudo(
+            access, f'Path requires sudo access: {path}')(func)(*args)
         post_func(func, (path))
+        return out
     return inner
 
 
@@ -34,9 +36,10 @@ def decor_path_args(*dargs):
                     sudo_path = args[it]
 
             pre_func(func, args)
-            decor_sudo(access, f'Path requires sudo access: {sudo_path}')(
+            out = decor_sudo(access, f'Path requires sudo access: {sudo_path}')(
                 func)(*args)
             post_func(func, args)
+            return out
         return wrap
     return inner
 
@@ -50,12 +53,13 @@ def decor_sudo(access=True, reason=''):
             elif not access and not VARS.sudo:
                 VARS.set_sudo(True, reason)
 
-            func(*args)
+            out = func(*args)
 
             if not VARS.sudo and prev_sudo:
                 VARS.set_sudo(True, 'Sudo timed out')
             elif VARS.sudo and not prev_sudo:
                 deactivate_sudo()
+            return out
         return wrap
     return inner
 

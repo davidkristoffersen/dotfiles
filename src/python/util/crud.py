@@ -64,6 +64,7 @@ def link(src, dst, desc, is_file=True):
 def read(path):
     '''Read file into list'''
     with open(path, 'r') as _f:
+        print_debug(f'\tReading from: "{path}"')
         return _f.read().splitlines()
 
 
@@ -74,8 +75,8 @@ def write(path, data):
     if not VARS.write:
         return
     with open(path, 'w') as _f:
-        print_debug(f'Writing to: "{path}"')
-        print_trace(f'Data: {data}')
+        print_debug(f'\tWriting to: "{path}"')
+        print_trace(f'\tData: {data}')
 
 
 # Delete
