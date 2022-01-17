@@ -44,6 +44,27 @@ def link_dir(src, dst, desc=''):
 
 
 def link(src, dst, desc, is_file=True):
+    if os.path.islink(dst):
+        link_dst = os.readlink(dst)
+        if not link_dst == src:
+            print_warn(f'Link already exist: {dst} -> {link_dst}')
+            print_warn('Replace the link(y/N)?', end=' ')
+            choice = input()
+            if not choice in ['y', 'Y']:
+                print_debug('...Skipping')
+                return
+        else:
+            return
+    elif os.path.isfile(dst):
+        print_warn(f'Destination already exist: {dst}')
+        print_warn('Replace the file(y/N)?', end=' ')
+        choice = input()
+        if not choice in ['y', 'Y']:
+            print_debug('...Skipping')
+            return
+    elif os.path.isdir(dst):
+        raise NotImplementedError(f'Destination is a directory: "{dst}"')
+
     if desc:
         print_info(f'Replacing {desc}:')
     else:
@@ -51,11 +72,8 @@ def link(src, dst, desc, is_file=True):
         desc = base_name(dst)
         print_info(f'Replacing {_type}: "{desc}"')
 
-    if os.path.isdir(dst):
-        raise NotImplementedError(f'Destination is a directory: "{dst}"')
     create_path(dir_name(dst))
     rm_file(dst)
-
     bash_cmd(f'ln -s "{src}" "{dst}"')
 
 
