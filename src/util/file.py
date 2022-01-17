@@ -6,17 +6,6 @@ from .print import *
 from .wrap import *
 
 
-# Create
-@decor_path
-def create_file(path, data):
-    if os.path.isfile(path):
-        raise NotImplementedError(f'File already exist: "{path}"')
-    if VARS.write:
-        print_info(f'Creating file: "{path}"')
-        bash_cmd(f'touch "{path}"')
-        bash_cmd(f'printf "{data}" > "{path}"')
-
-
 @decor_path
 def create_path(path):
     if VARS.write and not os.path.isdir(path):
@@ -92,9 +81,17 @@ def write(path, data):
     '''Write data to file'''
     if not VARS.write:
         return
-    with open(path, 'w') as _f:
-        print_debug(f'\tWriting to: "{path}"')
-        print_trace(f'\tData: {data}')
+    if os.path.isdir(path):
+        raise NotImplementedError(f'Destination is a directory: "{path}"')
+    elif os.path.isfile(path):
+        print_warn(f'File already exist: "{path}"')
+        print_warn('Replace the file(y/N)?', end=' ')
+        choice = input()
+        if not choice in ['y', 'Y']:
+            print_debug('...Skipping')
+            return
+    print_debug(f'\tWriting to: "{path}"')
+    bash_cmd(f'printf "{data}" > "{path}"')
 
 
 # Delete
