@@ -4,7 +4,7 @@ from os import listdir
 from os.path import isdir, isfile
 from typing import Union
 
-from toolz import curry, flip, pipe
+from toolz import curry, pipe
 from toolz.curried import filter, map
 
 from .config import *
@@ -80,7 +80,7 @@ def bash_cmd(cmd):
         if VARS.sudo:
             cmd = f'sudo {cmd}'
         out = print_debug(f'\t{cmd}')
-        # out = subprocess.run(cmd, check=True, shell=True)
+        out = subprocess.run(cmd, check=True, shell=True)
         if hardcoded:
             VARS.set_sudo(False)
         return out
