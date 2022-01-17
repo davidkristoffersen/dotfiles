@@ -19,5 +19,5 @@ def private():
 
     print_section('Shell source')
     secret_body = '#!/usr/bin/env bash\n\n'
-    secret_body += f'. $DOTFILES_PRIVATE/{name}/.bashrc'
+    secret_body += f'. \\"\$DOTFILES_PRIVATE/{name}/.bashrc\\"'
     write(f'{DOTFILES_SHELL}/.bash.d/.90-secrets.bash', secret_body)

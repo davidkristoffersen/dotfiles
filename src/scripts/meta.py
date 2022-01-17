@@ -8,12 +8,23 @@ def meta():
     '''Meta exports'''
     print()
 
-    src = f'{DOTFILES_SRC}/util/meta.sh'
-    dst = f'{HOME}/.dotfiles_meta.sh'
-    out = f'export DOTFILES="{DOTFILES}"'
-    src_file = read(src)
+    out = '#!/usr/bin/bash\n\n'
+    out += f'export DOTFILES="{DOTFILES}"\n\n'
+    out += meta_export('DOTFILES_SHELL', DOTFILES_SHELL)
+    out += meta_export('DOTFILES_SRC', DOTFILES_SRC)
+    out += meta_export('DOTFILES_SHELL', DOTFILES_SHELL)
+    out += meta_export('DOTFILES_HOME', DOTFILES_HOME)
+    out += meta_export('DOTFILES_CONFIG', DOTFILES_CONFIG)
+    out += meta_export('DOTFILES_BIN', DOTFILES_BIN)
+    out += meta_export('DOTFILES_LIB', DOTFILES_LIB)
+    out += meta_export('DOTFILES_SHARE', DOTFILES_SHARE)
+    out += meta_export('DOTFILES_ETC', DOTFILES_ETC)
+    out += meta_export('DOTFILES_PRIVATE', DOTFILES_PRIVATE)
 
-    pre = '\n'.join(src_file[0:2])
-    post = '\n'.join(src_file[2:])
-    out = f'{pre}\n{out}\n\n{post}'
+    dst = f'{HOME}/.dotfiles_meta.sh'
     write(dst, out)
+
+
+def meta_export(key, value):
+    value = value[len(DOTFILES):]
+    return f'export {key}=\\"\$DOTFILES{value}\\"\n'

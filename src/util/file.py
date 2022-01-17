@@ -91,7 +91,7 @@ def write(path, data):
             print_debug('...Skipping')
             return
     print_debug(f'\tWriting to: "{path}"')
-    bash_cmd(f'printf "{data}" > "{path}"')
+    bash_cmd(f'echo "{data}" > "{path}"')
 
 
 # Delete
