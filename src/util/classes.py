@@ -6,6 +6,7 @@ class Vars():
     sudo = False
     write = False
     submodule = False
+    no_bash = False
     print = LogLevel.DEBUG
 
     def set_sudo(self, boolean: bool, reason=''):

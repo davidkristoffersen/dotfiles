@@ -16,6 +16,7 @@ class Install():
         self.apt = args['apt']
 
         self.write = args['write']
+        self.nobash = args['nobash']
         self.log = args['log']
         self.sub = args['sub']
         self.test = args['test']
@@ -66,6 +67,8 @@ class Install():
             VARS.print = LogLevel(self.log_map[self.log])
         if self.write:
             VARS.write = self.write
+        if self.nobash:
+            VARS.no_bash = self.nobash
         if self.sub:
             VARS.submodule = self.sub
         if self.script:

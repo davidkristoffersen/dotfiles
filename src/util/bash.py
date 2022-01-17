@@ -80,7 +80,8 @@ def bash_cmd(cmd):
         if VARS.sudo:
             cmd = f'sudo {cmd}'
         out = print_debug(f'\t{cmd}')
-        out = subprocess.run(cmd, check=True, shell=True)
+        if not VARS.no_bash:
+            out = subprocess.run(cmd, check=True, shell=True)
         if hardcoded:
             VARS.set_sudo(False)
         return out

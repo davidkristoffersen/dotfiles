@@ -25,6 +25,9 @@ def parse_args() -> argparse.ArgumentParser:
         '--server', dest='server', action='store_true', help='Run server install')
     parser.add_argument(
         '--sub', dest='sub', action='store_true', help='Initialize submodules')
+    parser.add_argument(
+        '--no-bash', dest='nobash', action='store_true', help='Do not run bash commands')
+
     argcomplete.autocomplete(parser)
     return parser.parse_args()
 
