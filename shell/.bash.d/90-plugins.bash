@@ -10,26 +10,28 @@ _fzf() {
 
 	# Completion file
 	if [[ $- == *i* ]]; then
-		source "$DOTFILES/home/.vim/pack/general/opt/fzf/shell/completion.bash" 2> /dev/null;  check_error $?
+		source "$DOTFILES/home/.vim/pack/general/opt/fzf/shell/completion.bash" 2>/dev/null
+		check_error $?
 	fi
 
 	# Apply key bindings
-	source "$DOTFILES/home/.vim/pack/general/opt/fzf/shell/key-bindings.bash"; check_error $?
+	source "$DOTFILES/home/.vim/pack/general/opt/fzf/shell/key-bindings.bash"
+	check_error $?
 
 	fzf_update() {
 		$DOTFILES_HOME/.vim/pack/general/opt/fzf/install --bin
 	}
 
 	fzf_open_single() {
-		_file="$(fzf -m --reverse --height 40%)" \
-			&& history -s "vim $_file" \
-			&& vim $_file
+		_file="$(fzf -m --reverse --height 40%)" &&
+			history -s "vim $_file" &&
+			vim $_file
 	}
 
 	fzf_open_multi() {
-		_files="$(fzf -m --reverse --height 40%)" \
-			&& history -s "vim -p $(xargs <<< "$_files")" \
-			&& vim -p $_files
+		_files="$(fzf -m --reverse --height 40%)" &&
+			history -s "vim -p $(xargs <<<"$_files")" &&
+			vim -p $_files
 	}
 
 	fzf_upwards_pwd() {
@@ -46,6 +48,7 @@ _fzf() {
 	}
 }
 
+# TODO: Fix! This will crash shell if submodules is not initialized
 _fzf
 unset -f _fzf
 
@@ -53,7 +56,7 @@ _vim-prettier() {
 	vim-prettier_update() {
 		cd $DOTFILES_HOME/.vim/pack/general/opt/vim-prettier
 		yarn
-		cd - > /dev/null
+		cd - >/dev/null
 	}
 }
 
