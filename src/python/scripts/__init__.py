@@ -2,6 +2,8 @@ from .apt import apt
 from .bin import bin
 from .home import home
 from .lib import lib
+from .pacman import pacman
+from .private import private
 from .repo import repo
 from .share import share
 from .shell import shell

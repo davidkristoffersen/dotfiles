@@ -1,4 +1,6 @@
 import os
+import sys
+import traceback
 
 from scripts import *
 from util.access import *
@@ -12,10 +14,13 @@ class Install():
     def __init__(self, args):
         self.script = args['script']
         self.apt = args['apt']
+
         self.write = args['write']
         self.log = args['log']
         self.sub = args['sub']
         self.test = args['test']
+        self.server = args['server']
+        self.pacman = args['pacman']
 
         self.script_map = {
             'shell': shell,
@@ -23,9 +28,18 @@ class Install():
             'bin': bin,
             'lib': lib,
             'share': share,
-            'repo': repo
-            # 'private': private,
-            # 'pacman': pacman,
+            'repo': repo,
+            'private': private
+        }
+
+        self.server_map = {
+            'shell': shell,
+            'home': home,
+            'bin': bin,
+            'lib': lib,
+            'share': share,
+            'repo': repo,
+            'private': private
         }
 
         self.log_map = {
@@ -56,8 +70,13 @@ class Install():
             self.run_script(self.script_map[self.script], self.script)
         elif self.apt:
             self.run_script(apt, 'apt')
+        elif self.pacman:
+            self.run_script(pacman, 'pacman')
         elif self.test:
             self.run_script(test, 'test')
+        elif self.server:
+            for name, script in self.server_map.items():
+                self.run_script(script, name)
         else:
             for name, script in self.script_map.items():
                 self.run_script(script, name)
@@ -68,8 +87,16 @@ class Install():
         try:
             func()
         except Exception as e:
-            print_error('Something went wrong')
-            raise e
+            print_error(f'Error encountered: {e}')
+            while True:
+                print('Continue(y/N)/Show traceback(t):', end=' ')
+                choice = input()
+                if choice in ['y', 'Y']:
+                    break
+                elif choice in ['n', '']:
+                    sys.exit(1)
+                elif choice in ['t', 'T']:
+                    traceback.print_exc()
         os.chdir(DOTFILES)
 
         def meta_init(self):

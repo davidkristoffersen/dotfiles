@@ -3,6 +3,7 @@ from .bash import *
 from .classes import *
 from .config import *
 from .crud import *
+from .functional import *
 from .path import *
 from .print import *
 from .types import *

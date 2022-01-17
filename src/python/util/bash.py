@@ -1,5 +1,11 @@
 import os
 import subprocess
+from os import listdir
+from os.path import isdir, isfile
+from typing import Union
+
+from toolz import curry, flip, pipe
+from toolz.curried import filter, map
 
 from .config import *
 from .print import *
@@ -13,15 +19,36 @@ def source_all():
 
 
 def source_util():
-    bash_cmd(f'. {DOTFILES_SHELL}/.util')
+    bash_cmd(f'. "{DOTFILES_SHELL}/.util"')
 
 
 def source_profile():
-    bash_cmd(f'. {DOTFILES_SHELL}/.profile')
+    bash_cmd(f'. "{DOTFILES_SHELL}/.profile"')
 
 
 def source_bashrc():
-    bash_cmd(f'. {DOTFILES_SHELL}/.bashrc')
+    bash_cmd(f'. "{DOTFILES_SHELL}/.bashrc"')
+
+
+@curry
+def path_combine(base, path):
+    return f'{base}/{path}'
+
+
+def ls_files(path: str):
+    return ls_type(path, isfile)
+
+
+def ls_dirs(path: str):
+    return ls_type(path, isdir)
+
+
+def ls_type(path: str, func: Union[isfile, isdir]):
+    return list(pipe(
+        listdir(path),
+        map(path_combine(path)),
+        filter(func)
+    ))
 
 
 def getenv(name):

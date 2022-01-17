@@ -1,3 +1,4 @@
+
 from util.config import *
 from util.crud import *
 from util.print import *
@@ -5,18 +6,11 @@ from util.print import *
 
 def bin():
     '''Bin dotfiles'''
-    print()
 
-    xdg_bin_home = getenv('XDG_BIN_HOME')
+    print_section('Files')
+    for _f in ls_files(DOTFILES_BIN):
+        link_file(_f, f'{XDG_BIN_HOME}/{base_name(_f)}')
 
-    cwd = os.getcwd()
-    os.chdir(DOTFILES_BIN)
-    bash_cmd('shopt -s globstar')
-    scripts = bash_cmd('ls -dA1 **')
-    os.chdir(cwd)
-    if not scripts:
-        raise NotImplementedError(f'Directory empty: {DOTFILES_BIN}')
-
-    for script in scripts.stdout.splitLines():
-        base = base_name(script)
-        link_file(f'{DOTFILES_BIN}/{script}', f'{xdg_bin_home}/{base}', script)
+    print_section('Directories')
+    for _d in ls_dirs(DOTFILES_BIN):
+        link_dir(_d, f'{XDG_BIN_HOME}/{base_name(_d)}')

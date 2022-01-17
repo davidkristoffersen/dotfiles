@@ -7,8 +7,6 @@ def lib():
     '''Lib dotfiles'''
     print()
 
-    xdg_lib_home = getenv('XDG_LIB_HOME')
-
     # Bash library
     link_dir(f'{DOTFILES_LIB}/bash',
-             f'{xdg_lib_home}/bash', 'bash script library')
+             f'{XDG_LIB_HOME}/bash', 'bash script library')
