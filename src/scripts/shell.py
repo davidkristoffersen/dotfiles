@@ -16,7 +16,7 @@ def shell():
     create_links(['.bashrc', '.bash.d', '.bash_completion.d', '.bash_logout'])
 
     print_section("Source")
-    source_all()
+    # source_all()
 
 
 def create_links(links):
