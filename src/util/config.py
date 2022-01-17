@@ -4,7 +4,7 @@ import pathlib
 from .classes import *
 
 HOME = str(os.getenv('HOME'))
-DOTFILES = str(pathlib.Path(__file__).parent.parent.parent.parent.resolve())
+DOTFILES = str(pathlib.Path(__file__).parent.parent.parent.resolve())
 
 
 # Dotfiles structure

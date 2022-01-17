@@ -8,7 +8,7 @@ def meta():
     '''Meta exports'''
     print()
 
-    src = f'{DOTFILES_SRC}/python/util/meta.sh'
+    src = f'{DOTFILES_SRC}/util/meta.sh'
     dst = f'{HOME}/.dotfiles_meta.sh'
     out = f'export DOTFILES="{DOTFILES}"'
     src_file = read(src)
