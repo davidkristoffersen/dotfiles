@@ -7,19 +7,19 @@ function format() {
 		else
 			echo -en "$2$line$3"
 		fi
-	done <<< "$1"
+	done <<<"$1"
 }
 
 function rebase() {
 	format "git rebase upstream/$ubranch" "$r$f\t" "$r\n"
 	reb="$(git rebase upstream/$ubranch 2>&1)"
 	format "$reb" "$r\t" "\n"
-	if [ "$reb" == "Current branch master is up to date." ]; then
+	if [ "$reb" == "Current branch $ubranch is up to date." ]; then
 		return
 	fi
 
 	while true; do
-		git rebase --show-current-patch 2> /dev/null 1> /dev/null
+		git rebase --show-current-patch 2>/dev/null 1>/dev/null
 		if [ "$?" != "0" ]; then
 			break
 		fi
@@ -30,7 +30,7 @@ function rebase() {
 		format "$(git status)" "$r\t" "\n"
 		format "Fix conflicts and the press Enter to continue... " "$r$f\t" "$r"
 		read </dev/tty
-		git rebase --show-current-patch 2> /dev/null 1> /dev/null
+		git rebase --show-current-patch 2>/dev/null 1>/dev/null
 		if [ "$?" != "0" ]; then
 			break
 		fi
@@ -58,7 +58,7 @@ function update() {
 	cd $path
 
 	# Check if head is detached
-	git symbolic-ref -q HEAD 1>& /dev/null
+	git symbolic-ref -q HEAD 1>&/dev/null
 	if [ "$?" != "0" ]; then
 		obranch="$(git branch | grep -v ^* | head -n 1 | awk '{$1=$1};1')"
 	else
@@ -84,8 +84,8 @@ function update() {
 	fi
 
 	if [ ! -z "$upstream_exist" ]; then
-		ubranch="master"
 		upstream="$(git remote get-url upstream)"
+		ubranch="$(git ls-remote --symref $upstream HEAD | awk -F'[/\t]' 'NR == 1 {print $3}')"
 		format "Fork" "$b\t" "$r\n"
 		format "$upstream" "\t ↳ " "\n"
 		format "git fetch upstream" "$r$f\t" "$r\n"
@@ -117,11 +117,11 @@ function par() {
 function seq() {
 	func="seq"
 	while IFS= read -r line; do
-		f1="$(awk '{print $1}' <<< "$line")"
-		f2="$(awk '{print $2}' <<< "$line")"
+		f1="$(awk '{print $1}' <<<"$line")"
+		f2="$(awk '{print $2}' <<<"$line")"
 		update "$f1 $f2" "seq"
 		echo
-	done <<< "$(echo $args | xargs -n 2)"
+	done <<<"$(echo $args | xargs -n 2)"
 }
 
 function main() {
@@ -160,7 +160,7 @@ function main() {
 function init() {
 	path_bak="$(pwd)"
 
-	if ! [ -d .git ] || ! git rev-parse --git-dir > /dev/null 2>&1; then
+	if ! [ -d .git ] || ! git rev-parse --git-dir >/dev/null 2>&1; then
 		echo "fatal: not a git repository (or any parent up to mount point /)" >&2
 		exit
 	fi

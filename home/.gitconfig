@@ -7,8 +7,8 @@
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	lgs = "!f() { num=10; if [ ! -z $1 ]; then num=$1; fi; git lg | head -n $num; }; f"
-	pushm = push origin master
-	pullm = pull origin master
+	pushm = push origin main
+	pullm = pull origin main
 	rebaseKeepDates = rebase --committer-date-is-author-date
 	st = status
 	credz = config credential.helper store
