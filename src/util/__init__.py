@@ -3,7 +3,6 @@ from .bash import *
 from .classes import *
 from .config import *
 from .file import *
-from .functional import *
 from .path import *
 from .print import *
 from .types import *

@@ -2,10 +2,6 @@ import os
 import subprocess
 from os import listdir
 from os.path import isdir, isfile
-from typing import Union
-
-from toolz import curry, pipe
-from toolz.curried import filter, map
 
 from .config import *
 from .print import *
@@ -30,7 +26,6 @@ def source_bashrc():
     bash_cmd(f'. "{DOTFILES_SHELL}/.bashrc"')
 
 
-@curry
 def path_combine(base, path):
     return f'{base}/{path}'
 
@@ -43,12 +38,9 @@ def ls_dirs(path: str):
     return ls_type(path, isdir)
 
 
-def ls_type(path: str, func: Union[isfile, isdir]):
-    return list(pipe(
-        listdir(path),
-        map(path_combine(path)),
-        filter(func)
-    ))
+def ls_type(path: str, func):
+    files = [path_combine(path, _f) for _f in listdir(path)]
+    return [_f for _f in files if func(_f)]
 
 
 def getenv(name):
