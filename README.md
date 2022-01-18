@@ -29,7 +29,7 @@ $ cd $dotfiles/src
 $ source stetup.sh
 ```
 
-**Run the setup python script:**
+**Run the python setup script:**
 
 This script installs all dotfiles
 
