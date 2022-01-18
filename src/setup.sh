@@ -89,8 +89,8 @@ install_other() {
 			echo "mkdir -p $exa_dst"
 			echo "mv $exa_bin $exa_dst"
 			mv $exa_bin $exa_dst
-			echo "rm -f $exa_out"
-			rm -f $exa_out
+			echo "rm -f $exa_zip"
+			rm -f $exa_zip
 			echo "rm -rf $exa_unzip"
 			rm -rf $exa_unzip
 		fi
