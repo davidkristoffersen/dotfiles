@@ -26,7 +26,7 @@ This script does the following:
 
 ```bash
 $ cd $dotfiles/src
-$ source stetup.sh
+$ source setup.sh
 ```
 
 **Run the python setup script:**
