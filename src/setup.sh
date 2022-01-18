@@ -60,29 +60,39 @@ install_other() {
 		if [ "$line" == "pcloud" ]; then
 			echo -e "\nInstalling $line"
 			pcloud_url="https://www.pcloud.com/how-to-install-pcloud-drive-linux.html?download=electron-64"
-			pcloud_out="pcloud.bin"
-			echo "wget $pcloud_url -O $pcloud_out"
-			wget $pcloud_url -O $pcloud_out
-			echo "chmod +x $pcloud_out"
-			chmod +x $pcloud_out
-			echo "./$pcloud_out"
-			./$pcloud_out
-			echo "rm -f $pcloud_out"
-			rm -f $pcloud_out
+			pcloud_out="pcloud"
+			echo "Open \"$pcloud_url\" in your browser"
+			echo "Move the file "$pcloud_out" into this folder"
+			echo "Continue(Y/n)?:" | tr $'\n' ' '
+			read choice
+			if [[ "$choice" =~ ^(y|Y|yes|)$ ]]; then
+				echo "./$pcloud_out"
+				./$pcloud_out
+				echo "rm -f $pcloud_out"
+				rm -f $pcloud_out
+			fi
 		elif [ "$line" == "exa" ]; then
 			echo -e "\nInstalling $line"
 			exa_version="v0.10.1"
 			exa_url="https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86_64-$exa_version.zip"
-			exa_out="exa.zip"
-			exa_unzipped=""
-			echo "wget $exa_url -O $exa_out"
-			wget $exa_url -O $exa_out
-			echo "unzip $exa_out"
-			unzip $exa_out
-			echo "mv exa-linux-x86_64 $HOME/.local/bin"
-			mv exa-linux-x86_64 $HOME/.local/bin
+			exa_zip="exa.zip"
+			exa_unzip="exa"
+			exa_bin="exa/bin/exa"
+			exa_dst="$HOME/.local/bin"
+
+			echo "mkdir -p exa"
+			mkdir -p exa
+			echo "wget $exa_url -O $exa_zip"
+			wget $exa_url -O $exa_zip
+			echo "unzip $exa_zip -d $exa_unzip"
+			unzip $exa_zip -d $exa_unzip
+			echo "mkdir -p $exa_dst"
+			echo "mv $exa_bin $exa_dst"
+			mv $exa_bin $exa_dst
 			echo "rm -f $exa_out"
 			rm -f $exa_out
+			echo "rm -rf $exa_unzip"
+			rm -rf $exa_unzip
 		fi
 	done
 }
