@@ -12,7 +12,8 @@ _util() {
 			continue
 		fi
 
-		. $DOTFILES_SHELL/.util.d/$bash_file; check_error 0
+		. $DOTFILES_SHELL/.util.d/$bash_file
+		check_error 0
 	done
 
 	export SHELL_UTIL=true

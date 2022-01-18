@@ -18,7 +18,3 @@ _bashrc() {
 
 _bashrc
 unset -f _bashrc
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/david/.sdkman"
-[[ -s "/home/david/.sdkman/bin/sdkman-init.sh" ]] && source "/home/david/.sdkman/bin/sdkman-init.sh"

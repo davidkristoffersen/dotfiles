@@ -8,9 +8,9 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 alias tree='tree -C'
-alias cp="cp -i"                          # confirm before overwriting something
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
+alias cp="cp -i"     # confirm before overwriting something
+alias df='pydf -h'   # human-readable sizes
+alias free='free -m' # show sizes in MB
 
 # Listing
 alias lll="exa -ls type --git"

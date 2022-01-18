@@ -5,50 +5,50 @@
 #
 
 # Is the shell a sh environment
-[ "$0" == "sh" ] \
-	&& SHELL_SH=true \
-	|| SHELL_SH=false
+[ "$0" == "sh" ] &&
+	SHELL_SH=true ||
+	SHELL_SH=false
 
 # Is the shell interactive
-[ ! -z "`echo $- | grep i`" ] \
-	&& SHELL_INTERACTIVE=true \
-	|| SHELL_INTERACTIVE=false
+[ ! -z "$(echo $- | grep i)" ] &&
+	SHELL_INTERACTIVE=true ||
+	SHELL_INTERACTIVE=false
 
 # Is the shell a login shell
-[ ! -z "`shopt login_shell`" ] \
-	&& SHELL_LOGIN=true \
-	|| SHELL_LOGIN=false
+[ ! -z "$(shopt login_shell)" ] &&
+	SHELL_LOGIN=true ||
+	SHELL_LOGIN=false
 
 # Is the shell a ssh environment
-[ ! -z "`pstree -ps $$ | grep sshd`" ] \
-	&& SSH=true \
-	|| SSH=false
+[ ! -z "$(pstree -ps $$ | grep sshd)" ] &&
+	SSH=true ||
+	SSH=false
 
 # Is X active
-xhost >& /dev/null \
-	&& XDISPLAY=true \
-	|| XDISPLAY=false
+xhost >&/dev/null &&
+	XDISPLAY=true ||
+	XDISPLAY=false
 
 # Is the os based on wsl
-[ ! -z "$(uname -r | grep -ie "wsl2$")" ] \
-	&& SHELL_WSL=true \
-	|| SHELL_WSL=false
+[ ! -z "$(uname -r | grep -ie "wsl2$")" ] &&
+	SHELL_WSL=true ||
+	SHELL_WSL=false
 
 # Does wsl have gui support
-false && $SHELL_WSL \
-	&& SHELL_WSLG=true \
-	|| SHELL_WSLG=false
+false && $SHELL_WSL &&
+	SHELL_WSLG=true ||
+	SHELL_WSLG=false
 
 # Windows home path
 # && WIN_HOME="$(wslpath "$(wslvar USERPROFILE)")" \
-$SHELL_WSL \
-	&& WIN_HOME="/mnt/c/Users/divad" \
-	|| WIN_HOME=""
+$SHELL_WSL &&
+	WIN_HOME="/mnt/c/Users/divad" ||
+	WIN_HOME=""
 
 # Windows username
-$SHELL_WSL \
-	&& WIN_USERNAME="$(echo "$WIN_HOME" | xargs -I {} basename {})" \
-	|| WIN_USERNAME=""
+$SHELL_WSL &&
+	WIN_USERNAME="$(echo "$WIN_HOME" | xargs -I {} basename {})" ||
+	WIN_USERNAME=""
 
 export SHELL_SH SHELL_INTERACTIVE SHELL_LOGIN SSH XDISPLAY SHELL_WSL SHELL_WSLG WIN_HOME WIN_USERNAME
 
@@ -59,13 +59,13 @@ export SHELL_SH SHELL_INTERACTIVE SHELL_LOGIN SSH XDISPLAY SHELL_WSL SHELL_WSLG 
 set_colors() {
 	# Colors
 	declare -A colors=([black]=30
-						[red]=31
-						[green]=32
-						[yellow]=33
-						[blue]=34
-						[magenta]=35
-						[cyan]=36
-						[white]=37
+		[red]=31
+		[green]=32
+		[yellow]=33
+		[blue]=34
+		[magenta]=35
+		[cyan]=36
+		[white]=37
 	)
 	local pre='\033['
 	export RESET="${pre}m"
@@ -103,6 +103,10 @@ set_colors
 # DOTFILES REPO STATUS
 #
 
-[ ! -z "$(cd $DOTFILES; git submodule summary; cd - >& /dev/null)" ] \
-	&& SUBMODULE_INIT=true \
-	|| SUBMODULE_INIT=false
+[ ! -z "$(
+	cd $DOTFILES
+	git submodule summary
+	cd - >&/dev/null
+)" ] &&
+	SUBMODULE_INIT=true ||
+	SUBMODULE_INIT=false
