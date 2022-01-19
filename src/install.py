@@ -2,107 +2,76 @@ import os
 import sys
 import traceback
 
-from scripts import *
-from util.access import *
-from util.config import *
-from util.file import *
-from util.print import print_header
-from util.types import *
+from scripts import (apt, bin_files, home, lib, meta, pacman, private, repo,
+                     share, shell, test)
+from util.access import deactivate_sudo
+from util.config import DOTFILES, VARS
+from util.print import print_error, print_header
+from util.types import LogLevel
+
+script_map = {
+    'meta': meta,
+    'shell': shell,
+    'home': home,
+    'bin': bin_files,
+    'lib': lib,
+    'share': share,
+    'repo': repo,
+    'private': private
+}
+
+log_map = {
+    'all': 1,
+    'trace': 2,
+    'debug': 3,
+    'info': 4,
+    'category': 5,
+    'warn': 6,
+    'error': 7,
+    'fatal': 8,
+    'off': 9
+}
 
 
-class Install():
-    def __init__(self, args):
-        self.script = args['script']
-        self.apt = args['apt']
+def install(args):
+    caller_dir = os.getcwd()
+    os.chdir(DOTFILES)
+    deactivate_sudo()
 
-        self.write = args['write']
-        self.nobash = args['nobash']
-        self.nosudo = args['nosudo']
-        self.log = args['log']
-        self.sub = args['sub']
-        self.test = args['test']
-        self.server = args['server']
-        self.pacman = args['pacman']
+    VARS.write = args['write']
+    VARS.no_bash = args['nobash']
+    VARS.submodule = args['sub']
+    VARS.no_sudo = args['nosudo']
+    VARS.print = LogLevel(log_map[args['log']])
 
-        self.script_map = {
-            'meta': meta,
-            'shell': shell,
-            'home': home,
-            'bin': bin,
-            'lib': lib,
-            'share': share,
-            'repo': repo,
-            'private': private
-        }
+    if args['apt']:
+        install_script(apt, 'apt')
+    elif args['pacman']:
+        install_script(pacman, 'pacman')
+    elif args['test']:
+        install_script(test, 'test')
+    elif args['script'] == 'all':
+        for name, script in script_map.items():
+            install_script(script, name)
+    elif name := args['script']:
+        install_script(script_map[name], name)
+    deactivate_sudo()
+    os.chdir(caller_dir)
 
-        self.server_map = {
-            'meta': meta,
-            'shell': shell,
-            'home': home,
-            'bin': bin,
-            'lib': lib,
-            'share': share,
-            'repo': repo,
-            'private': private
-        }
 
-        self.log_map = {
-            'all': 1,
-            'trace': 2,
-            'debug': 3,
-            'info': 4,
-            'category': 5,
-            'warn': 6,
-            'error': 7,
-            'fatal': 8,
-            'off': 9
-        }
-
-        self.caller_dir = os.getcwd()
-        self.script_dir = pathlib.Path(__file__).parent.resolve()
-        os.chdir(DOTFILES)
-        deactivate_sudo()
-
-    def run(self):
-        if self.log:
-            VARS.print = LogLevel(self.log_map[self.log])
-        if self.write:
-            VARS.write = self.write
-        if self.nobash:
-            VARS.no_bash = self.nobash
-        if self.nosudo:
-            VARS.no_sudo = self.nosudo
-        if self.sub:
-            VARS.submodule = self.sub
-        if self.script:
-            self.run_script(self.script_map[self.script], self.script)
-        elif self.apt:
-            self.run_script(apt, 'apt')
-        elif self.pacman:
-            self.run_script(pacman, 'pacman')
-        elif self.test:
-            self.run_script(test, 'test')
-        elif self.server:
-            for name, script in self.server_map.items():
-                self.run_script(script, name)
-        else:
-            for name, script in self.script_map.items():
-                self.run_script(script, name)
-        deactivate_sudo()
-
-    def run_script(self, func, name):
-        print_header(name)
-        try:
-            func()
-        except Exception as e:
-            print_error(f'Error encountered: {e}')
-            while True:
-                print('Continue(y/N)/Show traceback(t):', end=' ')
-                choice = input()
-                if choice in ['y', 'Y']:
-                    break
-                elif choice in ['t', 'T']:
-                    traceback.print_exc()
-                else:
-                    sys.exit(1)
-        os.chdir(DOTFILES)
+def install_script(func, name):
+    print_header(name)
+    try:
+        func()
+    except Exception as error:
+        print_error(f'Error encountered: {error}')
+        while True:
+            print('Continue(y/N)/Show traceback(t):', end=' ')
+            choice = input()
+            if choice in ['y', 'Y']:
+                break
+            if choice in ['t', 'T']:
+                traceback.print_exc()
+            else:
+                sys.exit(1)
+    os.chdir(DOTFILES)

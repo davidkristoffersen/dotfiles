@@ -1,6 +1,3 @@
-from util.bash import *
-from util.config import *
-from util.print import *
 
 
 def pacman():

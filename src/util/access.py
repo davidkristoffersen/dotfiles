@@ -1,6 +1,8 @@
-from .bash import *
-from .config import *
-from .print import *
+
+
+from util.bash import bash_sudo_cmd
+from util.config import HOME, VARS
+from util.print import print_warn
 
 
 def get_path_access(path):
@@ -10,7 +12,7 @@ def get_path_access(path):
 def activate_sudo(reason=''):
     if not bash_sudo_cmd('sudo -n true 2>/dev/null'):
         reason = reason if reason else 'Install requires sudo:'
-        print_warn(reason + '\nContinue(Y/n)?:', end=' ')
+        print_warn(reason + '\nRun command(Y/n)?:', end=' ')
         choice = input()
         if not choice in ['y', 'Y', '']:
             return False
@@ -18,6 +20,7 @@ def activate_sudo(reason=''):
         if not bash_sudo_cmd('sudo -v'):
             raise NotImplementedError('Could not activate sudo')
         return True
+    return True
 
 
 def deactivate_sudo():

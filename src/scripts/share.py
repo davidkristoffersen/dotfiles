@@ -1,6 +1,7 @@
-from util.config import *
-from util.file import *
-from util.print import *
+
+
+from util.config import DOTFILES_SHARE, XDG_DATA_HOME
+from util.file import link_dir
 
 
 def share():

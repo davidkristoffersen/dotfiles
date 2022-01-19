@@ -1,7 +1,9 @@
 
-from util.config import *
-from util.file import *
-from util.print import *
+
+from util.config import (DOTFILES, DOTFILES_BIN, DOTFILES_CONFIG, DOTFILES_ETC,
+                         DOTFILES_HOME, DOTFILES_LIB, DOTFILES_PRIVATE,
+                         DOTFILES_SHARE, DOTFILES_SHELL, DOTFILES_SRC, HOME)
+from util.file import write
 
 
 def meta():
@@ -27,4 +29,4 @@ def meta():
 
 def meta_export(key, value):
     value = value[len(DOTFILES):]
-    return f'export {key}=\\"\$DOTFILES{value}\\"\n'
+    return f'export {key}=\\"\\$DOTFILES{value}\\"\n'

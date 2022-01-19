@@ -3,8 +3,8 @@ import subprocess
 from os import listdir
 from os.path import isdir, isfile
 
-from .config import *
-from .print import *
+from util.config import DOTFILES, DOTFILES_SHELL, VARS
+from util.print import print_debug, print_warn
 
 
 def source_all():
@@ -56,9 +56,8 @@ def run_script(path, name, args=[]):
     args = '"' + '" "'.join(args) + '"'
     cmd = f'./{name} {args}'
     os.chdir(path)
-    out = bash_cmd(cmd).stdout
+    bash_cmd(cmd)
     os.chdir(DOTFILES)
-    return out
 
 
 def bash_cmd(cmd):
@@ -78,15 +77,16 @@ def bash_cmd(cmd):
             cmd = cmd[5:]
         if VARS.sudo:
             cmd = f'sudo {cmd}'
-        out = print_debug(f'\t{cmd}')
+        print_debug(f'\t{cmd}')
         if not VARS.no_bash:
-            out = subprocess.run(cmd, check=True, shell=True)
+            print('COMMAND EXECUTED')
+            subprocess.run(cmd, check=True, shell=True)
         if hardcoded:
             VARS.set_sudo(False)
-        return out
-    except subprocess.CalledProcessError as e:
+        return
+    except subprocess.CalledProcessError as error:
         raise NotImplementedError(
-            f'Error in bash command: returncode={e.returncode}, stderr={e.stderr}')
+            f'Error in bash command: returncode={error.returncode}, stderr={error.stderr}') from error
 
 
 def bash_sudo_cmd(cmd):

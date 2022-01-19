@@ -1,5 +1,6 @@
-from .config import *
-from .print import *
+
+
+from util.config import HOME
 
 
 def base_name(path):

@@ -1,6 +1,8 @@
-from util.config import *
-from util.file import *
-from util.print import *
+
+
+from util.config import DOTFILES_CONFIG, DOTFILES_ETC, DOTFILES_HOME
+from util.file import link_dir, link_file
+from util.print import print_section
 
 
 def home():

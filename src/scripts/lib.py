@@ -1,6 +1,7 @@
-from util.config import *
-from util.file import *
-from util.print import *
+
+
+from util.config import DOTFILES_LIB, XDG_LIB_HOME
+from util.file import link_dir
 
 
 def lib():

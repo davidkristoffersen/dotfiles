@@ -1,7 +1,7 @@
 import os
 import pathlib
 
-from .classes import *
+from util.classes import Vars
 
 HOME = str(os.getenv('HOME'))
 DOTFILES = str(pathlib.Path(__file__).parent.parent.parent.resolve())

@@ -1,5 +1,6 @@
-from .config import VARS
-from .types import *
+
+from util.config import VARS
+from util.types import LogLevel
 
 BOLD = '\x1b[1m'
 FAINT = '\x1b[2m'

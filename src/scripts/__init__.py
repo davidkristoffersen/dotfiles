@@ -1,5 +1,5 @@
 from .apt import apt
-from .bin import bin
+from .bin_files import bin_files
 from .home import home
 from .lib import lib
 from .meta import meta

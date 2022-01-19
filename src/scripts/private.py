@@ -1,6 +1,10 @@
-from util.config import *
-from util.file import *
-from util.print import *
+
+
+from genericpath import isdir
+from util.bash import bash_cmd
+from util.config import DOTFILES_PRIVATE, DOTFILES_SHELL
+from util.file import link_dir, write
+from util.print import print_section
 
 
 def private():
@@ -19,5 +23,5 @@ def private():
 
     print_section('Shell source')
     secret_body = '#!/usr/bin/env bash\n\n'
-    secret_body += f'. \\"\$DOTFILES_PRIVATE/{name}/.bashrc\\"'
+    secret_body += f'. \\"\\$DOTFILES_PRIVATE/{name}/.bashrc\\"'
     write(f'{DOTFILES_SHELL}/.bash.d/.90-secrets.bash', secret_body)

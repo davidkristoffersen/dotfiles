@@ -1,7 +1,7 @@
-from util.bash import *
-from util.config import *
-from util.file import *
-from util.print import *
+
+
+from util.bash import bash_cmd, getenv, setenv
+from util.config import VARS
 
 
 def repo():

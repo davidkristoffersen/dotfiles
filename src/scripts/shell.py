@@ -1,7 +1,8 @@
 
-from util.config import *
-from util.file import *
-from util.print import *
+
+from util.config import DOTFILES_SHELL
+from util.file import link_dir, link_file
+from util.print import print_section
 
 
 def shell():

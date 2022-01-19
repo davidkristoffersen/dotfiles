@@ -1,5 +1,11 @@
 import os
 
+from util.bash import bash_cmd
+from util.config import DOTFILES, HOME, VARS
+from util.path import base_name, dir_name
+from util.print import print_debug, print_info, print_warn
+from util.wrap import decor_path, decor_path_args
+
 
 @decor_path
 def create_path(path):
@@ -32,12 +38,13 @@ def link(src, dst, desc, is_file=True):
         link_dst = os.readlink(dst)
         if not link_dst == src:
             print_warn(f'Link already exist: {dst} -> {link_dst}')
+
             print_warn('Replace the link(y/N)?', end=' ')
             choice = input()
             if not choice in ['y', 'Y']:
                 print_debug('...Skipping')
                 return
-        else:
+        elif not VARS.no_bash:
             return
     elif os.path.isfile(dst):
         print_warn(f'Destination already exist: {dst}')
@@ -65,7 +72,7 @@ def link(src, dst, desc, is_file=True):
 @decor_path
 def read(path):
     '''Read file into list'''
-    with open(path, 'r') as _f:
+    with open(path, 'r', encoding='utf-8') as _f:
         print_debug(f'\tReading from: "{path}"')
         return _f.read().splitlines()
 

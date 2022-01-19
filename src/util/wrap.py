@@ -1,7 +1,7 @@
-from .access import *
-from .config import *
-from .path import *
-from .print import *
+from util.access import deactivate_sudo, get_path_access
+from util.config import VARS
+from util.path import real_path
+from util.print import print_trace, print_warn
 
 
 def decor_path(func):
@@ -29,11 +29,11 @@ def decor_path_args(*dargs):
             args = list(fargs)
             access = True
             sudo_path = ''
-            for it, darg in enumerate(dargs):
-                args[it] = real_path(args[it], darg)
-                if not get_path_access(args[it]):
+            for _it, darg in enumerate(dargs):
+                args[_it] = real_path(args[_it], darg)
+                if not get_path_access(args[_it]):
                     access = False
-                    sudo_path = args[it]
+                    sudo_path = args[_it]
 
             pre_func(func, args)
             out = decor_sudo(access, f'Path requires sudo access: {sudo_path}')(
@@ -54,15 +54,18 @@ def decor_sudo(access=True, reason=''):
 
                 if VARS.no_sudo:
                     print_warn(
-                        f'Cannot run sudo command with "--no-sudo" flag: "{cmd}"')
-                    return
+                        'Cannot run sudo command with "--no-sudo" flag')
+                    return None
                 if not VARS.set_sudo(True, reason):
-                    print_warn(f'Failed to set sudo for command: "{cmd}"')
+                    print_warn('Failed to set sudo for command')
+                    deactivate_sudo()
+                    return None
 
             out = func(*args)
 
             if not VARS.sudo and prev_sudo:
-                VARS.set_sudo(True, 'Sudo timed out')
+                if not VARS.set_sudo(True, 'Sudo timed out'):
+                    print_warn('Failed to set sudo for command')
             elif VARS.sudo and not prev_sudo:
                 deactivate_sudo()
             return out

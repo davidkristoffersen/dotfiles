@@ -1,6 +1,8 @@
-from util.bash import *
-from util.config import *
-from util.print import *
+
+
+from util.bash import run_script
+from util.config import DOTFILES_SHARE
+from util.print import print_section
 
 
 def apt():
