@@ -1,10 +1,5 @@
 import os
 
-from .bash import *
-from .config import *
-from .print import *
-from .wrap import *
-
 
 @decor_path
 def create_path(path):

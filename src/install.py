@@ -17,6 +17,7 @@ class Install():
 
         self.write = args['write']
         self.nobash = args['nobash']
+        self.nosudo = args['nosudo']
         self.log = args['log']
         self.sub = args['sub']
         self.test = args['test']
@@ -69,6 +70,8 @@ class Install():
             VARS.write = self.write
         if self.nobash:
             VARS.no_bash = self.nobash
+        if self.nosudo:
+            VARS.no_sudo = self.nosudo
         if self.sub:
             VARS.submodule = self.sub
         if self.script:

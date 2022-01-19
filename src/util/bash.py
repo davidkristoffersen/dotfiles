@@ -66,8 +66,15 @@ def bash_cmd(cmd):
     try:
         hardcoded = False
         if not VARS.sudo and cmd[:5] == 'sudo ':
+            if VARS.no_sudo:
+                print_warn(
+                    f'Cannot run sudo command with "--no-sudo" flag: "{cmd}"')
+                return
             hardcoded = True
-            VARS.set_sudo(True, f'Command requires sudo: "{cmd}"')
+            if not VARS.set_sudo(True, f'Command requires sudo: "{cmd}"'):
+                print_warn(
+                    f'Failed to set sudo for command: "{cmd}"')
+                return
             cmd = cmd[5:]
         if VARS.sudo:
             cmd = f'sudo {cmd}'

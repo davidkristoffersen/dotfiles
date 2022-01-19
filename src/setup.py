@@ -26,6 +26,8 @@ def parse_args() -> argparse.ArgumentParser:
     parser.add_argument(
         '--sub', dest='sub', action='store_true', help='Initialize submodules')
     parser.add_argument(
+        '--no-sudo', dest='nosudo', action='store_true', help='Do not run sudo commands')
+    parser.add_argument(
         '--no-bash', dest='nobash', action='store_true', help='Do not run bash commands')
 
     argcomplete.autocomplete(parser)

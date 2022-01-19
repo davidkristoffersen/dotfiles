@@ -51,7 +51,13 @@ def decor_sudo(access=True, reason=''):
             if access and prev_sudo:
                 VARS.set_sudo(False)
             elif not access and not VARS.sudo:
-                VARS.set_sudo(True, reason)
+
+                if VARS.no_sudo:
+                    print_warn(
+                        f'Cannot run sudo command with "--no-sudo" flag: "{cmd}"')
+                    return
+                if not VARS.set_sudo(True, reason):
+                    print_warn(f'Failed to set sudo for command: "{cmd}"')
 
             out = func(*args)
 

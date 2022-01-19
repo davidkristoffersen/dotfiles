@@ -10,9 +10,14 @@ def get_path_access(path):
 def activate_sudo(reason=''):
     if not bash_sudo_cmd('sudo -n true 2>/dev/null'):
         reason = reason if reason else 'Install requires sudo:'
-        print_warn(reason, end='\n\t')
+        print_warn(reason + '\nContinue(Y/n)?:', end=' ')
+        choice = input()
+        if not choice in ['y', 'Y', '']:
+            return False
+        print(end='\t')
         if not bash_sudo_cmd('sudo -v'):
             raise NotImplementedError('Could not activate sudo')
+        return True
 
 
 def deactivate_sudo():

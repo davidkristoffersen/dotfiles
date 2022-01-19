@@ -31,6 +31,9 @@ def home():
     # LightDM
     link_file(f'{DOTFILES_ETC}/lightdm.conf', '/etc/lightdm.conf',
               'lightdm config - Display manager')
+    # Hushlogin
+    link_file(f'{DOTFILES_HOME}/.hushlogin', '.hushlogin',
+              'File to prevent daily login message')
 
     print_section('CLI configuration')
     # Readline
