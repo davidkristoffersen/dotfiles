@@ -1,16 +1,16 @@
 #!/usr/bin/bash
 
-config_dir="$WIN_HOME/AppData/Roaming/Code/User"
-
-settings="settings.json"
-keybindings="keybindings.json"
-prettier=".prettierrc"
+wslpath_win_dir="$WIN_HOME/AppData/Roaming/Code/User"
+win_dir="$(wslpath -w "$WIN_HOME/AppData/Roaming/Code/User")"
+wsl_dir="$(wslpath -w .)"
 
 update() {
-   cp "$config_dir/$1" "$config_dir/$1.bak"
-   cp "$1" "$config_dir/$1"
+	cp -f "$1" "$wslpath_win_dir/$1.bak"
+	rm -f "$wslpath_win_dir/$1"
+	cd $wslpath_win_dir
+	cmd.exe /C "mklink $win_dir\\$1 $wsl_dir\\$1 >nul"
+	cd - >/dev/null
 }
 
-update $settings
-update $keybindings
-update $prettier
+update settings.json
+update keybindings.json
