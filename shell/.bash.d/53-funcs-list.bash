@@ -1,5 +1,59 @@
 #!/usr/bin/bash
 
+f() {
+	path="$(ls_get_path "$@")"
+	args="$(ls_get_args "$@")"
+	[ ! -d "$path" ] && return
+	cd "$path"
+	exa -las type --git $args $(fs)
+	cd - >/dev/null
+}
+
+d() {
+	path="$(ls_get_path "$@")"
+	args="$(ls_get_args "$@")"
+	[ ! -d "$path" ] && return
+	cd "$path"
+	exa -dlas type --git $args $(ds)
+	cd - >/dev/null
+}
+
+lf() {
+	path="$(ls_get_path "$@")"
+	args="$(ls_get_args "$@")"
+	[ ! -d "$path" ] && return
+	cd "$path"
+	exa -lGas type --git $args $(fs)
+	cd - >/dev/null
+}
+
+ld() {
+	path="$(ls_get_path "$@")"
+	args="$(ls_get_args "$@")"
+	[ ! -d "$path" ] && return
+	cd "$path"
+	exa -dlGas type --git $args $(ds)
+	cd - >/dev/null
+}
+
+ls_get_path() {
+	if [ $# -eq 0 ]; then
+		echo "."
+	else
+		last="${@:$#}"
+		[ ${last:0:1} == '-' ] && echo "." || echo "$last"
+	fi
+}
+
+ls_get_args() {
+	if [ $# -eq 1 ]; then
+		[ ${1:0:1} == '-' ] && echo "$1"
+	elif [ $# -gt 1 ]; then
+		last="${@:$#}"
+		[ ${last:0:1} == '-' ] && echo "${@:1:$#}" || echo "${@:1:$#-1}"
+	fi
+}
+
 _lll() {
 	ls_sorted false -lh $@
 }

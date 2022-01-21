@@ -13,14 +13,12 @@ alias df='pydf -h'   # human-readable sizes
 alias free='free -m' # show sizes in MB
 
 # Listing
-alias lll="exa -ls type --git"
-alias lla="exa -las type --git"
-alias ld="exa -lDGs type --git"
-alias lda="exa -lDGas type --git"
-alias ll="exa -lGs type --git"
-alias la="exa -lGas type --git"
-alias l="exa -s type --git"
-alias a="exa -as type --git"
+alias l="exa -las type --git"
+alias o="exa -ls type --git"
+alias ll="exa -lGas type --git"
+alias lo="exa -lGs type --git"
+alias fs="find . -maxdepth 1 -not -type d -a -not -xtype d | tail -n +2 | grep -Po \"^./\K.*\""
+alias ds="find . -maxdepth 1 -type d -o -xtype d | tail -n +2 | grep -Po \"^./\K.*\""
 
 # Config
 alias srcall="source $HOME/.bash_profile"
