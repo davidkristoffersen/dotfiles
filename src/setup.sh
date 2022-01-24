@@ -56,6 +56,8 @@ install_req() {
 }
 
 install_other() {
+	xdg_bin="$HOME/.local/bin"
+	mkdir -p "$xdg_bin"
 	for line in $1; do
 		if [ "$line" == "pcloud" ]; then
 			echo -e "\nInstalling $line"
@@ -66,8 +68,10 @@ install_other() {
 			echo "Continue(Y/n)?:" | tr $'\n' ' '
 			read choice
 			if [[ "$choice" =~ ^(y|Y|yes|)$ ]]; then
-				echo "./$pcloud_out"
-				./$pcloud_out
+				echo "cp \"$pcloud_out\" \"$xdg_bin\""
+				cp "$pcloud_out" "$xdg_bin"
+				echo "$xdg_bin/$pcloud_out &"
+				$xdg_bin/$pcloud_out &
 				echo "rm -f $pcloud_out"
 				rm -f $pcloud_out
 			fi
@@ -78,7 +82,7 @@ install_other() {
 			exa_zip="exa.zip"
 			exa_unzip="exa"
 			exa_bin="exa/bin/exa"
-			exa_dst="$HOME/.local/bin"
+			exa_dst="$xdg_bin"
 
 			echo "mkdir -p exa"
 			mkdir -p exa
