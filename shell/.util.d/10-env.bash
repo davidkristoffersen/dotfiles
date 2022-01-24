@@ -35,22 +35,20 @@ xhost >&/dev/null &&
 	SHELL_WSL=false
 
 # Does wsl have gui support
-false && $SHELL_WSL &&
+$XDISPLAY && $SHELL_WSL &&
 	SHELL_WSLG=true ||
 	SHELL_WSLG=false
 
-# Windows home path
-# && WIN_HOME="$(wslpath "$(wslvar USERPROFILE)")" \
-$SHELL_WSL &&
-	WIN_HOME="/mnt/c/Users/divad" ||
-	WIN_HOME=""
+if $SHELL_WSL && [ -z "$WIN_HOME" ]; then
+	win_set_env "WIN_HOME" "%USERPROFILE%"
+	win_set_env "WIN_USERNAME" "%USERNAME%"
+	win_cmd "set WSLENV=WT_SESSION:WT_PROFILE_ID:WIN_HOME/p:WIN_USERNAME"
+	win_cmd "setx WSLENV WIN_HOME/p:WIN_USERNAME"
+	export WIN_HOME="$(win_get_env USERPROFILE)"
+	export WIN_USERNAME="$(win_get_env USERNAME)"
+fi
 
-# Windows username
-$SHELL_WSL &&
-	WIN_USERNAME="$(echo "$WIN_HOME" | xargs -I {} basename {})" ||
-	WIN_USERNAME=""
-
-export SHELL_SH SHELL_INTERACTIVE SHELL_LOGIN SSH XDISPLAY SHELL_WSL SHELL_WSLG WIN_HOME WIN_USERNAME
+export SHELL_SH SHELL_INTERACTIVE SHELL_LOGIN SSH XDISPLAY SHELL_WSL SHELL_WSLG
 
 #
 # COLORS
