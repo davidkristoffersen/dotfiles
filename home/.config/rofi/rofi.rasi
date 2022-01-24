@@ -211,4 +211,4 @@ configuration {
 	/* display-combi:					""; */
 }
 
-@import "/home/david/.local/share/rofi/themes/flat-orange.rasi"
+@import "$HOME/.local/share/rofi/themes/flat-orange.rasi"

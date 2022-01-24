@@ -238,7 +238,7 @@
       "before": ["<leader>", "P", "d"]
     }
   ],
-  "vim.vimrc.path": "\\\\wsl$\\Ubuntu-20.04\\home\\david\\dotfiles\\home\\.vim\\vscode\\.vimrc",
+  //   "vim.vimrc.path": "",
   "window.zoomLevel": 1,
   "workbench.colorCustomizations": {
     "breadcrumb.background": "#1d1d1d",

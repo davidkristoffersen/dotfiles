@@ -9,12 +9,12 @@ function script() {
 	vars+=" status_bar autostart_applications"
 	dst_code=""
 	gen_vars
-	format_vars > $dst
+	format_vars >$dst
 }
 
 function format_vars() {
 	for var in $vars; do
-		read -r -d '' tmp << EOF
+		read -r -d '' tmp <<EOF
 #
 # $(echo ${var^^} | tr '_' ' ')
 #
@@ -37,17 +37,17 @@ function gen_vars() {
 	local b="bindsym"
 
 	# ```i3config
-	read -r -d '' variables << EOF
+	read -r -d '' variables <<EOF
 # Mod1: Alt
 # Mod4: Super
 EOF
 
-	read -r -d '' fonts << EOF
+	read -r -d '' fonts <<EOF
 # Window title font
 font pango:monospace 8
 EOF
 
-	read -r -d '' network << EOF
+	read -r -d '' network <<EOF
 # Desktop env independentn system tray gui
 $e nm-applet
 EOF
@@ -55,7 +55,7 @@ EOF
 	# $```i3config
 	refresh_i3status="\$refresh_i3status"
 	# ```i3config
-	read -r -d '' audio << EOF
+	read -r -d '' audio <<EOF
 # Use pactl to adjust volume in PulseAudio.
 set \$refresh_i3status killall -SIGUSR1 i3status
 
@@ -65,7 +65,7 @@ $b XF86AudioMute $e pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3stat
 $b XF86AudioMicMute $e pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 EOF
 
-	read -r -d '' screens << EOF
+	read -r -d '' screens <<EOF
 # Output
 $e autorandr_helper.sh
 $b $m+$s+m $e autorandr_helper.sh
@@ -84,19 +84,19 @@ $e nitrogen --restore
 $b $m+$s+s $e i3_swap_workspaces.py
 EOF
 
-	read -r -d '' app_launcher << EOF
+	read -r -d '' app_launcher <<EOF
 # Rofi
 $b $m+d exec rofi -show drun
 EOF
 
-	read -r -d '' notifications << EOF
+	read -r -d '' notifications <<EOF
 # Kill xfce notification daemon
 $e killall -q xfce4-notifyd
 # Start dunst notification daemon
-$e dunst -config $HOME/.config/dunst/dunstrc
+$e dunst -config \$HOME/.config/dunst/dunstrc
 EOF
 
-	read -r -d '' applications << EOF
+	read -r -d '' applications <<EOF
 # Terminal
 $b $m+Return exec terminator
 # $b $m+Return exec alacritty
@@ -126,7 +126,7 @@ EOF
 		printf "$_out" | column -t
 	}
 	# ```i3config
-	read -r -d '' navigation << EOF
+	read -r -d '' navigation <<EOF
 # Change focus
 # Tiling / floating
 $b $m+Shift+t focus mode_toggle
@@ -226,7 +226,7 @@ EOF
 		printf "$_out" | column -t
 	}
 	# ```i3config
-	read -r -d '' workspaces << EOF
+	read -r -d '' workspaces <<EOF
 # Switch to workspace
 $(workspace_type $m "workspace number")
 
@@ -261,7 +261,7 @@ $b $m+$c+$a+Tab workspace next_on_output
 $b $m+$c+$a+$s+Tab workspace prev_on_output
 EOF
 
-	read -r -d '' appearance << EOF
+	read -r -d '' appearance <<EOF
 # Gaps size
 gaps inner 20
 gaps outer 0
@@ -281,7 +281,7 @@ client.background       #ffffff
 # for_window [class="^Chromium$" title=" - Chromium$"] border 1
 EOF
 
-	read -r -d '' config << EOF
+	read -r -d '' config <<EOF
 # Reload config
 $b $m+$s+c reload
 
@@ -314,7 +314,7 @@ EOF
 		printf "$_out"
 	}
 	# ```i3config
-	read -r -d '' modes << EOF
+	read -r -d '' modes <<EOF
 # Resize windows
 mode "resize" {
 	# Vim style
@@ -331,17 +331,17 @@ $(resize_type)
 $b $m+r mode "resize"
 EOF
 
-	read -r -d '' status_bar << EOF
+	read -r -d '' status_bar <<EOF
 # i3bar
 bar {
 	status_command i3status
 }
 EOF
 
-	read -r -d '' autostart_applications << EOF
+	read -r -d '' autostart_applications <<EOF
 # exec chromium
 EOF
-# $```i3config
+	# $```i3config
 }
 
 # Run script
