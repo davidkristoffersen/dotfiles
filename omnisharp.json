@@ -1,0 +1,6 @@
+{
+  "fileOptions": {
+    "userExcludeSearchPatterns": ["home/.vim/pack/**/*"],
+    "excludeSearchPatterns": ["home/.vim/pack/**/*"]
+  }
+}
