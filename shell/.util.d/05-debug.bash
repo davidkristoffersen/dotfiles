@@ -14,6 +14,12 @@ win_cmd() {
 	cd - >/dev/null
 }
 
+win_cmd_out() {
+	[ ! -z "$WIN_HOME" ] && cd "$WIN_HOME" || cd "$(win_get_env USERPROFILE)"
+	cmd.exe /C "$@"
+	cd - >/dev/null
+}
+
 win_get_env() {
 	echo "$(wslpath "$(wslvar $1)")"
 }
