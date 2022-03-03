@@ -187,7 +187,8 @@
   "omnisharp.organizeImportsOnFormat": true,
   "terminal.integrated.fontSize": 14,
   "todo-tree.general.tagGroups": {
-    "TEMP": ["TEMP", "TMP"]
+    "TEMP": ["TEMP", "TMP"],
+    "todo": ["TODO", "[@todo]"]
   },
   "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "[@todo]", "XXX", "TEMP", "TMP", "[ ]", "[x]"],
   "todo-tree.highlights.customHighlight": {
@@ -206,14 +207,14 @@
       "foreground": "magenta",
       "icon": "x"
     },
-    "TODO": {
+    "todo": {
       "background": "black",
       "foreground": "cyan",
       "icon": "check",
       "iconColor": "green"
     }
   },
-  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+  "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)|\\[@todo\\])",
   "vim.cursorStylePerMode.insert": "line",
   "vim.cursorStylePerMode.normal": "block",
   "vim.cursorStylePerMode.replace": "block",
