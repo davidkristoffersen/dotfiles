@@ -34,6 +34,8 @@ path_add "$HOME/.dotnet/tools"
 path_add "$HOME/dotfiles/home/.vim/pack/general/opt/fzf/bin"
 # Npm user directory
 path_add "$HOME/.npm-global/bin"
+# Cabal binaries
+path_add "$HOME/.cabal/bin"
 
 # Make path global
 export PATH="$PATH"
