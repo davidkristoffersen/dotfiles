@@ -40,7 +40,6 @@
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "autoDocstring.quoteStyle": "'''",
-  "breadcrumbs.enabled": false,
   "cSpell.enabled": false,
   "cSpell.userWords": [
     "appl",
@@ -67,13 +66,12 @@
   "editor.autoClosingQuotes": "never",
   "editor.cursorBlinking": "solid",
   "editor.detectIndentation": false,
-  "editor.fontSize": 13,
+  "editor.fontSize": 12,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.guides.bracketPairs": true,
   "editor.hideCursorInOverviewRuler": true,
   "editor.hover.delay": 500,
-  "editor.hover.sticky": false,
   "editor.insertSpaces": false,
   "editor.lightbulb.enabled": false,
   "editor.lineHeight": 0,
@@ -81,46 +79,104 @@
   "editor.minimap.enabled": false,
   "editor.mouseWheelZoom": true,
   "editor.renderWhitespace": "trailing",
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "heading.1.markdown entity.name.section.markdown, heading.1.markdown punctuation.definition.heading.markdown",
+        "settings": {
+          "foreground": "#1fa2ff"
+        }
+      },
+      {
+        "scope": "heading.2.markdown entity.name.section.markdown, heading.2.markdown punctuation.definition.heading.markdown",
+        "settings": {
+          "foreground": "#d39d09"
+        }
+      },
+      {
+        "scope": "heading.3.markdown entity.name.section.markdown, heading.3.markdown punctuation.definition.heading.markdown",
+        "settings": {
+          "foreground": "#47cf35"
+        }
+      },
+      {
+        "scope": "heading.4.markdown entity.name.section.markdown, heading.4.markdown punctuation.definition.heading.markdown",
+        "settings": {
+          "foreground": "#9cecfb"
+        }
+      },
+      {
+        "scope": "heading.5.markdown entity.name.section.markdown, heading.5.markdown punctuation.definition.heading.markdown",
+        "settings": {
+          "foreground": "#ff6e7f"
+        }
+      },
+      {
+        "scope": "heading.6.markdown entity.name.section.markdown, heading.6.markdown punctuation.definition.heading.markdown",
+        "settings": {
+          "foreground": "#9796f0"
+        }
+      }
+    ]
+  },
   "editor.wordWrap": "on",
   "editor.wrappingIndent": "deepIndent",
   "editor.wrappingStrategy": "advanced",
   "files.associations": {
     "*.bash": "shellscript",
     "*.h": "c",
-    "*.latex": "latex"
+    "*.latex": "latex",
+    ".latexmkrc": "perl"
   },
   "files.exclude": {
+    "**/*.bin": true,
+    "**/*.hex": true,
+    "**/.build": true,
     "**/.classpath": true,
     "**/.factorypath": true,
     "**/.project": true,
     "**/.settings": true,
-    "**/.build": true,
-    "**/*.hex": true,
-    "**/*.bin": true,
     "keyboards": false,
-    "keyboards/[^p]*": true,
-    "keyboards/?[^l]*": true,
-    "keyboards/??[^a]*": true,
     "keyboards/???[^n]*": true,
-    "keyboards/planck/[^(r|k)]*": true,
-    "keyboards/planck/?[^e]*": true,
-    "keyboards/planck/??[^(v|y)]*": true,
+    "keyboards/??[^a]*": true,
+    "keyboards/?[^l]*": true,
+    "keyboards/[^p]*": true,
     "keyboards/planck/???[^(5|m)]*": true,
-    "keyboards/planck/keymaps/[^p]*": true,
+    "keyboards/planck/??[^(v|y)]*": true,
+    "keyboards/planck/?[^e]*": true,
+    "keyboards/planck/[^(r|k)]*": true,
+    "keyboards/planck/keymaps/??[^o]*": true,
     "keyboards/planck/keymaps/?[^r]*": true,
-    "keyboards/planck/keymaps/??[^o]*": true
+    "keyboards/planck/keymaps/[^p]*": true
   },
   "githubPullRequests.fileListLayout": "tree",
+  "gitlens.codeLens.enabled": false,
   "gitlens.currentLine.enabled": false,
+  "gitlens.defaultDateFormat": "YYYY.MM.DD-hh:mm",
+  "gitlens.defaultDateShortFormat": "D MMM, YYYY",
+  "gitlens.defaultTimeFormat": null,
   "gitlens.hovers.currentLine.over": "line",
   "gitlens.hovers.enabled": false,
-  "latex-workshop.view.pdf.invertMode.brightness": 0.9,
-  "latex-workshop.view.pdf.invertMode.grayscale": 0.8,
-  "latex-workshop.view.pdf.viewer": "tab",
+  "grammarly.autoActivate": false,
+  "grammarly.dialect": "american",
+  "grammarly.showDeletedTextInQuickFix": true,
+  "grammarly.showExamples": true,
+  "grammarly.showExplanation": true,
+  "grammarly.showUsernameInStatusBar": true,
+  "latex-workshop.message.badbox.show": false,
+  "latex-workshop.synctex.afterBuild.enabled": true,
+  "latex-workshop.view.pdf.external.synctex.command": "wsl-open",
+  "latex-workshop.view.pdf.external.viewer.command": "wsl-open",
+  "latex-workshop.view.pdf.invert": 1,
+  "latex-workshop.view.pdf.invertMode.grayscale": 1,
+  "latex-workshop.view.pdf.ref.viewer": "external",
+  "latex-workshop.view.pdf.viewer": "external",
+  "latex-workshop.view.pdf.zoom": "page-width",
   "markdown.extension.list.indentationSize": "inherit",
   "markdown.preview.scrollEditorWithPreview": false,
   "markdown.preview.scrollPreviewWithEditor": false,
   "markdownlint.config": {
+    "first-line-h1": false,
     "header-style": false,
     "list-marker-space": false,
     "no-duplicate-header": false,
@@ -129,11 +185,11 @@
     "ul-indent": false
   },
   "omnisharp.organizeImportsOnFormat": true,
-  "terminal.integrated.fontSize": 17,
+  "terminal.integrated.fontSize": 14,
   "todo-tree.general.tagGroups": {
     "TEMP": ["TEMP", "TMP"]
   },
-  "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "XXX", "TEMP", "TMP", "[ ]", "[x]"],
+  "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "[@todo]", "XXX", "TEMP", "TMP", "[ ]", "[x]"],
   "todo-tree.highlights.customHighlight": {
     "BUG": {
       "background": "black",
@@ -182,8 +238,8 @@
       "before": ["<leader>", "x"]
     },
     {
-      "before": ["<leader>", "["],
-      "after": ["m", "a", "%", "m", "b", "%", "r", "]", "`", "b", "r", "[", "`", "a"]
+      "after": ["m", "a", "%", "m", "b", "%", "r", "]", "`", "b", "r", "[", "`", "a"],
+      "before": ["<leader>", "["]
     },
     {
       "after": ["m", "a", "%", "m", "b", "%", "r", "}", "`", "b", "r", "{", "`", "a"],
@@ -238,7 +294,6 @@
       "before": ["<leader>", "P", "d"]
     }
   ],
-  //   "vim.vimrc.path": "",
   "window.zoomLevel": 1,
   "workbench.colorCustomizations": {
     "breadcrumb.background": "#1d1d1d",

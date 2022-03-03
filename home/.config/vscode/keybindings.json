@@ -25,6 +25,10 @@
     "command": "merge-conflict.accept.current"
   },
   {
+    "key": "ctrl+alt+shift+b",
+    "command": "workbench.action.toggleMenuBar"
+  },
+  {
     "key": "alt+c"
   },
   {
