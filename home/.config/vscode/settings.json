@@ -40,6 +40,7 @@
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "autoDocstring.quoteStyle": "'''",
+  "breadcrumbs.enabled": false,
   "cSpell.enabled": false,
   "cSpell.userWords": [
     "appl",
@@ -172,7 +173,6 @@
   "latex-workshop.view.pdf.ref.viewer": "external",
   "latex-workshop.view.pdf.viewer": "external",
   "latex-workshop.view.pdf.zoom": "page-width",
-  "markdown.extension.list.indentationSize": "inherit",
   "markdown.preview.scrollEditorWithPreview": false,
   "markdown.preview.scrollPreviewWithEditor": false,
   "markdownlint.config": {
@@ -214,7 +214,7 @@
       "iconColor": "green"
     }
   },
-  "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)|\\[@todo\\])",
+  "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)|\\[@todo\\]|TODO)",
   "vim.cursorStylePerMode.insert": "line",
   "vim.cursorStylePerMode.normal": "block",
   "vim.cursorStylePerMode.replace": "block",
@@ -354,5 +354,7 @@
   },
   "workbench.iconTheme": "material-icon-theme",
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideTabs": false
+  "zenMode.hideTabs": false,
+  "window.menuBarVisibility": "compact",
+  "workbench.activityBar.visible": false
 }
