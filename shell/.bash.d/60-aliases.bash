@@ -34,6 +34,7 @@ alias dotfiles="cd $DOTFILES"
 
 # Terminal
 alias c='clear'
+alias cl="xclip -r -sel clip"
 
 # Program specific
 alias rip='gio trash'
