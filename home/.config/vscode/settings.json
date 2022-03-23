@@ -1,7 +1,6 @@
 {
   "C_Cpp.clang_format_sortIncludes": true,
   "C_Cpp.formatting": "vcFormat",
-  "C_Cpp.updateChannel": "Insiders",
   "C_Cpp.vcFormat.newLine.beforeOpenBrace.block": "sameLine",
   "C_Cpp.vcFormat.newLine.beforeOpenBrace.function": "sameLine",
   "C_Cpp.vcFormat.newLine.beforeOpenBrace.lambda": "sameLine",
@@ -29,7 +28,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 4,
     "editor.wordWrap": "on",
-    "editor.wrappingIndent": "indent"
+    "editor.wrappingIndent": "indent",
+    "editor.renderWhitespace": "trailing"
   },
   "[python]": {
     "editor.defaultFormatter": "ms-python.python",
@@ -40,7 +40,6 @@
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "autoDocstring.quoteStyle": "'''",
-  "breadcrumbs.enabled": false,
   "cSpell.enabled": false,
   "cSpell.userWords": [
     "appl",
@@ -79,7 +78,7 @@
   "editor.lineNumbers": "relative",
   "editor.minimap.enabled": false,
   "editor.mouseWheelZoom": true,
-  "editor.renderWhitespace": "trailing",
+  "editor.renderWhitespace": "none",
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
@@ -127,7 +126,8 @@
     "*.bash": "shellscript",
     "*.h": "c",
     "*.latex": "latex",
-    ".latexmkrc": "perl"
+    ".latexmkrc": "perl",
+    "*.vim": "viml"
   },
   "files.exclude": {
     "**/*.bin": true,
@@ -188,9 +188,9 @@
   "terminal.integrated.fontSize": 14,
   "todo-tree.general.tagGroups": {
     "TEMP": ["TEMP", "TMP"],
-    "todo": ["TODO", "[@todo]"]
+    "todo": ["TODO", "[@todo]", "[Todo]"]
   },
-  "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "[@todo]", "XXX", "TEMP", "TMP", "[ ]", "[x]"],
+  "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "[@todo]", "[Todo]", "XXX", "TEMP", "TMP", "[ ]", "[x]"],
   "todo-tree.highlights.customHighlight": {
     "BUG": {
       "background": "black",
@@ -214,7 +214,7 @@
       "iconColor": "green"
     }
   },
-  "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)|\\[@todo\\]|TODO)",
+  "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)|\\[@todo\\]|TODO|\\[Todo\\])",
   "vim.cursorStylePerMode.insert": "line",
   "vim.cursorStylePerMode.normal": "block",
   "vim.cursorStylePerMode.replace": "block",
@@ -356,5 +356,6 @@
   "zenMode.hideLineNumbers": false,
   "zenMode.hideTabs": false,
   "window.menuBarVisibility": "compact",
+  "breadcrumbs.enabled": false,
   "workbench.activityBar.visible": false
 }
