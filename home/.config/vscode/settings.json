@@ -28,7 +28,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.renderWhitespace": "trailing",
     "editor.tabSize": 4,
-    "editor.wordWrap": "on",
     "editor.wrappingIndent": "indent"
   },
   "[python]": {
@@ -59,7 +58,11 @@
     "ngneat",
     "Precommitment",
     "Sunstein",
-    "Webmail"
+    "Webmail",
+    "grammarly",
+    "Noto",
+    "Powals",
+    "Roboto"
   ],
   "diffEditor.ignoreTrimWhitespace": false,
   "diffEditor.wordWrap": "on",
@@ -159,8 +162,12 @@
   "gitlens.defaultTimeFormat": null,
   "gitlens.hovers.currentLine.over": "line",
   "gitlens.hovers.enabled": false,
+  "grammarly.audience": "expert",
   "grammarly.autoActivate": false,
   "grammarly.dialect": "american",
+  "grammarly.domain": "academic",
+  "grammarly.emotions": ["analytical", "neutral"],
+  "grammarly.goals": ["describe", "inform"],
   "grammarly.showDeletedTextInQuickFix": true,
   "grammarly.showExamples": true,
   "grammarly.showExplanation": true,
@@ -287,6 +294,12 @@
     }
   },
   "latex-workshop.message.badbox.show": false,
+  "latex-workshop.message.latexlog.exclude": [
+    "tracking amount list",
+    "Are you sure you are allowed to use the",
+    "`!h' float specifier changed to `!ht'.",
+    "starttoc has already been redefined; tocloft bailing out.."
+  ],
   "latex-workshop.synctex.afterBuild.enabled": true,
   "latex-workshop.view.pdf.external.synctex.command": "wsl-open",
   "latex-workshop.view.pdf.external.viewer.command": "wsl-open",
@@ -307,6 +320,10 @@
     "ul-indent": false
   },
   "omnisharp.organizeImportsOnFormat": true,
+  "openInApplication.applications": {
+    "pdf": "wsl-open"
+  },
+  "python.linting.mypyEnabled": true,
   "terminal.integrated.fontSize": 14,
   "todo-tree.general.tagGroups": {
     "TEMP": ["TEMP", "TMP"],
@@ -419,7 +436,6 @@
   ],
   "window.menuBarVisibility": "compact",
   "window.zoomLevel": 1,
-  "workbench.activityBar.visible": false,
   "workbench.colorCustomizations": {
     "breadcrumb.background": "#1d1d1d",
     "breadcrumb.foreground": "#5f5f5f",
