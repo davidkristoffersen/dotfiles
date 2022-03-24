@@ -363,7 +363,12 @@
     "(\\\\[a-zA-Z0-9%]+)": {
       "regexFlags": "g",
       "filterLanguageRegex": "markdown",
-      "decorations": [{ "color": "#dd00dd" }]
+      "decorations": [{ "color": "#dd0000" }]
+    },
+    "(\\$)(.+?)(\\$)": {
+      "regexFlags": "g",
+      "filterLanguageRegex": "markdown",
+      "decorations": [{ "color": "#dd00dd" }, { "color": "#d39d09" }, { "color": "#dd00dd" }]
     },
     "((?:<!-- *)?(?:#|// @|//|./\\*+|<!--|--|\\* @|{!|{{!--|{{!) *TODO(?:\\s*\\([^)]+\\))?:?)((?!\\w)(?: *-->| *\\*/| *!}| *--}}| *}}|(?= *(?:[^:]//|/\\*+|<!--|@|--|{!|{{!--|{{!))|(?: +[^\\n@]*?)(?= *(?:[^:]//|/\\*+|<!--|@|--(?!>)|{!|{{!--|{{!))|(?: +[^@\\n]+)?))": {
       "filterFileRegex": ".*(?<!CHANGELOG.md)$",
