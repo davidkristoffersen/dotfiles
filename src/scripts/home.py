@@ -57,6 +57,11 @@ def home():
     # Vimrc files
     link_dir(f'{DOTFILES_HOME}/.vim', '.vim', 'vim dir config')
     link_file(f'{DOTFILES_HOME}/.vim/.vimrc', '.vimrc', 'vim config')
+    # Neovim configs
+    link_file(f'{DOTFILES_CONFIG}/nvim/init.lua',
+              '.config/nvim/init.lua', 'neovim config')
+    # link_file(f'{DOTFILES_CONFIG}/nvim/init.vim',
+    #   '.config/nvim/init.vim', 'neovim lua config')
     # Latex
     link_file(f'{DOTFILES_CONFIG}/latex/template.latex',
               '.config/latex/template.latex', 'Latex template')
