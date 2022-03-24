@@ -26,10 +26,10 @@
   },
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.renderWhitespace": "trailing",
     "editor.tabSize": 4,
     "editor.wordWrap": "on",
-    "editor.wrappingIndent": "indent",
-    "editor.renderWhitespace": "trailing"
+    "editor.wrappingIndent": "indent"
   },
   "[python]": {
     "editor.defaultFormatter": "ms-python.python",
@@ -40,6 +40,7 @@
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "autoDocstring.quoteStyle": "'''",
+  "breadcrumbs.enabled": false,
   "cSpell.enabled": false,
   "cSpell.userWords": [
     "appl",
@@ -126,8 +127,8 @@
     "*.bash": "shellscript",
     "*.h": "c",
     "*.latex": "latex",
-    ".latexmkrc": "perl",
-    "*.vim": "viml"
+    "*.vim": "viml",
+    ".latexmkrc": "perl"
   },
   "files.exclude": {
     "**/*.bin": true,
@@ -164,6 +165,127 @@
   "grammarly.showExamples": true,
   "grammarly.showExplanation": true,
   "grammarly.showUsernameInStatusBar": true,
+  "highlight.regexes": {
+    "((?:<!-- *)?(?:#|// @|//|./\\*+|<!--|--|\\* @|{!|{{!--|{{!) *(?:FIXME|FIX|BUG|UGLY|DEBUG|HACK)(?:\\s*\\([^)]+\\))?:?)((?!\\w)(?: *-->| *\\*/| *!}| *--}}| *}}|(?= *(?:[^:]//|/\\*+|<!--|@|--|{!|{{!--|{{!))|(?: +[^\\n@]*?)(?= *(?:[^:]//|/\\*+|<!--|@|--(?!>)|{!|{{!--|{{!))|(?: +[^@\\n]+)?))": {
+      "decorations": [
+        {
+          "backgroundColor": "#cc0000",
+          "color": "#1f1f1f",
+          "fontWeight": "bold",
+          "overviewRulerColor": "#cc0000"
+        },
+        {
+          "backgroundColor": "#cc0000",
+          "color": "#1f1f1f"
+        }
+      ],
+      "filterFileRegex": ".*(?<!CHANGELOG.md)$"
+    },
+    "((?:<!-- *)?(?:#|// @|//|./\\*+|<!--|--|\\* @|{!|{{!--|{{!) *(?:IDEA)(?:\\s*\\([^)]+\\))?:?)((?!\\w)(?: *-->| *\\*/| *!}| *--}}| *}}|(?= *(?:[^:]//|/\\*+|<!--|@|--|{!|{{!--|{{!))|(?: +[^\\n@]*?)(?= *(?:[^:]//|/\\*+|<!--|@|--(?!>)|{!|{{!--|{{!))|(?: +[^@\\n]+)?))": {
+      "decorations": [
+        {
+          "backgroundColor": "#cc00cc",
+          "color": "#1f1f1f",
+          "fontWeight": "bold",
+          "overviewRulerColor": "#cc00cc"
+        },
+        {
+          "backgroundColor": "#cc00cc",
+          "color": "#1f1f1f"
+        }
+      ],
+      "filterFileRegex": ".*(?<!CHANGELOG.md)$"
+    },
+    "((?:<!-- *)?(?:#|// @|//|./\\*+|<!--|--|\\* @|{!|{{!--|{{!) *(?:REVIEW|OPTIMIZE|TSC)(?:\\s*\\([^)]+\\))?:?)((?!\\w)(?: *-->| *\\*/| *!}| *--}}| *}}|(?= *(?:[^:]//|/\\*+|<!--|@|--|{!|{{!--|{{!))|(?: +[^\\n@]*?)(?= *(?:[^:]//|/\\*+|<!--|@|--(?!>)|{!|{{!--|{{!))|(?: +[^@\\n]+)?))": {
+      "decorations": [
+        {
+          "backgroundColor": "#00ccff",
+          "color": "#1f1f1f",
+          "fontWeight": "bold",
+          "overviewRulerColor": "#00ccff"
+        },
+        {
+          "backgroundColor": "#00ccff",
+          "color": "#1f1f1f"
+        }
+      ],
+      "filterFileRegex": ".*(?<!CHANGELOG.md)$"
+    },
+    "((?:<!-- *)?(?:#|// @|//|./\\*+|<!--|--|\\* @|{!|{{!--|{{!) *TODO(?:\\s*\\([^)]+\\))?:?)((?!\\w)(?: *-->| *\\*/| *!}| *--}}| *}}|(?= *(?:[^:]//|/\\*+|<!--|@|--|{!|{{!--|{{!))|(?: +[^\\n@]*?)(?= *(?:[^:]//|/\\*+|<!--|@|--(?!>)|{!|{{!--|{{!))|(?: +[^@\\n]+)?))": {
+      "decorations": [
+        {
+          "backgroundColor": "#ffcc00",
+          "color": "#1f1f1f",
+          "fontWeight": "bold",
+          "overviewRulerColor": "#ffcc00"
+        },
+        {
+          "backgroundColor": "#ffcc00",
+          "color": "#1f1f1f"
+        }
+      ],
+      "filterFileRegex": ".*(?<!CHANGELOG.md)$"
+    },
+    "(\\$)(.+?)(\\$)": {
+      //   "decorations": [{ "color": "#dd00dd" }, { "color": "#d39d09" }, { "color": "#dd00dd" }]
+      "backgroundColor": "#111111",
+      "decorations": [
+        {
+          "color": "#bb0000"
+        },
+        {
+          "color": "none"
+        },
+        {
+          "color": "#bb0000"
+        }
+      ],
+      "filterLanguageRegex": "markdown",
+      "regexFlags": "g"
+    },
+    "(\\$\\$)(.+?)(\\$\\$)": {
+      "decorations": [
+        {
+          "color": "#bb0000"
+        },
+        {
+          "backgroundColor": "#161616",
+          "color": "none"
+        },
+        {
+          "color": "#bb0000"
+        }
+      ],
+      "filterLanguageRegex": "markdown",
+      "regexFlags": "gs"
+    },
+    // Latex commands
+    "(\\\\[a-zA-Z0-9%]+)": {
+      "decorations": [
+        {
+          "color": "#569cd6"
+        }
+      ],
+      "filterLanguageRegex": "markdown",
+      "regexFlags": "g"
+    },
+    "(```{=latex})(.+?)(```)": {
+      "decorations": [
+        {
+          "color": "#bb00bb"
+        },
+        {
+          "backgroundColor": "#161616",
+          "color": "none"
+        },
+        {
+          "color": "#bb00bb"
+        }
+      ],
+      "filterLanguageRegex": "markdown",
+      "regexFlags": "gs"
+    }
+  },
   "latex-workshop.message.badbox.show": false,
   "latex-workshop.synctex.afterBuild.enabled": true,
   "latex-workshop.view.pdf.external.synctex.command": "wsl-open",
@@ -295,7 +417,9 @@
       "before": ["<leader>", "P", "d"]
     }
   ],
+  "window.menuBarVisibility": "compact",
   "window.zoomLevel": 1,
+  "workbench.activityBar.visible": false,
   "workbench.colorCustomizations": {
     "breadcrumb.background": "#1d1d1d",
     "breadcrumb.foreground": "#5f5f5f",
@@ -354,81 +478,5 @@
   },
   "workbench.iconTheme": "material-icon-theme",
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideTabs": false,
-  "window.menuBarVisibility": "compact",
-  "breadcrumbs.enabled": false,
-  "workbench.activityBar.visible": false,
-  "highlight.regexes": {
-    // Latex commands
-    "(\\\\[a-zA-Z0-9%]+)": {
-      "regexFlags": "g",
-      "filterLanguageRegex": "markdown",
-      "decorations": [{ "color": "#dd0000" }]
-    },
-    "(\\$)(.+?)(\\$)": {
-      "regexFlags": "g",
-      "filterLanguageRegex": "markdown",
-      "decorations": [{ "color": "#dd00dd" }, { "color": "#d39d09" }, { "color": "#dd00dd" }]
-    },
-    "((?:<!-- *)?(?:#|// @|//|./\\*+|<!--|--|\\* @|{!|{{!--|{{!) *TODO(?:\\s*\\([^)]+\\))?:?)((?!\\w)(?: *-->| *\\*/| *!}| *--}}| *}}|(?= *(?:[^:]//|/\\*+|<!--|@|--|{!|{{!--|{{!))|(?: +[^\\n@]*?)(?= *(?:[^:]//|/\\*+|<!--|@|--(?!>)|{!|{{!--|{{!))|(?: +[^@\\n]+)?))": {
-      "filterFileRegex": ".*(?<!CHANGELOG.md)$",
-      "decorations": [
-        {
-          "overviewRulerColor": "#ffcc00",
-          "backgroundColor": "#ffcc00",
-          "color": "#1f1f1f",
-          "fontWeight": "bold"
-        },
-        {
-          "backgroundColor": "#ffcc00",
-          "color": "#1f1f1f"
-        }
-      ]
-    },
-    "((?:<!-- *)?(?:#|// @|//|./\\*+|<!--|--|\\* @|{!|{{!--|{{!) *(?:FIXME|FIX|BUG|UGLY|DEBUG|HACK)(?:\\s*\\([^)]+\\))?:?)((?!\\w)(?: *-->| *\\*/| *!}| *--}}| *}}|(?= *(?:[^:]//|/\\*+|<!--|@|--|{!|{{!--|{{!))|(?: +[^\\n@]*?)(?= *(?:[^:]//|/\\*+|<!--|@|--(?!>)|{!|{{!--|{{!))|(?: +[^@\\n]+)?))": {
-      "filterFileRegex": ".*(?<!CHANGELOG.md)$",
-      "decorations": [
-        {
-          "overviewRulerColor": "#cc0000",
-          "backgroundColor": "#cc0000",
-          "color": "#1f1f1f",
-          "fontWeight": "bold"
-        },
-        {
-          "backgroundColor": "#cc0000",
-          "color": "#1f1f1f"
-        }
-      ]
-    },
-    "((?:<!-- *)?(?:#|// @|//|./\\*+|<!--|--|\\* @|{!|{{!--|{{!) *(?:REVIEW|OPTIMIZE|TSC)(?:\\s*\\([^)]+\\))?:?)((?!\\w)(?: *-->| *\\*/| *!}| *--}}| *}}|(?= *(?:[^:]//|/\\*+|<!--|@|--|{!|{{!--|{{!))|(?: +[^\\n@]*?)(?= *(?:[^:]//|/\\*+|<!--|@|--(?!>)|{!|{{!--|{{!))|(?: +[^@\\n]+)?))": {
-      "filterFileRegex": ".*(?<!CHANGELOG.md)$",
-      "decorations": [
-        {
-          "overviewRulerColor": "#00ccff",
-          "backgroundColor": "#00ccff",
-          "color": "#1f1f1f",
-          "fontWeight": "bold"
-        },
-        {
-          "backgroundColor": "#00ccff",
-          "color": "#1f1f1f"
-        }
-      ]
-    },
-    "((?:<!-- *)?(?:#|// @|//|./\\*+|<!--|--|\\* @|{!|{{!--|{{!) *(?:IDEA)(?:\\s*\\([^)]+\\))?:?)((?!\\w)(?: *-->| *\\*/| *!}| *--}}| *}}|(?= *(?:[^:]//|/\\*+|<!--|@|--|{!|{{!--|{{!))|(?: +[^\\n@]*?)(?= *(?:[^:]//|/\\*+|<!--|@|--(?!>)|{!|{{!--|{{!))|(?: +[^@\\n]+)?))": {
-      "filterFileRegex": ".*(?<!CHANGELOG.md)$",
-      "decorations": [
-        {
-          "overviewRulerColor": "#cc00cc",
-          "backgroundColor": "#cc00cc",
-          "color": "#1f1f1f",
-          "fontWeight": "bold"
-        },
-        {
-          "backgroundColor": "#cc00cc",
-          "color": "#1f1f1f"
-        }
-      ]
-    }
-  }
+  "zenMode.hideTabs": false
 }
