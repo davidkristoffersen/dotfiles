@@ -359,7 +359,9 @@
   "vim.cursorStylePerMode.insert": "line",
   "vim.cursorStylePerMode.normal": "block",
   "vim.cursorStylePerMode.replace": "block",
-  "vim.cursorStylePerMode.visual": "block",
+  "vim.cursorStylePerMode.visual": "line",
+  "vim.cursorStylePerMode.visualblock": "line",
+  "vim.cursorStylePerMode.visualline": "line",
   "vim.handleKeys": {
     "<C-b>": false,
     "<C-j>": false,
