@@ -70,7 +70,7 @@
   "editor.autoClosingQuotes": "never",
   "editor.cursorBlinking": "solid",
   "editor.detectIndentation": false,
-  "editor.fontSize": 12,
+  "editor.fontSize": 14,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.guides.bracketPairs": true,
@@ -126,6 +126,8 @@
   "editor.wordWrap": "on",
   "editor.wrappingIndent": "deepIndent",
   "editor.wrappingStrategy": "advanced",
+  "errorLens.enabledDiagnosticLevels": ["error", "info", "warning"],
+  "errorLens.scrollbarHackEnabled": true,
   "files.associations": {
     "*.bash": "shellscript",
     "*.h": "c",
@@ -435,7 +437,8 @@
     }
   ],
   "window.menuBarVisibility": "compact",
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 2,
+  "workbench.activityBar.visible": false,
   "workbench.colorCustomizations": {
     "breadcrumb.background": "#1d1d1d",
     "breadcrumb.foreground": "#5f5f5f",
