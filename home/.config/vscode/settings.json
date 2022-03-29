@@ -25,9 +25,10 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+    "editor.insertSpaces": true,
     "editor.renderWhitespace": "trailing",
-    "editor.tabSize": 4,
+    "editor.tabSize": 2,
     "editor.wrappingIndent": "indent"
   },
   "[python]": {
@@ -315,11 +316,11 @@
   "markdownlint.config": {
     "first-line-h1": false,
     "header-style": false,
-    "list-marker-space": false,
+    "list-marker-space": true,
     "no-duplicate-header": false,
     "no-inline-html": false,
     "single-h1": false,
-    "ul-indent": false
+    "ul-indent": true
   },
   "omnisharp.organizeImportsOnFormat": true,
   "openInApplication.applications": {
@@ -334,25 +335,25 @@
   "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "[@todo]", "[Todo]", "XXX", "TEMP", "TMP", "[ ]", "[x]"],
   "todo-tree.highlights.customHighlight": {
     "BUG": {
-      "background": "black",
-      "foreground": "orange",
+      "background": "#161616",
+      "foreground": "#ff7700",
       "icon": "bug"
     },
     "FIXME": {
-      "background": "black",
-      "foreground": "red",
+      "background": "#161616",
+      "foreground": "#ff0000",
       "icon": "flame"
     },
     "TEMP": {
-      "background": "black",
-      "foreground": "magenta",
+      "background": "#161616",
+      "foreground": "#ff00ff",
       "icon": "x"
     },
     "todo": {
-      "background": "black",
-      "foreground": "cyan",
+      "background": "#161616",
+      "foreground": "#00ff77",
       "icon": "check",
-      "iconColor": "green"
+      "iconColor": "#00ff00"
     }
   },
   "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)|\\[@todo\\]|TODO|\\[Todo\\])",
