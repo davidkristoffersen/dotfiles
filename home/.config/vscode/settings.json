@@ -322,6 +322,7 @@
     "single-h1": false,
     "ul-indent": true
   },
+  "markdownlint.ignore": ["**/.vscode*/extensions/**/*.md"],
   "omnisharp.organizeImportsOnFormat": true,
   "openInApplication.applications": {
     "pdf": "wsl-open"
@@ -442,7 +443,6 @@
   ],
   "window.menuBarVisibility": "compact",
   "window.zoomLevel": 2,
-  "workbench.activityBar.visible": false,
   "workbench.colorCustomizations": {
     "breadcrumb.background": "#1d1d1d",
     "breadcrumb.foreground": "#5f5f5f",
