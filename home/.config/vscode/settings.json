@@ -180,6 +180,7 @@
   "grammarly.showUsernameInStatusBar": true,
   "highlight.regexes": {
     "((?:<!-- *)?(?:#|// @|//|./\\*+|<!--|--|\\* @|{!|{{!--|{{!) *(?:FIXME|FIX|BUG|UGLY|DEBUG|HACK)(?:\\s*\\([^)]+\\))?:?)((?!\\w)(?: *-->| *\\*/| *!}| *--}}| *}}|(?= *(?:[^:]//|/\\*+|<!--|@|--|{!|{{!--|{{!))|(?: +[^\\n@]*?)(?= *(?:[^:]//|/\\*+|<!--|@|--(?!>)|{!|{{!--|{{!))|(?: +[^@\\n]+)?))": {
+      "regexFlags": "m",
       "decorations": [
         {
           "backgroundColor": "#cc0000",
@@ -445,7 +446,7 @@
     }
   ],
   "window.menuBarVisibility": "compact",
-  "window.zoomLevel": 2,
+  "window.zoomLevel": 1,
   "workbench.activityBar.visible": false,
   "workbench.colorCustomizations": {
     "breadcrumb.background": "#1d1d1d",
