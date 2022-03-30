@@ -32,6 +32,9 @@
     "editor.wrappingIndent": "indent"
   },
   "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },
     "editor.defaultFormatter": "ms-python.python",
     "editor.insertSpaces": true,
     "editor.tabSize": 4
@@ -443,6 +446,7 @@
   ],
   "window.menuBarVisibility": "compact",
   "window.zoomLevel": 2,
+  "workbench.activityBar.visible": false,
   "workbench.colorCustomizations": {
     "breadcrumb.background": "#1d1d1d",
     "breadcrumb.foreground": "#5f5f5f",
