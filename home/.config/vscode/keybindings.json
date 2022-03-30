@@ -1,37 +1,42 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
   {
-    "key": "ctrl+alt+b",
-    "command": "workbench.action.toggleActivityBarVisibility"
+    "command": "workbench.action.toggleActivityBarVisibility",
+    "key": "ctrl+alt+b"
   },
   {
-    "key": "ctrl+tab",
-    "command": "workbench.action.nextEditorInGroup"
+    "command": "workbench.action.nextEditorInGroup",
+    "key": "ctrl+tab"
   },
   {
-    "key": "ctrl+shift+tab",
-    "command": "workbench.action.previousEditorInGroup"
+    "command": "workbench.action.previousEditorInGroup",
+    "key": "ctrl+shift+tab"
   },
   {
-    "key": "shift+tab",
-    "command": "workbench.action.toggleTabsVisibility"
+    "command": "workbench.action.toggleTabsVisibility",
+    "key": "shift+tab"
   },
   {
-    "key": "ctrl+shift+z",
-    "command": "workbench.action.toggleZenMode"
+    "command": "workbench.action.toggleZenMode",
+    "key": "ctrl+shift+z"
   },
   {
-    "key": "ctrl+shift+c",
-    "command": "merge-conflict.accept.current"
+    "command": "merge-conflict.accept.current",
+    "key": "ctrl+shift+c"
   },
   {
-    "key": "ctrl+alt+shift+b",
-    "command": "workbench.action.toggleMenuBar"
+    "command": "workbench.action.toggleMenuBar",
+    "key": "ctrl+alt+shift+b"
   },
   {
     "key": "alt+c"
   },
   {
     "key": "alt+shift+c"
+  },
+  {
+    "command": "-breadcrumbs.focusAndSelect",
+    "key": "ctrl+shift+oem_period",
+    "when": "breadcrumbsPossible"
   }
 ]
