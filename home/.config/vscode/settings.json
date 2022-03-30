@@ -368,6 +368,7 @@
     "<C-j>": false,
     "<C-k>": false
   },
+  "vim.hlsearch": true,
   "vim.leader": " ",
   "vim.normalModeKeyBindingsNonRecursive": [
     {
