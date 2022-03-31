@@ -25,6 +25,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[markdown]": {
+    "diffEditor.wordWrap": "on",
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
     "editor.insertSpaces": true,
     "editor.renderWhitespace": "trailing",
