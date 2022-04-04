@@ -21,10 +21,6 @@
     "key": "ctrl+shift+z"
   },
   {
-    "command": "merge-conflict.accept.current",
-    "key": "ctrl+shift+c"
-  },
-  {
     "command": "workbench.action.toggleMenuBar",
     "key": "ctrl+alt+shift+b"
   },
@@ -38,5 +34,14 @@
     "command": "-breadcrumbs.focusAndSelect",
     "key": "ctrl+shift+oem_period",
     "when": "breadcrumbsPossible"
+  },
+  {
+    "command": "-workbench.action.terminal.openNativeConsole",
+    "key": "ctrl+shift+c",
+    "when": "!terminalFocus"
+  },
+  {
+    "command": "editor.action.clipboardCopyAction",
+    "key": "ctrl+shift+c"
   }
 ]
