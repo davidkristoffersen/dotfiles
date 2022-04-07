@@ -301,6 +301,8 @@
       "regexFlags": "gs"
     }
   },
+  "latex-workshop.latex.autoBuild.cleanAndRetry.enabled": false,
+  "latex-workshop.latex.autoBuild.run": "onFileChange",
   "latex-workshop.message.badbox.show": false,
   "latex-workshop.message.latexlog.exclude": [
     "tracking amount list",
@@ -328,11 +330,33 @@
     "ul-indent": true
   },
   "markdownlint.ignore": ["**/.vscode*/extensions/**/*.md"],
+  "multiCommand.commands": [
+    {
+      "command": "toggleUltraZen",
+      "sequence": ["workbench.action.toggleZenMode", "settings.cycle.ultraZen", "workbench.action.reloadWindow"]
+    }
+  ],
   "omnisharp.organizeImportsOnFormat": true,
   "openInApplication.applications": {
     "pdf": "wsl-open"
   },
   "python.linting.mypyEnabled": true,
+  "settings.cycle": [
+    {
+      "id": "ultraZen",
+      "overrideWorkspaceSettings": false,
+      "values": [
+        {
+          "customizeUI.stylesheet": {}
+        },
+        {
+          "customizeUI.stylesheet": {
+            ".title.show-file-icons": "display: none !important;"
+          }
+        }
+      ]
+    }
+  ],
   "terminal.integrated.fontSize": 14,
   "todo-tree.general.tagGroups": {
     "TEMP": ["TEMP", "TMP"],
@@ -447,7 +471,6 @@
     }
   ],
   "window.menuBarVisibility": "compact",
-  "window.zoomLevel": 1,
   "workbench.activityBar.visible": false,
   "workbench.colorCustomizations": {
     "breadcrumb.background": "#1d1d1d",
@@ -506,6 +529,10 @@
     "*.ipynb": "jupyter.notebook.ipynb"
   },
   "workbench.iconTheme": "material-icon-theme",
+  "zenMode.centerLayout": true,
+  "zenMode.fullScreen": true,
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideTabs": false
+  "zenMode.hideStatusBar": true,
+  "zenMode.hideTabs": true,
+  "zenMode.restore": true
 }
