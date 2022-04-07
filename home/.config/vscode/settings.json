@@ -333,7 +333,8 @@
   "multiCommand.commands": [
     {
       "command": "toggleUltraZen",
-      "sequence": ["workbench.action.toggleZenMode", "settings.cycle.ultraZen", "workbench.action.reloadWindow"]
+      "sequence": ["settings.cycle.ultraZen"]
+      //   "sequence": [ "workbench.action.toggleZenMode", "settings.cycle.ultraZen", "workbench.action.reloadWindow" ]
     }
   ],
   "omnisharp.organizeImportsOnFormat": true,
