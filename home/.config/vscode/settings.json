@@ -69,6 +69,7 @@
     "Powals",
     "Roboto"
   ],
+  "customizeUI.stylesheet": {},
   "diffEditor.ignoreTrimWhitespace": false,
   "diffEditor.wordWrap": "on",
   "editor.autoClosingBrackets": "never",
@@ -526,9 +527,6 @@
   "workbench.colorTheme": "Visual Studio 2019 Dark",
   "workbench.editor.scrollToSwitchTabs": true,
   "workbench.editor.wrapTabs": true,
-  "workbench.editorAssociations": {
-    "*.ipynb": "jupyter.notebook.ipynb"
-  },
   "workbench.iconTheme": "material-icon-theme",
   "zenMode.centerLayout": true,
   "zenMode.fullScreen": true,
