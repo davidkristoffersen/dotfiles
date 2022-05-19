@@ -19,8 +19,9 @@ theme="theme.cmd"
 
 info="\e[33m"
 reset="\e[m"
+do_echo=false
 
-mklink() {
+update() {
 	src="$(pwd)"
 	src_name="$1"
 	dst_name="$(basename "$2")"
@@ -30,21 +31,16 @@ mklink() {
 
 	backup "$dst_name"
 
-	# links="$dst_name $win_cwd\\$src_name"
-	# echo -e "${info}Linking: " | tr -d '\n'
-	# echo "$links" | tr -d '\n'
-	# echo -e "$reset"
-	# cmd.exe /C "mklink $links"
-	echo -e "${info}cp \"$src/$src_name\" $dst_name$reset"
+	$do_echo && echo -e "${info}cp \"$src/$src_name\" $dst_name$reset"
 	cp "$src/$src_name" $dst_name
 
 	cd - >/dev/null
 }
 
 backup() {
-	echo -e "${info}Backup: $1$reset"
+	$do_echo && echo -e "${info}Backup: $1$reset"
 	sudo cp -f "$1" "$1.bak" 2>/dev/null
-	echo -e "${info}Removing: $1$reset"
+	$do_echo && echo -e "${info}Removing: $1$reset"
 	sudo rm -f "$1" 2>/dev/null
 }
 
@@ -77,10 +73,10 @@ init_files() {
 main() {
 	init_files
 
-	mklink $theme "$program/$theme"
-	mklink $default_conf "$config/$win_conf"
-	mklink $light_conf "$config/light/$win_conf"
-	mklink $dark_conf "$config/dark/$win_conf"
+	update $theme "$program/$theme"
+	update $default_conf "$config/$win_conf"
+	update $light_conf "$config/light/$win_conf"
+	update $dark_conf "$config/dark/$win_conf"
 }
 
 main
