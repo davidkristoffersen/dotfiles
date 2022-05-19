@@ -74,9 +74,10 @@
   "diffEditor.wordWrap": "on",
   "editor.autoClosingBrackets": "never",
   "editor.autoClosingQuotes": "never",
+  "editor.bracketPairColorization.enabled": false,
   "editor.cursorBlinking": "solid",
   "editor.detectIndentation": false,
-  "editor.fontSize": 14,
+  "editor.fontSize": 17,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.guides.bracketPairs": true,
@@ -88,6 +89,7 @@
   "editor.lineNumbers": "relative",
   "editor.minimap.enabled": false,
   "editor.mouseWheelZoom": true,
+  "editor.multiCursorModifier": "ctrlCmd",
   "editor.renderWhitespace": "none",
   "editor.tokenColorCustomizations": {
     "textMateRules": [
@@ -132,8 +134,10 @@
   "editor.wordWrap": "on",
   "editor.wrappingIndent": "deepIndent",
   "editor.wrappingStrategy": "advanced",
-  "errorLens.enabledDiagnosticLevels": ["error", "info", "warning"],
+  "errorLens.enabledDiagnosticLevels": ["info", "hint", "warning", "error"],
+  "errorLens.followCursor": "activeLine",
   "errorLens.scrollbarHackEnabled": true,
+  "errorLens.statusBarIconsEnabled": true,
   "files.associations": {
     "*.bash": "shellscript",
     "*.h": "c",
@@ -532,6 +536,6 @@
   "zenMode.fullScreen": true,
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": true,
-  "zenMode.hideTabs": true,
+  "zenMode.hideTabs": false,
   "zenMode.restore": true
 }
