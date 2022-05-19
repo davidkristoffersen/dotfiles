@@ -21,6 +21,7 @@ info="\e[33m"
 reset="\e[m"
 
 mklink() {
+	src="$(pwd)"
 	src_name="$1"
 	dst_name="$(basename "$2")"
 	dst="$(dirname "$2")"
@@ -29,11 +30,13 @@ mklink() {
 
 	backup "$dst_name"
 
-	links="$dst_name $win_cwd\\$src_name"
-	echo -e "${info}Linking: " | tr -d '\n'
-	echo "$links" | tr -d '\n'
-	echo -e "$reset"
-	cmd.exe /C "mklink $links"
+	# links="$dst_name $win_cwd\\$src_name"
+	# echo -e "${info}Linking: " | tr -d '\n'
+	# echo "$links" | tr -d '\n'
+	# echo -e "$reset"
+	# cmd.exe /C "mklink $links"
+	echo -e "${info}cp \"$src/$src_name\" $dst_name$reset"
+	cp "$src/$src_name" $dst_name
 
 	cd - >/dev/null
 }
@@ -58,6 +61,7 @@ init_files() {
 	if [ ! -f "$dark_prog" ]; then
 		cp $default_prog $dark_prog
 	fi
+	cd - >/dev/null
 
 	cd $config
 	if [ ! -d light ]; then
