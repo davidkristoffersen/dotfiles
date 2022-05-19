@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 wslpath_win_dir="$WIN_HOME/AppData/Roaming/Code/User"
-win_dir="$(wslpath -w "$WIN_HOME/AppData/Roaming/Code/User")"
+win_dir="$(wslpath -w "$wslpath_win_dir")"
 wsl_dir="$(wslpath -w .)"
 
 mklink() {
