@@ -17,23 +17,32 @@ light_prog="$prog-light.exe"
 dark_prog="$prog-dark.exe"
 theme="theme.cmd"
 
+info="\e[33m"
+reset="\e[m"
+
 mklink() {
 	src_name="$1"
 	dst_name="$(basename "$2")"
-	wsl_dst="$(dirname "$2")"
-	dst="$(wslpath -w "$wsl_dst")"
+	dst="$(dirname "$2")"
 
-	cd "$wsl_dst"
+	cd "$dst"
 
 	backup "$dst_name"
-	sudo rm -f "$dst_name"
-	cmd.exe /C "mklink $dst\\$dst_name $win_cwd\\$src_name >nul"
+
+	links="$dst_name $win_cwd\\$src_name"
+	echo -e "${info}Linking: " | tr -d '\n'
+	echo "$links" | tr -d '\n'
+	echo -e "$reset"
+	cmd.exe /C "mklink $links"
 
 	cd - >/dev/null
 }
 
 backup() {
-	sudo cp -f "$1" "$1.bak"
+	echo -e "${info}Backup: $1$reset"
+	sudo cp -f "$1" "$1.bak" 2>/dev/null
+	echo -e "${info}Removing: $1$reset"
+	sudo rm -f "$1" 2>/dev/null
 }
 
 init_files() {
