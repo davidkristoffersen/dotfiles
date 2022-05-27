@@ -29,6 +29,55 @@ move_cursor() {
 	esac
 }
 
+hex2rgb() {
+	printf "%d;%d;%d" 0x${1:0:2} 0x${1:2:2} 0x${1:4:2}
+}
+
+rgb_text() {
+	echo -en "\x1b[38;2;$1m$2\x1b[m"
+}
+
+rgb_back() {
+	echo -en "\x1b[48;2;$1m$2\x1b[m"
+}
+
+print_ansi() {
+	log() {
+		local rgb="$(hex2rgb "$3")"
+		local back="$(rgb_back "$rgb" "   ")"
+		local pre="$(rgb_text "$rgb" "$1\t$2")"
+		local suf="$(rgb_text "$rgb" "#$3\t$rgb\t$4")"
+		echo -e "$pre\t$back\t$suf"
+	}
+	log_normal() {
+		log "0" "Black" "000000" "30"
+		log "1" "Red" "c71e00" "31"
+		log "2" "Green" "00c203" "32"
+		log "3" "Yellow" "c6c500" "33"
+		log "4" "Blue" "6775b8" "34"
+		log "5" "Purple" "ca31c6" "35"
+		log "6" "Cyan" "07afc8" "36"
+		log "7" "White" "c7c7c7" "37"
+	}
+
+	log_bright() {
+		log "8" "Black" "686868" "90"
+		log "9" "Red" "ff6e6a" "91"
+		log "10" "Green" "60fa68" "92"
+		log "11" "Yellow" "fefb68" "93"
+		log "12" "Blue" "b3b5fe" "94"
+		log "13" "Purple" "ff78ff" "95"
+		log "14" "Cyan" "5dd7da" "96"
+		log "15" "White" "ffffff" "97"
+	}
+
+	echo -e "Normal colors"
+	log_normal | column -N "No.,Name,Color,Hex,RGB,4-Bit" -ts $'\t'
+
+	echo -e "\nBright colors"
+	log_bright | column -N "No.,Name,Color,Hex,RGB,4-Bit" -ts $'\t'
+}
+
 print_at() {
 	[ ${#@} == 3 ] && true
 	check_error $? nargs
@@ -39,7 +88,7 @@ print_at() {
 	move_cursor r 0
 }
 
-print_ascii_list() {
+print_ansi_list() {
 	for ((i = 0; i < 48; i++)); do
 		for ((j = 0; j < 48; j++)); do
 			echo -e "[${i}][${j}] -> " | tr '\n' '\0'
@@ -51,7 +100,7 @@ print_ascii_list() {
 	done
 }
 
-print_ascii_wave() {
+print_ansi_wave() {
 	b() { test $1 && echo $1 || echo $2; }
 	r="{$(b $1 0)..255..$(b $4 16)} {255..$(b $1 0)..$(b $4 16)}"
 	g="{$(b $2 0)..255..$(b $5 16)} {255..$(b $2 0)..$(b $5 16)}"
@@ -104,4 +153,4 @@ clock() {
 	done
 }
 
-export -f move_cursor print_at print_ascii_list print_ascii_wave
+export -f move_cursor hex2rgb rgb_back rgb_text print_at print_ansi_list print_ansi_wave
