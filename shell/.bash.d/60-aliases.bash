@@ -17,8 +17,15 @@ alias l="exa -las type --git"
 alias o="exa -ls type --git"
 alias ll="exa -lGas type --git"
 alias lo="exa -lGs type --git"
-alias fs="find . -maxdepth 1 -not -type d -a -not -xtype d | tail -n +2 | grep -Po \"^./\K.*\""
-alias ds="find . -maxdepth 1 -type d -o -xtype d | tail -n +2 | grep -Po \"^./\K.*\""
+alias fs="exa -1as type --git \$(find . -maxdepth 1 -not -type d -a -not -xtype d | tail -n +2 | grep -Po \"^./\K.*\")"
+alias ds="exa -1ads type --git \$(find . -maxdepth 1 -type d -o -xtype d | tail -n +2 | grep -Po \"^./\K.*\")"
+
+alias li="exa -las type --git --git-ignore -I .git"
+alias oi="exa -ls type --git --git-ignore -I .git"
+alias lli="exa -lGas type --git --git-ignore -I .git"
+alias loi="exa -lGs type --git --git-ignore -I .git"
+alias fsi="exa -1as type --git --git-ignore -I .git \$(find . -maxdepth 1 -not -type d -a -not -xtype d | tail -n +2 | grep -Po \"^./\K.*\")"
+alias dsi="exa -1ads type --git --git-ignore -I .git \$(find . -maxdepth 1 -type d -o -xtype d | tail -n +2 | grep -Po \"^./\K.*\")"
 
 # Config
 alias srcall="source $HOME/.bash_profile"
