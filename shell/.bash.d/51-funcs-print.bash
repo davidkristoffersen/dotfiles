@@ -33,15 +33,26 @@ hex2rgb() {
 	printf "%d;%d;%d" 0x${1:0:2} 0x${1:2:2} 0x${1:4:2}
 }
 
+rgb2hex() {
+	local rgb="$(tr ';' ' ' "$1")"
+	for var in $rgb; do
+		printf '%x' "$var"
+	done
+}
+
 rgb_text() {
 	echo -en "\x1b[38;2;$1m$2\x1b[m"
+}
+
+ansi_text() {
+	echo -e "\x1b[$1m$2\x1b[m"
 }
 
 rgb_back() {
 	echo -en "\x1b[48;2;$1m$2\x1b[m"
 }
 
-print_ansi() {
+print_Xansi() {
 	log() {
 		local rgb="$(hex2rgb "$3")"
 		local back="$(rgb_back "$rgb" "   ")"
@@ -76,6 +87,42 @@ print_ansi() {
 
 	echo -e "\nBright colors"
 	log_bright | column -N "No.,Name,Color,Hex,RGB,4-Bit" -ts $'\t'
+}
+
+print_ansi() {
+	log() {
+		local back="$(ansi_text "$(($3 + 10))" "   ")"
+		local pre="$(ansi_text "$3" "$1\t$2")"
+		local suf="$(ansi_text "$3" "$3")"
+		echo -e "$pre\t$back\t$suf"
+	}
+	log_normal() {
+		log "0" "Black" "30"
+		log "1" "Red" "31"
+		log "2" "Green" "32"
+		log "3" "Yellow" "33"
+		log "4" "Blue" "34"
+		log "5" "Purple" "35"
+		log "6" "Cyan" "36"
+		log "7" "White" "37"
+	}
+
+	log_bright() {
+		log "8" "Black" "90"
+		log "9" "Red" "91"
+		log "10" "Green" "92"
+		log "11" "Yellow" "93"
+		log "12" "Blue" "94"
+		log "13" "Purple" "95"
+		log "14" "Cyan" "96"
+		log "15" "White" "97"
+	}
+
+	echo -e "Normal colors"
+	log_normal | column -N "No.,Name,Color,4-Bit" -ts $'\t'
+
+	echo -e "\nBright colors"
+	log_bright | column -N "No.,Name,Color,4-Bit" -ts $'\t'
 }
 
 print_at() {
@@ -153,4 +200,4 @@ clock() {
 	done
 }
 
-export -f move_cursor hex2rgb rgb_back rgb_text print_at print_ansi_list print_ansi_wave
+export -f move_cursor hex2rgb rgb_back rgb_text print_ansi print_Xansi print_at print_ansi_list print_ansi_wave
