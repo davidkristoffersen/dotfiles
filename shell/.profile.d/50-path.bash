@@ -24,6 +24,7 @@ path_add "$HOME/.local/bin"
 path_add_rec "$HOME/.local/bin"
 # Cargo's bin
 path_add "$HOME/.cargo/bin"
+path_add "$HOME/.cargo/env"
 # Basher's bin
 path_add "$HOME/.basher/bin"
 # Dotnet source
