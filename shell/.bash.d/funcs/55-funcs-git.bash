@@ -9,4 +9,4 @@ hostname_master() {
 	tracepath -b 129.242.16.30 | grep "$name" | grep -e '^ 1:'
 }
 
-export -f format_patch hostname_master
+call_bash_func_if_exist $@

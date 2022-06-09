@@ -44,4 +44,4 @@ pwd_dot_list() {
 	done <<<"$dir_list"
 }
 
-export -f tree_dotfiles pwd_list
+call_bash_func_if_exist $@

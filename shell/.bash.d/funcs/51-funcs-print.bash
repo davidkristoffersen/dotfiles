@@ -200,4 +200,4 @@ clock() {
 	done
 }
 
-export -f move_cursor hex2rgb rgb_back rgb_text print_ansi print_Xansi print_at print_ansi_list print_ansi_wave
+call_bash_func_if_exist $@

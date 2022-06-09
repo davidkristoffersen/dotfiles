@@ -3,13 +3,16 @@
 _bashrc() {
 	. $HOME/.dotfiles_meta.sh
 	[ $? -ne 0 ] && return
+	local d_path="$DOTFILES_SHELL/.bash.d"
 
-	for bash_file in $(ls -A1 $DOTFILES_SHELL/.bash.d | sort); do
-		if [ "$bash_file" == ".gitignore" ]; then
+	for bash_file in $(ls -A1 "$d_path" | sort); do
+		local file_path="$d_path/$bash_file"
+
+		if [ "$bash_file" == ".gitignore" ] || [ -d "$file_path" ]; then
 			continue
 		fi
 
-		. $DOTFILES_SHELL/.bash.d/$bash_file
+		. $file_path
 		check_error 0
 	done
 

@@ -42,4 +42,4 @@ extract() {
 	fi
 }
 
-export -f code_style_format xresource_get evalps1 extract
+call_bash_func_if_exist $@

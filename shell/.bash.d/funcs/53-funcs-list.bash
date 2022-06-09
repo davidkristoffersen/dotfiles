@@ -119,4 +119,4 @@ ls_sorted() {
 	fi
 }
 
-export -f _lll _lla _ll _la
+call_bash_func_if_exist $@
