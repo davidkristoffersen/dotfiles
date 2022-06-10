@@ -77,7 +77,7 @@
   "editor.bracketPairColorization.enabled": false,
   "editor.cursorBlinking": "solid",
   "editor.detectIndentation": false,
-  "editor.fontSize": 17,
+  "editor.fontSize": 14,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.guides.bracketPairs": true,
@@ -142,7 +142,9 @@
     "*.bash": "shellscript",
     "*.h": "c",
     "*.latex": "latex",
+    "*.rsc": "bibtex-style",
     "*.vim": "viml",
+    ".bibtoolrsc": "bibtex-style",
     ".latexmkrc": "perl"
   },
   "files.exclude": {
@@ -152,19 +154,19 @@
     "**/.classpath": true,
     "**/.factorypath": true,
     "**/.project": true,
-    "**/.settings": true,
-    "keyboards": false,
-    "keyboards/???[^n]*": true,
-    "keyboards/??[^a]*": true,
-    "keyboards/?[^l]*": true,
-    "keyboards/[^p]*": true,
-    "keyboards/planck/???[^(5|m)]*": true,
-    "keyboards/planck/??[^(v|y)]*": true,
-    "keyboards/planck/?[^e]*": true,
-    "keyboards/planck/[^(r|k)]*": true,
-    "keyboards/planck/keymaps/??[^o]*": true,
-    "keyboards/planck/keymaps/?[^r]*": true,
-    "keyboards/planck/keymaps/[^p]*": true
+    "**/.settings": true
+    // "keyboards": false,
+    // "keyboards/???[^n]*": true,
+    // "keyboards/??[^a]*": true,
+    // "keyboards/?[^l]*": true,
+    // "keyboards/[^p]*": true,
+    // "keyboards/planck/???[^(5|m)]*": true,
+    // "keyboards/planck/??[^(v|y)]*": true,
+    // "keyboards/planck/?[^e]*": true,
+    // "keyboards/planck/[^(r|k)]*": true,
+    // "keyboards/planck/keymaps/??[^o]*": true,
+    // "keyboards/planck/keymaps/?[^r]*": true,
+    // "keyboards/planck/keymaps/[^p]*": true
   },
   "githubPullRequests.fileListLayout": "tree",
   "gitlens.codeLens.enabled": false,
@@ -337,10 +339,15 @@
   "markdownlint.ignore": ["**/.vscode*/extensions/**/*.md"],
   "multiCommand.commands": [
     {
-      "command": "toggleUltraZen",
-      "sequence": ["settings.cycle.ultraZen"]
-      //   "sequence": [ "workbench.action.toggleZenMode", "settings.cycle.ultraZen", "workbench.action.reloadWindow" ]
+      "command": "toggleCrumbs",
+      "interval": 300,
+      "sequence": ["breadcrumbs.toggle", "breadcrumbs.focusAndSelect"]
     }
+    // {
+    //   "command": "toggleUltraZen",
+    //   "sequence": ["settings.cycle.ultraZen"]
+    //   //   "sequence": [ "workbench.action.toggleZenMode", "settings.cycle.ultraZen", "workbench.action.reloadWindow" ]
+    // },
   ],
   "omnisharp.organizeImportsOnFormat": true,
   "openInApplication.applications": {
@@ -353,12 +360,10 @@
       "overrideWorkspaceSettings": false,
       "values": [
         {
-          "customizeUI.stylesheet": {}
+          "breadcrumbs.enabled": true
         },
         {
-          "customizeUI.stylesheet": {
-            ".title.show-file-icons": "display: none !important;"
-          }
+          "breadcrumbs.enabled": false
         }
       ]
     }
@@ -477,6 +482,7 @@
     }
   ],
   "window.menuBarVisibility": "compact",
+  "window.zoomLevel": 1,
   "workbench.activityBar.visible": false,
   "workbench.colorCustomizations": {
     "breadcrumb.background": "#1d1d1d",
@@ -493,7 +499,6 @@
     "editorCursor.foreground": "#ff3737",
     "editorGroup.border": "#292929",
     "editorGroupHeader.tabsBackground": "#1d1d1d",
-    //"breadcrumb.background": "#000000",
     // Gutter
     "editorGutter.background": "#1d1d1d",
     //"editorBracketMatch.background": "#3d3d3d",
@@ -510,7 +515,7 @@
     "editorOverviewRuler.modifiedForeground": "#0000",
     "editorOverviewRuler.selectionHighlightForeground": "#0000",
     "editorOverviewRuler.warningForeground": "#0000",
-    "focusBorder": "#ff000000",
+    "focusBorder": "#ff6200a6",
     "gitDecoration.addedResourceForeground": "#73c991",
     "gitDecoration.deletedResourceForeground": "#f88070",
     "gitDecoration.modifiedResourceForeground": "#e2c08c",
