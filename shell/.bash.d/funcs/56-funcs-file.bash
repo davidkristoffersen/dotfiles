@@ -21,7 +21,7 @@ file_copy_new() {
 file_overwrite() {
 	_file_helper "$1" "$2"
 
-	backup "$dst"
+	file_backup "$dst"
 
 	print_info "Overwriting: \"$src_base\" -> \"$dst_base\""
 	print_debug "Dirs: \"$src_dir\" -> \"$dst_dir\""
@@ -29,11 +29,21 @@ file_overwrite() {
 }
 
 file_backup() {
-	_file_helper "$1"
+	if [ $# -eq 1 ]; then
+		_file_helper "$1"
 
-	print_info "Backup: \"$base\""
-	print_debug "Dir: \"$dir\""
-	sudo cp -f "$path" "$path.bak" 2>/dev/null
+		print_info "Backup: \"$base\""
+		print_debug "Dir: \"$dir\""
+		sudo cp -f "$path" "$path" 2>/dev/null
+	elif [ $# -eq 2 ]; then
+		_file_helper "$1" "$2"
+
+		file_backup "$dst"
+
+		print_info "Backup: \"$src_base\" -> \"$dst_base\""
+		print_debug "Dirs: \"$src_dir\" -> \"$dst_dir\""
+		cp "$src" "$dst"
+	fi
 }
 
 file_remove() {

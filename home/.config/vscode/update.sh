@@ -9,8 +9,8 @@ DEBUG=true
 
 # Backup src to win dir
 backup() {
-	file_overwrite "$conf" "$dst/$conf.bak"
-	file_overwrite "$key" "$dst/$key.bak"
+	file_backup "$conf" "$dst/$conf.bak"
+	file_backup "$key" "$dst/$key.bak"
 }
 
 # Recreate win links

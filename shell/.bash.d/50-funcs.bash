@@ -32,6 +32,6 @@ call_bash_func_if_exist() {
 	test "$(type -t "$func")" = 'function' && "$func" $@
 }
 
-export -f call_bash_func_if_exist
+export -f call_bash_func_if_exist _call_bash_func
 
 main
