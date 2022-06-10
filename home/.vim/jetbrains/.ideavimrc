@@ -1,0 +1,10 @@
+fu VimrcInit()
+	source .jetbrains.d/basic.vim
+	source .jetbrains.d/options.vim
+	" source .jetbrains.d/highlight.vim
+	source .jetbrains.d/map_mode.vim
+	source .jetbrains.d/map_leader.vim
+	source .jetbrains.d/functions.vim
+endf
+
+call VimrcInit()

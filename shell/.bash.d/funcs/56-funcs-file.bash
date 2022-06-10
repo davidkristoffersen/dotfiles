@@ -17,10 +17,19 @@ sudo_deactivate() {
 	SUDO=""
 }
 
+dir_create() {
+	if [ ! -d "$1" ]; then
+		_file_helper "$1"
+		print_info "Creating dir: \"$base\""
+		print_debug "Dir: \"$dir\""
+		${SUDO}mkdir "$path"
+	fi
+}
+
 file_create() {
 	if [ ! -f "$1" ]; then
 		_file_helper "$1"
-		print_info "Creating: \"$base\""
+		print_info "Creating file: \"$base\""
 		print_info "Dir: \"$dir\""
 		${SUDO}touch "$path"
 	fi
