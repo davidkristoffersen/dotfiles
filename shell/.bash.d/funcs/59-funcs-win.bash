@@ -4,18 +4,18 @@ _help() {
 	INFO=true
 }
 
-mklink() {
+win_link() {
 	local src="$(realpath "$1")"
 	local dst="$(realpath "$2")"
 
 	local src_win="$(wslpath -w "$src")"
 	local dst_win="$(wslpath -w "$dst")"
 
-	local dst_win_dir="$(dirname "$dst_win")"
 	local src_dir="$(dirname "$src")"
+	local dst_win_dir="$(dirname "$dst_win")"
 
-	local dst_win_base="$(basename "$dst_win")"
 	local src_base="$(basename "$src")"
+	local dst_win_base="$(basename "$dst_win")"
 
 	cd "$dst"
 	file_backup "$dst"

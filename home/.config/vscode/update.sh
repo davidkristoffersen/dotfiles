@@ -1,23 +1,30 @@
 #!/usr/bin/bash
 
-wslpath_win_dir="$WIN_HOME/AppData/Roaming/Code/User"
-win_dir="$(wslpath -w "$wslpath_win_dir")"
-wsl_dir="$(wslpath -w .)"
+dst="$WIN_HOME/AppData/Roaming/Code/User"
+conf="settings.json"
+key="keybindings.json"
 
-mklink() {
-	cd $wslpath_win_dir
-	sudo rm -f "$1"
-	cmd.exe /C "mklink $win_dir\\$1 $wsl_dir\\$1 >nul"
-	cd - >/dev/null
+INFO=true
+DEBUG=true
+
+# Backup src to win dir
+backup() {
+	file_overwrite "$conf" "$dst/$conf.bak"
+	file_overwrite "$key" "$dst/$key.bak"
 }
 
-backup() {
-	sudo cp -f "$1" "$wslpath_win_dir/$1.bak"
+# Recreate win links
+link() {
+	win_link "$conf" "$dst/$conf"
+	win_link "$key" "$dst/$key"
 }
 
 main() {
-	backup settings.json
-	backup keybindings.json
+	backup
+	# link
 }
 
-main
+pushd . >/dev/null
+cd $(dirname ${BASH_SOURCE[0]})
+main $@
+popd >/dev/null

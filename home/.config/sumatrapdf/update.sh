@@ -5,7 +5,6 @@ conf="settings"
 
 config="$WIN_HOME/AppData/Local/$prog"
 program="$WIN_ROOT/Program Files/$prog"
-win_cwd="$(wslpath -w .)"
 
 default_conf="$conf-default.ini"
 light_conf="$conf-light.ini"
@@ -17,32 +16,8 @@ light_prog="$prog-light.exe"
 dark_prog="$prog-dark.exe"
 theme="theme.cmd"
 
-info="\e[33m"
-reset="\e[m"
-do_echo=false
-
-update() {
-	src="$(pwd)"
-	src_name="$1"
-	dst_name="$(basename "$2")"
-	dst="$(dirname "$2")"
-
-	cd "$dst"
-
-	backup "$dst_name"
-
-	$do_echo && echo -e "${info}cp \"$src/$src_name\" $dst_name$reset"
-	cp "$src/$src_name" $dst_name
-
-	cd - >/dev/null
-}
-
-backup() {
-	$do_echo && echo -e "${info}Backup: $1$reset"
-	sudo cp -f "$1" "$1.bak" 2>/dev/null
-	$do_echo && echo -e "${info}Removing: $1$reset"
-	sudo rm -f "$1" 2>/dev/null
-}
+INFO=true
+DEBUG=true
 
 init_files() {
 	cd "$program"
@@ -51,12 +26,9 @@ init_files() {
 		return
 	fi
 
-	if [ ! -f "$light_prog" ]; then
-		cp $default_prog $light_prog
-	fi
-	if [ ! -f "$dark_prog" ]; then
-		cp $default_prog $dark_prog
-	fi
+	file_copy_new $default_prog $light_prog
+	file_copy_new $default_prog $dark_prog
+
 	cd - >/dev/null
 
 	cd $config
@@ -72,11 +44,15 @@ init_files() {
 
 main() {
 	init_files
+	local src_dir="$(pwd)"
 
-	update $theme "$program/$theme"
-	update $default_conf "$config/$win_conf"
-	update $light_conf "$config/light/$win_conf"
-	update $dark_conf "$config/dark/$win_conf"
+	file_update "$src_dir/$theme" "$program/$theme"
+	file_update "$src_dir/$default_conf" "$config/$win_conf"
+	file_update "$src_dir/$light_conf" "$config/light/$win_conf"
+	file_update "$src_dir/$dark_conf" "$config/dark/$win_conf"
 }
 
-main
+pushd . >/dev/null
+cd $(dirname ${BASH_SOURCE[0]})
+main $@
+popd >/dev/null
