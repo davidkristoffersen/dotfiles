@@ -1,11 +1,28 @@
 #!/usr/bin/bash
 
+sudo_needed() {
+	if [ ! -w "$1" ]; then
+		sudo_activate
+		check_error $?
+	fi
+}
+
+sudo_activate() {
+	sudo -v
+	SUDO="sudo "
+}
+
+sudo_deactivate() {
+	sudo -k
+	SUDO=""
+}
+
 file_create() {
 	if [ ! -f "$1" ]; then
 		_file_helper "$1"
 		print_info "Creating: \"$base\""
 		print_info "Dir: \"$dir\""
-		touch "$path"
+		${SUDO}touch "$path"
 	fi
 }
 
@@ -14,7 +31,7 @@ file_copy_new() {
 		_file_helper "$1" "$2"
 		print_info "Copying new: \"$src_base\" -> \"$dst_base\""
 		print_debug "Dirs: \"$src_dir\" -> \"$dst_dir\""
-		cp "$src" "$dst"
+		${SUDO}cp "$src" "$dst"
 	fi
 }
 
@@ -25,7 +42,7 @@ file_overwrite() {
 
 	print_info "Overwriting: \"$src_base\" -> \"$dst_base\""
 	print_debug "Dirs: \"$src_dir\" -> \"$dst_dir\""
-	cp "$src" "$dst"
+	${SUDO}cp "$src" "$dst"
 }
 
 file_backup() {
@@ -34,15 +51,14 @@ file_backup() {
 
 		print_info "Backup: \"$base\""
 		print_debug "Dir: \"$dir\""
-		sudo cp -f "$path" "$path" 2>/dev/null
+		${SUDO}cp -f "$path" "$path" 2>/dev/null
 	elif [ $# -eq 2 ]; then
 		_file_helper "$1" "$2"
-
-		file_backup "$dst"
 
 		print_info "Backup: \"$src_base\" -> \"$dst_base\""
 		print_debug "Dirs: \"$src_dir\" -> \"$dst_dir\""
 		cp "$src" "$dst"
+		${SUDO}cp -f "$path" "$path" 2>/dev/null
 	fi
 }
 
@@ -51,11 +67,13 @@ file_remove() {
 
 	print_info "Removing: \"$base\""
 	print_debug "Dir: \"$dir\""
-	sudo rm -f "$path" 2>/dev/null
+	${SUDO}rm -f "$path" 2>/dev/null
 }
 
 _file_helper() {
+	SUDO=""
 	if [ $# -eq 1 ]; then
+		sudo_needed "$1"
 		if [ -f "$1" ]; then
 			path="$(realpath "$1")"
 		else
@@ -64,6 +82,8 @@ _file_helper() {
 		dir="$(dirname "$path")"
 		base="$(basename "$path")"
 	elif [ $# -eq 2 ]; then
+		sudo_needed "$1"
+		sudo_needed "$2"
 		src="$(realpath "$1")"
 
 		if [ -f "$2" ]; then
