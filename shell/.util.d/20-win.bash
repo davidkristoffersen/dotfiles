@@ -21,4 +21,4 @@ win_set_env() {
 	win_cmd "setx $1 $2"
 }
 
-export -f debug_profile win_cmd win_get_env win_set_env
+export -f win_cmd win_cmd_out win_get_env win_set_env

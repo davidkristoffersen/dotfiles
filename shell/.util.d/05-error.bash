@@ -94,3 +94,5 @@ debug_profile() {
 	fi
 }
 debug_profile false
+
+export -f debug_profile

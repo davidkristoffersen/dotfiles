@@ -31,6 +31,7 @@ call_bash_func_if_exist() {
 	shift
 	test "$(type -t "$func")" = 'function' && "$func" $@
 }
+
 export -f call_bash_func_if_exist
 
 main

@@ -73,4 +73,4 @@ help_test() {
 		"h	help	Print this help message"
 }
 
-export -f help_print help_option help_test
+export -f help_check help_print help_option help_test

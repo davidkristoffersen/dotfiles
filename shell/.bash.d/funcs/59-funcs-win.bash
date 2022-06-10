@@ -1,9 +1,5 @@
 #!/usr/bin/bash
 
-_help() {
-	INFO=true
-}
-
 win_link() {
 	local src="$(realpath "$1")"
 	local dst="$(realpath "$2")"
