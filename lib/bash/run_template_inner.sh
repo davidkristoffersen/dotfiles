@@ -9,7 +9,7 @@ cd "$(dirname "$0")"
 ########################
 
 # Help menu variables
-function help_vars() {
+help_vars() {
 	title_col="\e[36m"
 	header_col="\e[33m"
 	option_col="\e[32m"
@@ -20,7 +20,7 @@ function help_vars() {
 	script="$(basename "$0")"
 }
 
-function completion_vars() {
+completion_vars() {
 	completion_enable=true
 	completion_path="$HOME/.bash_completion.d"
 }
@@ -29,11 +29,11 @@ function completion_vars() {
 #   HELP INIT   #
 #################
 
-function gen_title() {
+gen_title() {
 	echo -e "$title_col$title_name:$reset_col $title_body"
 }
 
-function help_init() {
+help_init() {
 	help_vars
 	printf -v info_tabs '\t%.0s' $(seq 1 $num_tabs)
 
@@ -50,8 +50,8 @@ function help_init() {
 	title="$(gen_title)"
 
 	declare -gA headers=([u]="USAGE"
-						[o]="OPTIONS"
-						[s]="SUBCOMMANDS"
+		[o]="OPTIONS"
+		[s]="SUBCOMMANDS"
 	)
 
 	usage_arr=("$script [OPTIONS]")
@@ -79,18 +79,18 @@ function help_init() {
 #   OPTION PARSE   #
 ####################
 
-function add_option_help() {
+add_option_help() {
 	echo -e "add_option ⁻(smid)"
 	echo -e "-m: String text of option, required."
 	exit
 }
 
-function add_subcmd_help() {
+add_subcmd_help() {
 	echo -e "add_subcmd name title"
 	exit
 }
 
-function _add_subcmd() {
+_add_subcmd() {
 	eval "subcmd_$1=true"
 
 	if $completion_enable; then
@@ -106,8 +106,8 @@ function _add_subcmd() {
 	eval "$1_title=\"$(gen_title)\""
 
 	declare -A headers=([u]="USAGE"
-						[o]="OPTIONS"
-						[s]="SUBCOMMANDS"
+		[o]="OPTIONS"
+		[s]="SUBCOMMANDS"
 	)
 	agcp $1_headers headers
 
@@ -131,7 +131,7 @@ function _add_subcmd() {
 	add_option -m print_args -i "Print argument values." --subcmd $1
 }
 
-function add_subcmd() {
+add_subcmd() {
 	if [ ! "$#" -ge "2" ]; then
 		add_subcmd_help
 	fi
@@ -144,7 +144,7 @@ function add_subcmd() {
 	_add_subcmd "$@"
 }
 
-function add_option() {
+add_option() {
 	local _single=""
 	local _multi=""
 	local _info=""
@@ -156,64 +156,64 @@ function add_option() {
 	while [[ $# -gt 0 ]]; do
 		opt="$1"
 		case $opt in
-			-h|--help)
-				add_option_help
-				;;
-			-s)
-				if [ -z "$2" ]; then
-					return
-				fi
-				_single="$2"
-				shift
-				shift
-				;;
-			-m)
-				if [ -z "$2" ]; then
-					return
-				fi
-				_multi="$2"
-				shift
-				shift
-				;;
-			-i)
-				if [ -z "$2" ]; then
-					return
-				fi
-				_info="$2"
-				shift
-				shift
-				;;
-			-v)
-				if [ -z "$2" ]; then
-					return
-				fi
-				_value="$2"
-				shift
-				shift
-				;;
-			-d)
-				if [ -z "$2" ]; then
-					return
-				fi
-				_default="$2"
-				shift
-				shift
-				;;
-			--subcmd)
-				if [ -z "$2" ]; then
-					return
-				fi
-				if ! eval "[ \"\$subcmd_$2\" == \"true\" ]"; then
-					echo "Subcommand has not been created: $2"
-					add_subcmd_help
-				fi
-				_subcmd="$2"
-				shift
-				shift
-				;;
-			*)
-				add_option_help
-				;;
+		-h | --help)
+			add_option_help
+			;;
+		-s)
+			if [ -z "$2" ]; then
+				return
+			fi
+			_single="$2"
+			shift
+			shift
+			;;
+		-m)
+			if [ -z "$2" ]; then
+				return
+			fi
+			_multi="$2"
+			shift
+			shift
+			;;
+		-i)
+			if [ -z "$2" ]; then
+				return
+			fi
+			_info="$2"
+			shift
+			shift
+			;;
+		-v)
+			if [ -z "$2" ]; then
+				return
+			fi
+			_value="$2"
+			shift
+			shift
+			;;
+		-d)
+			if [ -z "$2" ]; then
+				return
+			fi
+			_default="$2"
+			shift
+			shift
+			;;
+		--subcmd)
+			if [ -z "$2" ]; then
+				return
+			fi
+			if ! eval "[ \"\$subcmd_$2\" == \"true\" ]"; then
+				echo "Subcommand has not been created: $2"
+				add_subcmd_help
+			fi
+			_subcmd="$2"
+			shift
+			shift
+			;;
+		*)
+			add_option_help
+			;;
 		esac
 	done
 
@@ -242,9 +242,9 @@ function add_option() {
 
 	if [ ! -z "$_default" ]; then
 		if [ -z "$_value" ]; then
-			if [ ! -z "$(grep -o "^true$\|^0$" <<< "$_default")" ]; then
+			if [ ! -z "$(grep -o "^true$\|^0$" <<<"$_default")" ]; then
 				_default=true
-			elif [ ! -z "$(grep -o "^false$\|^1$" <<< "$_default")" ]; then
+			elif [ ! -z "$(grep -o "^false$\|^1$" <<<"$_default")" ]; then
 				_default=false
 			else
 				echo "Bool argument can only have true and false as default value: $_default"
@@ -278,14 +278,14 @@ function add_option() {
 #   HELP PRINT  #
 #################
 
-function help() {
+help() {
 	help_strings $@
 	help_print $@
 	exit 0
 }
 
 # Creating printable strings
-function help_strings() {
+help_strings() {
 	if $help_short; then
 		local _short=true
 	else
@@ -346,7 +346,7 @@ function help_strings() {
 				if $_short; then
 					break
 				fi
-			done <<< "$lines"
+			done <<<"$lines"
 		fi
 	done
 
@@ -356,7 +356,7 @@ function help_strings() {
 }
 
 # Printing help menu
-function help_print() {
+help_print() {
 	if $help_short; then
 		local _short=true
 	else
@@ -405,14 +405,14 @@ function help_print() {
 				local _len=0
 				local _word
 				for _word in $_line; do
-					_len=$((_len+${#_word}+1))
+					_len=$((_len + ${#_word} + 1))
 					if (($_len > $_width)); then
 						if $_short; then
 							echo -en "\n$_pre_option"
 						else
 							echo -en "\n$_pre_tabs"
 						fi
-						_len=$((${#_word}+1))
+						_len=$((${#_word} + 1))
 					fi
 					echo -n "$_word "
 				done
@@ -450,15 +450,15 @@ function help_print() {
 #   COMPLETION FUNCS	#
 #########################
 
-function path_to_var() {
+path_to_var() {
 	echo -e "$1" | xxd -p | tr -d '\n'
 }
 
-function var_to_path() {
+var_to_path() {
 	echo -e "$1" | xxd -r -p
 }
 
-function completion_parse() {
+completion_parse() {
 	completion_src="$(pwd)/$script"
 	completion_script="$script"
 
@@ -472,19 +472,19 @@ function completion_parse() {
 	declare -gA completion_code_subcmds=()
 
 	completion_code="#!/usr/bin/env bash
-function $completion_func() {
+$completion_func() {
 	local _src=\"$completion_src\"
 	local _caller=\"\$(readlink -f \"\$1\")\"
 	local _in_path=\"$(which $script 2>&1)\"
 "
 }
 
-function completion_parse_subcmd() {
+completion_parse_subcmd() {
 	eval "$1_completion_flags=\"\""
 	eval "completion_code_subcmds[\"$1\"]=\"$1_completion_flags\""
 }
 
-function generate_completion_file() {
+generate_completion_file() {
 	local _debug=false
 
 	for x in "${!completion_code_subcmds[@]}"; do
@@ -516,14 +516,14 @@ complete -o nosort -F $completion_func $completion_script
 complete -o nosort -F $completion_func ./$completion_script"
 
 	$_debug && echo -e "$completion_code"
-	echo -e "$completion_code" > $completion_file
+	echo -e "$completion_code" >$completion_file
 }
 
 #########################
 #   CLIENT FUNCTIONS	#
 #########################
 
-function subcmd_exists() {
+subcmd_exists() {
 	if [ "$subcmd" == "$1" ]; then
 		eval true
 	else
@@ -531,11 +531,11 @@ function subcmd_exists() {
 	fi
 }
 
-function key_exists() {
+key_exists() {
 	eval '[ ${'args'[$1]+true} ]'
 }
 
-function get_key() {
+get_key() {
 	if key_exists $1; then
 		echo "${args[$1]}"
 	else
@@ -543,7 +543,7 @@ function get_key() {
 	fi
 }
 
-function set_key() {
+set_key() {
 	if key_exists $1; then
 		eval "$1=${args[$1]}"
 	fi
@@ -553,35 +553,35 @@ function set_key() {
 #   ARGUMENT PARSING	#
 #########################
 
-function arg_parse_pre() {
+arg_parse_pre() {
 	if $completion_enable; then
 		generate_completion_file
 	fi
 	POSITIONAL=()
 }
 
-function agcp() {
+agcp() {
 	local _string=$(declare -p $2)
 	eval "declare -gA $1=\${_string#*=}"
 }
-function alcp() {
+alcp() {
 	local _string=$(declare -p $2)
 	echo "declare -A $1=${_string#*=}"
 }
-function igcp() {
+igcp() {
 	local _string=$(declare -p $2)
 	eval "declare -ga $1=\${_string#*=}"
 }
-function ilcp() {
+ilcp() {
 	local _string=$(declare -p $2)
 	echo "declare -a $1=${_string#*=}"
 }
 
-function arg_parse_post() {
+arg_parse_post() {
 	set -- "${POSITIONAL[@]}"
 }
 
-function print_args() {
+print_args() {
 	local out=""
 	for x in "${!args[@]}"; do
 		out+="\n$x:${args[$x]}"
@@ -589,7 +589,7 @@ function print_args() {
 	echo -e "$out" | tail +2 | sort | column -t -s ":"
 }
 
-function arg_parse() {
+arg_parse() {
 	local _subcmd_exists=$1
 	shift
 	local _option_num=$1
@@ -608,7 +608,7 @@ function arg_parse() {
 		eval $(ilcp _$_var $var)
 	done
 
-	for s in  "${!_options_arr_subcmds[@]}"; do
+	for s in "${!_options_arr_subcmds[@]}"; do
 		local _subcmd="${_options_arr_subcmds[s]}"
 		local _subcmd_info="${_options_arr_subcmds_infos[s]}"
 		if [ "$1" == "$_subcmd" ]; then
@@ -620,7 +620,7 @@ function arg_parse() {
 
 			shift
 			local string="$(eval "echo \"\$${subcmd}_options_arrs_string\"")"
-			arg_parse true $((_option_num-1)) "${@:1:$((_option_num-1))}" $string
+			arg_parse true $((_option_num - 1)) "${@:1:$((_option_num - 1))}" $string
 			return
 		fi
 	done
@@ -650,7 +650,7 @@ function arg_parse() {
 		local _opt_multi=false
 
 		_hit=false
-		IFS='=' read -r _opt_flag _opt_data <<< "$_opt"
+		IFS='=' read -r _opt_flag _opt_data <<<"$_opt"
 		if [ ! -z "$_opt_data" ]; then
 			_opt="$_opt_flag"
 		fi
@@ -766,7 +766,7 @@ function arg_parse() {
 	fi
 }
 
-function parse() {
+parse() {
 	arg_parse_pre "$@"
 	arg_parse false $# "$@" $options_arrs_string
 	arg_parse_post "$@"

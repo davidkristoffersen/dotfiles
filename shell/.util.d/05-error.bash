@@ -1,5 +1,9 @@
 #!/usr/bin/bash
 
+#
+# Error handling
+#
+
 confirm() {
 	printf "Do you want to execute this cmd? (y/n) "
 }
@@ -79,3 +83,14 @@ check_error() {
 }
 
 export -f check_error confirm check_error_help
+
+#
+# Debugging
+#
+
+debug_profile() {
+	if [ ! -z "$1" ] && $1 && $(debug_bash.sh -k debug_profile); then
+		source "$profile"
+	fi
+}
+debug_profile false

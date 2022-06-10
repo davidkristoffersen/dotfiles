@@ -1,12 +1,5 @@
 #!/usr/bin/bash
 
-debug_profile() {
-	if [ ! -z "$1" ] && $1 && $(debug_bash.sh -k debug_profile); then
-		source "$profile"
-	fi
-}
-debug_profile false
-
 win_cmd() {
 	[ ! -z "$WIN_HOME" ] && cd "$WIN_HOME" || cd "$(win_get_env USERPROFILE)"
 	echo "cmd.exe /C \"$@ >nul\""
