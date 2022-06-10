@@ -11,7 +11,7 @@ file_create() {
 
 file_copy_new() {
 	if [ -f "$1" ] && [ ! -f "$2" ]; then
-		_file_helper "$1"
+		_file_helper "$1" "$2"
 		print_info "Copying new: \"$src_base\" -> \"$dst_base\""
 		print_debug "Dirs: \"$src_dir\" -> \"$dst_dir\""
 		cp "$src" "$dst"
