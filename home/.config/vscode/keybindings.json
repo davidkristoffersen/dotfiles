@@ -31,11 +31,6 @@
     "key": "alt+shift+c"
   },
   {
-    "command": "-breadcrumbs.focusAndSelect",
-    "key": "ctrl+shift+oem_period",
-    "when": "breadcrumbsPossible"
-  },
-  {
     "command": "-workbench.action.terminal.openNativeConsole",
     "key": "ctrl+shift+c",
     "when": "!terminalFocus"
@@ -69,5 +64,29 @@
     "command": "-editor.action.showHover",
     "key": "ctrl+k ctrl+i",
     "when": "editorTextFocus"
+  },
+  {
+    "command": "-breadcrumbs.toggleToOn",
+    "key": "ctrl+shift+oem_period",
+    "when": "!config.breadcrumbs.enabled"
+  },
+  {
+    "command": "-breadcrumbs.focusAndSelect",
+    "key": "ctrl+shift+oem_period",
+    "when": "breadcrumbsPossible"
+  },
+  {
+    "command": "toggleCrumbs",
+    "key": "ctrl+shift+oem_comma"
+  },
+  {
+    "command": "breadcrumbs.focusNext",
+    "key": "right",
+    "when": "breadcrumbsActive && breadcrumbsVisible"
+  },
+  {
+    "command": "-breadcrumbs.focusNext",
+    "key": "right",
+    "when": "breadcrumbsActive && breadcrumbsVisible"
   }
 ]
