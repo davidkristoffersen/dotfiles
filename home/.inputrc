@@ -22,3 +22,6 @@ set show-all-if-ambiguous on
 set colored-stats on
 # Color the common prefix
 set colored-completion-prefix on
+
+# Disable bell
+set bell-style none

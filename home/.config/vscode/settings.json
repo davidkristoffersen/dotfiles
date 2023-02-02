@@ -44,7 +44,6 @@
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "autoDocstring.quoteStyle": "'''",
-  "breadcrumbs.enabled": false,
   "cSpell.enabled": false,
   "cSpell.userWords": [
     "appl",
@@ -77,7 +76,6 @@
   "editor.bracketPairColorization.enabled": false,
   "editor.cursorBlinking": "solid",
   "editor.detectIndentation": false,
-  "editor.fontSize": 14,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.guides.bracketPairs": true,
@@ -85,7 +83,6 @@
   "editor.hover.delay": 500,
   "editor.insertSpaces": false,
   "editor.lightbulb.enabled": false,
-  "editor.lineHeight": 0,
   "editor.lineNumbers": "relative",
   "editor.minimap.enabled": false,
   "editor.mouseWheelZoom": true,
@@ -145,7 +142,8 @@
     "*.rsc": "bibtex-style",
     "*.vim": "viml",
     ".bibtoolrsc": "bibtex-style",
-    ".latexmkrc": "perl"
+    ".latexmkrc": "perl",
+    "*.nvjs": "javascript"
   },
   "files.exclude": {
     "**/*.bin": true,
@@ -154,20 +152,20 @@
     "**/.classpath": true,
     "**/.factorypath": true,
     "**/.project": true,
-    "**/.settings": true
-    // "keyboards": false,
-    // "keyboards/???[^n]*": true,
-    // "keyboards/??[^a]*": true,
-    // "keyboards/?[^l]*": true,
-    // "keyboards/[^p]*": true,
-    // "keyboards/planck/???[^(5|m)]*": true,
-    // "keyboards/planck/??[^(v|y)]*": true,
-    // "keyboards/planck/?[^e]*": true,
-    // "keyboards/planck/[^(r|k)]*": true,
-    // "keyboards/planck/keymaps/??[^o]*": true,
-    // "keyboards/planck/keymaps/?[^r]*": true,
-    // "keyboards/planck/keymaps/[^p]*": true
+    "**/.settings": true,
+    // QMK SPECIFIC
+    "users": false,
+    "layouts": false,
+    "layouts/default": true,
+    "keyboards": false,
+    "users/{[^d]*,?[^(a|r)]*,??[^(v|a)]*,???[^(i|s)]*,????[^(d|h)]*}": true,
+    "layouts/community/{[^o]*,??????[^4]*,????????[^1]*,?????????[^2]}": true,
+    "layouts/community/ortho_4x12/{[^d]*,?[^r]*,??[^a]*,???[^s]*,????[^h]*}": true,
+    "keyboards/{[^p]*,?[^l]*,??[^a]*,???[^n]*}": true,
+    "keyboards/planck/{[^k]*,?[^e]*,??[^y]*,???[^m]*}": true,
+    "keyboards/planck/keymaps/{[^p]*,?[^r]*,??[^o]*}": true
   },
+  //   "explorer.excludeGitIgnore": true,
   "githubPullRequests.fileListLayout": "tree",
   "gitlens.codeLens.enabled": false,
   "gitlens.currentLine.enabled": false,
@@ -334,6 +332,8 @@
     "no-duplicate-header": false,
     "no-inline-html": false,
     "single-h1": false,
+    "reference-links-images": false,
+    "ol-prefix": false,
     "ul-indent": true
   },
   "markdownlint.ignore": ["**/.vscode*/extensions/**/*.md"],
@@ -373,7 +373,19 @@
     "TEMP": ["TEMP", "TMP"],
     "todo": ["TODO", "[@todo]", "[Todo]"]
   },
-  "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "[@todo]", "[Todo]", "XXX", "TEMP", "TMP", "[ ]", "[x]"],
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "[@todo]",
+    "[Todo]",
+    "XXX",
+    "TEMP",
+    "TMP",
+    "[ ]",
+    "[x]"
+  ],
   "todo-tree.highlights.customHighlight": {
     "BUG": {
       "background": "#161616",
@@ -425,15 +437,60 @@
       "before": ["<leader>", "x"]
     },
     {
-      "after": ["m", "a", "%", "m", "b", "%", "r", "]", "`", "b", "r", "[", "`", "a"],
+      "after": [
+        "m",
+        "a",
+        "%",
+        "m",
+        "b",
+        "%",
+        "r",
+        "]",
+        "`",
+        "b",
+        "r",
+        "[",
+        "`",
+        "a"
+      ],
       "before": ["<leader>", "["]
     },
     {
-      "after": ["m", "a", "%", "m", "b", "%", "r", "}", "`", "b", "r", "{", "`", "a"],
+      "after": [
+        "m",
+        "a",
+        "%",
+        "m",
+        "b",
+        "%",
+        "r",
+        "}",
+        "`",
+        "b",
+        "r",
+        "{",
+        "`",
+        "a"
+      ],
       "before": ["<leader>", "{"]
     },
     {
-      "after": ["m", "a", "%", "m", "b", "%", "r", ")", "`", "b", "r", "(", "`", "a"],
+      "after": [
+        "m",
+        "a",
+        "%",
+        "m",
+        "b",
+        "%",
+        "r",
+        ")",
+        "`",
+        "b",
+        "r",
+        "(",
+        "`",
+        "a"
+      ],
       "before": ["<leader>", "("]
     },
     {
@@ -441,35 +498,215 @@
       "before": ["<leader>", "P", "s"]
     },
     {
-      "after": ["a", ":", "p", "u", "r", "p", "l", "e", "_", "h", "e", "a", "r", "t", ":", "<Esc>", "F", ":", "h"],
+      "after": [
+        "a",
+        ":",
+        "p",
+        "u",
+        "r",
+        "p",
+        "l",
+        "e",
+        "_",
+        "h",
+        "e",
+        "a",
+        "r",
+        "t",
+        ":",
+        "<Esc>",
+        "F",
+        ":",
+        "h"
+      ],
       "before": ["<leader>", "p", "h"]
     },
     {
-      "after": ["i", ":", "p", "u", "r", "p", "l", "e", "_", "h", "e", "a", "r", "t", ":", "<Esc>", "F", ":", "h"],
+      "after": [
+        "i",
+        ":",
+        "p",
+        "u",
+        "r",
+        "p",
+        "l",
+        "e",
+        "_",
+        "h",
+        "e",
+        "a",
+        "r",
+        "t",
+        ":",
+        "<Esc>",
+        "F",
+        ":",
+        "h"
+      ],
       "before": ["<leader>", "P", "h"]
     },
     {
-      "after": ["a", ":", "w", "h", "i", "t", "e", "_", "c", "h", "e", "c", "k", "_", "m", "a", "r", "k", ":", "<Esc>", "F", ":", "h"],
+      "after": [
+        "a",
+        ":",
+        "w",
+        "h",
+        "i",
+        "t",
+        "e",
+        "_",
+        "c",
+        "h",
+        "e",
+        "c",
+        "k",
+        "_",
+        "m",
+        "a",
+        "r",
+        "k",
+        ":",
+        "<Esc>",
+        "F",
+        ":",
+        "h"
+      ],
       "before": ["<leader>", "p", "u"]
     },
     {
-      "after": ["i", ":", "w", "h", "i", "t", "e", "_", "c", "h", "e", "c", "k", "_", "m", "a", "r", "k", ":", "<Esc>", "F", ":", "h"],
+      "after": [
+        "i",
+        ":",
+        "w",
+        "h",
+        "i",
+        "t",
+        "e",
+        "_",
+        "c",
+        "h",
+        "e",
+        "c",
+        "k",
+        "_",
+        "m",
+        "a",
+        "r",
+        "k",
+        ":",
+        "<Esc>",
+        "F",
+        ":",
+        "h"
+      ],
       "before": ["<leader>", "P", "u"]
     },
     {
-      "after": ["a", ":", "l", "a", "r", "g", "e", "_", "b", "l", "u", "e", "_", "c", "i", "r", "c", "l", "e", ":", "<Esc>", "F", ":", "h"],
+      "after": [
+        "a",
+        ":",
+        "l",
+        "a",
+        "r",
+        "g",
+        "e",
+        "_",
+        "b",
+        "l",
+        "u",
+        "e",
+        "_",
+        "c",
+        "i",
+        "r",
+        "c",
+        "l",
+        "e",
+        ":",
+        "<Esc>",
+        "F",
+        ":",
+        "h"
+      ],
       "before": ["<leader>", "p", "n"]
     },
     {
-      "after": ["i", ":", "l", "a", "r", "g", "e", "_", "b", "l", "u", "e", "_", "c", "i", "r", "c", "l", "e", ":", "<Esc>", "F", ":", "h"],
+      "after": [
+        "i",
+        ":",
+        "l",
+        "a",
+        "r",
+        "g",
+        "e",
+        "_",
+        "b",
+        "l",
+        "u",
+        "e",
+        "_",
+        "c",
+        "i",
+        "r",
+        "c",
+        "l",
+        "e",
+        ":",
+        "<Esc>",
+        "F",
+        ":",
+        "h"
+      ],
       "before": ["<leader>", "P", "n"]
     },
     {
-      "after": ["a", ":", "g", "r", "e", "y", "_", "q", "u", "e", "s", "t", "i", "o", "n", ":", "<Esc>", "F", ":", "h"],
+      "after": [
+        "a",
+        ":",
+        "g",
+        "r",
+        "e",
+        "y",
+        "_",
+        "q",
+        "u",
+        "e",
+        "s",
+        "t",
+        "i",
+        "o",
+        "n",
+        ":",
+        "<Esc>",
+        "F",
+        ":",
+        "h"
+      ],
       "before": ["<leader>", "p", "q"]
     },
     {
-      "after": ["i", ":", "g", "r", "e", "y", "_", "q", "u", "e", "s", "t", "i", "o", "n", ":", "<Esc>", "F", ":", "h"],
+      "after": [
+        "i",
+        ":",
+        "g",
+        "r",
+        "e",
+        "y",
+        "_",
+        "q",
+        "u",
+        "e",
+        "s",
+        "t",
+        "i",
+        "o",
+        "n",
+        ":",
+        "<Esc>",
+        "F",
+        ":",
+        "h"
+      ],
       "before": ["<leader>", "P", "q"]
     },
     {
@@ -481,9 +718,7 @@
       "before": ["<leader>", "P", "d"]
     }
   ],
-  "window.menuBarVisibility": "compact",
   "window.zoomLevel": 1,
-  "workbench.activityBar.visible": false,
   "workbench.colorCustomizations": {
     "breadcrumb.background": "#1d1d1d",
     "breadcrumb.foreground": "#5f5f5f",
@@ -542,5 +777,21 @@
   "zenMode.hideLineNumbers": false,
   "zenMode.hideStatusBar": true,
   "zenMode.hideTabs": false,
-  "zenMode.restore": true
+  "zenMode.restore": true,
+  "breadcrumbs.enabled": false,
+  "workbench.editorAssociations": {
+    "*.jar": "default"
+  },
+  "yaml.schemas": {
+	"file:///c%3A/Users/divad/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+},
+  "redhat.telemetry.enabled": false,
+  "githubPullRequests.pullBranch": "never",
+  "npm.keybindingsChangedWarningShown": true,
+  "errorLens.enabled": false,
+  "spellright.language": ["en"],
+  "spellright.documentTypes": ["markdown", "latex"],
+  "editor.fontSize": 13,
+  "editor.lineHeight": 0,
+  "editor.accessibilitySupport": "off"
 }

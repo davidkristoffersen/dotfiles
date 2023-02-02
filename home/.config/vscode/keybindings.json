@@ -88,5 +88,23 @@
     "command": "-breadcrumbs.focusNext",
     "key": "right",
     "when": "breadcrumbsActive && breadcrumbsVisible"
+  },
+  {
+    "key": "alt+l",
+    "command": "workbench.files.action.collapseExplorerFolders"
+  },
+  {
+    "key": "ctrl+shift+;",
+    "command": "editor.action.showDefinitionPreviewHover"
+  },
+  {
+    "key": "ctrl+;",
+    "command": "breadcrumbs.focusAndSelect",
+    "when": "breadcrumbsPossible && breadcrumbsVisible"
+  },
+  {
+    "key": "ctrl+shift+.",
+    "command": "-breadcrumbs.focusAndSelect",
+    "when": "breadcrumbsPossible && breadcrumbsVisible"
   }
 ]

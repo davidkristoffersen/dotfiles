@@ -1,4 +1,4 @@
-fu GeneralInit()
+fu BasicInit()
 	let mapleader = " "	" Leader set to space
 endf
 
