@@ -1,53 +1,95 @@
-Section       Name                    Description
-=======       ====                    ===========
-Unknown       yarn
-admin         aptitude                terminal-based package manager
-devel         autoconf                automatic configure script builder
-devel         clang-format            Tool to format C/C++/Obj-C code
-devel         cmake                   cross-platform, open-source make system
-devel         libtool                 Generic library support script
-devel         pkg-config              manage compile and link flags for libraries
-devel         sloccount               programs for counting physical source lines of code (SLOC)
-editors       freeplane               Java program for working with Mind Maps
-electronics   avrdude                 software for programming Atmel AVR microcontrollers
-electronics   dfu-programmer          device firmware update (DFU) based USB programmer for Atmel chips
-electronics   dfu-util                Device firmware update (DFU) USB programmer
-fonts         texlive-fonts-extra     TeX Live: Additional fonts
-games         sl                      Correct you if you type `sl' by mistake
-gnu-r         r-base                  GNU R statistical computation and graphics system
-graphics      feh                     imlib2 based image viewer
-graphics      gimp                    GNU Image Manipulation Program
-graphics      graphviz                rich set of graph drawing tools
-interpreters  ipython3                Enhanced interactive Python 3 shell
-java          default-jdk             Standard Java or Java compatible Development Kit
-java          gradle                  Powerful build system for the JVM
-java          openjdk-8-jre-headless  OpenJDK Java runtime, using Hotspot JIT (headless)
-javascript    nodejs                  evented I/O for V8 javascript - runtime executable
-net           net-tools               NET-3 networking toolkit
-oldlibs       apt-transport-https     transitional package for https support
-oldlibs       imagemagick             image manipulation programs -- binaries
-python        python-is-python3       symlinks /usr/bin/python to python3
-python        python3-pip             Python package installer
-python        python3-venv            pyvenv-3 binary for python3 (default python3 version)
-science       snap                    location of genes from DNA sequence with hidden markov model
-sound         festival                General multi-lingual speech synthesis system
-tex           texlive                 TeX Live: A decent selection of the TeX Live packages
-tex           texlive-extra-utils     TeX Live: TeX auxiliary programs
-tex           texlive-latex-extra     TeX Live: LaTeX additional packages
-text          colordiff               tool to colorize 'diff' output
-text          figlet                  Make large character ASCII banners out of ordinary text
-text          pandoc                  general markup converter
-text          wdiff                   Compares two files word by word
-text          zathura                 document viewer with a minimalistic interface
-utils         debian-goodies          Small toolbox-style utilities for Debian systems
-utils         fd-find                 Simple, fast and user-friendly alternative to find
-utils         fzf                     general-purpose command-line fuzzy finder
-utils         jq                      lightweight and flexible command-line JSON processor
-utils         mlocate                 quickly find files on the filesystem based on their name
-utils         moreutils               additional Unix utilities
-utils         parallel                build and execute command lines from standard input in parallel
-utils         ppa-purge               disables a PPA and reverts to official packages
-utils         pydf                    colourised df(1)-clone
-utils         ripgrep                 Recursively searches directories for a regex pattern
-utils         tree                    displays an indented directory tree, in color
-x11           xsel                    command-line tool to access X clipboard and selection buffers
+Section            Name                    Description
+=======            ====                    ===========
+database           sqlite                  command line interface for SQLite 2
+devel              adb                     Android Debug Bridge
+devel              cmake                   cross-platform, open-source make system
+devel              cxref                   Generates LaTeX and HTML documentation for C programs
+devel              gettext                 GNU Internationalization utilities
+electronics        dfu-programmer          device firmware update (DFU) based USB programmer for Atmel chips
+electronics        dfu-util                Device firmware update (DFU) USB programmer
+gnome              evince                  Document (PostScript, PDF) viewer
+gnome              seahorse                GNOME front end for GnuPG
+golang             golang-go               Go programming language compiler, linker, compiled stdlib
+golang             gopls                   language server for the Go language
+java               default-jdk             Standard Java or Java compatible Development Kit
+java               default-jdk             Standard Java or Java compatible Development Kit
+java               default-jre             Standard Java or Java compatible Runtime
+java               kotlin                  cross-platform, general-purpose programming language
+java               maven                   Java software project management and comprehension tool
+kernel             linux-tools-virtual     Virtual Linux kernel tools
+libdevel           libglib2.0-dev          Development files for the GLib library
+misc               hwdata                  hardware identification / configuration data
+net                net-tools               NET-3 networking toolkit
+net                network-manager         network management framework (daemon and userspace tools)
+python             python3                 interactive high-level object-oriented language (default python3 version)
+python             python-is-python3       symlinks /usr/bin/python to python3
+shells             fdclone                 console-base lightweight file manager
+tex                catdvi                  DVI to plain text translator
+tex                texlive-extra-utils     TeX Live: TeX auxiliary programs
+tex                texlive-full            TeX Live: metapackage pulling in all components of TeX Live
+tex                texlive-full            TeX Live: metapackage pulling in all components of TeX Live
+tex                texlive-latex-extra     TeX Live: LaTeX additional packages
+tex                texlive                 TeX Live: A decent selection of the TeX Live packages
+tex                texlive                 TeX Live: A decent selection of the TeX Live packages
+text               wdiff                   Compares two files word by word
+universe/admin     aptitude                terminal-based package manager
+universe/devel     clang-format            Tool to format C/C++/Obj-C code
+universe/devel     sloccount               programs for counting physical source lines of code (SLOC)
+universe/editors   neovim                  heavily refactored vim fork
+universe/editors   neovim                  heavily refactored vim fork
+universe/games     sl                      Correct you if you type `sl' by mistake
+universe/graphics  feh                     imlib2 based image viewer
+universe/graphics  feh                     imlib2 based image viewer
+universe/graphics  gimp                    GNU Image Manipulation Program
+universe/graphics  graphviz                rich set of graph drawing tools
+universe/graphics  vlc                     multimedia player and streamer
+universe/haskell   cabal-install           command-line interface for Cabal and Hackage
+universe/haskell   pandoc-citeproc         Pandoc support for Citation Style Language - tools
+universe/java      gradle                  Powerful build system for the JVM
+universe/java      openjdk-8-jre-headless  OpenJDK Java runtime, using Hotspot JIT (headless)
+universe/math      r-base                  GNU R statistical computation and graphics system
+universe/misc      terminator              multiple GNOME terminals in one window
+universe/python    ipython3                Enhanced interactive Python 3 shell
+universe/python    python3-argcomplete     bash tab completion for argparse (for Python 3)
+universe/python    python3-pip             Python package installer
+universe/python    python3-venv            venv module for python3 (default python3 version)
+universe/science   sumatra                 fast and exact comparison and clustering of sequences
+universe/sound     festival                General multi-lingual speech synthesis system
+universe/text      colordiff               tool to colorize 'diff' output
+universe/text      figlet                  Make large character ASCII banners out of ordinary text
+universe/text      pandoc                  general markup converter
+universe/text      xindy                   index generator for structured documents like LaTeX or SGML
+universe/text      zathura                 document viewer with a minimalistic interface
+universe/utils     bat                     cat(1) clone with syntax highlighting and git integration
+universe/utils     btop                    Modern and colorful command line resource monitor that shows usage and stats
+universe/utils     fd-find                 Simple, fast and user-friendly alternative to find
+universe/utils     fzf                     general-purpose command-line fuzzy finder
+universe/utils     moreutils               additional Unix utilities
+universe/utils     parallel                build and execute command lines from standard input in parallel
+universe/utils     ppa-purge               disables a PPA and reverts to official packages
+universe/utils     pydf                    colourised df(1)-clone
+universe/utils     ripgrep                 Recursively searches directories for a regex pattern
+universe/utils     tree                    displays an indented directory tree, in color
+universe/web       nodejs                  evented I/O for V8 javascript - runtime executable
+universe/web       npm                     package manager for Node.js
+universe/x11       autorandr               Automatically select a display configuration for connected devices
+universe/x11       i3lock-fancy            i3lock custom wrapper script
+universe/x11       i3                      metapackage (i3 window manager, screen locker, menu, statusbar)
+universe/x11       i3-wm                   improved dynamic tiling window manager
+universe/x11       i3-wm                   improved dynamic tiling window manager
+universe/x11       nitrogen                wallpaper browser and changing utility for X
+universe/x11       xclip                   command line interface to X selections
+universe/x11       xsel                    command-line tool to access X clipboard and selection buffers
+Unknown            i3-gaps                 
+Unknown            i3-gaps                 
+Unknown            i3-gaps                 
+utils              ascii                   interactive ASCII name and synonym chart
+utils              exa                     Modern replacement for ls
+utils              extundelete             utility to recover deleted files from ext3/ext4 partition
+utils              icdiff                  terminal side-by-side colorized word diff
+utils              jq                      lightweight and flexible command-line JSON processor
+utils              mlocate                 transitional dummy package
+utils              unzip                   De-archiver for .zip files
+video              ffmpeg                  Tools for transcoding, streaming and playing of multimedia files
+x11                xtermcontrol            dynamic configuration of xterm properties
+x11                xwayland                X server for running X clients under Wayland

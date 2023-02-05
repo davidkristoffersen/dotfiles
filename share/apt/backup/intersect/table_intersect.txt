@@ -1,204 +1,133 @@
-Section               Name                         Description
-=======               ====                         ===========
-Development           gh                           GitHub’s official command line tool.
-Unknown               g++
-admin                 apparmor                     user-space parser utility for AppArmor
-admin                 at                           Delayed job execution and batch processing
-admin                 base-files                   Debian base system miscellaneous files
-admin                 base-passwd                  Debian base system master password and group files
-admin                 btrfs-progs                  Checksumming Copy on Write Filesystem utilities
-admin                 cloud-guest-utils            cloud guest utilities
-admin                 cloud-init                   initialization and customization tool for cloud instances
-admin                 cloud-initramfs-copymods     copy initramfs modules into root filesystem for later use
-admin                 cloud-initramfs-dyn-netconf  write a network interface file in /run for BOOTIF
-admin                 cron                         process scheduling daemon
-admin                 friendly-recovery            Make recovery boot mode more user-friendly
-admin                 fwupd                        Firmware update daemon
-admin                 hdparm                       tune hard disk parameters for high performance
-admin                 hostname                     utility to set/show the host name or domain name
-admin                 logrotate                    Log rotation utility
-admin                 lvm2                         Linux Logical Volume Manager
-admin                 mdadm                        tool to administer Linux MD arrays (software RAID)
-admin                 motd-news-config             Configuration for motd-news shipped in base-files
-admin                 multipath-tools              maintain multipath block device access
-admin                 ncurses-term                 additional terminal type definitions
-admin                 overlayroot                  use an overlayfs on top of a read-only root filesystem
-admin                 packages-microsoft-prod      Apt configuration for packages.microsoft.com
-admin                 parted                       disk partition manipulator
-admin                 pciutils                     PCI utilities
-admin                 pollinate                    seed the pseudo random number generator
-admin                 psmisc                       utilities that use the proc file system
-admin                 show-motd                    show message of the day in interactive shells
-admin                 sosreport                    Set of tools to gather troubleshooting data from a system
-admin                 sysvinit-utils               System-V-like utilities
-admin                 tmux                         terminal multiplexer
-admin                 ufw                          program for managing a Netfilter firewall
-admin                 update-motd                  compliments pam_motd in libpam-modules
-admin                 wslu                         collection of utilities for the Windows 10 Linux Subsystem
-admin                 xfsprogs                     Utilities for managing the XFS filesystem
-devel                 aspnetcore-runtime-5.0       Shared Framework for hosting of Microsoft ASP.NET Core applications. It is open source, cross-platform and is supported by Microsoft. We hope you enjoy using it! If you do, please consider joining the active community of developers that are contributing to the project on GitHub (https://github.com/dotnet/aspnetcore). We happily accept issues and PRs.
-devel                 build-essential              Informational list of build-essential packages
-devel                 cmake                        cross-platform, open-source make system
-devel                 dbus                         simple interprocess messaging system (daemon and utilities)
-devel                 default-jdk                  Standard Java or Java compatible Development Kit
-devel                 desktop-file-utils           Utilities for .desktop files
-devel                 dotnet-sdk-5.0               Microsoft .NET SDK 5.0.404
-devel                 gcc                          GNU C compiler
-devel                 make                         utility for directing compilation
-devel                 pkg-config                   manage compile and link flags for libraries
-devel                 snapd                        Daemon and tooling that enable snap packages
-devel                 yarn                         Fast, reliable, and secure dependency management.
-doc                   info                         Standalone GNU Info documentation browser
-doc                   man-db                       tools for reading manual pages
-doc                   manpages                     Manual pages about using a GNU/Linux system
-editors               ed                           classic UNIX line editor
-editors               nano                         small, friendly text editor inspired by Pico
-editors               vim                          Vi IMproved - enhanced vi editor
-fonts                 fonts-dejavu-core            Vera font family derivate with additional characters
-fonts                 fonts-ubuntu-console         console version of the Ubuntu Mono font
-gnome                 gnome-keyring                GNOME keyring services (daemon and tools)
-interpreters          default-jre                  Standard Java or Java compatible Runtime
-java                  freeplane                    freeplane
-libs                  fontconfig-config            generic font configuration library - configuration
-libs                  uuid-runtime                 runtime components for the Universally Unique ID library
-metapackages          init                         metapackage ensuring an init system is installed
-metapackages          ubuntu-minimal               Minimal core of Ubuntu
-metapackages          ubuntu-wsl                   Ubuntu on Windows tools - Windows Subsystem for Linux integration
-misc                  byobu                        text window manager, shell multiplexer, integrated DevOps environment
-misc                  ca-certificates              Common CA certificates
-misc                  lxd-agent-loader             LXD - VM agent loader
-misc                  popularity-contest           Vote for your favourite packages automatically
-misc                  screen                       terminal multiplexer with VT100/ANSI terminal emulation
-misc                  ssh-import-id                securely retrieve an SSH public key and install it locally
-net                   bind9-dnsutils               Clients provided with BIND 9
-net                   ftp                          classical file transfer client
-net                   iptables                     administration tools for packet filtering and NAT
-net                   iputils-tracepath            Tools to trace the network path to a remote host
-net                   mime-support                 MIME files 'mime.types' & 'mailcap', and support programs
-net                   mtr-tiny                     Full screen ncurses traceroute tool
-net                   net-tools                    NET-3 networking toolkit
-net                   open-iscsi                   iSCSI initiator tools
-net                   openssh-client               secure shell (SSH) client, for secure access to remote machines
-net                   openssh-server               secure shell (SSH) server, for secure access from remote machines
-net                   openssh-sftp-server          secure shell (SSH) sftp server module, for SFTP access from remote machines
-net                   rsync                        fast, versatile, remote (and local) file-copying tool
-net                   tcpdump                      command-line network traffic analyzer
-net                   telnet                       basic telnet client
-otherosfs             dosfstools                   utilities for making and checking MS-DOS FAT filesystems
-otherosfs             ntfs-3g                      read/write NTFS driver for FUSE
-php                   php                          server-side, HTML-embedded scripting language (default)
-php                   php-common                   Common files for PHP packages
-python                python3                      interactive high-level object-oriented language (default python3 version)
-python                python3-apt                  Python 3 interface to libapt-pkg
-python                python3-dev                  header files and a static library for Python (default)
-python                python3-distutils            distutils package for Python 3.x
-python                python3-importlib-metadata   library to access the metadata for a Python package - Python 3.x
-python                python3-jinja2               small but fast and easy to use stand-alone template engine
-python                python3-json-pointer         resolve JSON pointers - Python 3.x
-python                python3-jsonpatch            library to apply JSON patches - Python 3.x
-python                python3-jsonschema           An(other) implementation of JSON Schema (Draft 3 and 4) - Python 3.x
-python                python3-lib2to3              Interactive high-level object-oriented language (lib2to3)
-python                python3-markupsafe           HTML/XHTML/XML string library for Python 3
-python                python3-more-itertools       library with routines for operating on iterables, beyond itertools (Python 3)
-python                python3-nacl                 Python bindings to libsodium (Python 3)
-python                python3-pymacaroons          Macaroon library for Python 3
-python                python3-serial               pyserial - module encapsulating access for the serial port
-python                python3-setuptools           Python3 Distutils Enhancements
-python                python3-zipp                 pathlib-compatible Zipfile object wrapper - Python 3.x
-python                python3.9                    Interactive high-level object-oriented language (version 3.9)
-python                python3.9-dev                Header files and a static library for Python (v3.9)
-python                python3.9-venv               Interactive high-level object-oriented language (pyvenv binary, version 3.9)
-shells                bash                         GNU Bourne Again SHell
-shells                bash-completion              programmable completion for the bash shell
-shells                busybox-static               Standalone rescue shell with tons of builtin utilities
-shells                dash                         POSIX-compliant shell
-sound                 pulseaudio-utils             Command line tools for the PulseAudio sound server
-text                  wdiff                        Compares two files word by word
-universe/admin        apt-transport-https          transitional package for https support
-universe/admin        aptitude                     terminal-based package manager
-universe/admin        open-vm-tools                Open VMware Tools for virtual machines hosted on VMware (CLI)
-universe/devel        binutils-arm-none-eabi       GNU assembler, linker and binary utilities for ARM Cortex-R/M processors
-universe/devel        binutils-avr                 Binary utilities supporting Atmel's AVR targets
-universe/devel        clang-format                 Tool to format C/C++/Obj-C code
-universe/devel        dfu-programmer               device firmware update (DFU) based USB programmer for Atmel chips
-universe/devel        gcc-arm-none-eabi            GCC cross compiler for ARM Cortex-R/M processors
-universe/devel        gcc-avr                      GNU C compiler (cross compiler for avr)
-universe/devel        groovy                       Agile dynamic language for the Java Virtual Machine
-universe/devel        sloccount                    programs for counting physical source lines of code (SLOC)
-universe/devel        teensy-loader-cli            load and run programs onto your Teensy micro controller
-universe/electronics  avrdude                      software for programming Atmel AVR microcontrollers
-universe/electronics  dfu-util                     Device firmware update (DFU) USB programmer
-universe/games        sl                           Correct you if you type `sl' by mistake
-universe/graphics     feh                          imlib2 based image viewer
-universe/graphics     gimp                         GNU Image Manipulation Program
-universe/graphics     graphviz                     rich set of graph drawing tools
-universe/graphics     imagemagick                  image manipulation programs -- binaries
-universe/java         gradle                       Powerful build system for the JVM
-universe/libs         libnewlib-arm-none-eabi      C library and math library compiled for bare metal using Cortex A/R/M
-universe/otherosfs    avr-libc                     Standard C library for Atmel AVR development
-universe/python       ipython3                     Enhanced interactive Python 3 shell
-universe/python       pylint                       Python 3 code static checker and UML diagram generator
-universe/python       python-apt                   Python interface to libapt-pkg
-universe/python       python3-pip                  Python package installer
-universe/python       python3-venv                 pyvenv-3 binary for python3 (default python3 version)
-universe/tex          latexmk                      Perl script for running LaTeX the correct number of times
-universe/tex          texlive-fonts-extra          TeX Live: Additional fonts
-universe/tex          texlive-fonts-recommended    TeX Live: Recommended fonts
-universe/tex          texlive-latex-base           TeX Live: LaTeX fundamental packages
-universe/tex          texlive-latex-extra          TeX Live: LaTeX additional packages
-universe/text         colordiff                    tool to colorize 'diff' output
-universe/text         figlet                       Make large character ASCII banners out of ordinary text
-universe/text         pandoc                       general markup converter
-universe/text         zathura                      document viewer with a minimalistic interface
-universe/utils        bat                          cat(1) clone with syntax highlighting and git integration
-universe/utils        fd-find                      Simple, fast and user-friendly alternative to find
-universe/utils        fzf                          general-purpose command-line fuzzy finder
-universe/utils        jq                           lightweight and flexible command-line JSON processor
-universe/utils        moreutils                    additional Unix utilities
-universe/utils        parallel                     build and execute command lines from standard input in parallel
-universe/utils        ppa-purge                    disables a PPA and reverts to official packages
-universe/utils        pydf                         colourised df(1)-clone
-universe/utils        ripgrep                      Recursively searches directories for a regex pattern
-universe/utils        silversearcher-ag            very fast grep-like program, alternative to ack-grep
-universe/utils        tree                         displays an indented directory tree, in color
-universe/web          lynx                         classic non-graphical (text-mode) web browser
-universe/x11          xsel                         command-line tool to access X clipboard and selection buffers
-utils                 bcache-tools                 bcache userspace tools
-utils                 coreutils                    GNU core utilities
-utils                 cpio                         GNU cpio -- a program to manage archives of files
-utils                 diffutils                    File comparison utilities
-utils                 dirmngr                      GNU privacy guard - network certificate management service
-utils                 dmidecode                    SMBIOS/DMI table decoder
-utils                 eatmydata                    Library and utilities designed to disable fsync and friends
-utils                 ethtool                      display or change Ethernet device settings
-utils                 fdisk                        collection of partitioning utilities
-utils                 file                         Recognize the type of data in a file using "magic" numbers
-utils                 findutils                    utilities for finding files--find, xargs
-utils                 gnupg                        GNU privacy guard - a free PGP replacement
-utils                 grep                         GNU grep, egrep and fgrep
-utils                 gzip                         GNU compression utilities
-utils                 htop                         interactive processes viewer
-utils                 irqbalance                   Daemon to balance interrupts for SMP systems
-utils                 libsensors-config            lm-sensors configuration files
-utils                 lshw                         information about hardware configuration
-utils                 lsof                         utility to list open files
-utils                 ltrace                       Tracks runtime library calls in dynamically linked programs
-utils                 mlocate                      quickly find files on the filesystem based on their name
-utils                 ncurses-base                 basic terminal type definitions
-utils                 ncurses-bin                  terminal-related programs and man pages
-utils                 patch                        Apply a diff file to an original
-utils                 poppler-utils                PDF utilities (based on Poppler)
-utils                 strace                       System call tracer
-utils                 time                         GNU time program for measuring CPU resource usage
-utils                 unzip                        De-archiver for .zip files
-utils                 usbutils                     Linux USB utilities
-utils                 zip                          Archiver for .zip files
-vcs                   git                          fast, scalable, distributed revision control system
-web                   curl                         command line tool for transferring data with URL syntax
-web                   nodejs                       Node.js event-based server-side javascript engine
-web                   wget                         retrieves files from the web
-x11                   dbus-x11                     simple interprocess messaging system (X11 deps)
-x11                   plymouth                     boot animation, logger and I/O multiplexer
-x11                   plymouth-theme-ubuntu-text   boot animation, logger and I/O multiplexer - ubuntu text theme
-x11                   x11-common                   X Window System (X.Org) infrastructure
-x11                   x11-utils                    X11 utilities
+Section               Name                        Description
+=======               ====                        ===========
+admin                 base-files                  Debian base system miscellaneous files
+admin                 base-passwd                 Debian base system master password and group files
+admin                 cloud-init                  initialization and customization tool for cloud instances
+admin                 hostname                    utility to set/show the host name or domain name
+admin                 ncurses-term                additional terminal type definitions
+admin                 show-motd                   show message of the day in interactive shells
+admin                 software-properties-common  manage the repositories that you install software from (common)
+admin                 sysvinit-utils              System-V-like utilities
+admin                 tmux                        terminal multiplexer
+admin                 update-motd                 compliments pam_motd in libpam-modules
+admin                 wslu                        collection of utilities for the Windows 10 Linux Subsystem
+devel                 autoconf                    automatic configure script builder
+devel                 automake                    Tool for generating GNU Standards-compliant Makefiles
+devel                 build-essential             Informational list of build-essential packages
+devel                 cmake                       cross-platform, open-source make system
+devel                 default-jdk                 Standard Java or Java compatible Development Kit
+devel                 gcc                         GNU C compiler
+devel                 libtool                     Generic library support script
+devel                 pkg-config                  manage compile and link flags for libraries
+editors               vim                         Vi IMproved - enhanced vi editor
+fonts                 fonts-dejavu-core           Vera font family derivate with additional characters
+libs                  fontconfig-config           generic font configuration library - configuration
+metapackages          init                        metapackage ensuring an init system is installed
+metapackages          ubuntu-minimal              Minimal core of Ubuntu
+metapackages          ubuntu-server               The Ubuntu Server system
+metapackages          ubuntu-standard             The Ubuntu standard system
+metapackages          ubuntu-wsl                  Ubuntu on Windows tools - Windows Subsystem for Linux integration
+misc                  ca-certificates             Common CA certificates
+misc                  screen                      terminal multiplexer with VT100/ANSI terminal emulation
+misc                  ssh-import-id               securely retrieve an SSH public key and install it locally
+net                   net-tools                   NET-3 networking toolkit
+net                   openssh-server              secure shell (SSH) server, for secure access from remote machines
+net                   openssh-sftp-server         secure shell (SSH) sftp server module, for SFTP access from remote machines
+net                   rsync                       fast, versatile, remote (and local) file-copying tool
+otherosfs             dosfstools                  utilities for making and checking MS-DOS FAT filesystems
+perl                  perl                        Larry Wall's Practical Extraction and Report Language
+python                python-is-python3           symlinks /usr/bin/python to python3
+python                python3                     interactive high-level object-oriented language (default python3 version)
+python                python3-distutils           distutils package for Python 3.x
+python                python3-importlib-metadata  library to access the metadata for a Python package - Python 3.x
+python                python3-jinja2              small but fast and easy to use stand-alone template engine
+python                python3-json-pointer        resolve JSON pointers - Python 3.x
+python                python3-jsonpatch           library to apply JSON patches - Python 3.x
+python                python3-jsonschema          An(other) implementation of JSON Schema (Draft 3 and 4) - Python 3.x
+python                python3-lib2to3             Interactive high-level object-oriented language (lib2to3)
+python                python3-markupsafe          HTML/XHTML/XML string library for Python 3
+python                python3-more-itertools      library with routines for operating on iterables, beyond itertools (Python 3)
+python                python3-nacl                Python bindings to libsodium (Python 3)
+python                python3-pymacaroons         Macaroon library for Python 3
+python                python3-serial              pyserial - module encapsulating access for the serial port
+python                python3-setuptools          Python3 Distutils Enhancements
+python                python3-zipp                pathlib-compatible Zipfile object wrapper - Python 3.x
+shells                bash                        GNU Bourne Again SHell
+shells                bash-completion             programmable completion for the bash shell
+shells                dash                        POSIX-compliant shell
+sound                 pulseaudio-utils            Command line tools for the PulseAudio sound server
+text                  less                        pager program similar to more
+text                  wdiff                       Compares two files word by word
+universe/admin        apt-transport-https         transitional package for https support
+universe/admin        aptitude                    terminal-based package manager
+universe/devel        clang-format                Tool to format C/C++/Obj-C code
+universe/devel        dfu-programmer              device firmware update (DFU) based USB programmer for Atmel chips
+universe/devel        groovy                      Agile dynamic language for the Java Virtual Machine
+universe/devel        sloccount                   programs for counting physical source lines of code (SLOC)
+universe/editors      freeplane                   Java program for working with Mind Maps
+universe/electronics  avrdude                     software for programming Atmel AVR microcontrollers
+universe/electronics  dfu-util                    Device firmware update (DFU) USB programmer
+universe/games        sl                          Correct you if you type `sl' by mistake
+universe/graphics     feh                         imlib2 based image viewer
+universe/graphics     gimp                        GNU Image Manipulation Program
+universe/graphics     graphviz                    rich set of graph drawing tools
+universe/graphics     imagemagick                 image manipulation programs -- binaries
+universe/java         gradle                      Powerful build system for the JVM
+universe/math         r-base                      GNU R statistical computation and graphics system
+universe/python       cmdtest                     blackbox testing of Unix command line programs
+universe/python       ipython3                    Enhanced interactive Python 3 shell
+universe/python       python3-pip                 Python package installer
+universe/python       python3-venv                pyvenv-3 binary for python3 (default python3 version)
+universe/science      snap                        location of genes from DNA sequence with hidden markov model
+universe/sound        festival                    General multi-lingual speech synthesis system
+universe/tex          texlive                     TeX Live: A decent selection of the TeX Live packages
+universe/tex          texlive-extra-utils         TeX Live: TeX auxiliary programs
+universe/tex          texlive-fonts-extra         TeX Live: Additional fonts
+universe/tex          texlive-fonts-recommended   TeX Live: Recommended fonts
+universe/tex          texlive-latex-extra         TeX Live: LaTeX additional packages
+universe/text         colordiff                   tool to colorize 'diff' output
+universe/text         figlet                      Make large character ASCII banners out of ordinary text
+universe/text         pandoc                      general markup converter
+universe/text         zathura                     document viewer with a minimalistic interface
+universe/utils        fd-find                     Simple, fast and user-friendly alternative to find
+universe/utils        fzf                         general-purpose command-line fuzzy finder
+universe/utils        jq                          lightweight and flexible command-line JSON processor
+universe/utils        moreutils                   additional Unix utilities
+universe/utils        parallel                    build and execute command lines from standard input in parallel
+universe/utils        ppa-purge                   disables a PPA and reverts to official packages
+universe/utils        pydf                        colourised df(1)-clone
+universe/utils        ripgrep                     Recursively searches directories for a regex pattern
+universe/utils        tree                        displays an indented directory tree, in color
+universe/web          nodejs                      evented I/O for V8 javascript - runtime executable
+universe/x11          xsel                        command-line tool to access X clipboard and selection buffers
+utils                 bcache-tools                bcache userspace tools
+utils                 coreutils                   GNU core utilities
+utils                 cpio                        GNU cpio -- a program to manage archives of files
+utils                 debian-goodies              Small toolbox-style utilities for Debian systems
+utils                 diffutils                   File comparison utilities
+utils                 dirmngr                     GNU privacy guard - network certificate management service
+utils                 eatmydata                   Library and utilities designed to disable fsync and friends
+utils                 ethtool                     display or change Ethernet device settings
+utils                 fdisk                       collection of partitioning utilities
+utils                 file                        Recognize the type of data in a file using "magic" numbers
+utils                 findutils                   utilities for finding files--find, xargs
+utils                 gnupg                       GNU privacy guard - a free PGP replacement
+utils                 grep                        GNU grep, egrep and fgrep
+utils                 gzip                        GNU compression utilities
+utils                 htop                        interactive processes viewer
+utils                 libsensors-config           lm-sensors configuration files
+utils                 lshw                        information about hardware configuration
+utils                 lsof                        utility to list open files
+utils                 mlocate                     quickly find files on the filesystem based on their name
+utils                 ncurses-base                basic terminal type definitions
+utils                 ncurses-bin                 terminal-related programs and man pages
+utils                 patch                       Apply a diff file to an original
+utils                 time                        GNU time program for measuring CPU resource usage
+utils                 unzip                       De-archiver for .zip files
+utils                 zip                         Archiver for .zip files
+vcs                   git                         fast, scalable, distributed revision control system
+web                   curl                        command line tool for transferring data with URL syntax
+web                   wget                        retrieves files from the web
+x11                   dbus-x11                    simple interprocess messaging system (X11 deps)
+x11                   x11-common                  X Window System (X.Org) infrastructure
+x11                   x11-utils                   X11 utilities

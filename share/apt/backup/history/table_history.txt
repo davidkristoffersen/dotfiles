@@ -1,52 +1,53 @@
-Section         Name                        Description
-=======         ====                        ===========
-Unknown         gh
-admin           aptitude                    terminal-based package manager
-admin           software-properties-common  manage the repositories that you install software from (common)
-devel           build-essential             Informational list of build-essential packages
-devel           cmake                       cross-platform, open-source make system
-devel           gcc                         GNU C compiler
-devel           pkg-config                  manage compile and link flags for libraries
-devel           sloccount                   programs for counting physical source lines of code (SLOC)
-games           sl                          Correct you if you type `sl' by mistake
-gnu-r           r-base                      GNU R statistical computation and graphics system
-graphics        feh                         imlib2 based image viewer
-graphics        gimp                        GNU Image Manipulation Program
-graphics        graphviz                    rich set of graph drawing tools
-interpreters    ipython3                    Enhanced interactive Python 3 shell
-java            default-jdk                 Standard Java or Java compatible Development Kit
-java            gradle                      Powerful build system for the JVM
-java            openjdk-8-jre-headless      OpenJDK Java runtime, using Hotspot JIT (headless)
-javascript      nodejs                      evented I/O for V8 javascript - runtime executable
-misc            ca-certificates             Common CA certificates
-misc            screen                      terminal multiplexer with VT100/ANSI terminal emulation
-net             net-tools                   NET-3 networking toolkit
-oldlibs         apt-transport-https         transitional package for https support
-oldlibs         imagemagick                 image manipulation programs -- binaries
-python          python3-pip                 Python package installer
-python          python3-venv                pyvenv-3 binary for python3 (default python3 version)
-python          python3-venv                pyvenv-3 binary for python3 (default python3 version)
-sound           festival                    General multi-lingual speech synthesis system
-tex             texlive                     TeX Live: A decent selection of the TeX Live packages
-tex             texlive-extra-utils         TeX Live: TeX auxiliary programs
-tex             texlive-latex-extra         TeX Live: LaTeX additional packages
-text            colordiff                   tool to colorize 'diff' output
-text            figlet                      Make large character ASCII banners out of ordinary text
-text            pandoc                      general markup converter
-text            wdiff                       Compares two files word by word
-text            zathura                     document viewer with a minimalistic interface
-universe/utils  bat                         cat(1) clone with syntax highlighting and git integration
-utils           dirmngr                     GNU privacy guard - network certificate management service
-utils           fd-find                     Simple, fast and user-friendly alternative to find
-utils           gnupg                       GNU privacy guard - a free PGP replacement
-utils           jq                          lightweight and flexible command-line JSON processor
-utils           mlocate                     quickly find files on the filesystem based on their name
-utils           moreutils                   additional Unix utilities
-utils           parallel                    build and execute command lines from standard input in parallel
-utils           ppa-purge                   disables a PPA and reverts to official packages
-utils           pydf                        colourised df(1)-clone
-utils           ripgrep                     Recursively searches directories for a regex pattern
-utils           tree                        displays an indented directory tree, in color
-utils           unzip                       De-archiver for .zip files
-vcs             git                         fast, scalable, distributed revision control system
-x11             xsel                        command-line tool to access X clipboard and selection buffers
+Section       Name                    Description
+=======       ====                    ===========
+Unknown       yarn
+admin         aptitude                terminal-based package manager
+devel         autoconf                automatic configure script builder
+devel         clang-format            Tool to format C/C++/Obj-C code
+devel         cmake                   cross-platform, open-source make system
+devel         libtool                 Generic library support script
+devel         pkg-config              manage compile and link flags for libraries
+devel         sloccount               programs for counting physical source lines of code (SLOC)
+editors       freeplane               Java program for working with Mind Maps
+electronics   avrdude                 software for programming Atmel AVR microcontrollers
+electronics   dfu-programmer          device firmware update (DFU) based USB programmer for Atmel chips
+electronics   dfu-util                Device firmware update (DFU) USB programmer
+fonts         texlive-fonts-extra     TeX Live: Additional fonts
+games         sl                      Correct you if you type `sl' by mistake
+gnu-r         r-base                  GNU R statistical computation and graphics system
+graphics      feh                     imlib2 based image viewer
+graphics      gimp                    GNU Image Manipulation Program
+graphics      graphviz                rich set of graph drawing tools
+interpreters  ipython3                Enhanced interactive Python 3 shell
+java          default-jdk             Standard Java or Java compatible Development Kit
+java          gradle                  Powerful build system for the JVM
+java          openjdk-8-jre-headless  OpenJDK Java runtime, using Hotspot JIT (headless)
+javascript    nodejs                  evented I/O for V8 javascript - runtime executable
+net           net-tools               NET-3 networking toolkit
+oldlibs       apt-transport-https     transitional package for https support
+oldlibs       imagemagick             image manipulation programs -- binaries
+python        python-is-python3       symlinks /usr/bin/python to python3
+python        python3-pip             Python package installer
+python        python3-venv            pyvenv-3 binary for python3 (default python3 version)
+science       snap                    location of genes from DNA sequence with hidden markov model
+sound         festival                General multi-lingual speech synthesis system
+tex           texlive                 TeX Live: A decent selection of the TeX Live packages
+tex           texlive-extra-utils     TeX Live: TeX auxiliary programs
+tex           texlive-latex-extra     TeX Live: LaTeX additional packages
+text          colordiff               tool to colorize 'diff' output
+text          figlet                  Make large character ASCII banners out of ordinary text
+text          pandoc                  general markup converter
+text          wdiff                   Compares two files word by word
+text          zathura                 document viewer with a minimalistic interface
+utils         debian-goodies          Small toolbox-style utilities for Debian systems
+utils         fd-find                 Simple, fast and user-friendly alternative to find
+utils         fzf                     general-purpose command-line fuzzy finder
+utils         jq                      lightweight and flexible command-line JSON processor
+utils         mlocate                 quickly find files on the filesystem based on their name
+utils         moreutils               additional Unix utilities
+utils         parallel                build and execute command lines from standard input in parallel
+utils         ppa-purge               disables a PPA and reverts to official packages
+utils         pydf                    colourised df(1)-clone
+utils         ripgrep                 Recursively searches directories for a regex pattern
+utils         tree                    displays an indented directory tree, in color
+x11           xsel                    command-line tool to access X clipboard and selection buffers
