@@ -1,0 +1,5 @@
+  develop        e68205db1b [upstream/develop] Merge remote-tracking branch 'origin/master' into develop
+* master         9a157a3a99 [origin/master] KP Republic BM60HSRGB_EC QMK Configurator and readme touch-up (#17541)
+  prog-qgmlwb    fd70edf99b [origin/prog-qgmlwb] Delete references to removed shell scripts
+  spacial-layout de135aa211 [origin/spacial-layout] Use custom spacial ortho layout
+  unicode        f76c102df7 [origin/unicode] Add numpad normal map
