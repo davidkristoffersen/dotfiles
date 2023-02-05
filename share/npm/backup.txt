@@ -1,0 +1,6 @@
+/usr/local/lib
+├── bibtex-tidy@1.8.5
+├── gradle-upgrade-interactive@0.7.4
+├── reveal-md@5.4.0
+└── wsl-open@2.2.1
+
