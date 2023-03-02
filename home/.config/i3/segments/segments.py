@@ -33,6 +33,8 @@ def plasma_compat():
 {fw} [class="(?i)*nextcloud*"] {fd}
 ''', [1])
 
+    background = '$HOME/.local/share/backgrounds/manjaro.jpg'
+
     return f'''
 # Plasma compatibility improvements
 {win}
@@ -40,10 +42,23 @@ def plasma_compat():
 {cls}
 {fw} [class="plasmashell" window_type="notification"] {bn}, move position 70 ppt 81 ppt
 no_focus [class="plasmashell" window_type="notification"]
+
+# Kill Desktop window that covers everything
 {fw} [title="Desktop — Plasma"] kill; {fe}; {bn}
 
-# using plasma's logout screen instead of i3's
+# Using plasma's logout screen instead of i3's
+# Works only if the below usage of i3 nagbar is commented out 
 {BMS}+e {E} id qdbus-qt5 org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
+
+# Audio integration
+# Works only if the below usage pactl is commented out
+{B} XF86AudioRaiseVolume {E} qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "increase_volume"
+{B} XF86AudioLowerVolume {E} qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "decrease_volume"
+{B} XF86AudioMute {E} qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "mute"
+{B} XF86AudioMicMute {E} qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "mic_mute"
+
+# Background, comment out nitrogen
+{E} feh --bg-scale {background}
 '''
 
 
@@ -74,10 +89,10 @@ def audio():
 # Use pactl to adjust volume in PulseAudio.
 set {ri3} killall -SIGUSR1 i3status
 
-{B} XF86AudioRaiseVolume {E} pactl set-sink-volume @DEFAULT_SINK@ +10% && {ri3}
-{B} XF86AudioLowerVolume {E} pactl set-sink-volume @DEFAULT_SINK@ -10% && {ri3}
-{B} XF86AudioMute {E} pactl set-sink-mute @DEFAULT_SINK@ toggle && {ri3}
-{B} XF86AudioMicMute {E} pactl set-source-mute @DEFAULT_SOURCE@ toggle && {ri3}
+# {B} XF86AudioRaiseVolume {E} pactl set-sink-volume @DEFAULT_SINK@ +10% && {ri3}
+# {B} XF86AudioLowerVolume {E} pactl set-sink-volume @DEFAULT_SINK@ -10% && {ri3}
+# {B} XF86AudioMute {E} pactl set-sink-mute @DEFAULT_SINK@ toggle && {ri3}
+# {B} XF86AudioMicMute {E} pactl set-source-mute @DEFAULT_SOURCE@ toggle && {ri3}
 '''
 
 
@@ -95,7 +110,7 @@ def screens():
 {BMS}+q kill
 
 # Background
-{E} nitrogen --restore
+# {E} nitrogen --restore
 
 # Swap active workspaces
 {BMS}+s {E} i3_swap_workspaces.py
@@ -291,7 +306,7 @@ def config():
 {BMS}+r restart
 
 # Exit i3
-{BMS}+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'" 
+# {BMS}+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'" 
 '''
 
 
