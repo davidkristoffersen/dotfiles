@@ -48,7 +48,10 @@ no_focus [class="plasmashell" window_type="notification"]
 
 # Using plasma's logout screen instead of i3's
 # Works only if the below usage of i3 nagbar is commented out 
-{BMS}+e {E} id qdbus-qt5 org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
+{BMS}+e {E} qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
+
+# Application launcher
+{BMS}+d qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.activateLauncherMenu
 
 # Audio integration
 # Works only if the below usage pactl is commented out
