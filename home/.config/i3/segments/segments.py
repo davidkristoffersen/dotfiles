@@ -51,7 +51,7 @@ no_focus [class="plasmashell" window_type="notification"]
 {BMS}+e {E} qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
 
 # Application launcher
-{BMS}+d qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.activateLauncherMenu
+# {BMS}+d qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.activateLauncherMenu
 
 # Audio integration
 # Works only if the below usage pactl is commented out
@@ -61,7 +61,7 @@ no_focus [class="plasmashell" window_type="notification"]
 {B} XF86AudioMicMute {E} qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "mic_mute"
 
 # Background, comment out nitrogen
-{E} feh --bg-scale {background}
+# {E} feh --bg-scale {background}
 '''
 
 
@@ -113,7 +113,7 @@ def screens():
 {BMS}+q kill
 
 # Background
-# {E} nitrogen --restore
+{E} nitrogen --restore
 
 # Swap active workspaces
 {BMS}+s {E} i3_swap_workspaces.py
@@ -281,7 +281,7 @@ def appearance():
     c = 'client'
     return f'''
 # Gaps size
-gaps inner 20
+gaps inner 10
 gaps outer 0
 
 default_border pixel 2
@@ -315,8 +315,20 @@ def config():
 
 def modes():
     def mode(x): return f'mode "{x}"'
-    to_default = mode('default')
-    to_resize = mode('resize')
+    m_default = mode('default')
+
+    def to_default(hotkey: str = ''):
+        return f'''
+    {B} Return {m_default}
+    {B} Escape {m_default}
+    {hotkey + ' ' + m_default if hotkey else ''}
+'''.strip()
+
+    m_resize = mode('resize')
+    h_resize = f'{BM}+r'
+
+    m_bar = mode('modify bar')
+    h_bar = f'{BMS}+b'
 
     def resize(isVim=False):
         grow = 'resize grow'
@@ -328,8 +340,9 @@ def modes():
         return columns(out, [1, 4, 12], '\t')
 
     return f'''
+
 # Resize windows
-mode "resize" {{
+{m_resize} {{
 	# Vim style
 {resize(True)}
 
@@ -337,11 +350,21 @@ mode "resize" {{
 {resize()}
 
 	# Exit mode
-	{B} Return {to_default}
-	{B} Escape {to_default}
-	{BM}+r {to_default}
+	{to_default(h_resize)}
 }}
-{BM}+r {to_resize}
+
+{m_bar} {{
+    {B} s bar mode dock
+    {B} h bar mode hide
+    {B} i bar mode invisible
+    {B}+t bar mode toggle
+
+    # Exit mode
+    {to_default(h_bar)}
+}}
+
+{h_resize} {m_resize}
+{h_bar} {m_bar}
 '''
 
 
@@ -350,6 +373,8 @@ def status_bar():
 # i3bar
 bar {{
 	status_command i3status
+    position top
+    mode dock
 }}
 '''
 
