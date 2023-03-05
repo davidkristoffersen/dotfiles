@@ -104,7 +104,7 @@ def screens():
 
 # Lock
 {BMS}+o exec xlock
-# {BMS}+o exec chromium
+# {BMS}+o exec google-chrome-stable
 
 # Kill focused window
 {BMS}+q kill
@@ -140,7 +140,7 @@ def applications():
 # {BM}+Return exec alacritty
 
 # Browser
-{BM}+b exec chromium
+{BM}+b exec google-chrome-stable
 
 # Language swap
 {BM}+space {E} toggle_xkbmap.sh
@@ -293,7 +293,7 @@ default_border pixel 2
 {c}.background       #ffffff
 
 # App specific
-# for_window [class="^Chromium$" title=" - Chromium$"] border 1
+# for_window [class="^Google chrome$" title=" - Google chrome$"] border 1
 '''
 
 
@@ -353,5 +353,5 @@ bar {{
 
 def autostart_applications():
     return f'''
-# exec chromium
+# exec google-chrome-stable
 '''
