@@ -1,6 +1,6 @@
 configuration {
 	/* Enabled modi */
-	modi:                           "window,drun,run";
+	modes:                           "window,drun,run";
 	/* Window opacity */
 	/* opacity:                        "100"; */
 	/* Window width */
@@ -211,4 +211,4 @@ configuration {
 	/* display-combi:					""; */
 }
 
-@import "$HOME/.local/share/rofi/themes/flat-orange.rasi"
+@import "~/.local/share/rofi/themes/flat-orange.rasi"
