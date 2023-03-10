@@ -209,7 +209,7 @@ awful.screen.connect_for_each_screen(function(s)
 	s.mywibox:setup {
 		layout = wibox.layout.align.horizontal,
 		{
-		  -- Left widgets
+			-- Left widgets
 			layout = wibox.layout.fixed.horizontal,
 			mylauncher,
 			s.mytaglist,
@@ -217,7 +217,7 @@ awful.screen.connect_for_each_screen(function(s)
 		},
 		s.mytasklist, -- Middle widget
 		{
-		              -- Right widgets
+			-- Right widgets
 			layout = wibox.layout.fixed.horizontal,
 			mykeyboardlayout,
 			wibox.widget.systray(),
@@ -511,7 +511,7 @@ awful.rules.rules = {
 			role = {
 				"AlarmWindow", -- Thunderbird's calendar.
 				"ConfigManager", -- Thunderbird's about:config.
-				"pop-up",  -- e.g. Google Chrome's (detached) Developer Tools.
+				"pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
 			}
 		},
 		properties = { floating = true }
@@ -561,15 +561,15 @@ client.connect_signal("request::titlebars", function(c)
 
 	awful.titlebar(c):setup {
 		{
-		  -- Left
+			-- Left
 			awful.titlebar.widget.iconwidget(c),
 			buttons = buttons,
 			layout  = wibox.layout.fixed.horizontal
 		},
 		{
-		      -- Middle
+			-- Middle
 			{
-			  -- Title
+				-- Title
 				align  = "center",
 				widget = awful.titlebar.widget.titlewidget(c)
 			},
@@ -577,7 +577,7 @@ client.connect_signal("request::titlebars", function(c)
 			layout  = wibox.layout.flex.horizontal
 		},
 		{
-		  -- Right
+			-- Right
 			awful.titlebar.widget.floatingbutton(c),
 			awful.titlebar.widget.maximizedbutton(c),
 			awful.titlebar.widget.stickybutton(c),
