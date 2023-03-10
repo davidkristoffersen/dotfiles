@@ -52,7 +52,6 @@ save_current() {
 
 # Restore mouse position
 restore_current() {
-	# xdotool mousemove ${cur}
 	xdotool mousemove $cur_x $cur_y 2>/dev/null
 }
 
@@ -60,7 +59,7 @@ main() {
 	save_current
 	get_screens
 	get_res
-	# click_middle
+	click_middle
 	restore_current
 }
 main
