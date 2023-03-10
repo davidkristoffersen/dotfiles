@@ -9,22 +9,22 @@ get_screens() {
 	$DEBUG && echo "Screens: $((SCREENS))"
 }
 
+get_all_res() {
+	xrandr | rg -o --pcre2 "((?<= connected )|(?<= connected primary ))\d[^ ]+" | tr 'x' ' ' | tr '+' ' '
+}
+
 # Get the resolution of each screen
 get_res() {
 	for ((i = 0; i < $SCREENS; i++)); do
 		n=$((i + 1))
 
-		res="$(xrandr | grep -Po " connected[^\d]*\K\d+x\d+\+\d+\+\d+" | sed -n "$n p")"
-		w="$(echo $res | grep -Po "^\d+")"
-		h="$(echo $res | grep -Po "^\d+x\K\d+")"
-		x="$(echo $res | grep -Po "^\d+x\d+\+\K\d+")"
-		y="$(echo $res | grep -Po "^\d+x\d+\+\d+\+\K\d+")"
+		read w h x y <<<$(get_all_res | sed -n "$n p")
 
 		mx="$(echo "$x+$w/2" | bc)"
 		my="$(echo "$y+$h/2" | bc)"
 		POS[$i]="$mx $my"
 
-		$DEBUG && echo -e "Screen $i: Pos: ${x}x$y\tSize: $w,$h, Middle: ${pos[$i]}"
+		$DEBUG && echo -e "Screen $i: Pos: ${x}x$y\tSize: $w,$h, Middle: ${POS[$i]}"
 	done
 }
 
@@ -60,7 +60,7 @@ main() {
 	save_current
 	get_screens
 	get_res
-	click_middle
+	# click_middle
 	restore_current
 }
 main
