@@ -98,11 +98,12 @@ combine() {
 
 xlock() {
 	# i3lock -u -i $out
-	BLANK='#00000000'
-	CLEAR='#ffffff0a'
-	DEFAULT='#f07416cc'
+	BLANK='#22222222'
+	CLEAR='#ffffff10'
+	DEFAULT='#f07416ff'
 	TEXT='#c45f12cc'
 	WRONG='#880000bb'
+	KEY='#11bfaeff'
 	VERIFYING='#c45f12bb'
 
 	i3lock \
@@ -125,8 +126,8 @@ xlock() {
 		--time-color=$TEXT \
 		--date-color=$TEXT \
 		--layout-color=$TEXT \
-		--keyhl-color=$WRONG \
-		--bshl-color=$WRONG \
+		--keyhl-color=$KEY \
+		--bshl-color=$KEY \
 		\
 		--screen 1 \
 		--clock \
