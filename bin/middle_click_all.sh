@@ -31,7 +31,7 @@ get_res() {
 # Click in the middle of each screen
 click_middle() {
 	for ((i = 0; i < $SCREENS; i++)); do
-		echo "Clicking screen $i"
+		$DEBUG && echo "Clicking screen $i"
 
 		# Perform the click
 		pos="${POS[$i]}"
