@@ -2,9 +2,9 @@
 WantedBy=plasma-workspace.target
 
 [Unit]
-Description=Launch Plasma with i3
+Description=Launch Plasma with awesome
 Before=plasma-workspace.target
 
 [Service]
-ExecStart=/usr/bin/i3
+ExecStart=/usr/bin/awesome
 Restart=on-failure
