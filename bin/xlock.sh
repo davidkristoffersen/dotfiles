@@ -15,23 +15,21 @@ r="\e[0m"
 b="\e[1m"
 f="\e[2m"
 
-main() {
-	$debug && echo -en "${b}Starting:\t\t"
-	timeit get_res
-	$debug && echo -e "$r"
-	if $par; then
-		parallelize
-	else
-		sequential
-	fi
+timeit() {
+	$@
+	$debug && t="$({ time $@; } 2>&1)"
+	$debug && echo -e "$t" | tr -d '\n' 1>&2
+	$debug && echo 1>&2
+}
 
-	if [ "$num_screens" -gt 1 ]; then
-		combine
-	else
-		cp "${pre_png}0$post_png" "$out"
-	fi
+resolution() {
+	num_screens="$(xrandr | grep " connected" | wc -l)"
+	res="$(xrandr | rg -o --pcre2 "((?<= connected )|(?<= connected primary ))\d[^ ]+" | tr 'x' ' ' | tr '+' ' ')"
+	names="$(xrandr | rg -o --pcre2 "^[^ ]+(?= connected)")"
+	primary="$(xrandr | rg -o --pcre2 "^[^ ]+(?= connected primary)")"
 
-	xlock
+	tagstring='\033[30;3{=$_=++$::color%8=}m'
+	screens="$(echo $(seq 0 $((num_screens - 1))) | tr " " "\n")"
 }
 
 parallelize() {
@@ -44,27 +42,28 @@ sequential() {
 	done
 }
 
-get_res() {
-	num_screens="$(xrandr | grep " connected" | wc -l)"
-	res="$(xrandr | rg -o --pcre2 "((?<= connected )|(?<= connected primary ))\d[^ ]+" | tr 'x' ' ' | tr '+' ' ')"
-	names="$(xrandr | rg -o --pcre2 "^[^ ]+(?= connected)")"
-	primary="$(xrandr | rg -o --pcre2 "^[^ ]+(?= connected primary)")"
-
-	tagstring='\033[30;3{=$_=++$::color%8=}m'
-	# tagstring='{=1 $_=`date +%T-%Z`;chomp=} - {1}'
-	screens="$(echo $(seq 0 $((num_screens - 1))) | tr " " "\n")"
+screenshot() {
+	$debug && echo -en "${f}Screenshot:\t" 1>&2
+	timeit scrot -o -a ${x},${y},${w},${h} $screen
 }
 
-timeit() {
-	# start_time=$(date +%s%3N)
-	$@
-	# end_time=$(date +%s%3N)
-	# elapsed_time=$((end_time - start_time))
-	# elapsed_time_seconds=$(bc <<<"scale=3; $elapsed_time/1000")
-	# $debug && printf "%.3f\t" $elapsed_time_seconds 1>&2
-	$debug && t="$({ time $@; } 2>&1)"
-	$debug && echo -e "$t" | tr -d '\n' 1>&2
-	$debug && echo 1>&2
+blur() {
+	$debug && echo -en "${f}Blurring:\t" 1>&2
+	timeit gm convert $screen -scale 10% -blur 0x2.5 -resize 1000% $screen
+}
+
+pixelize() {
+	$debug && echo -en "${f}Pixelizing:\t" 1>&2
+	timeit pixelize.py $screen $screen 15
+}
+
+overlay() {
+	if [[ -f $overlay_img ]] && ! $primary; then
+		rw=$((w / 5))
+		rh=$((h / 5))
+		$debug && echo -en "${f}Overlaying:\t" 1>&2
+		timeit gm composite -matte -gravity center -resize ${rw}x$rh $overlay_img $screen $screen
+	fi
 }
 
 seq_main() {
@@ -79,31 +78,15 @@ seq_main() {
 	$debug && $verbose && echo "# $name" 1>&2
 	$debug && $verbose && echo "$name: $w x $h + $x + $y -> $screen" 1>&2
 
-	# screenshot
-	$debug && echo -en "${f}Scrotting:\t" 1>&2
-	timeit scrot -o -a ${x},${y},${w},${h} $screen
-
-	# blur
-	$debug && echo -en "${f}Blurring:\t" 1>&2
-	timeit gm convert $screen -scale 10% -blur 0x2.5 -resize 1000% $screen
-
-	# pixelize
-	$debug && echo -en "${f}Pixelizing:\t" 1>&2
-	timeit pixelize.py $screen $screen 15
-
-	# overlay if not primary
-	if [[ -f $overlay_img ]] && ! $primary; then
-		rw=$((w / 5))
-		rh=$((h / 5))
-		$debug && echo -en "${f}Overlaying:\t" 1>&2
-		timeit gm composite -matte -gravity center -resize ${rw}x$rh $overlay_img $screen $screen
-	fi
+	screenshot
+	blur
+	pixelize
+	overlay
 
 	pages="-page +$x+$y $screen "
-
 	echo -e "$w|$h|$x|$y|$pages"
 }
-export -f seq_main timeit
+export -f seq_main timeit screenshot blur pixelize overlay
 export debug f r res names pre_png post_png overlay_img TIMEFORMAT verbose
 
 combine() {
@@ -134,7 +117,6 @@ combine() {
 }
 
 xlock() {
-	# i3lock -u -i $out
 	BLANK='#22222222'
 	CLEAR='#ffffff10'
 	DEFAULT='#f07416ff'
@@ -173,6 +155,26 @@ xlock() {
 		--date-str="%A, %Y-%m-%d" \
 		--keylayout 1
 
+}
+
+main() {
+	$debug && echo -en "${b}Starting:\t\t"
+	timeit resolution
+	$debug && echo -e "$r"
+
+	if $par; then
+		parallelize
+	else
+		sequential
+	fi
+
+	if [ "$num_screens" -gt 1 ]; then
+		combine
+	else
+		cp "${pre_png}0$post_png" "$out"
+	fi
+
+	xlock
 }
 
 main
