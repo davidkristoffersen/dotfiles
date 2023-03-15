@@ -19,9 +19,17 @@ _bashrc() {
 	export SHELL_BASHRC=true
 }
 
+_checkloaded() {
+	if [ "$SHELL_UTIL" != "true" ]; then
+		. $HOME/.util
+	fi
+	if [ "$SHELL_PROFILE" != "true" ]; then
+		. $HOME/.profile
+	fi
+}
+
+_checkloaded
+unset -f _checkloaded
+
 _bashrc
 unset -f _bashrc
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

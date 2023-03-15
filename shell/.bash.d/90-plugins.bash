@@ -6,7 +6,7 @@ _fzf() {
 
 	# Default command
 	export FZF_DEFAULT_COMMAND="rg --hidden -l '' -g '!.git'"
-	export FZF_ALT_C_COMMAND="fdfind --type d --hidden --follow --exclude '.git' ."
+	export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude '.git' ."
 
 	# Completion file
 	if [[ $- == *i* ]]; then

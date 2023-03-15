@@ -24,7 +24,6 @@ path_add "$HOME/.local/bin"
 path_add_rec "$HOME/.local/bin"
 # Cargo's bin
 path_add "$HOME/.cargo/bin"
-path_add "$HOME/.cargo/env"
 # Basher's bin
 path_add "$HOME/.basher/bin"
 # Dotnet source
@@ -37,6 +36,8 @@ path_add "$HOME/dotfiles/home/.vim/pack/general/opt/fzf/bin"
 path_add "$HOME/.npm-global/bin"
 # Cabal binaries
 path_add "$HOME/.cabal/bin"
+# JetBrains Toolbox scripts
+path_add "$HOME/.local/share/JetBrains/Toolbox/scripts"
 
 # Make path global
 export PATH="$PATH"
