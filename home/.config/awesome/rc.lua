@@ -3,6 +3,10 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, 'luarocks.loader')
 
+--[[
+    Libraries
+--]]
+--
 -- Standard awesome library
 local gears = require('gears')
 local awful = require('awful')
@@ -22,6 +26,7 @@ require('awful.hotkeys_popup.keys')
 --[[
 	Missing Library linting fix
 --]]
+--
 -- awesome =
 -- mousegrabber =
 -- root = beautiful
@@ -29,7 +34,10 @@ require('awful.hotkeys_popup.keys')
 -- client = awful.client
 -- tag = awful.tag
 
--- {{{ Error handling
+--[[
+    Error handling
+--]]
+--
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -61,9 +69,10 @@ do
         end
     )
 end
--- }}}
 
--- {{{ Variable definitions
+--[[
+    Variable definitions
+--]]
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init('~/.config/awesome/themes/default/theme.lua')
 
@@ -93,13 +102,16 @@ awful.layout.layouts = {
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw, -- awful.layout.suit.corner.ne,
+    awful.layout.suit.corner.nw,
+    -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
 }
--- }}}
 
--- {{{ Menu
+--[[
+    Menu
+--]]
+--
 -- Create a launcher widget and a main menu
 myawesomemenu = {
     {
@@ -135,12 +147,14 @@ mylauncher = awful.widget.launcher
 -- Menubar configuration
 menubar.utils.terminal =
     terminal -- Set the terminal for applications that require it
--- }}}
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
--- {{{ Wibar
+--[[
+    Wibar
+--]]
+--
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
@@ -271,9 +285,11 @@ awful.screen.connect_for_each_screen(
         }
     end
 )
--- }}}
 
--- {{{ Mouse bindings
+--[[
+    Mouse bindings
+--]]
+--
 -- @DOC_RnanoOOT_BUTTONS@
 -- awful.mouse.append_global_mousebindings({
 root.buttons(
@@ -284,9 +300,11 @@ root.buttons(
     )
 )
 -- })
--- }}}
 
--- {{{ Key bindings
+--[[
+    Key bindings
+--]]
+--
 globalkeys = gears.table.join(
     awful.key(
         {modkey}, 's', hotkeys_popup.show_help, {description = 'show help', group = 'awesome'}
@@ -475,7 +493,8 @@ clientkeys = gears.table.join(
             c:raise()
         end, {description = 'toggle fullscreen', group = 'client'}
     ), awful.key(
-        {modkey, 'Shift'}, 'c', function (c) c:kill() end, {description = 'close', group = 'client'}
+        {modkey, 'Shift'}, 'c', function (c) c:kill() end,
+        {description = 'close', group = 'client'}
     ), awful.key(
         {modkey, 'Control'}, 'space', awful.client.floating.toggle, {
             description = 'toggle floating',
@@ -599,9 +618,11 @@ clientbuttons = gears.table.join(
 
 -- Set keys
 root.keys(globalkeys)
--- }}}
 
--- {{{ Rules
+--[[
+    Rules
+--]]
+--
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
     -- All clients will match this rule.
@@ -657,9 +678,11 @@ awful.rules.rules = {
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
 }
--- }}}
 
--- {{{ Signals
+--[[
+    Signals
+--]]
+--
 -- Signal function to execute when a new client appears.
 client.connect_signal(
     'manage', function (c)
@@ -740,4 +763,3 @@ client.connect_signal('focus',
     function (c) c.border_color = beautiful.border_focus end)
 client.connect_signal('unfocus',
     function (c) c.border_color = beautiful.border_normal end)
--- }}}
