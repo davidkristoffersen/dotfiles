@@ -328,7 +328,7 @@ end, {
 }), awful.key({modkey, 'Control'}, 'r', awesome.restart, {
     description = 'reload awesome',
     group = 'awesome',
-}), awful.key({modkey, 'Shift'}, 'q', awesome.quit, {
+}), awful.key({modkey, 'Shift', 'Control', 'Mod1'}, 'q', awesome.quit, {
     description = 'quit awesome',
     group = 'awesome',
 }), -- Lock screen, launch xlock.sh
