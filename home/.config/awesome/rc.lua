@@ -33,11 +33,10 @@ require('awful.hotkeys_popup.keys')
     Error handling
 --]]
 --
--- Check if awesome encountered an error during startup and fell back to
+-- Check if awesome encountered an error during startup and fallback to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
-    naughty.notify
-    {
+    naughty.notify{
         preset = naughty.config.presets.critical,
         title = 'Oops, there were errors during startup!',
         text = awesome.startup_errors,
@@ -53,8 +52,7 @@ do
             if in_error then return end
             in_error = true
 
-            naughty.notify
-            {
+            naughty.notify{
                 preset = naughty.config.presets.critical,
                 title = 'Oops, an error happened!',
                 text = tostring(err),
@@ -74,7 +72,7 @@ beautiful.init('~/.config/awesome/themes/default/theme.lua')
 -- This is used later as the default terminal and editor to run.
 terminal = 'terminator'
 editor = os.getenv('EDITOR') or 'vim'
-editor_cmd = terminal .. ' -e ' .. editor
+editor_cmd = terminal .. ' -e "' .. editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -85,8 +83,8 @@ modkey = 'Mod4'
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
+    awful.layout.suit.floating,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
@@ -109,37 +107,29 @@ awful.layout.layouts = {
 --
 -- Create a launcher widget and a main menu
 myawesomemenu = {
-    {
-        'hotkeys',
-        function ()
-            hotkeys_popup.show_help(nil,
-                awful.screen.focused())
-        end,
-    },
-    {'manual',      terminal .. ' -e man awesome'},
-    {'edit config', editor_cmd .. ' ' .. awesome.conffile},
+    {'hotkeys',     function () hotkeys_popup.show_help(nil, awful.screen.focused()) end},
+    {'manual',      terminal .. ' -e "man awesome"'},
+    {'edit config', editor_cmd .. ' ' .. awesome.conffile .. '"'},
     {'restart',     awesome.restart},
     {'quit',        function () awesome.quit() end},
     {'lock',        function () awful.spawn.with_shell('xlock.sh') end},
 }
 
-mymainmenu = awful.menu
-    {
-        items = {
-            {'awesome',       myawesomemenu, beautiful.awesome_icon},
-            {'open terminal', terminal},
-        },
-    }
+mymainmenu = awful.menu{
+    items = {
+        {'awesome',       myawesomemenu, beautiful.awesome_icon},
+        {'open terminal', terminal},
+    },
+}
 
 
 praisewidget = wibox.widget.textbox()
 praisewidget.text = 'You are great!'
 
-mylauncher = awful.widget.launcher
-    {
-        image = beautiful.awesome_icon,
-        menu = mymainmenu,
-    }
+mylauncher = awful.widget.launcher{
+    image = beautiful.awesome_icon,
+    menu = mymainmenu,
+}
 
 
 -- Menubar configuration
@@ -406,12 +396,12 @@ globalkeys = gears.table.join(
         }
     ), -- Lock screen, launch xlock.sh
     awful.key(
-        {modkey}, 'l', function () awful.spawn('xlock.sh') end, {
+        {modkey, 'Control', 'Shift', 'Mod1'}, 'l', function () awful.spawn('xlock.sh') end, {
             description = 'lock screen',
             group = 'launcher',
         }
-    ), -- awful.key({ modkey, }, "l", function() awful.tag.incmwfact(0.05) end,
-    -- { description = "increase master width factor", group = "layout" }),
+    ), awful.key({modkey}, 'l', function () awful.tag.incmwfact(0.05) end,
+        {description = 'increase master width factor', group = 'layout'}),
     awful.key(
         {modkey}, 'h', function () awful.tag.incmwfact(-0.05) end, {
             description = 'decrease master width factor',
@@ -693,6 +683,9 @@ client.connect_signal(
             -- Prevent clients from being unreachable after screen count changes.
             awful.placement.no_offscreen(c)
         end
+        if not awesome.startup then
+            c.maximized = false
+        end
     end
 )
 
@@ -762,3 +755,17 @@ client.connect_signal('focus',
     function (c) c.border_color = beautiful.border_focus end)
 client.connect_signal('unfocus',
     function (c) c.border_color = beautiful.border_normal end)
+
+--[[
+	Autostart: Background programs
+--]]
+--
+-- Polkit authentication agent
+awful.spawn.with_shell('/usr/lib/polkit-kde-authentication-agent-1 &')
+
+--[[
+    Autostart: Applications
+--]]
+--
+-- Terminal
+awful.spawn(terminal)
