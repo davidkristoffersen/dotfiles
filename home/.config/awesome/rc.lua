@@ -29,6 +29,10 @@ local hotkeys_popup = require('awful.hotkeys_popup')
 -- when client with a matching name is opened:
 require('awful.hotkeys_popup.keys')
 
+config_path = gears.filesystem.get_configuration_dir()
+org_path = package.path
+
+
 --[[
     Error handling
 --]]
@@ -66,6 +70,7 @@ end
 --[[
     Variable definitions
 --]]
+--
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init('~/.config/awesome/themes/default/theme.lua')
 
@@ -80,26 +85,6 @@ editor_cmd = terminal .. ' -e "' .. editor
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = 'Mod4'
-
--- Table of layouts to cover with awful.layout.inc, order matters.
-awful.layout.layouts = {
-    awful.layout.suit.tile,
-    awful.layout.suit.floating,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
-    -- awful.layout.suit.corner.ne,
-    -- awful.layout.suit.corner.sw,
-    -- awful.layout.suit.corner.se,
-}
 
 --[[
     Menu
@@ -133,50 +118,63 @@ mylauncher = awful.widget.launcher{
 
 
 -- Menubar configuration
-menubar.utils.terminal =
-    terminal -- Set the terminal for applications that require it
+-- Set the terminal for applications that require it
+menubar.utils.terminal = terminal
 
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+-- Table of layouts to cover with awful.layout.inc, order matters.
+local tag_names = {'1', '2', '3', '4', '5', '6', '7', '8', '9'}
+local als = awful.layout.suit
+awful.layout.layouts = {
+    als.tile,
+    als.floating,
+    als.tile.left,
+    als.tile.bottom,
+    als.tile.top,
+    als.fair,
+    als.fair.horizontal,
+    als.spiral,
+    als.spiral.dwindle,
+    als.max,
+    als.max.fullscreen,
+    als.magnifier,
+    als.corner.nw,
+    -- als.corner.ne,
+    -- als.corner.sw,
+    -- als.corner.se,
+}
 
 --[[
     Wibar
 --]]
 --
--- Create a textclock widget
+-- Keyboard map indicator and switcher
+mykeyboardlayout = awful.widget.keyboardlayout()
+
+-- Textclock widget
 mytextclock = wibox.widget.textclock()
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
     awful.button({}, 1, function (t) t:view_only() end),
-    awful.button({modkey}, 1,
-        function (t) if client.focus then client.focus:move_to_tag(t) end end),
+    awful.button({modkey}, 1, function (t) if client.focus then client.focus:move_to_tag(t) end end),
     awful.button({}, 3, awful.tag.viewtoggle),
-    awful.button({modkey}, 3,
-        function (t) if client.focus then client.focus:toggle_tag(t) end end),
+    awful.button({modkey}, 3, function (t) if client.focus then client.focus:toggle_tag(t) end end),
     awful.button({}, 4, function (t) awful.tag.viewnext(t.screen) end),
     awful.button({}, 5, function (t) awful.tag.viewprev(t.screen) end)
 )
 
 local tasklist_buttons = gears.table.join(
-    awful.button(
-        {}, 1, function (c)
-            if c == client.focus then
-                c.minimized = true
-            else
-                c:emit_signal(
-                    'request::activate', 'tasklist', {raise = true}
-                )
-            end
+    awful.button({}, 1, function (c)
+        if c == client.focus then
+            c.minimized = true
+        else
+            c:emit_signal('request::activate', 'tasklist', {raise = true})
         end
-    ), awful.button(
-        {}, 3, function ()
-            awful.menu.client_list
-            {
-                theme = {width = 250},
-            }
-        end
-    ), awful.button({}, 4, function () awful.client.focus.byidx(1) end),
+    end), awful.button({}, 3, function ()
+        awful.menu.client_list{
+            theme = {width = 250},
+        }
+    end), awful.button({}, 4, function () awful.client.focus.byidx(1) end),
     awful.button({}, 5, function () awful.client.focus.byidx(-1) end)
 )
 
@@ -199,25 +197,11 @@ awful.screen.connect_for_each_screen(
         set_wallpaper(s)
 
         -- Each screen has its own tag table.
-        awful.tag({'1', '2', '3', '4', '5', '6', '7', '8', '9'}, s,
-            awful.layout.layouts[1])
-        -- local names = {'main', 'www', 'skype', 'gimp', 'office', 'im', '7', '8', '9'}
-        -- local l = awful.layout.suit -- Just to save some typing: use an alias.
-        -- local layouts = {
-        --     l.floating,
-        --     l.tile,
-        --     l.floating,
-        --     l.fair,
-        --     l.max,
-        --     l.floating,
-        --     l.tile.left,
-        --     l.floating,
-        --     l.floating,
-        -- }
-        -- awful.tag(names, s, layouts)
+        awful.tag(tag_names, s, awful.layout.layouts)
 
         -- Create a promptbox for each screen
         s.mypromptbox = awful.widget.prompt()
+
         -- Create an imagebox widget which will contain an icon indicating which layout we're using.
         -- We need one layoutbox per screen.
         s.mylayoutbox = awful.widget.layoutbox(s)
@@ -229,6 +213,7 @@ awful.screen.connect_for_each_screen(
                 awful.button({}, 5, function () awful.layout.inc(-1) end)
             )
         )
+
         -- Create a taglist widget
         s.mytaglist = awful.widget.taglist{
             screen = s,
@@ -244,11 +229,10 @@ awful.screen.connect_for_each_screen(
         }
 
         -- Create the wibox
-        s.mywibox = awful.wibar
-            {
-                position = 'top',
-                screen = s,
-            }
+        s.mywibox = awful.wibar{
+            position = 'top',
+            screen = s,
+        }
 
 
         -- Add widgets to the wibox
@@ -757,15 +741,8 @@ client.connect_signal('unfocus',
     function (c) c.border_color = beautiful.border_normal end)
 
 --[[
-	Autostart: Background programs
+    Autostart
 --]]
 --
--- Polkit authentication agent
-awful.spawn.with_shell('/usr/lib/polkit-kde-authentication-agent-1 &')
 
---[[
-    Autostart: Applications
---]]
---
--- Terminal
-awful.spawn(terminal)
+require('autostart')

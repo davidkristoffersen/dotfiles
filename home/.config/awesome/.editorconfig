@@ -150,4 +150,4 @@ auto_collapse_lines = false
 
 ignore_space_after_colon = false
 
-remove_call_expression_list_finish_comma = false
+remove_call_expression_list_finish_comma = true
