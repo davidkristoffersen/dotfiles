@@ -1,8 +1,7 @@
--- local dir = require('util.module').script_path()
-
 local module = require('util.module')
+local debug = require('util.debug')
 
 return {
-    init_module = module.init_module,
-    deinit_module = module.deinit_module,
+    module = module,
+    debug = debug,
 }

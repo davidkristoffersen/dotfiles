@@ -32,11 +32,9 @@ require('awful.hotkeys_popup.keys')
 config_path = gears.filesystem.get_configuration_dir()
 org_path = package.path
 
-
 --[[
     Error handling
 --]]
---
 -- Check if awesome encountered an error during startup and fallback to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -364,6 +362,12 @@ globalkeys = gears.table.join(
             description = 'open google-chrome-stable',
             group = 'launcher',
         }
+    ), -- Take a screenshot using flameshot
+    awful.key(
+        {modkey, 'Shift'}, 's', function () awful.spawn('flameshot gui') end, {
+            description = 'take a screenshot',
+            group = 'launcher',
+        }
     ), awful.key(
         {modkey, 'Control'}, 'r', awesome.restart,
         {description = 'reload awesome', group = 'awesome'}
@@ -371,7 +375,7 @@ globalkeys = gears.table.join(
         {modkey, 'Control', 'Mod1'}, 'r',
         function ()
             awful.spawn.with_shell(
-                'Xephyr :5 & sleep 1 ; DISPLAY=:5 awesome')
+                'Xephyr -ac -br -noreset -screen 1920x1080 :5 & sleep 1 ; DISPLAY=:5 awesome')
         end, {description = 'test awesome in a new session', group = 'launcher'}
     ), awful.key(
         {modkey, 'Shift', 'Control', 'Mod1'}, 'q', awesome.quit, {
