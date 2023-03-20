@@ -13,7 +13,7 @@ end
 ---@return string relative_path
 ---@return integer count
 local function relative_path(path)
-    return path:gsub(config_path, '')
+    return path:gsub(ConfigPath, '')
 end
 
 --- Get directory name from path
@@ -51,7 +51,7 @@ end
 ---@param path string | nil
 local function init(path)
     path = path or script_dir(5)
-    local autostart_path = config_path .. path .. '/?.lua;'
+    local autostart_path = ConfigPath .. path .. '/?.lua;'
     package.path = package.path .. ';' .. autostart_path
 end
 
@@ -60,7 +60,7 @@ end
 --- Warning:
 --- - Must be called after init()
 local function cleanup()
-    package.path = org_path
+    package.path = OrgPath
 end
 
 return {

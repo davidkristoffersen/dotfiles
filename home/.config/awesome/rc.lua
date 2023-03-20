@@ -29,8 +29,12 @@ local hotkeys_popup = require('awful.hotkeys_popup')
 -- when client with a matching name is opened:
 require('awful.hotkeys_popup.keys')
 
-config_path = gears.filesystem.get_configuration_dir()
-org_path = package.path
+--[[
+    Global declarations
+--]]
+--
+require('globals')
+
 
 --[[
     Error handling
