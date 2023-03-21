@@ -35,7 +35,7 @@ require('awful.hotkeys_popup.keys')
 --
 -- Global declarations
 local conf = require('config.init')
-local app, modkey = conf.app, conf.mod
+local app, layout, modkey = conf.app, conf.layout, conf.mod
 
 -- Utilities
 local util = require('util.init')
@@ -52,27 +52,7 @@ require('themes.init').init('default')
 --
 local menu = require('menu.init')
 
--- Table of layouts to cover with awful.layout.inc, order matters.
-local tag_names = {'1', '2', '3', '4', '5', '6', '7', '8', '9'}
-local als = awful.layout.suit
-awful.layout.layouts = {
-    als.tile,
-    als.floating,
-    als.tile.left,
-    als.tile.bottom,
-    als.tile.top,
-    als.fair,
-    als.fair.horizontal,
-    als.spiral,
-    als.spiral.dwindle,
-    als.max,
-    als.max.fullscreen,
-    als.magnifier,
-    als.corner.nw,
-    -- als.corner.ne,
-    -- als.corner.sw,
-    -- als.corner.se,
-}
+awful.layout.layouts = layout.layouts
 
 --[[
     Wibar
@@ -128,7 +108,7 @@ awful.screen.connect_for_each_screen(
         set_wallpaper(s)
 
         -- Each screen has its own tag table.
-        awful.tag(tag_names, s, awful.layout.layouts)
+        awful.tag(layout.names, s, awful.layout.layouts)
 
         -- Create a promptbox for each screen
         s.mypromptbox = awful.widget.prompt()
