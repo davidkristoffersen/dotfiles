@@ -30,70 +30,27 @@ local hotkeys_popup = require('awful.hotkeys_popup')
 require('awful.hotkeys_popup.keys')
 
 --[[
-    Global declarations
+    Local libraries
 --]]
 --
-require('globals')
+-- Global declarations
+local conf = require('config.init')
+local app, modkey = conf.app, conf.mod
 
---[[
-    Error handling
---]]
---
-require('util.error').init()
+-- Utilities
+local util = require('util.init')
 
---[[
-    Variable definitions
---]]
---
--- Themes define colours, icons, font and wallpapers.
-beautiful.init('~/.config/awesome/themes/default/theme.lua')
+-- Error handling
+util.error.init()
 
--- This is used later as the default terminal and editor to run.
-terminal = 'terminator'
-editor = os.getenv('EDITOR') or 'vim'
-editor_cmd = terminal .. ' -e "' .. editor
-
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = 'Mod4'
+-- Theme handling library
+require('themes.init').init('default')
 
 --[[
     Menu
 --]]
 --
--- Create a launcher widget and a main menu
-myawesomemenu = {
-    {'hotkeys',     function () hotkeys_popup.show_help(nil, awful.screen.focused()) end},
-    {'manual',      terminal .. ' -e "man awesome"'},
-    {'edit config', editor_cmd .. ' ' .. awesome.conffile .. '"'},
-    {'restart',     awesome.restart},
-    {'quit',        function () awesome.quit() end},
-    {'lock',        function () awful.spawn.with_shell('xlock.sh') end},
-}
-
-mymainmenu = awful.menu{
-    items = {
-        {'awesome',       myawesomemenu, beautiful.awesome_icon},
-        {'open terminal', terminal},
-    },
-}
-
-
-praisewidget = wibox.widget.textbox()
-praisewidget.text = 'You are great!'
-
-mylauncher = awful.widget.launcher{
-    image = beautiful.awesome_icon,
-    menu = mymainmenu,
-}
-
-
--- Menubar configuration
--- Set the terminal for applications that require it
-menubar.utils.terminal = terminal
+local menu = require('menu.init')
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local tag_names = {'1', '2', '3', '4', '5', '6', '7', '8', '9'}
@@ -215,8 +172,7 @@ awful.screen.connect_for_each_screen(
             {
                 -- Left widgets
                 layout = wibox.layout.fixed.horizontal,
-                mylauncher,
-                praisewidget,
+                menu.launcher,
                 s.mytaglist,
                 s.mypromptbox,
             },
@@ -241,7 +197,7 @@ awful.screen.connect_for_each_screen(
 -- awful.mouse.append_global_mousebindings({
 root.buttons(
     gears.table.join(
-        awful.button({}, 3, function () mymainmenu:toggle() end),
+        awful.button({}, 3, function () menu.main:toggle() end),
         awful.button({}, 4, awful.tag.viewnext),
         awful.button({}, 5, awful.tag.viewprev)
     )
@@ -272,7 +228,7 @@ globalkeys = gears.table.join(
             group = 'client',
         }
     ), awful.key(
-        {modkey}, 'w', function () mymainmenu:show() end, {
+        {modkey}, 'w', function () menu.main:show() end, {
             description = 'show main menu',
             group = 'awesome',
         }
@@ -328,7 +284,7 @@ globalkeys = gears.table.join(
         }
     ), -- Standard program
     awful.key(
-        {modkey}, 'Return', function () awful.spawn(terminal) end, {
+        {modkey}, 'Return', function () awful.spawn(app.terminal) end, {
             description = 'open a terminal',
             group = 'launcher',
         }

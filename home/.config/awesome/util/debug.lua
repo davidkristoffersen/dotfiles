@@ -13,6 +13,7 @@ local function warn(title, msg)
     }
 end
 
+--- Debugging utilities
 return {
     warn = warn,
 }

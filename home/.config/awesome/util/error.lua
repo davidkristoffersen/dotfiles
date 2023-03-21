@@ -33,6 +33,7 @@ local function init()
     end
 end
 
+--- Error handling
 return {
     init = init,
 }

@@ -1,4 +1,4 @@
-local m = require('util.init').module
+local m = require('util.module')
 
 m.init()
 
