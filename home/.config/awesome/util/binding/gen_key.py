@@ -48,7 +48,32 @@ def comb(f: TextIOWrapper):
 
 
 def mod(f: TextIOWrapper):
-    ...
+    f.write("local modkey = require('config.init').mod\n\n")
+
+    # Modifier names
+    for mod in main_modifiers:
+        f.write(f"local {mod['n']} = {mod['v']}\n")
+    f.write("\n\n")
+
+    # Initialize modifier tables
+    combs: List[str] = []
+    for n_modifiers in range(1, len(main_modifiers) + 1):
+        first = True
+        for mod_combination in itertools.combinations(main_modifiers, n_modifiers):
+            sp = ''
+            if first:
+                sp = ' '
+            binding = "".join([mod['b'] for mod in mod_combination])
+            val = ", ".join([mod['n'] for mod in mod_combination])
+            comment = " + ".join([mod['c'] for mod in mod_combination])
+            combs.append(binding)
+            f.write(f"local {binding} {sp}= {{{val}}} -- {comment}\n")
+    f.write("\n\n")
+
+    f.write("return {\n")
+    for c in combs:
+        f.write(f"    {c} = {c},\n")
+    f.write("}\n")
 
 
 def key(f: TextIOWrapper):
