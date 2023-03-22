@@ -24,19 +24,19 @@ local mcsa = {M, C, S, A}
 
 
 return {
-    m    = m,     -- Modkey
-    c    = c,     -- Control
-    s    = s,     -- Shift
-    a    = a,     -- Alt
-    mc   = mc,    -- Modkey + Control
-    ms   = ms,    -- Modkey + Shift
-    ma   = ma,    -- Modkey + Alt
-    cs   = cs,    -- Control + Shift
-    ca   = ca,    -- Control + Alt
-    sa   = sa,    -- Shift + Alt
-    mcs  = mcs,   -- Modkey + Control + Shift
-    mca  = mca,   -- Modkey + Control + Alt
-    msa  = msa,   -- Modkey + Shift + Alt
-    csa  = csa,   -- Control + Shift + Alt
-    mcsa = mcsa,  -- Modkey + Control + Shift + Alt
+    m    = m,    -- Modkey
+    c    = c,    -- Control
+    s    = s,    -- Shift
+    a    = a,    -- Alt
+    mc   = mc,   -- Modkey + Control
+    ms   = ms,   -- Modkey + Shift
+    ma   = ma,   -- Modkey + Alt
+    cs   = cs,   -- Control + Shift
+    ca   = ca,   -- Control + Alt
+    sa   = sa,   -- Shift + Alt
+    mcs  = mcs,  -- Modkey + Control + Shift
+    mca  = mca,  -- Modkey + Control + Alt
+    msa  = msa,  -- Modkey + Shift + Alt
+    csa  = csa,  -- Control + Shift + Alt
+    mcsa = mcsa, -- Modkey + Control + Shift + Alt
 }
