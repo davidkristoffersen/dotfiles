@@ -1,35 +1,25 @@
-local awful  = require('awful')
-local gears  = require('gears')
+local awful   = require('awful')
+local gears   = require('gears')
 
-local modkey = require('config.init').mod
+local binding = require('util.binding.init')
+local M, K, B = binding.mod, binding.key, binding.bind
+local key     = binding.funcs.set_key
+
+local modkey  = M.m[1]
 
 
 local keys = gears.table.join(
-    awful.key(
-        {modkey}, 'f', function (c)
-            c.fullscreen = not c.fullscreen
-            c:raise()
-        end, {description = 'toggle fullscreen', group = 'client'}
-    ), awful.key(
-        {modkey, 'Shift'}, 'c', function (c) c:kill() end,
-        {description = 'close', group = 'client'}
-    ), awful.key(
-        {modkey, 'Control'}, 'space', awful.client.floating.toggle, {
-            description = 'toggle floating',
-            group = 'client',
-        }
-    ), awful.key(
-        {modkey, 'Control'}, 'Return',
-        function (c) c:swap(awful.client.getmaster()) end, {
-            description = 'move to master',
-            group = 'client',
-        }
-    ), awful.key(
-        {modkey}, 'o', function (c) c:move_to_screen() end, {
-            description = 'move to screen',
-            group = 'client',
-        }
-    ), -- Move to next/previous screen
+    key(B.m.f, function (c)
+        c.fullscreen = not c.fullscreen
+        c:raise()
+    end, 'toggle fullscreen', 'client'),
+    key(B.ms.c, function (c) c:kill() end, 'close', 'client'),
+    key(B.mc.space, awful.client.floating.toggle,
+        'toggle floating', 'client'),
+    key(B.mc.return_, function (c) c:swap(awful.client.getmaster()) end,
+        'move to master', 'client'),
+    key(B.m.o, function (c) c:move_to_screen() end,
+        'move to screen', 'client'), -- Move to next/previous screen
     awful.key(
         {modkey, 'Mod1'}, 'Right',
         function (c) c:move_to_screen(c.screen.index + 1) end, {
