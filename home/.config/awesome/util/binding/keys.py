@@ -240,20 +240,20 @@ xf86 = [
 ]
 
 keycode_groups = {
-    "number": number,
-    "letter": letter,
-    "punctuation": punctuation,
-    "fn": fn,
-    "modifier": modifier,
-    "navigation": navigation,
-    "keypad": keypad,
-    "misc": misc,
-    "language": language,
-    "xf86": xf86,
+    "number": {'v': number, 'c': 'Numeric keys 0-9'},
+    "letter": {'v': letter, 'c': 'Alphabet keys A-Z, a-z'},
+    "punctuation": {'v': punctuation, 'c': 'Punctuation keys and symbols'},
+    "fn": {'v': fn, 'c': 'Function keys F1-F12'},
+    "modifier": {'v': modifier, 'c': 'Modifier keys like Shift, Control, Alt'},
+    "navigation": {'v': navigation, 'c': 'Navigation keys like arrows, Home, End'},
+    "keypad": {'v': keypad, 'c': 'Numeric keypad and related keys'},
+    "misc": {'v': misc, 'c': 'Miscellaneous keys like Esc, Enter, Tab'},
+    "language": {'v': language, 'c': 'Language input and character conversion keys'},
+    "xf86": {'v': xf86, 'c': 'Multimedia and system control keys'},
 }
 
 # Combine all keycode_groups into one list
-keycodes = [x for group in keycode_groups.values() for x in group]
+keycodes = [x for group in keycode_groups.values() for x in group['v']]
 
 main_modifiers = [
     {"b": "m", "n": "M", "v": "modkey", "c": "Modkey"},
