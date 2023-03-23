@@ -543,7 +543,6 @@ client.floating = false
 
 --- The x coordinates.
 ---
---- TODO Fix type after method.lua is typed
 ---@type integer
 ---## Constraints
 --- - Default value: `c:geometry().x`
@@ -554,7 +553,6 @@ client.x = client:geometry().x
 
 --- The y coordinates.
 ---
---- TODO Fix type after method.lua is typed
 ---@type integer
 ---## Constraints
 --- - Default value: `c:geometry().y`
@@ -565,7 +563,6 @@ client.y = client:geometry().y
 
 --- The width of the client.
 ---
---- TODO Fix type after method.lua is typed
 ---@type integer
 ---## Constraints
 --- - Default value: `c:geometry().width`
@@ -576,7 +573,6 @@ client.width = client:geometry().width
 
 --- The height of the client.
 ---
---- TODO Fix type after method.lua is typed
 ---@type integer
 ---## Constraints
 --- - Default value: `c:geometry().height`
