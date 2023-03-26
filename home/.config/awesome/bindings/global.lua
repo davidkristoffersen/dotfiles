@@ -3,9 +3,9 @@ local gears         = require('gears')
 local menubar       = require('menubar')
 local hotkeys_popup = require('awful.hotkeys_popup').widget
 
-local modkey        = require('config.init').mod
-local main          = require('menu.init').main
-local app           = require('config.app')
+local modkey        = require('config.vars').mod
+local main          = require('menus.init').main
+local apps          = require('config.apps')
 
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -87,7 +87,7 @@ local keys = gears.table.join(
         }
     ), -- Standard program
     awful.key(
-        {modkey}, 'Return', function () awful.spawn(app.terminal) end, {
+        {modkey}, 'Return', function () awful.spawn(apps.terminal) end, {
             description = 'open a terminal',
             group = 'launcher',
         }

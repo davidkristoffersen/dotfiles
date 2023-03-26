@@ -5,6 +5,8 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, 'luarocks.loader')
 
+-- awful = require('awful')
+
 --[[
     Libraries
 --]]
@@ -20,36 +22,33 @@ require('awful.autofocus')
 -- Global declarations
 local conf = require('config.init')
 
--- Utilities
-local util = require('util.init')
+-- Helpers
+local helpers = require('helpers.init')
 -- Error handling
-util.error.init()
+helpers.error.init()
 
 -- Theme handling library
-require('themes.init').init('default')
+require('themes.init').init(conf.vars.theme)
 
 -- Menu
-require('menu.init')
+require('menus.init')
 
 -- Set awesome layouts
-awful.layout.layouts = conf.layout.layouts
+awful.layout.layouts = conf.vars.layouts
 
 -- Wibar
-require('widget.init')
-
--- Mouse bindings
-require('binding.init')
+require('widgets.init')
 
 -- Key bindings
-local binding = require('binding.init')
+local bindings = require('bindings.init')
 -- Set keys
-root.keys(binding.global)
+root.keys(bindings.global)
 
 -- Rules
-require('rule.init')
+require('rules.init')
 
 -- Signals
-require('signal.init')
+require('signals.init')
 
 -- Autostart
 require('autostart.init')

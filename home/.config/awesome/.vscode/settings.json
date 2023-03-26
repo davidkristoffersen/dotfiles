@@ -1,0 +1,16 @@
+{
+  "python.linting.pylintEnabled": false,
+  "python.linting.enabled": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    "source.sortMembers": true
+  },
+  "python.linting.mypyEnabled": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "Lua.diagnostics.globals": ["awesome", "client", "screen", "tag", "root"],
+  "Lua.workspace.library": [
+    "~/.src/awesome/lib",
+    "~/.config/awesome/stubs/awful/key"
+  ],
+  "git.detectSubmodulesLimit": 100
+}

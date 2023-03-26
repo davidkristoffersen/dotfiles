@@ -1,23 +1,35 @@
+---@meta
 ---@diagnostic disable: missing-return
 
+---@module 'awful'
+local awful
+
+---@class Struts: table A table with strut values.
+---@field left integer? The left strut value.
+---@field right integer? The right strut value.
+---@field top integer? The top strut value.
+---@field bottom integer? The bottom strut value.
+
 --- Return client struts (reserved space at the edge of the screen).
----@param struts table A table with new strut values, or none.
----@return table A table with strut values.
----
+---@param struts Struts A table with new strut values, or none.
+---@return Struts: A table with strut values.
+--- ---
 --- [**View doc**](https://awesomewm.org/apidoc/core_components/client.html#struts)
 function client:struts(struts)
 end
 
 --- Check if a client is visible on its screen.
----@return boolean A boolean value, true if the client is visible, false otherwise.
----
+---@return boolean: A boolean value, true if the client is visible, false otherwise.
+--- ---
 --- [**View doc**](https://awesomewm.org/apidoc/core_components/client.html#isvisible)
 function client:isvisible()
 end
 
 --- Kill a client.
+---
 --- This method can be used to close (kill) a client using the X11 protocol.
 ---
+--- ---
 --- [**View doc**](https://awesomewm.org/apidoc/core_components/client.html#kill)
 function client:kill()
 end
@@ -30,40 +42,43 @@ function client:swap(c)
 end
 
 --- Access or set the client tags.
----@param tags_table table A table with tags to set, or nil to get the current tags.
----@return table A table with all tags.
+---@param tags_table table|nil A table with tags to set, or nil to get the current tags.
+---@return table: A table with all tags.
 --- ---
 --- [**View doc**](https://awesomewm.org/apidoc/core_components/client.html#tags)
 function client:tags(tags_table)
 end
 
 --- Raise a client on top of others which are on the same layer.
+---
 --- ---
 --- [**View doc**](https://awesomewm.org/apidoc/core_components/client.html#raise)
 function client:raise()
 end
 
 --- Lower a client on bottom of others which are on the same layer.
+---
 --- ---
 --- [**View doc**](https://awesomewm.org/apidoc/core_components/client.html#lower)
 function client:lower()
 end
 
 --- Stop managing a client.
+---
 --- ---
 --- [**View doc**](https://awesomewm.org/apidoc/core_components/client.html#unmanage)
 function client:unmanage()
 end
 
----@class geometry
----@field x integer
----@field y integer
----@field width integer
----@field height integer
+---@class Geometry: table
+---@field x integer The horizontal position.
+---@field y integer The vertical position.
+---@field width integer The width.
+---@field height integer The height.
 
 --- Return or set client geometry.
----@param geo geometry? A table with new coordinates, or nil.
----@return geometry: A table with client geometry and coordinates.
+---@param geo Geometry|nil A table with new coordinates, or nil.
+---@return Geometry: A table with client geometry and coordinates.
 --- ---
 --- [**View doc**](https://awesomewm.org/apidoc/core_components/client.html#geometry)
 function client:geometry(geo)
@@ -72,8 +87,8 @@ end
 --- Apply size hints to a size.
 ---@param width integer Desired width of client
 ---@param height integer Desired height of client
----@return integer Actual width of client
----@return integer Actual height of client
+---@return integer: Actual width of client
+---@return integer: Actual height of client
 --- ---
 --- [**View doc**](https://awesomewm.org/apidoc/core_components/client.html#apply_size_hints)
 function client:apply_size_hints(width, height)
@@ -81,7 +96,7 @@ end
 
 --- Get the client's n-th icon.
 ---@param index integer The index in the list of icons to get.
----@return surface A lightuserdata for a cairo surface. This reference must be destroyed!
+---@return surface: A lightuserdata for a cairo surface. This reference must be destroyed!
 --- ---
 --- [**View doc**](https://awesomewm.org/apidoc/core_components/client.html#get_icon)
 function client:get_icon(index)
@@ -100,6 +115,9 @@ end
 --- [**View doc**](https://awesomewm.org/apidoc/core_components/client.html#append_keybinding)
 function client:append_keybinding(key)
 end
+
+---@type awful_key
+local k = {}
 
 --- Remove a keybinding.
 ---@param key awful.key The key.
@@ -123,12 +141,14 @@ function client:remove_mousebinding(button)
 end
 
 --- Move the client to the most significant layout position.
+---
 --- ---
 --- [**View doc**](https://awesomewm.org/apidoc/core_components/client.html#to_primary_section)
 function client:to_primary_section()
 end
 
 --- Move the client to the least significant layout position.
+---
 --- ---
 --- [**View doc**](https://awesomewm.org/apidoc/core_components/client.html#to_secondary_section)
 function client:to_secondary_section()
@@ -166,6 +186,7 @@ function client:move_to_screen(s)
 end
 
 --- Find suitable tags for newly created clients.
+---
 --- ---
 --- [**View doc**](https://awesomewm.org/apidoc/core_components/client.html#to_selected_tags)
 function client:to_selected_tags()
@@ -237,6 +258,7 @@ function client:connect_signal(name, func)
 end
 
 --- Connect to a signal weakly.
+---
 --- This allows the callback function to be garbage collected and automatically disconnects the signal when that happens.
 --- Warning: Only use this function if you really, really, really know what you are doing.
 ---@param name string The name of the signal.

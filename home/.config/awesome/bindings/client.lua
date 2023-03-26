@@ -1,8 +1,37 @@
 local awful   = require('awful')
 local gears   = require('gears')
 
-local binding = require('util.binding.init')
+local binding = require('helpers.binding.init')
 local B, key  = binding.bind, binding.funcs.set_key
+
+local cc      = require('awful.client')
+local tt      = require('awful.tag')
+
+
+print(client.size_hints)
+
+-- local show_tag_by_numrow_index = awful.key{
+--     modifiers = {'Mod4'},
+--     keygroup = awful.key.keygroup.NUMROW,
+--     description = 'only view tag',
+--     group = 'tag',
+--     on_press = function (index)
+--         local screen = awful.screen.focused()
+--         local tag = screen.tags[index]
+--         if tag then
+--             tag:view_only()
+--         end
+--     end,
+-- }
+
+
+
+-- ---@param c client
+-- ff = function (c)
+--     c.fullscreen = not c.fullscreen
+--     local t = c:struts()
+--     t.bottom
+-- end
 
 
 local keys = gears.table.join(

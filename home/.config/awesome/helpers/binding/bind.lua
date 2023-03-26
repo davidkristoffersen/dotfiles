@@ -1,4 +1,4 @@
-local modkey = require('config.init').mod
+local modkey = require('config.vars').mod
 
 local M = modkey
 local C = 'Control'

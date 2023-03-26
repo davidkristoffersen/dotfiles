@@ -1,3 +1,4 @@
+---@meta
 ---@diagnostic disable: missing-return
 
 --- Get the number of instances.
@@ -13,7 +14,7 @@ end
 
 --- Get all clients into a table.
 ---
---- TODO Fix type after screen.lua is typed
+---# TODO Fix type after screen.lua is typed
 ---@param screen integer|screen?: A screen number to filter clients on (optional).
 ---@param stacked boolean?: Return clients in stacking order? (ordered from top to bottom) (optional).
 ---@return table: A table with clients.

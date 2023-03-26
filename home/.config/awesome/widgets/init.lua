@@ -1,11 +1,11 @@
 local awful = require('awful')
-local wibox = require('wibox')
+local wibox = require('wibox.init')
 local gears = require('gears')
 local beautiful = require('beautiful')
 
 local conf = require('config.init')
-local layout, modkey = conf.layout, conf.mod
-local menu = require('menu.init')
+local vars, modkey = conf.vars, conf.mod
+local menus = require('menus.init')
 
 -- Keyboard map indicator and switcher
 local mykeyboardlayout = awful.widget.keyboardlayout()
@@ -57,7 +57,7 @@ awful.screen.connect_for_each_screen(
         set_wallpaper(s)
 
         -- Each screen has its own tag table.
-        awful.tag(layout.names, s, awful.layout.layouts)
+        awful.tag(vars.names, s, awful.layout.layouts)
 
         -- Create a promptbox for each screen
         s.mypromptbox = awful.widget.prompt()
@@ -101,7 +101,7 @@ awful.screen.connect_for_each_screen(
             {
                 -- Left widgets
                 layout = wibox.layout.fixed.horizontal,
-                menu.launcher,
+                menus.launcher,
                 s.mytaglist,
                 s.mypromptbox,
             },

@@ -1,0 +1,3 @@
+---@meta
+---@class client
+---@field focus client The currently focused client.

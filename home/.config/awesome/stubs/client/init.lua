@@ -1,3 +1,4 @@
+---@meta
 --- A window managed by AwesomeWM, representing a process or part of it.
 ---
 --- Clients in Awesome (and X11) are windows associated with a program or its parts, such as dialogs.

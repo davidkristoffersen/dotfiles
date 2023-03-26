@@ -1,4 +1,4 @@
-local m = require('util.module')
+local m = require('helpers.module')
 
 m.init()
 

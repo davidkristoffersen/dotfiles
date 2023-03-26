@@ -1,8 +1,8 @@
 ---@meta
 ---@class client
----@field focus client|nil
 
-local gears = require('gears')
+---@module 'gears'
+local gears
 
 --- The X window id.
 ---@type integer
@@ -123,7 +123,7 @@ client.icon_sizes = nil
 
 --- Client screen.
 ---
---- TODO Fix type after screen.lua is typed
+---# TODO Fix type after screen.lua is typed
 ---@type screen
 ---## Constraints
 --- - Default value: This usually correspond to where the top-left (or other gravities) is placed. Then it is mapped to the screen `geometry`.
@@ -468,7 +468,7 @@ client.valid = true
 
 --- The first tag of the client.
 ---
---- TODO Fix type after tag.lua is typed
+---# TODO Fix type after tag.lua is typed
 ---@type tag|nil
 ---## Constraints
 --- - Access: read-only

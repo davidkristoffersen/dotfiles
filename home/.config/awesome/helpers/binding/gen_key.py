@@ -12,7 +12,7 @@ sp = ' ' if FORCE_FORMAT else ''
 
 
 def comb(f: TextIOWrapper):
-    f.write("local modkey = require('config.init').mod\n\n")
+    f.write("local modkey = require('config.vars').mod\n\n")
 
     # Modifier names
     for mod in main_modifiers:
@@ -45,7 +45,7 @@ def comb(f: TextIOWrapper):
 
 
 def mod(f: TextIOWrapper):
-    f.write("local modkey = require('config.init').mod\n\n")
+    f.write("local modkey = require('config.vars').mod\n\n")
 
     # Modifier names
     for mod in main_modifiers:

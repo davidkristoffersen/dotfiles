@@ -1,8 +1,8 @@
 local gears = require('gears')
 local awful = require('awful')
 
-local main = require('menu.init').main
-local modkey = require('config.init').mod
+local main = require('menus.init').main
+local modkey = require('config.vars').mod
 
 -- @DOC_RnanoOOT_BUTTONS@
 root.buttons(

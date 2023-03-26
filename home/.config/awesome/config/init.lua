@@ -1,13 +1,9 @@
-local path = require('config.path')
-local app = require('config.app')
-local layout = require('config.layout')
-
--- Default modkey
-local mod = 'Mod4'
+local paths = require('config.paths')
+local apps = require('config.apps')
+local vars = require('config.vars')
 
 return {
-    path = path,
-    app = app,
-    layout = layout,
-    mod = mod,
+    paths = paths,
+    apps = apps,
+    vars = vars,
 }

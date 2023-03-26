@@ -23,7 +23,15 @@ local layouts = {
     -- l.corner.se,
 }
 
+-- Default theme
+local theme = 'default'
+
+-- Default modkey
+local mod = 'Mod4'
+
 return {
-    names = names,
-    layouts = layouts,
+    names = names,     -- Tag names
+    layouts = layouts, -- Table of layouts to cover with awful.layout.inc
+    theme = theme,     -- Default theme
+    mod = mod,         -- Default modkey
 }

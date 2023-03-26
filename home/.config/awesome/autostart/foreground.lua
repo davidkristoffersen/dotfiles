@@ -1,9 +1,10 @@
 local awful = require('awful')
-local app = require('config.app')
+
+local apps = require('config.apps')
 
 --[[
     Autostart: Applications
 --]]
 --
 -- Terminal
-awful.spawn(app.terminal)
+awful.spawn(apps.terminal)
