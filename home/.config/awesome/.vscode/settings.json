@@ -7,11 +7,5 @@
   },
   "python.linting.mypyEnabled": true,
   "python.analysis.typeCheckingMode": "basic",
-  "Lua.diagnostics.globals": ["awesome", "client", "screen", "tag", "root"],
-  "Lua.workspace.library": [
-    "~/.local/share/awesome/awesome.git/lib",
-    "~/.local/share/awesome/awesome-emmylua.git/lua",
-    "~/.local/share/awesome/awesome-stubs.git/lua"
-  ],
   "git.detectSubmodulesLimit": 100
 }

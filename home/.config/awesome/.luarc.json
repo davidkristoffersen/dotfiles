@@ -1,0 +1,15 @@
+{
+  "diagnostics.globals": [
+    "awesome",
+    "client",
+    "mouse",
+    "mousegrabber",
+    "root",
+    "screen",
+    "tag"
+  ],
+  "Lua.workspace.library": [
+    "~/.local/share/awesome/awesome-emmylua.git/lua",
+    "~/.local/share/awesome/awesome.git/lib"
+  ]
+}
