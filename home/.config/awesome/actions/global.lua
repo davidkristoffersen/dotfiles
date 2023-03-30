@@ -1,12 +1,13 @@
 local awful = require('awful')
+local screen = require('awful.screen')
 local menubar = require('menubar')
-local hotkeys_popup = require('awful.hotkeys_popup').widget
+local hotkeys_popup = require('widgets.hotkeys_popup')
 
 local main = require('menus.init').main
 local apps = require('config.apps')
 
 local awesome = {
-    help = {hotkeys_popup.show_help, {'show help', 'awesome'}},
+    help = {function () hotkeys_popup:show() end, {'show help', 'awesome'}},
     restart = {awesome.restart, {'reload awesome', 'awesome'}},
     quit = {awesome.quit, {'quit awesome', 'awesome'}},
     test = {
@@ -145,7 +146,10 @@ local launcher = {
         {'lock screen', 'launcher'},
     },
     suspend = {
-        function () awful.spawn('systemctl suspend') end,
+        function ()
+            awful.spawn('xlock.sh')
+            awful.spawn.with_shell('sleep 3 && systemctl suspend')
+        end,
         {'Sleep the system', 'launcher'},
     },
     hibernate = {

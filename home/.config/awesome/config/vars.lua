@@ -1,12 +1,11 @@
-local naughty = require("naughty")
-local l = require("awful.layout.suit")
+local naughty = require('naughty')
+local l = require('awful.layout.suit')
 
 --[[
     Laouts
 --]]
-
 -- Tag names
-local names = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }
+local names = {'1', '2', '3', '4', '5', '6', '7', '8', '9'}
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts = {
@@ -31,23 +30,28 @@ local layouts = {
 --[[
     Theme
 --]]
-
 -- Default theme
-local theme = "default"
+local theme = 'default'
 
 -- Set the default font size for notifications
-naughty.config.defaults.font = "sans 20"
+naughty.config.defaults.font = 'sans 20'
+
+--- Hotkeys popup styling
+local hotkeys_style = {
+    font = 'sans 20',
+    description_font = 'sans 16',
+    screen_ratio = 0.8,
+}
 
 --[[
     Modifier keys
 --]]
+local M = 'Mod4' -- Default modkey
 
-local M = "Mod4" -- Default modkey
-
-local C = "Control"
-local S = "Shift"
-local A = "Mod1"
-local N = ""
+local C = 'Control'
+local S = 'Shift'
+local A = 'Mod1'
+local N = ''
 
 --- ### Description
 --- Modifier names
@@ -66,8 +70,9 @@ local Modifiers = {
 }
 
 return {
-    names = names, -- Tag names
-    layouts = layouts, -- Table of layouts to cover with awful.layout.inc
-    theme = theme, -- Default theme
+    names = names,                 -- Tag names
+    layouts = layouts,             -- Table of layouts to cover with awful.layout.inc
+    theme = theme,                 -- Default theme
+    hotkeys_style = hotkeys_style, -- Hotkeys popup styling
     mods = Modifiers,
 }

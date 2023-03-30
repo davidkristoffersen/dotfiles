@@ -6,6 +6,9 @@ local global = require('bindings.global')
 local client = require('bindings.client')
 local mouse = require('bindings.mouse').buttons
 
+-- Set keys
+root.keys(global)
+
 return {
     global = global,
     client = client,

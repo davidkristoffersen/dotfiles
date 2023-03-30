@@ -6,6 +6,7 @@ local beautiful = require('beautiful')
 local conf = require('config.init')
 local vars, modkey = conf.vars, conf.mod
 local menus = require('menus.init')
+local hotkeys_popup = require('widgets.hotkeys_popup')
 
 -- Keyboard map indicator and switcher
 local mykeyboardlayout = awful.widget.keyboardlayout()
@@ -117,3 +118,7 @@ awful.screen.connect_for_each_screen(
         }
     end
 )
+
+return {
+    hotkeys_popup = hotkeys_popup,
+}
