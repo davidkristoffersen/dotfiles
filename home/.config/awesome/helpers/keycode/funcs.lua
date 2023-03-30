@@ -1,10 +1,10 @@
-local awful = require("awful")
-local gears = require("gears")
+local awful = require('awful')
+local gears = require('gears')
 
-local warn = require("helpers.debug").warn
-local T = require("helpers.keycode.combinations.tables")
-local S = require("helpers.keycode.combinations.strings")
-local S_to_T = require("helpers.keycode.combinations.strings_to_tables")
+local warn = require('helpers.debug').warn
+local T = require('helpers.keycode.combinations.tables')
+local S = require('helpers.keycode.combinations.strings')
+local S_to_T = require('helpers.keycode.combinations.strings_to_tables')
 
 --- Create a key binding
 ---@param binding table Table where: [1] = 'mod' string[], [2] = 'key' string
@@ -13,12 +13,8 @@ local S_to_T = require("helpers.keycode.combinations.strings_to_tables")
 ---@param group string Group of key binding
 ---@return AKey[]: A table with key objects.
 local set_key = function(binding, func, desc, group)
-    if desc == nil then
-        desc = "no description"
-    end
-    if group == nil then
-        group = "no group"
-    end
+    if desc == nil then desc = 'no description' end
+    if group == nil then group = 'no group' end
     local t =
         awful.key.new(binding[1], binding[2], func, nil, { description = desc, group = group })
     return t
@@ -48,7 +44,7 @@ local function join_keys(keytable)
         --- @type function
         local func
         local data = {}
-        if type(action) == "table" then
+        if type(action) == 'table' then
             func = action[1]
             data = { description = action[2][1], group = action[2][2] }
         else

@@ -112,7 +112,7 @@ def combinations(f: TextIOWrapper, name: str):
             f.write(f"return strings_to_tables -- Strings to tables mapping\n")
 
 
-def key(f: TextIOWrapper):
+def keys(f: TextIOWrapper):
     for name, val in keycode_groups.items():
         f.write(f"-- {val['d']}\n")
         f.write(f"local {name} = {{\n")
@@ -154,7 +154,7 @@ class CombFile(File):
 
 
 def main():
-    File('key', key).run()
+    File('keys', keys).run()
     CombFile('tables', combinations).run()
     CombFile('strings', combinations).run()
     CombFile('strings_to_tables', combinations).run()
