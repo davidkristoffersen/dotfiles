@@ -1,73 +1,48 @@
----@diagnostic disable: lowercase-global
 -- awesome_mode: api-level=4:screen=on
--- If LuaRocks is installed, make sure that packages installed through it are
--- found (e.g. lgi). If LuaRocks is not installed, do nothing.
-pcall(require, "luarocks.loader")
 
-local awful = require("awful")
+--------------------------------
+-- Configuration and Helpers
+--------------------------------
 
--- local gears = require("gears")
+-- Global configuration variables and settings
+require('config.init')
 
--- local f = client.foo
--- local ac = client.active
+-- Helper functions and utilities
+require('helpers.init')
 
--- local a = awesome
 
--- GEARS
--- local g = gears
--- local t = g.table
--- local j = t.join
--- local jr = j({})
+--------------------------------
+-- LuaRocks and Core Libraries
+--------------------------------
 
--- -- AWFUL
--- local a = awful
--- local k = a.key
--- local r = k.new
--- local rr = r({ "Mod4" }, "l", function() end)
--- local ri = rr[1]
+-- Load LuaRocks loader to support external packages
+pcall(require, 'luarocks.loader')
 
---[[
-    Libraries
---]]
---
--- Standard awesome library
--- local awful = require('awful')
-require("awful.autofocus")
+-- Import and initialize the standard AwesomeWM library
+require('awful.autofocus')
 
---[[
-    Local libraries
---]]
---
--- Global declarations
-local conf = require("config.init")
 
--- Helpers
-local helpers = require("helpers.init")
--- Error handling
-helpers.error.init()
+--------------------------------
+-- Interface, Bindings, and Runtime Configuration
+--------------------------------
 
--- Theme handling library
-require("themes.init").init(conf.vars.theme)
+-- Load and apply the selected theme
+require('themes.init')
 
--- Menu
-require("menus.init")
+-- Create main and context menus
+require('menus.init')
 
--- Set awesome layouts
-awful.layout.layouts = conf.vars.layouts
+-- Initialize wibar and widgets
+require('widgets.init')
 
--- Wibar
-require("widgets.init")
+-- Define and set key and mouse bindings
+require('bindings.init')
 
--- Key bindings
-local bindings = require("bindings.init")
--- Set keys
-root.keys(bindings.global)
+-- Set rules for clients (windows)
+require('rules.init')
 
--- Rules
-require("rules.init")
+-- Set up AwesomeWM signals and event handling
+require('signals.init')
 
--- Signals
-require("signals.init")
-
--- Autostart
-require("autostart.init")
+-- Launch autostart programs
+require('autostart.init')

@@ -1,3 +1,4 @@
+local awful = require('awful')
 local naughty = require('naughty')
 local l = require('awful.layout.suit')
 
@@ -26,6 +27,9 @@ local layouts = {
     -- l.corner.sw,
     -- l.corner.se,
 }
+
+-- Set awesome layouts
+awful.layout.layouts = layouts
 
 --[[
     Theme
