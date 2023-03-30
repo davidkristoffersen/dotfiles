@@ -1,11 +1,8 @@
-local awful = require('awful')
 local gears = require('gears')
 
-local warn = require('helpers.debug').warn
 local keycode = require('helpers.keycode.init')
-local modkey = require('config.vars').mods.m
-local join_keys, set_key = keycode.funcs.join_keys, keycode.funcs.set_key
-local S, T, K = keycode.combinations.strings, keycode.combinations.tables, keycode.keys
+local join_keys = keycode.funcs.join_keys
+local S = keycode.combinations.strings
 local global = require('actions.global')
 local ga, gt, gta, gc, gs, gw, gy, gu =
     global.awesome,
