@@ -1,14 +1,16 @@
 local awful = require('awful')
 local gears = require('gears')
 
+local warn = require('helpers.debug').warn
 local keycode = require('helpers.keycode.init')
 local modkey = require('config.vars').mods.m
-local join_keys = keycode.funcs.join_keys
-local S = keycode.combinations.strings
+local join_keys, set_key = keycode.funcs.join_keys, keycode.funcs.set_key
+local S, T, K = keycode.combinations.strings, keycode.combinations.tables, keycode.keys
 local global = require('actions.global')
-local ga, gt, gc, gs, gw, gy, gu =
+local ga, gt, gta, gc, gs, gw, gy, gu =
     global.awesome,
     global.tag,
+    global.tag_actions,
     global.client,
     global.screen,
     global.client_swap,
@@ -71,36 +73,14 @@ local keys = join_keys{
 }
 
 -- Bind all key numbers to tags.
--- Be careful: we use keycodes to make it work on any keyboard layout.
--- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
-    keys = gears.table.join(
-        keys, -- View tag only.
-        awful.key({modkey}, '#' .. i + 9, function ()
-            local screen = awful.screen.focused()
-            local tag = screen.tags[i]
-            if tag then tag:view_only() end
-        end, {description = 'view tag #' .. i, group = 'tag'}), -- Toggle tag display.
-        awful.key({modkey, 'Control'}, '#' .. i + 9, function ()
-            local screen = awful.screen.focused()
-            local tag = screen.tags[i]
-            if tag then awful.tag.viewtoggle(tag) end
-        end, {description = 'toggle tag #' .. i, group = 'tag'}), -- Move client to tag.
-        awful.key({modkey, 'Shift'}, '#' .. i + 9, function ()
-            if client.focus then
-                local tag = client.focus.screen.tags[i]
-                if tag then client.focus:move_to_tag(tag) end
-            end
-        end, {description = 'move focused client to tag #' .. i, group = 'tag'}), -- Toggle tag on focused client.
-        awful.key({modkey, 'Control', 'Shift'}, '#' .. i + 9, function ()
-            if client.focus then
-                local tag = client.focus.screen.tags[i]
-                if tag then client.focus:toggle_tag(tag) end
-            end
-        end, {description = 'toggle focused client on tag #' .. i, group = 'tag'})
-    )
+    keys = gears.table.join(keys, join_keys{
+        [S.m._ .. '-' .. i]   = gta.view[i],
+        [S.mc._ .. '-' .. i]  = gta.toggle[i],
+        [S.ms._ .. '-' .. i]  = {gta.move_client[i], client},
+        [S.mcs._ .. '-' .. i] = {gta.toggle_client[i], client},
+    })
 end
 
-return {
-    keys = keys,
-}
+
+return keys
