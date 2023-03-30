@@ -51,7 +51,7 @@ local function join_keys(keytable)
             func = action
         end
 
-        table.insert(keys, awful.key(mod_table, key_name, func, data))
+        table.insert(keys, awful.key.new(mod_table, key_name, func, data))
     end
     return gears.table.join(table.unpack(keys))
 end

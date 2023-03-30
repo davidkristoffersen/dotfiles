@@ -17,6 +17,7 @@ local n    = {}
 
 
 -- Modkey
+m._                      = 'M'
 m._0                     = 'M-0'                      -- 0
 m._1                     = 'M-1'                      -- 1
 m._2                     = 'M-2'                      -- 2
@@ -231,6 +232,7 @@ m.xf86xfer               = 'M-XF86Xfer'               -- 💼
 
 
 -- Control
+c._                      = 'C'
 c._0                     = 'C-0'                      -- 0
 c._1                     = 'C-1'                      -- 1
 c._2                     = 'C-2'                      -- 2
@@ -445,6 +447,7 @@ c.xf86xfer               = 'C-XF86Xfer'               -- 💼
 
 
 -- Shift
+s._                      = 'S'
 s._0                     = 'S-0'                      -- 0
 s._1                     = 'S-1'                      -- 1
 s._2                     = 'S-2'                      -- 2
@@ -659,6 +662,7 @@ s.xf86xfer               = 'S-XF86Xfer'               -- 💼
 
 
 -- Alt
+a._                      = 'A'
 a._0                     = 'A-0'                      -- 0
 a._1                     = 'A-1'                      -- 1
 a._2                     = 'A-2'                      -- 2
@@ -873,6 +877,7 @@ a.xf86xfer               = 'A-XF86Xfer'               -- 💼
 
 
 -- Modkey + Control
+mc._                      = 'M-C'
 mc._0                     = 'M-C-0'                      -- 0
 mc._1                     = 'M-C-1'                      -- 1
 mc._2                     = 'M-C-2'                      -- 2
@@ -1087,6 +1092,7 @@ mc.xf86xfer               = 'M-C-XF86Xfer'               -- 💼
 
 
 -- Modkey + Shift
+ms._                      = 'M-S'
 ms._0                     = 'M-S-0'                      -- 0
 ms._1                     = 'M-S-1'                      -- 1
 ms._2                     = 'M-S-2'                      -- 2
@@ -1301,6 +1307,7 @@ ms.xf86xfer               = 'M-S-XF86Xfer'               -- 💼
 
 
 -- Modkey + Alt
+ma._                      = 'M-A'
 ma._0                     = 'M-A-0'                      -- 0
 ma._1                     = 'M-A-1'                      -- 1
 ma._2                     = 'M-A-2'                      -- 2
@@ -1515,6 +1522,7 @@ ma.xf86xfer               = 'M-A-XF86Xfer'               -- 💼
 
 
 -- Control + Shift
+cs._                      = 'C-S'
 cs._0                     = 'C-S-0'                      -- 0
 cs._1                     = 'C-S-1'                      -- 1
 cs._2                     = 'C-S-2'                      -- 2
@@ -1729,6 +1737,7 @@ cs.xf86xfer               = 'C-S-XF86Xfer'               -- 💼
 
 
 -- Control + Alt
+ca._                      = 'C-A'
 ca._0                     = 'C-A-0'                      -- 0
 ca._1                     = 'C-A-1'                      -- 1
 ca._2                     = 'C-A-2'                      -- 2
@@ -1943,6 +1952,7 @@ ca.xf86xfer               = 'C-A-XF86Xfer'               -- 💼
 
 
 -- Shift + Alt
+sa._                      = 'S-A'
 sa._0                     = 'S-A-0'                      -- 0
 sa._1                     = 'S-A-1'                      -- 1
 sa._2                     = 'S-A-2'                      -- 2
@@ -2157,6 +2167,7 @@ sa.xf86xfer               = 'S-A-XF86Xfer'               -- 💼
 
 
 -- Modkey + Control + Shift
+mcs._                      = 'M-C-S'
 mcs._0                     = 'M-C-S-0'                      -- 0
 mcs._1                     = 'M-C-S-1'                      -- 1
 mcs._2                     = 'M-C-S-2'                      -- 2
@@ -2371,6 +2382,7 @@ mcs.xf86xfer               = 'M-C-S-XF86Xfer'               -- 💼
 
 
 -- Modkey + Control + Alt
+mca._                      = 'M-C-A'
 mca._0                     = 'M-C-A-0'                      -- 0
 mca._1                     = 'M-C-A-1'                      -- 1
 mca._2                     = 'M-C-A-2'                      -- 2
@@ -2585,6 +2597,7 @@ mca.xf86xfer               = 'M-C-A-XF86Xfer'               -- 💼
 
 
 -- Modkey + Shift + Alt
+msa._                      = 'M-S-A'
 msa._0                     = 'M-S-A-0'                      -- 0
 msa._1                     = 'M-S-A-1'                      -- 1
 msa._2                     = 'M-S-A-2'                      -- 2
@@ -2799,6 +2812,7 @@ msa.xf86xfer               = 'M-S-A-XF86Xfer'               -- 💼
 
 
 -- Control + Shift + Alt
+csa._                      = 'C-S-A'
 csa._0                     = 'C-S-A-0'                      -- 0
 csa._1                     = 'C-S-A-1'                      -- 1
 csa._2                     = 'C-S-A-2'                      -- 2
@@ -3013,6 +3027,7 @@ csa.xf86xfer               = 'C-S-A-XF86Xfer'               -- 💼
 
 
 -- Modkey + Control + Shift + Alt
+mcsa._                      = 'M-C-S-A'
 mcsa._0                     = 'M-C-S-A-0'                      -- 0
 mcsa._1                     = 'M-C-S-A-1'                      -- 1
 mcsa._2                     = 'M-C-S-A-2'                      -- 2

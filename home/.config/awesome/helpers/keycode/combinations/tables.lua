@@ -45,6 +45,7 @@ local n    = {}
 
 
 -- Modkey
+m._                      = {M, nil}
 m._0                     = {M, '0'}                      -- 0
 m._1                     = {M, '1'}                      -- 1
 m._2                     = {M, '2'}                      -- 2
@@ -259,6 +260,7 @@ m.xf86xfer               = {M, 'XF86Xfer'}               -- 💼
 
 
 -- Control
+c._                      = {C, nil}
 c._0                     = {C, '0'}                      -- 0
 c._1                     = {C, '1'}                      -- 1
 c._2                     = {C, '2'}                      -- 2
@@ -473,6 +475,7 @@ c.xf86xfer               = {C, 'XF86Xfer'}               -- 💼
 
 
 -- Shift
+s._                      = {S, nil}
 s._0                     = {S, '0'}                      -- 0
 s._1                     = {S, '1'}                      -- 1
 s._2                     = {S, '2'}                      -- 2
@@ -687,6 +690,7 @@ s.xf86xfer               = {S, 'XF86Xfer'}               -- 💼
 
 
 -- Alt
+a._                      = {A, nil}
 a._0                     = {A, '0'}                      -- 0
 a._1                     = {A, '1'}                      -- 1
 a._2                     = {A, '2'}                      -- 2
@@ -901,6 +905,7 @@ a.xf86xfer               = {A, 'XF86Xfer'}               -- 💼
 
 
 -- Modkey + Control
+mc._                      = {MC, nil}
 mc._0                     = {MC, '0'}                      -- 0
 mc._1                     = {MC, '1'}                      -- 1
 mc._2                     = {MC, '2'}                      -- 2
@@ -1115,6 +1120,7 @@ mc.xf86xfer               = {MC, 'XF86Xfer'}               -- 💼
 
 
 -- Modkey + Shift
+ms._                      = {MS, nil}
 ms._0                     = {MS, '0'}                      -- 0
 ms._1                     = {MS, '1'}                      -- 1
 ms._2                     = {MS, '2'}                      -- 2
@@ -1329,6 +1335,7 @@ ms.xf86xfer               = {MS, 'XF86Xfer'}               -- 💼
 
 
 -- Modkey + Alt
+ma._                      = {MA, nil}
 ma._0                     = {MA, '0'}                      -- 0
 ma._1                     = {MA, '1'}                      -- 1
 ma._2                     = {MA, '2'}                      -- 2
@@ -1543,6 +1550,7 @@ ma.xf86xfer               = {MA, 'XF86Xfer'}               -- 💼
 
 
 -- Control + Shift
+cs._                      = {CS, nil}
 cs._0                     = {CS, '0'}                      -- 0
 cs._1                     = {CS, '1'}                      -- 1
 cs._2                     = {CS, '2'}                      -- 2
@@ -1757,6 +1765,7 @@ cs.xf86xfer               = {CS, 'XF86Xfer'}               -- 💼
 
 
 -- Control + Alt
+ca._                      = {CA, nil}
 ca._0                     = {CA, '0'}                      -- 0
 ca._1                     = {CA, '1'}                      -- 1
 ca._2                     = {CA, '2'}                      -- 2
@@ -1971,6 +1980,7 @@ ca.xf86xfer               = {CA, 'XF86Xfer'}               -- 💼
 
 
 -- Shift + Alt
+sa._                      = {SA, nil}
 sa._0                     = {SA, '0'}                      -- 0
 sa._1                     = {SA, '1'}                      -- 1
 sa._2                     = {SA, '2'}                      -- 2
@@ -2185,6 +2195,7 @@ sa.xf86xfer               = {SA, 'XF86Xfer'}               -- 💼
 
 
 -- Modkey + Control + Shift
+mcs._                      = {MCS, nil}
 mcs._0                     = {MCS, '0'}                      -- 0
 mcs._1                     = {MCS, '1'}                      -- 1
 mcs._2                     = {MCS, '2'}                      -- 2
@@ -2399,6 +2410,7 @@ mcs.xf86xfer               = {MCS, 'XF86Xfer'}               -- 💼
 
 
 -- Modkey + Control + Alt
+mca._                      = {MCA, nil}
 mca._0                     = {MCA, '0'}                      -- 0
 mca._1                     = {MCA, '1'}                      -- 1
 mca._2                     = {MCA, '2'}                      -- 2
@@ -2613,6 +2625,7 @@ mca.xf86xfer               = {MCA, 'XF86Xfer'}               -- 💼
 
 
 -- Modkey + Shift + Alt
+msa._                      = {MSA, nil}
 msa._0                     = {MSA, '0'}                      -- 0
 msa._1                     = {MSA, '1'}                      -- 1
 msa._2                     = {MSA, '2'}                      -- 2
@@ -2827,6 +2840,7 @@ msa.xf86xfer               = {MSA, 'XF86Xfer'}               -- 💼
 
 
 -- Control + Shift + Alt
+csa._                      = {CSA, nil}
 csa._0                     = {CSA, '0'}                      -- 0
 csa._1                     = {CSA, '1'}                      -- 1
 csa._2                     = {CSA, '2'}                      -- 2
@@ -3041,6 +3055,7 @@ csa.xf86xfer               = {CSA, 'XF86Xfer'}               -- 💼
 
 
 -- Modkey + Control + Shift + Alt
+mcsa._                      = {MCSA, nil}
 mcsa._0                     = {MCSA, '0'}                      -- 0
 mcsa._1                     = {MCSA, '1'}                      -- 1
 mcsa._2                     = {MCSA, '2'}                      -- 2

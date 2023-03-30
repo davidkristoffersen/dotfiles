@@ -36,13 +36,20 @@ def tables_fill(f: TextIOWrapper, key: str, k: KeyT):
     f.write(f"{{{key.upper()}, '{k[1]}'}}")
 
 
-def strings_fill(f: TextIOWrapper, key: str, comb: ModCombT, k: KeyT):
+def strings_fill(f: TextIOWrapper, key: str, comb: ModCombT, k: str):
     f.write("'")
-    for val in comb.values():
+    for it, val in enumerate(comb.values()):
         if key == 'n':
             continue
-        f.write(f"{val['u']}{COMB_MOD_SEP}")
-    f.write(f"{k[1]}'")
+        if k == '_':
+            if it < len(comb) - 1:
+                f.write(f"{val['u']}{COMB_MOD_SEP}")
+            else:
+                f.write(f"{val['u']}'")
+        else:
+            f.write(f"{val['u']}{COMB_MOD_SEP}")
+    if not k == '_':
+        f.write(f"{k}'")
 
 
 def combinations(f: TextIOWrapper, name: str):
@@ -79,18 +86,31 @@ def combinations(f: TextIOWrapper, name: str):
     for it, (key, val) in enumerate(mod_combs.items()):
         desc = ' + '.join([v['d'] for k, v in val.items()])
         f.write(f"-- {desc}\n")
+        if not key == 'n':
+            match name:
+                case 'tables':
+                    f.write(f"{key}._ {SP}= " + "{" + key.upper() + ", nil}\n")
+                case 'strings':
+                    f.write(f"{key}._ {SP}= ")
+                    strings_fill(f, key, val, '_')
+                    f.write(f"\n")
+                case 'strings_to_tables':
+                    f.write("[")
+                    strings_fill(f, key, val, '_')
+                    f.write(f"] {SP}= T.{key}._,\n")
+
         for k in keycodes:
             if name in ['tables', 'strings']:
                 f.write(f"{key}.{k[0]} {SP}= ")
             elif name == 'strings_to_tables':
                 f.write("[")
-                strings_fill(f, key, val, k)
+                strings_fill(f, key, val, k[1])
                 f.write(f"] {SP}= T.{key}.{k[0]},")
             match name:
                 case 'tables':
                     tables_fill(f, key, k)
                 case 'strings':
-                    strings_fill(f, key, val, k)
+                    strings_fill(f, key, val, k[1])
             f.write(f" -- {k[2]}\n")
 
         if name in ['tables', 'strings']:
