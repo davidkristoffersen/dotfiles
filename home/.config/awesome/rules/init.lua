@@ -13,8 +13,8 @@ awful.rules.rules = {
             border_color = beautiful.border_normal,
             focus = awful.client.focus.filter,
             raise = true,
-            keys = bindings.client,
-            buttons = bindings.mouse,
+            keys = bindings.keys.client,
+            buttons = bindings.buttons.client,
             screen = awful.screen.preferred,
             placement = awful.placement.no_overlap + awful.placement
                 .no_offscreen,

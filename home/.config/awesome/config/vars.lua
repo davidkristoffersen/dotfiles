@@ -42,8 +42,8 @@ naughty.config.defaults.font = 'sans 20'
 
 --- Hotkeys popup styling
 local hotkeys_style = {
-    font = 'sans 20',
-    description_font = 'sans 16',
+    font = 'sans 18',
+    description_font = 'sans 14',
     screen_ratio = 0.8,
 }
 

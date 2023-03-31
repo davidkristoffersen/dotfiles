@@ -2,15 +2,16 @@
 -- when client with a matching name is opened:
 require('awful.hotkeys_popup.keys')
 
-local global = require('bindings.global')
-local client = require('bindings.client')
-local mouse = require('bindings.mouse').buttons
+local keys = require('bindings.keys.init')
+local buttons = require('bindings.buttons.init')
 
 -- Set keys
-root.keys(global)
+root.keys(keys.global)
+
+-- Set buttons
+root.buttons(buttons.global)
 
 return {
-    global = global,
-    client = client,
-    mouse = mouse,
+    keys = keys,
+    buttons = buttons,
 }

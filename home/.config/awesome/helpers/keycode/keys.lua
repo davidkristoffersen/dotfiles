@@ -1,4 +1,15 @@
--- Numeric keys 0-9
+--- Mouse buttons
+--- @type { [string]: string }
+local mouse = {
+    b_left   = 'B1', -- Left mouse button
+    b_middle = 'B2', -- Middle mouse button
+    b_right  = 'B3', -- Right mouse button
+    b_up     = 'B4', -- Scroll Up
+    b_down   = 'B5', -- Scroll Down
+}
+
+--- Numeric keys 0-9
+--- @type { [string]: string }
 local number = {
     _0 = '0', -- 0
     _1 = '1', -- 1
@@ -12,7 +23,8 @@ local number = {
     _9 = '9', -- 9
 }
 
--- Alphabet keys A-Z, a-z
+--- Alphabet keys A-Z, a-z
+--- @type { [string]: string }
 local letter = {
     a      = 'a',      -- a
     b      = 'b',      -- b
@@ -45,7 +57,8 @@ local letter = {
     aring  = 'aring',  -- å
 }
 
--- Punctuation keys and symbols
+--- Punctuation keys and symbols
+--- @type { [string]: string }
 local punctuation = {
     apostrophe = 'apostrophe', -- '
     backslash  = 'backslash',  -- \
@@ -63,7 +76,8 @@ local punctuation = {
     tab        = 'tab',        -- ⇥
 }
 
--- Function keys F1-F12
+--- Function keys F1-F12
+--- @type { [string]: string }
 local fn = {
     f1  = 'F1',  -- F1
     f2  = 'F2',  -- F2
@@ -79,7 +93,8 @@ local fn = {
     f12 = 'F12', -- F12
 }
 
--- Modifier keys like Shift, Control, Alt
+--- Modifier keys like Shift, Control, Alt
+--- @type { [string]: string }
 local modifier = {
     alt_l            = 'Alt_L',            -- Alt Left
     control_l        = 'Control_L',        -- Ctrl Left
@@ -92,7 +107,8 @@ local modifier = {
     super_r          = 'Super_R',          -- Super Right
 }
 
--- Navigation keys like arrows, Home, End
+--- Navigation keys like arrows, Home, End
+--- @type { [string]: string }
 local navigation = {
     backspace   = 'BackSpace',   -- ⌫
     caps_lock   = 'Caps_Lock',   -- ⇪
@@ -116,7 +132,8 @@ local navigation = {
     up          = 'Up',          -- ↑
 }
 
--- Numeric keypad and related keys
+--- Numeric keypad and related keys
+--- @type { [string]: string }
 local keypad = {
     kp_add      = 'KP_Add',      -- +
     kp_begin    = 'KP_Begin',    -- Begin
@@ -138,7 +155,8 @@ local keypad = {
     kp_up       = 'KP_Up',       -- ↑
 }
 
--- Miscellaneous keys like Esc, Enter, Tab
+--- Miscellaneous keys like Esc, Enter, Tab
+--- @type { [string]: string }
 local misc = {
     find  = 'Find',  -- Find
     help  = 'Help',  -- Help
@@ -146,7 +164,8 @@ local misc = {
     undo  = 'Undo',  -- Undo
 }
 
--- Language input and character conversion keys
+--- Language input and character conversion keys
+--- @type { [string]: string }
 local language = {
     hangul            = 'Hangul',            -- 한글
     hangul_hanja      = 'Hangul_Hanja',      -- 한자
@@ -157,7 +176,8 @@ local language = {
     muhenkan          = 'Muhenkan',          -- 無変換
 }
 
--- Multimedia and system control keys
+--- Multimedia and system control keys
+--- @type { [string]: string }
 local xf86 = {
     xf86audioforward       = 'XF86AudioForward',       -- ⏩
     xf86audiolowervolume   = 'XF86AudioLowerVolume',   -- 🔉
@@ -249,7 +269,9 @@ local xf86 = {
     xf86xfer               = 'XF86Xfer',               -- 💼
 }
 
+
 return {
+    mouse       = mouse,       -- Mouse buttons
     number      = number,      -- Numeric keys 0-9
     letter      = letter,      -- Alphabet keys A-Z, a-z
     punctuation = punctuation, -- Punctuation keys and symbols

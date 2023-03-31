@@ -1,9 +1,15 @@
 local T = require('helpers.keycode.combinations.tables')
 
 
+--- @type { [string]: KeyComb}
 local strings_to_tables = {
     -- Modkey
     ['M']                              = T.m._,
+    ['M-B1']                           = T.m.b_left,                 -- Left mouse button
+    ['M-B2']                           = T.m.b_middle,               -- Middle mouse button
+    ['M-B3']                           = T.m.b_right,                -- Right mouse button
+    ['M-B4']                           = T.m.b_up,                   -- Scroll Up
+    ['M-B5']                           = T.m.b_down,                 -- Scroll Down
     ['M-0']                            = T.m._0,                     -- 0
     ['M-1']                            = T.m._1,                     -- 1
     ['M-2']                            = T.m._2,                     -- 2
@@ -217,6 +223,11 @@ local strings_to_tables = {
     ['M-XF86Xfer']                     = T.m.xf86xfer,               -- 💼
     -- Control
     ['C']                              = T.c._,
+    ['C-B1']                           = T.c.b_left,                 -- Left mouse button
+    ['C-B2']                           = T.c.b_middle,               -- Middle mouse button
+    ['C-B3']                           = T.c.b_right,                -- Right mouse button
+    ['C-B4']                           = T.c.b_up,                   -- Scroll Up
+    ['C-B5']                           = T.c.b_down,                 -- Scroll Down
     ['C-0']                            = T.c._0,                     -- 0
     ['C-1']                            = T.c._1,                     -- 1
     ['C-2']                            = T.c._2,                     -- 2
@@ -430,6 +441,11 @@ local strings_to_tables = {
     ['C-XF86Xfer']                     = T.c.xf86xfer,               -- 💼
     -- Shift
     ['S']                              = T.s._,
+    ['S-B1']                           = T.s.b_left,                 -- Left mouse button
+    ['S-B2']                           = T.s.b_middle,               -- Middle mouse button
+    ['S-B3']                           = T.s.b_right,                -- Right mouse button
+    ['S-B4']                           = T.s.b_up,                   -- Scroll Up
+    ['S-B5']                           = T.s.b_down,                 -- Scroll Down
     ['S-0']                            = T.s._0,                     -- 0
     ['S-1']                            = T.s._1,                     -- 1
     ['S-2']                            = T.s._2,                     -- 2
@@ -643,6 +659,11 @@ local strings_to_tables = {
     ['S-XF86Xfer']                     = T.s.xf86xfer,               -- 💼
     -- Alt
     ['A']                              = T.a._,
+    ['A-B1']                           = T.a.b_left,                 -- Left mouse button
+    ['A-B2']                           = T.a.b_middle,               -- Middle mouse button
+    ['A-B3']                           = T.a.b_right,                -- Right mouse button
+    ['A-B4']                           = T.a.b_up,                   -- Scroll Up
+    ['A-B5']                           = T.a.b_down,                 -- Scroll Down
     ['A-0']                            = T.a._0,                     -- 0
     ['A-1']                            = T.a._1,                     -- 1
     ['A-2']                            = T.a._2,                     -- 2
@@ -856,6 +877,11 @@ local strings_to_tables = {
     ['A-XF86Xfer']                     = T.a.xf86xfer,               -- 💼
     -- Modkey + Control
     ['M-C']                            = T.mc._,
+    ['M-C-B1']                         = T.mc.b_left,                 -- Left mouse button
+    ['M-C-B2']                         = T.mc.b_middle,               -- Middle mouse button
+    ['M-C-B3']                         = T.mc.b_right,                -- Right mouse button
+    ['M-C-B4']                         = T.mc.b_up,                   -- Scroll Up
+    ['M-C-B5']                         = T.mc.b_down,                 -- Scroll Down
     ['M-C-0']                          = T.mc._0,                     -- 0
     ['M-C-1']                          = T.mc._1,                     -- 1
     ['M-C-2']                          = T.mc._2,                     -- 2
@@ -1069,6 +1095,11 @@ local strings_to_tables = {
     ['M-C-XF86Xfer']                   = T.mc.xf86xfer,               -- 💼
     -- Modkey + Shift
     ['M-S']                            = T.ms._,
+    ['M-S-B1']                         = T.ms.b_left,                 -- Left mouse button
+    ['M-S-B2']                         = T.ms.b_middle,               -- Middle mouse button
+    ['M-S-B3']                         = T.ms.b_right,                -- Right mouse button
+    ['M-S-B4']                         = T.ms.b_up,                   -- Scroll Up
+    ['M-S-B5']                         = T.ms.b_down,                 -- Scroll Down
     ['M-S-0']                          = T.ms._0,                     -- 0
     ['M-S-1']                          = T.ms._1,                     -- 1
     ['M-S-2']                          = T.ms._2,                     -- 2
@@ -1282,6 +1313,11 @@ local strings_to_tables = {
     ['M-S-XF86Xfer']                   = T.ms.xf86xfer,               -- 💼
     -- Modkey + Alt
     ['M-A']                            = T.ma._,
+    ['M-A-B1']                         = T.ma.b_left,                 -- Left mouse button
+    ['M-A-B2']                         = T.ma.b_middle,               -- Middle mouse button
+    ['M-A-B3']                         = T.ma.b_right,                -- Right mouse button
+    ['M-A-B4']                         = T.ma.b_up,                   -- Scroll Up
+    ['M-A-B5']                         = T.ma.b_down,                 -- Scroll Down
     ['M-A-0']                          = T.ma._0,                     -- 0
     ['M-A-1']                          = T.ma._1,                     -- 1
     ['M-A-2']                          = T.ma._2,                     -- 2
@@ -1495,6 +1531,11 @@ local strings_to_tables = {
     ['M-A-XF86Xfer']                   = T.ma.xf86xfer,               -- 💼
     -- Control + Shift
     ['C-S']                            = T.cs._,
+    ['C-S-B1']                         = T.cs.b_left,                 -- Left mouse button
+    ['C-S-B2']                         = T.cs.b_middle,               -- Middle mouse button
+    ['C-S-B3']                         = T.cs.b_right,                -- Right mouse button
+    ['C-S-B4']                         = T.cs.b_up,                   -- Scroll Up
+    ['C-S-B5']                         = T.cs.b_down,                 -- Scroll Down
     ['C-S-0']                          = T.cs._0,                     -- 0
     ['C-S-1']                          = T.cs._1,                     -- 1
     ['C-S-2']                          = T.cs._2,                     -- 2
@@ -1708,6 +1749,11 @@ local strings_to_tables = {
     ['C-S-XF86Xfer']                   = T.cs.xf86xfer,               -- 💼
     -- Control + Alt
     ['C-A']                            = T.ca._,
+    ['C-A-B1']                         = T.ca.b_left,                 -- Left mouse button
+    ['C-A-B2']                         = T.ca.b_middle,               -- Middle mouse button
+    ['C-A-B3']                         = T.ca.b_right,                -- Right mouse button
+    ['C-A-B4']                         = T.ca.b_up,                   -- Scroll Up
+    ['C-A-B5']                         = T.ca.b_down,                 -- Scroll Down
     ['C-A-0']                          = T.ca._0,                     -- 0
     ['C-A-1']                          = T.ca._1,                     -- 1
     ['C-A-2']                          = T.ca._2,                     -- 2
@@ -1921,6 +1967,11 @@ local strings_to_tables = {
     ['C-A-XF86Xfer']                   = T.ca.xf86xfer,               -- 💼
     -- Shift + Alt
     ['S-A']                            = T.sa._,
+    ['S-A-B1']                         = T.sa.b_left,                 -- Left mouse button
+    ['S-A-B2']                         = T.sa.b_middle,               -- Middle mouse button
+    ['S-A-B3']                         = T.sa.b_right,                -- Right mouse button
+    ['S-A-B4']                         = T.sa.b_up,                   -- Scroll Up
+    ['S-A-B5']                         = T.sa.b_down,                 -- Scroll Down
     ['S-A-0']                          = T.sa._0,                     -- 0
     ['S-A-1']                          = T.sa._1,                     -- 1
     ['S-A-2']                          = T.sa._2,                     -- 2
@@ -2134,6 +2185,11 @@ local strings_to_tables = {
     ['S-A-XF86Xfer']                   = T.sa.xf86xfer,               -- 💼
     -- Modkey + Control + Shift
     ['M-C-S']                          = T.mcs._,
+    ['M-C-S-B1']                       = T.mcs.b_left,                 -- Left mouse button
+    ['M-C-S-B2']                       = T.mcs.b_middle,               -- Middle mouse button
+    ['M-C-S-B3']                       = T.mcs.b_right,                -- Right mouse button
+    ['M-C-S-B4']                       = T.mcs.b_up,                   -- Scroll Up
+    ['M-C-S-B5']                       = T.mcs.b_down,                 -- Scroll Down
     ['M-C-S-0']                        = T.mcs._0,                     -- 0
     ['M-C-S-1']                        = T.mcs._1,                     -- 1
     ['M-C-S-2']                        = T.mcs._2,                     -- 2
@@ -2347,6 +2403,11 @@ local strings_to_tables = {
     ['M-C-S-XF86Xfer']                 = T.mcs.xf86xfer,               -- 💼
     -- Modkey + Control + Alt
     ['M-C-A']                          = T.mca._,
+    ['M-C-A-B1']                       = T.mca.b_left,                 -- Left mouse button
+    ['M-C-A-B2']                       = T.mca.b_middle,               -- Middle mouse button
+    ['M-C-A-B3']                       = T.mca.b_right,                -- Right mouse button
+    ['M-C-A-B4']                       = T.mca.b_up,                   -- Scroll Up
+    ['M-C-A-B5']                       = T.mca.b_down,                 -- Scroll Down
     ['M-C-A-0']                        = T.mca._0,                     -- 0
     ['M-C-A-1']                        = T.mca._1,                     -- 1
     ['M-C-A-2']                        = T.mca._2,                     -- 2
@@ -2560,6 +2621,11 @@ local strings_to_tables = {
     ['M-C-A-XF86Xfer']                 = T.mca.xf86xfer,               -- 💼
     -- Modkey + Shift + Alt
     ['M-S-A']                          = T.msa._,
+    ['M-S-A-B1']                       = T.msa.b_left,                 -- Left mouse button
+    ['M-S-A-B2']                       = T.msa.b_middle,               -- Middle mouse button
+    ['M-S-A-B3']                       = T.msa.b_right,                -- Right mouse button
+    ['M-S-A-B4']                       = T.msa.b_up,                   -- Scroll Up
+    ['M-S-A-B5']                       = T.msa.b_down,                 -- Scroll Down
     ['M-S-A-0']                        = T.msa._0,                     -- 0
     ['M-S-A-1']                        = T.msa._1,                     -- 1
     ['M-S-A-2']                        = T.msa._2,                     -- 2
@@ -2773,6 +2839,11 @@ local strings_to_tables = {
     ['M-S-A-XF86Xfer']                 = T.msa.xf86xfer,               -- 💼
     -- Control + Shift + Alt
     ['C-S-A']                          = T.csa._,
+    ['C-S-A-B1']                       = T.csa.b_left,                 -- Left mouse button
+    ['C-S-A-B2']                       = T.csa.b_middle,               -- Middle mouse button
+    ['C-S-A-B3']                       = T.csa.b_right,                -- Right mouse button
+    ['C-S-A-B4']                       = T.csa.b_up,                   -- Scroll Up
+    ['C-S-A-B5']                       = T.csa.b_down,                 -- Scroll Down
     ['C-S-A-0']                        = T.csa._0,                     -- 0
     ['C-S-A-1']                        = T.csa._1,                     -- 1
     ['C-S-A-2']                        = T.csa._2,                     -- 2
@@ -2986,6 +3057,11 @@ local strings_to_tables = {
     ['C-S-A-XF86Xfer']                 = T.csa.xf86xfer,               -- 💼
     -- Modkey + Control + Shift + Alt
     ['M-C-S-A']                        = T.mcsa._,
+    ['M-C-S-A-B1']                     = T.mcsa.b_left,                 -- Left mouse button
+    ['M-C-S-A-B2']                     = T.mcsa.b_middle,               -- Middle mouse button
+    ['M-C-S-A-B3']                     = T.mcsa.b_right,                -- Right mouse button
+    ['M-C-S-A-B4']                     = T.mcsa.b_up,                   -- Scroll Up
+    ['M-C-S-A-B5']                     = T.mcsa.b_down,                 -- Scroll Down
     ['M-C-S-A-0']                      = T.mcsa._0,                     -- 0
     ['M-C-S-A-1']                      = T.mcsa._1,                     -- 1
     ['M-C-S-A-2']                      = T.mcsa._2,                     -- 2
@@ -3198,6 +3274,11 @@ local strings_to_tables = {
     ['M-C-S-A-XF86WWW']                = T.mcsa.xf86www,                -- 🌐
     ['M-C-S-A-XF86Xfer']               = T.mcsa.xf86xfer,               -- 💼
     -- No Modifier
+    ['B1']                             = T.n.b_left,                    -- Left mouse button
+    ['B2']                             = T.n.b_middle,                  -- Middle mouse button
+    ['B3']                             = T.n.b_right,                   -- Right mouse button
+    ['B4']                             = T.n.b_up,                      -- Scroll Up
+    ['B5']                             = T.n.b_down,                    -- Scroll Down
     ['0']                              = T.n._0,                        -- 0
     ['1']                              = T.n._1,                        -- 1
     ['2']                              = T.n._2,                        -- 2

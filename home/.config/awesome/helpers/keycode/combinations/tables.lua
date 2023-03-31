@@ -26,26 +26,47 @@ local MCSA = {_M, _C, _S, _A}
 local N    = {_N}
 
 
+--- @type { [string]: KeyComb}
 local m    = {}
+--- @type { [string]: KeyComb}
 local c    = {}
+--- @type { [string]: KeyComb}
 local s    = {}
+--- @type { [string]: KeyComb}
 local a    = {}
+--- @type { [string]: KeyComb}
 local mc   = {}
+--- @type { [string]: KeyComb}
 local ms   = {}
+--- @type { [string]: KeyComb}
 local ma   = {}
+--- @type { [string]: KeyComb}
 local cs   = {}
+--- @type { [string]: KeyComb}
 local ca   = {}
+--- @type { [string]: KeyComb}
 local sa   = {}
+--- @type { [string]: KeyComb}
 local mcs  = {}
+--- @type { [string]: KeyComb}
 local mca  = {}
+--- @type { [string]: KeyComb}
 local msa  = {}
+--- @type { [string]: KeyComb}
 local csa  = {}
+--- @type { [string]: KeyComb}
 local mcsa = {}
+--- @type { [string]: KeyComb}
 local n    = {}
 
 
 -- Modkey
 m._                      = {M, nil}
+m.b_left                 = {M, 'B1'}                     -- Left mouse button
+m.b_middle               = {M, 'B2'}                     -- Middle mouse button
+m.b_right                = {M, 'B3'}                     -- Right mouse button
+m.b_up                   = {M, 'B4'}                     -- Scroll Up
+m.b_down                 = {M, 'B5'}                     -- Scroll Down
 m._0                     = {M, '0'}                      -- 0
 m._1                     = {M, '1'}                      -- 1
 m._2                     = {M, '2'}                      -- 2
@@ -261,6 +282,11 @@ m.xf86xfer               = {M, 'XF86Xfer'}               -- 💼
 
 -- Control
 c._                      = {C, nil}
+c.b_left                 = {C, 'B1'}                     -- Left mouse button
+c.b_middle               = {C, 'B2'}                     -- Middle mouse button
+c.b_right                = {C, 'B3'}                     -- Right mouse button
+c.b_up                   = {C, 'B4'}                     -- Scroll Up
+c.b_down                 = {C, 'B5'}                     -- Scroll Down
 c._0                     = {C, '0'}                      -- 0
 c._1                     = {C, '1'}                      -- 1
 c._2                     = {C, '2'}                      -- 2
@@ -476,6 +502,11 @@ c.xf86xfer               = {C, 'XF86Xfer'}               -- 💼
 
 -- Shift
 s._                      = {S, nil}
+s.b_left                 = {S, 'B1'}                     -- Left mouse button
+s.b_middle               = {S, 'B2'}                     -- Middle mouse button
+s.b_right                = {S, 'B3'}                     -- Right mouse button
+s.b_up                   = {S, 'B4'}                     -- Scroll Up
+s.b_down                 = {S, 'B5'}                     -- Scroll Down
 s._0                     = {S, '0'}                      -- 0
 s._1                     = {S, '1'}                      -- 1
 s._2                     = {S, '2'}                      -- 2
@@ -691,6 +722,11 @@ s.xf86xfer               = {S, 'XF86Xfer'}               -- 💼
 
 -- Alt
 a._                      = {A, nil}
+a.b_left                 = {A, 'B1'}                     -- Left mouse button
+a.b_middle               = {A, 'B2'}                     -- Middle mouse button
+a.b_right                = {A, 'B3'}                     -- Right mouse button
+a.b_up                   = {A, 'B4'}                     -- Scroll Up
+a.b_down                 = {A, 'B5'}                     -- Scroll Down
 a._0                     = {A, '0'}                      -- 0
 a._1                     = {A, '1'}                      -- 1
 a._2                     = {A, '2'}                      -- 2
@@ -906,6 +942,11 @@ a.xf86xfer               = {A, 'XF86Xfer'}               -- 💼
 
 -- Modkey + Control
 mc._                      = {MC, nil}
+mc.b_left                 = {MC, 'B1'}                     -- Left mouse button
+mc.b_middle               = {MC, 'B2'}                     -- Middle mouse button
+mc.b_right                = {MC, 'B3'}                     -- Right mouse button
+mc.b_up                   = {MC, 'B4'}                     -- Scroll Up
+mc.b_down                 = {MC, 'B5'}                     -- Scroll Down
 mc._0                     = {MC, '0'}                      -- 0
 mc._1                     = {MC, '1'}                      -- 1
 mc._2                     = {MC, '2'}                      -- 2
@@ -1121,6 +1162,11 @@ mc.xf86xfer               = {MC, 'XF86Xfer'}               -- 💼
 
 -- Modkey + Shift
 ms._                      = {MS, nil}
+ms.b_left                 = {MS, 'B1'}                     -- Left mouse button
+ms.b_middle               = {MS, 'B2'}                     -- Middle mouse button
+ms.b_right                = {MS, 'B3'}                     -- Right mouse button
+ms.b_up                   = {MS, 'B4'}                     -- Scroll Up
+ms.b_down                 = {MS, 'B5'}                     -- Scroll Down
 ms._0                     = {MS, '0'}                      -- 0
 ms._1                     = {MS, '1'}                      -- 1
 ms._2                     = {MS, '2'}                      -- 2
@@ -1336,6 +1382,11 @@ ms.xf86xfer               = {MS, 'XF86Xfer'}               -- 💼
 
 -- Modkey + Alt
 ma._                      = {MA, nil}
+ma.b_left                 = {MA, 'B1'}                     -- Left mouse button
+ma.b_middle               = {MA, 'B2'}                     -- Middle mouse button
+ma.b_right                = {MA, 'B3'}                     -- Right mouse button
+ma.b_up                   = {MA, 'B4'}                     -- Scroll Up
+ma.b_down                 = {MA, 'B5'}                     -- Scroll Down
 ma._0                     = {MA, '0'}                      -- 0
 ma._1                     = {MA, '1'}                      -- 1
 ma._2                     = {MA, '2'}                      -- 2
@@ -1551,6 +1602,11 @@ ma.xf86xfer               = {MA, 'XF86Xfer'}               -- 💼
 
 -- Control + Shift
 cs._                      = {CS, nil}
+cs.b_left                 = {CS, 'B1'}                     -- Left mouse button
+cs.b_middle               = {CS, 'B2'}                     -- Middle mouse button
+cs.b_right                = {CS, 'B3'}                     -- Right mouse button
+cs.b_up                   = {CS, 'B4'}                     -- Scroll Up
+cs.b_down                 = {CS, 'B5'}                     -- Scroll Down
 cs._0                     = {CS, '0'}                      -- 0
 cs._1                     = {CS, '1'}                      -- 1
 cs._2                     = {CS, '2'}                      -- 2
@@ -1766,6 +1822,11 @@ cs.xf86xfer               = {CS, 'XF86Xfer'}               -- 💼
 
 -- Control + Alt
 ca._                      = {CA, nil}
+ca.b_left                 = {CA, 'B1'}                     -- Left mouse button
+ca.b_middle               = {CA, 'B2'}                     -- Middle mouse button
+ca.b_right                = {CA, 'B3'}                     -- Right mouse button
+ca.b_up                   = {CA, 'B4'}                     -- Scroll Up
+ca.b_down                 = {CA, 'B5'}                     -- Scroll Down
 ca._0                     = {CA, '0'}                      -- 0
 ca._1                     = {CA, '1'}                      -- 1
 ca._2                     = {CA, '2'}                      -- 2
@@ -1981,6 +2042,11 @@ ca.xf86xfer               = {CA, 'XF86Xfer'}               -- 💼
 
 -- Shift + Alt
 sa._                      = {SA, nil}
+sa.b_left                 = {SA, 'B1'}                     -- Left mouse button
+sa.b_middle               = {SA, 'B2'}                     -- Middle mouse button
+sa.b_right                = {SA, 'B3'}                     -- Right mouse button
+sa.b_up                   = {SA, 'B4'}                     -- Scroll Up
+sa.b_down                 = {SA, 'B5'}                     -- Scroll Down
 sa._0                     = {SA, '0'}                      -- 0
 sa._1                     = {SA, '1'}                      -- 1
 sa._2                     = {SA, '2'}                      -- 2
@@ -2196,6 +2262,11 @@ sa.xf86xfer               = {SA, 'XF86Xfer'}               -- 💼
 
 -- Modkey + Control + Shift
 mcs._                      = {MCS, nil}
+mcs.b_left                 = {MCS, 'B1'}                     -- Left mouse button
+mcs.b_middle               = {MCS, 'B2'}                     -- Middle mouse button
+mcs.b_right                = {MCS, 'B3'}                     -- Right mouse button
+mcs.b_up                   = {MCS, 'B4'}                     -- Scroll Up
+mcs.b_down                 = {MCS, 'B5'}                     -- Scroll Down
 mcs._0                     = {MCS, '0'}                      -- 0
 mcs._1                     = {MCS, '1'}                      -- 1
 mcs._2                     = {MCS, '2'}                      -- 2
@@ -2411,6 +2482,11 @@ mcs.xf86xfer               = {MCS, 'XF86Xfer'}               -- 💼
 
 -- Modkey + Control + Alt
 mca._                      = {MCA, nil}
+mca.b_left                 = {MCA, 'B1'}                     -- Left mouse button
+mca.b_middle               = {MCA, 'B2'}                     -- Middle mouse button
+mca.b_right                = {MCA, 'B3'}                     -- Right mouse button
+mca.b_up                   = {MCA, 'B4'}                     -- Scroll Up
+mca.b_down                 = {MCA, 'B5'}                     -- Scroll Down
 mca._0                     = {MCA, '0'}                      -- 0
 mca._1                     = {MCA, '1'}                      -- 1
 mca._2                     = {MCA, '2'}                      -- 2
@@ -2626,6 +2702,11 @@ mca.xf86xfer               = {MCA, 'XF86Xfer'}               -- 💼
 
 -- Modkey + Shift + Alt
 msa._                      = {MSA, nil}
+msa.b_left                 = {MSA, 'B1'}                     -- Left mouse button
+msa.b_middle               = {MSA, 'B2'}                     -- Middle mouse button
+msa.b_right                = {MSA, 'B3'}                     -- Right mouse button
+msa.b_up                   = {MSA, 'B4'}                     -- Scroll Up
+msa.b_down                 = {MSA, 'B5'}                     -- Scroll Down
 msa._0                     = {MSA, '0'}                      -- 0
 msa._1                     = {MSA, '1'}                      -- 1
 msa._2                     = {MSA, '2'}                      -- 2
@@ -2841,6 +2922,11 @@ msa.xf86xfer               = {MSA, 'XF86Xfer'}               -- 💼
 
 -- Control + Shift + Alt
 csa._                      = {CSA, nil}
+csa.b_left                 = {CSA, 'B1'}                     -- Left mouse button
+csa.b_middle               = {CSA, 'B2'}                     -- Middle mouse button
+csa.b_right                = {CSA, 'B3'}                     -- Right mouse button
+csa.b_up                   = {CSA, 'B4'}                     -- Scroll Up
+csa.b_down                 = {CSA, 'B5'}                     -- Scroll Down
 csa._0                     = {CSA, '0'}                      -- 0
 csa._1                     = {CSA, '1'}                      -- 1
 csa._2                     = {CSA, '2'}                      -- 2
@@ -3056,6 +3142,11 @@ csa.xf86xfer               = {CSA, 'XF86Xfer'}               -- 💼
 
 -- Modkey + Control + Shift + Alt
 mcsa._                      = {MCSA, nil}
+mcsa.b_left                 = {MCSA, 'B1'}                     -- Left mouse button
+mcsa.b_middle               = {MCSA, 'B2'}                     -- Middle mouse button
+mcsa.b_right                = {MCSA, 'B3'}                     -- Right mouse button
+mcsa.b_up                   = {MCSA, 'B4'}                     -- Scroll Up
+mcsa.b_down                 = {MCSA, 'B5'}                     -- Scroll Down
 mcsa._0                     = {MCSA, '0'}                      -- 0
 mcsa._1                     = {MCSA, '1'}                      -- 1
 mcsa._2                     = {MCSA, '2'}                      -- 2
@@ -3270,6 +3361,11 @@ mcsa.xf86xfer               = {MCSA, 'XF86Xfer'}               -- 💼
 
 
 -- No Modifier
+n.b_left                 = {N, 'B1'}                     -- Left mouse button
+n.b_middle               = {N, 'B2'}                     -- Middle mouse button
+n.b_right                = {N, 'B3'}                     -- Right mouse button
+n.b_up                   = {N, 'B4'}                     -- Scroll Up
+n.b_down                 = {N, 'B5'}                     -- Scroll Down
 n._0                     = {N, '0'}                      -- 0
 n._1                     = {N, '1'}                      -- 1
 n._2                     = {N, '2'}                      -- 2

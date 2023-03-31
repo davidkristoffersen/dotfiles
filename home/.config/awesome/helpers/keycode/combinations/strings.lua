@@ -1,23 +1,44 @@
+--- @type { [string]: string}
 local m    = {}
+--- @type { [string]: string}
 local c    = {}
+--- @type { [string]: string}
 local s    = {}
+--- @type { [string]: string}
 local a    = {}
+--- @type { [string]: string}
 local mc   = {}
+--- @type { [string]: string}
 local ms   = {}
+--- @type { [string]: string}
 local ma   = {}
+--- @type { [string]: string}
 local cs   = {}
+--- @type { [string]: string}
 local ca   = {}
+--- @type { [string]: string}
 local sa   = {}
+--- @type { [string]: string}
 local mcs  = {}
+--- @type { [string]: string}
 local mca  = {}
+--- @type { [string]: string}
 local msa  = {}
+--- @type { [string]: string}
 local csa  = {}
+--- @type { [string]: string}
 local mcsa = {}
+--- @type { [string]: string}
 local n    = {}
 
 
 -- Modkey
 m._                      = 'M'
+m.b_left                 = 'M-B1'                     -- Left mouse button
+m.b_middle               = 'M-B2'                     -- Middle mouse button
+m.b_right                = 'M-B3'                     -- Right mouse button
+m.b_up                   = 'M-B4'                     -- Scroll Up
+m.b_down                 = 'M-B5'                     -- Scroll Down
 m._0                     = 'M-0'                      -- 0
 m._1                     = 'M-1'                      -- 1
 m._2                     = 'M-2'                      -- 2
@@ -233,6 +254,11 @@ m.xf86xfer               = 'M-XF86Xfer'               -- 💼
 
 -- Control
 c._                      = 'C'
+c.b_left                 = 'C-B1'                     -- Left mouse button
+c.b_middle               = 'C-B2'                     -- Middle mouse button
+c.b_right                = 'C-B3'                     -- Right mouse button
+c.b_up                   = 'C-B4'                     -- Scroll Up
+c.b_down                 = 'C-B5'                     -- Scroll Down
 c._0                     = 'C-0'                      -- 0
 c._1                     = 'C-1'                      -- 1
 c._2                     = 'C-2'                      -- 2
@@ -448,6 +474,11 @@ c.xf86xfer               = 'C-XF86Xfer'               -- 💼
 
 -- Shift
 s._                      = 'S'
+s.b_left                 = 'S-B1'                     -- Left mouse button
+s.b_middle               = 'S-B2'                     -- Middle mouse button
+s.b_right                = 'S-B3'                     -- Right mouse button
+s.b_up                   = 'S-B4'                     -- Scroll Up
+s.b_down                 = 'S-B5'                     -- Scroll Down
 s._0                     = 'S-0'                      -- 0
 s._1                     = 'S-1'                      -- 1
 s._2                     = 'S-2'                      -- 2
@@ -663,6 +694,11 @@ s.xf86xfer               = 'S-XF86Xfer'               -- 💼
 
 -- Alt
 a._                      = 'A'
+a.b_left                 = 'A-B1'                     -- Left mouse button
+a.b_middle               = 'A-B2'                     -- Middle mouse button
+a.b_right                = 'A-B3'                     -- Right mouse button
+a.b_up                   = 'A-B4'                     -- Scroll Up
+a.b_down                 = 'A-B5'                     -- Scroll Down
 a._0                     = 'A-0'                      -- 0
 a._1                     = 'A-1'                      -- 1
 a._2                     = 'A-2'                      -- 2
@@ -878,6 +914,11 @@ a.xf86xfer               = 'A-XF86Xfer'               -- 💼
 
 -- Modkey + Control
 mc._                      = 'M-C'
+mc.b_left                 = 'M-C-B1'                     -- Left mouse button
+mc.b_middle               = 'M-C-B2'                     -- Middle mouse button
+mc.b_right                = 'M-C-B3'                     -- Right mouse button
+mc.b_up                   = 'M-C-B4'                     -- Scroll Up
+mc.b_down                 = 'M-C-B5'                     -- Scroll Down
 mc._0                     = 'M-C-0'                      -- 0
 mc._1                     = 'M-C-1'                      -- 1
 mc._2                     = 'M-C-2'                      -- 2
@@ -1093,6 +1134,11 @@ mc.xf86xfer               = 'M-C-XF86Xfer'               -- 💼
 
 -- Modkey + Shift
 ms._                      = 'M-S'
+ms.b_left                 = 'M-S-B1'                     -- Left mouse button
+ms.b_middle               = 'M-S-B2'                     -- Middle mouse button
+ms.b_right                = 'M-S-B3'                     -- Right mouse button
+ms.b_up                   = 'M-S-B4'                     -- Scroll Up
+ms.b_down                 = 'M-S-B5'                     -- Scroll Down
 ms._0                     = 'M-S-0'                      -- 0
 ms._1                     = 'M-S-1'                      -- 1
 ms._2                     = 'M-S-2'                      -- 2
@@ -1308,6 +1354,11 @@ ms.xf86xfer               = 'M-S-XF86Xfer'               -- 💼
 
 -- Modkey + Alt
 ma._                      = 'M-A'
+ma.b_left                 = 'M-A-B1'                     -- Left mouse button
+ma.b_middle               = 'M-A-B2'                     -- Middle mouse button
+ma.b_right                = 'M-A-B3'                     -- Right mouse button
+ma.b_up                   = 'M-A-B4'                     -- Scroll Up
+ma.b_down                 = 'M-A-B5'                     -- Scroll Down
 ma._0                     = 'M-A-0'                      -- 0
 ma._1                     = 'M-A-1'                      -- 1
 ma._2                     = 'M-A-2'                      -- 2
@@ -1523,6 +1574,11 @@ ma.xf86xfer               = 'M-A-XF86Xfer'               -- 💼
 
 -- Control + Shift
 cs._                      = 'C-S'
+cs.b_left                 = 'C-S-B1'                     -- Left mouse button
+cs.b_middle               = 'C-S-B2'                     -- Middle mouse button
+cs.b_right                = 'C-S-B3'                     -- Right mouse button
+cs.b_up                   = 'C-S-B4'                     -- Scroll Up
+cs.b_down                 = 'C-S-B5'                     -- Scroll Down
 cs._0                     = 'C-S-0'                      -- 0
 cs._1                     = 'C-S-1'                      -- 1
 cs._2                     = 'C-S-2'                      -- 2
@@ -1738,6 +1794,11 @@ cs.xf86xfer               = 'C-S-XF86Xfer'               -- 💼
 
 -- Control + Alt
 ca._                      = 'C-A'
+ca.b_left                 = 'C-A-B1'                     -- Left mouse button
+ca.b_middle               = 'C-A-B2'                     -- Middle mouse button
+ca.b_right                = 'C-A-B3'                     -- Right mouse button
+ca.b_up                   = 'C-A-B4'                     -- Scroll Up
+ca.b_down                 = 'C-A-B5'                     -- Scroll Down
 ca._0                     = 'C-A-0'                      -- 0
 ca._1                     = 'C-A-1'                      -- 1
 ca._2                     = 'C-A-2'                      -- 2
@@ -1953,6 +2014,11 @@ ca.xf86xfer               = 'C-A-XF86Xfer'               -- 💼
 
 -- Shift + Alt
 sa._                      = 'S-A'
+sa.b_left                 = 'S-A-B1'                     -- Left mouse button
+sa.b_middle               = 'S-A-B2'                     -- Middle mouse button
+sa.b_right                = 'S-A-B3'                     -- Right mouse button
+sa.b_up                   = 'S-A-B4'                     -- Scroll Up
+sa.b_down                 = 'S-A-B5'                     -- Scroll Down
 sa._0                     = 'S-A-0'                      -- 0
 sa._1                     = 'S-A-1'                      -- 1
 sa._2                     = 'S-A-2'                      -- 2
@@ -2168,6 +2234,11 @@ sa.xf86xfer               = 'S-A-XF86Xfer'               -- 💼
 
 -- Modkey + Control + Shift
 mcs._                      = 'M-C-S'
+mcs.b_left                 = 'M-C-S-B1'                     -- Left mouse button
+mcs.b_middle               = 'M-C-S-B2'                     -- Middle mouse button
+mcs.b_right                = 'M-C-S-B3'                     -- Right mouse button
+mcs.b_up                   = 'M-C-S-B4'                     -- Scroll Up
+mcs.b_down                 = 'M-C-S-B5'                     -- Scroll Down
 mcs._0                     = 'M-C-S-0'                      -- 0
 mcs._1                     = 'M-C-S-1'                      -- 1
 mcs._2                     = 'M-C-S-2'                      -- 2
@@ -2383,6 +2454,11 @@ mcs.xf86xfer               = 'M-C-S-XF86Xfer'               -- 💼
 
 -- Modkey + Control + Alt
 mca._                      = 'M-C-A'
+mca.b_left                 = 'M-C-A-B1'                     -- Left mouse button
+mca.b_middle               = 'M-C-A-B2'                     -- Middle mouse button
+mca.b_right                = 'M-C-A-B3'                     -- Right mouse button
+mca.b_up                   = 'M-C-A-B4'                     -- Scroll Up
+mca.b_down                 = 'M-C-A-B5'                     -- Scroll Down
 mca._0                     = 'M-C-A-0'                      -- 0
 mca._1                     = 'M-C-A-1'                      -- 1
 mca._2                     = 'M-C-A-2'                      -- 2
@@ -2598,6 +2674,11 @@ mca.xf86xfer               = 'M-C-A-XF86Xfer'               -- 💼
 
 -- Modkey + Shift + Alt
 msa._                      = 'M-S-A'
+msa.b_left                 = 'M-S-A-B1'                     -- Left mouse button
+msa.b_middle               = 'M-S-A-B2'                     -- Middle mouse button
+msa.b_right                = 'M-S-A-B3'                     -- Right mouse button
+msa.b_up                   = 'M-S-A-B4'                     -- Scroll Up
+msa.b_down                 = 'M-S-A-B5'                     -- Scroll Down
 msa._0                     = 'M-S-A-0'                      -- 0
 msa._1                     = 'M-S-A-1'                      -- 1
 msa._2                     = 'M-S-A-2'                      -- 2
@@ -2813,6 +2894,11 @@ msa.xf86xfer               = 'M-S-A-XF86Xfer'               -- 💼
 
 -- Control + Shift + Alt
 csa._                      = 'C-S-A'
+csa.b_left                 = 'C-S-A-B1'                     -- Left mouse button
+csa.b_middle               = 'C-S-A-B2'                     -- Middle mouse button
+csa.b_right                = 'C-S-A-B3'                     -- Right mouse button
+csa.b_up                   = 'C-S-A-B4'                     -- Scroll Up
+csa.b_down                 = 'C-S-A-B5'                     -- Scroll Down
 csa._0                     = 'C-S-A-0'                      -- 0
 csa._1                     = 'C-S-A-1'                      -- 1
 csa._2                     = 'C-S-A-2'                      -- 2
@@ -3028,6 +3114,11 @@ csa.xf86xfer               = 'C-S-A-XF86Xfer'               -- 💼
 
 -- Modkey + Control + Shift + Alt
 mcsa._                      = 'M-C-S-A'
+mcsa.b_left                 = 'M-C-S-A-B1'                     -- Left mouse button
+mcsa.b_middle               = 'M-C-S-A-B2'                     -- Middle mouse button
+mcsa.b_right                = 'M-C-S-A-B3'                     -- Right mouse button
+mcsa.b_up                   = 'M-C-S-A-B4'                     -- Scroll Up
+mcsa.b_down                 = 'M-C-S-A-B5'                     -- Scroll Down
 mcsa._0                     = 'M-C-S-A-0'                      -- 0
 mcsa._1                     = 'M-C-S-A-1'                      -- 1
 mcsa._2                     = 'M-C-S-A-2'                      -- 2
@@ -3242,6 +3333,11 @@ mcsa.xf86xfer               = 'M-C-S-A-XF86Xfer'               -- 💼
 
 
 -- No Modifier
+n.b_left                 = 'B1'                     -- Left mouse button
+n.b_middle               = 'B2'                     -- Middle mouse button
+n.b_right                = 'B3'                     -- Right mouse button
+n.b_up                   = 'B4'                     -- Scroll Up
+n.b_down                 = 'B5'                     -- Scroll Down
 n._0                     = '0'                      -- 0
 n._1                     = '1'                      -- 1
 n._2                     = '2'                      -- 2
