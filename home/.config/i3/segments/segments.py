@@ -113,7 +113,7 @@ def screens():
 {BMS}+q kill
 
 # Background
-{E} nitrogen --restore
+# {E} nitrogen --restore
 
 # Swap active workspaces
 {BMS}+s {E} i3_swap_workspaces.py
