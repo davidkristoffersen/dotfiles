@@ -103,7 +103,7 @@ install_other() {
 
 # Setup autocomplete for python setup script
 autocomplete() {
-	eval "$(register-python-argcomplete3 ./setup.py)"
+	eval "$(register-python-argcomplete ./setup.py)"
 }
 
 main() {
