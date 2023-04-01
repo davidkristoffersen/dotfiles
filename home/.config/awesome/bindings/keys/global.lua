@@ -74,8 +74,8 @@ for i = 1, 9 do
     keys = gears.table.join(keys, join_keys{
         [S.m._ .. '-' .. i]   = gta.view[i],
         [S.mc._ .. '-' .. i]  = gta.toggle[i],
-        [S.ms._ .. '-' .. i]  = {gta.move_client[i], client},
-        [S.mcs._ .. '-' .. i] = {gta.toggle_client[i], client},
+        [S.ms._ .. '-' .. i]  = {gta.move_client[i], args = {client}},
+        [S.mcs._ .. '-' .. i] = {gta.toggle_client[i], args = {client}},
     })
 end
 
