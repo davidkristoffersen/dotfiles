@@ -1,34 +1,34 @@
---- @type { [string]: string}
+--- @type { [string]: string }
 local m    = {}
---- @type { [string]: string}
+--- @type { [string]: string }
 local c    = {}
---- @type { [string]: string}
+--- @type { [string]: string }
 local s    = {}
---- @type { [string]: string}
+--- @type { [string]: string }
 local a    = {}
---- @type { [string]: string}
+--- @type { [string]: string }
 local mc   = {}
---- @type { [string]: string}
+--- @type { [string]: string }
 local ms   = {}
---- @type { [string]: string}
+--- @type { [string]: string }
 local ma   = {}
---- @type { [string]: string}
+--- @type { [string]: string }
 local cs   = {}
---- @type { [string]: string}
+--- @type { [string]: string }
 local ca   = {}
---- @type { [string]: string}
+--- @type { [string]: string }
 local sa   = {}
---- @type { [string]: string}
+--- @type { [string]: string }
 local mcs  = {}
---- @type { [string]: string}
+--- @type { [string]: string }
 local mca  = {}
---- @type { [string]: string}
+--- @type { [string]: string }
 local msa  = {}
---- @type { [string]: string}
+--- @type { [string]: string }
 local csa  = {}
---- @type { [string]: string}
+--- @type { [string]: string }
 local mcsa = {}
---- @type { [string]: string}
+--- @type { [string]: string }
 local n    = {}
 
 

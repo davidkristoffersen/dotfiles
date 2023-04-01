@@ -1,7 +1,7 @@
 local T = require('helpers.keycode.combinations.tables')
 
 
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local strings_to_tables = {
     -- Modkey
     ['M']                              = T.m._,

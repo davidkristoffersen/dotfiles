@@ -26,37 +26,37 @@ local MCSA = {_M, _C, _S, _A}
 local N    = {_N}
 
 
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local m    = {}
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local c    = {}
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local s    = {}
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local a    = {}
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local mc   = {}
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local ms   = {}
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local ma   = {}
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local cs   = {}
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local ca   = {}
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local sa   = {}
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local mcs  = {}
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local mca  = {}
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local msa  = {}
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local csa  = {}
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local mcsa = {}
---- @type { [string]: KeyComb}
+--- @type { [string]: KeyComb }
 local n    = {}
 
 
