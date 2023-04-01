@@ -65,9 +65,14 @@ def disable_wm(wm):
     print()
 
 
-def parse_args():
-    parser = argparse.ArgumentParser('Enable window manager')
+class DefaultHelpParser(argparse.ArgumentParser):
+    def error(self, message):
+        print(f'{red}{message}{r}')
+        self.print_help()
+        exit(2)
 
+
+def parse_args():
     parser.add_argument('wm', nargs='?', default=None, choices=[
                         'kwin', *wms], action='store', help='Window manager to enable')
     parser.add_argument('-c', '--current', action='store_true',
@@ -78,6 +83,7 @@ def parse_args():
 
 
 if __name__ == '__main__':
+    parser = DefaultHelpParser('Enable window manager')
     wms = ['i3', 'awesome']
     cur_wm = get_current_wm()
     args = parse_args()
@@ -85,7 +91,7 @@ if __name__ == '__main__':
     if args.current:
         print('Current window manager:', cur_wm)
     elif args.wm is None:
-        print('No window manager specified')
+        parser.error('No window manager specified')
     elif args.wm == 'kwin':
         for _wm in wms:
             disable_wm(_wm)
