@@ -1,8 +1,14 @@
 {
-  "python.linting.pylintEnabled": true,
+  "python.linting.pylintEnabled": false,
   "python.linting.enabled": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": true,
     "source.sortMembers": true
-  }
+  },
+  "files.associations": {
+    "**/config/i3/**.config": "i3"
+  },
+  "python.linting.mypyEnabled": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "git.detectSubmodulesLimit": 100
 }
