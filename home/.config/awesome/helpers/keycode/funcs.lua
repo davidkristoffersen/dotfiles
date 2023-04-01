@@ -132,7 +132,7 @@ local function join_keys(keytable)
             local button = tonumber(key_name) --[[ @as integer --]]
             -- warn('Button', key_name)
             -- warn('Data', data.description)
-            binding = awful.button.new(mod_table, button, func, data)
+            binding = awful.button.new(mod_table, button, func)
         else
             binding = awful.key.new(mod_table, key_name, func, data)
         end
