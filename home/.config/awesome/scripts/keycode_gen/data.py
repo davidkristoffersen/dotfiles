@@ -1,6 +1,14 @@
 import itertools
 from typing import Dict, List, OrderedDict, Tuple, cast
 
+_mouse = [
+    ("b_left", "B1", "Left mouse button"),
+    ("b_middle", "B2", "Middle mouse button"),
+    ("b_right", "B3", "Right mouse button"),
+    ("b_up", "B4", "Scroll Up"),
+    ("b_down", "B5", "Scroll Down"),
+]
+
 _number = [
     ("_0", "0", "0"),
     ("_1", "1", "1"),
@@ -247,6 +255,7 @@ KeyListT = List[KeyT]
 KeyGroupT = Dict[str, Dict[str, KeyListT | str]]
 
 keycode_groups: KeyGroupT = {
+    "mouse": {'k': _mouse, 'd': 'Mouse buttons'},
     "number": {'k': _number, 'd': 'Numeric keys 0-9'},
     "letter": {'k': _letter, 'd': 'Alphabet keys A-Z, a-z'},
     "punctuation": {'k': _punctuation, 'd': 'Punctuation keys and symbols'},
@@ -300,7 +309,6 @@ modifiers: ModCombT = OrderedDict({
     "s": {"l": "s", "u": "S", "c": "'Shift'", "d": "Shift"},
     "a": {"l": "a", "u": "A", "c": "'Mod1'", "d": "Alt"},
     "n": {"l": "n", "u": "N", "c": "", "d": "No Modifier"}
-
 })
 """ Modifier names
 ## Description

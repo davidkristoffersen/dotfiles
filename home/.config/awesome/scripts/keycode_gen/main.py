@@ -19,6 +19,9 @@ COMB = f'{ROOT}/combinations'
 COMB_MOD_SEP = '-'
 COMB_NAMES = ['tables', 'strings', 'strings_to_tables']
 
+COMB_TYPE = '--- @type { [string]: KeyComb }\n'
+STRING_TYPE = '--- @type { [string]: string }\n'
+
 Func = Callable[[TextIOWrapper], None]
 CombFunc = Callable[[TextIOWrapper, str], None]
 
@@ -74,11 +77,13 @@ def combinations(f: TextIOWrapper, name: str):
             f.write(f"local T = require('helpers.keycode.combinations.tables')\n\n\n")
 
             # Initialize mapping list
+            f.write(COMB_TYPE)
             f.write("local strings_to_tables = {\n")
 
     # Initialize modifier tables
     if name in ['tables', 'strings']:
         for key, val in mod_combs.items():
+            f.write(COMB_TYPE if name == 'tables' else STRING_TYPE)
             f.write(f"local {key} {SP}= {{}}\n")
         f.write("\n\n")
 
@@ -134,13 +139,14 @@ def combinations(f: TextIOWrapper, name: str):
 
 def keys(f: TextIOWrapper):
     for name, val in keycode_groups.items():
-        f.write(f"-- {val['d']}\n")
+        f.write(f"--- {val['d']}\n")
+        f.write(STRING_TYPE)
         f.write(f"local {name} = {{\n")
         for k in val['k']:
             f.write(f"    {k[0]} {SP}= '{k[1]}', -- {k[2]}\n")
         f.write("}\n\n")
 
-    f.write("return {\n")
+    f.write("\nreturn {\n")
     for name, val in keycode_groups.items():
         f.write(f"    {name} {SP}= {name}, -- {val['d']}\n")
     f.write("}\n")
