@@ -8,7 +8,6 @@ fu VimrcInit()
 	source $HOME/.vim/.vim.d/map_leader.vim
 	source $HOME/.vim/.vim.d/functions.vim
 	source $HOME/.vim/.vim.d/practical.vim "Commnt
-	exec 'Code ' ''Test'' 'New'
 endf
 
 call VimrcInit()
