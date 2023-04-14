@@ -1,3 +1,4 @@
+-- Config
 local join_keys = require('helpers.keycode.funcs').join_keys
 local n = require('helpers.keycode.combinations.strings').n
 local r = require('actions.mouse').root

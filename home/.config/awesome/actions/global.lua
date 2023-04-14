@@ -1,13 +1,17 @@
+-- Global
 local awful = require('awful')
-local screen = require('awful.screen')
 local menubar = require('menubar')
-local hotkeys_popup = require('widgets.hotkeys_popup')
 
-local main = require('menus.init').main
+-- Config
+local shared_state = require('shared_state.init')
 local apps = require('config.apps')
 
+
+local menus = shared_state.menus
+local widgets = shared_state.widgets
+
 local awesome = {
-    help = {function () hotkeys_popup:show() end, {'show help', 'awesome'}},
+    help = {function () widgets.hotkeys_popup:show() end, {'show help', 'awesome'}},
     restart = {awesome.restart, {'reload awesome', 'awesome'}},
     quit = {awesome.quit, {'quit awesome', 'awesome'}},
     test = {
@@ -30,7 +34,7 @@ local awesome = {
         {'lua execute prompt', 'awesome'},
     },
     main = {
-        function () main:show() end,
+        function () menus.main:show() end,
         {'show main menu', 'awesome'},
     },
 }
@@ -226,6 +230,7 @@ for i = 1, 9 do
         {'toggle focused client on tag #' .. i, 'tag'},
     }
 end
+
 
 return {
     awesome = awesome,

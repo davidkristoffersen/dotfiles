@@ -1,5 +1,7 @@
+-- Global
 local beautiful = require('beautiful')
 
+-- Config
 local paths = require('config.paths')
 local theme = require('config.vars').theme
 

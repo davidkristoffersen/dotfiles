@@ -1,8 +1,10 @@
+-- Config
 local keycode = require('helpers.keycode.init')
+local client = require('actions.client')
+
+
 local join_keys = keycode.funcs.join_keys
 local S = keycode.combinations.strings
-
-local client = require('actions.client')
 local t, m, r = client.toggle, client.move, client.resize
 
 local keys = join_keys{
@@ -24,5 +26,6 @@ local keys = join_keys{
     [S.mc.m]       = r.maximize_vertically,
     [S.ms.m]       = r.maximize_horizontally,
 }
+
 
 return keys

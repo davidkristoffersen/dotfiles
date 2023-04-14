@@ -1,9 +1,13 @@
+-- Global
 local gears = require('gears')
 
+-- Config
 local keycode = require('helpers.keycode.init')
+local global = require('actions.global')
+
+
 local join_keys = keycode.funcs.join_keys
 local S = keycode.combinations.strings
-local global = require('actions.global')
 local ga, gt, gta, gc, gs, gw, gy, gu =
     global.awesome,
     global.tag,

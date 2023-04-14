@@ -1,7 +1,10 @@
+-- Global
 local awful = require('awful')
 local beautiful = require('beautiful')
 
+-- Config
 local bindings = require('bindings.init')
+
 
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {

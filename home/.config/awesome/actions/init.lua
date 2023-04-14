@@ -1,4 +1,6 @@
+-- Local
 local client = require('actions.client')
+
 
 --- @class AKeyData : table
 --- @field mod Modifier[] List of modifiers.

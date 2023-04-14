@@ -1,3 +1,4 @@
+-- Config
 local join_keys = require('helpers.keycode.funcs').join_keys
 local S = require('helpers.keycode.combinations.strings')
 local m, n = S.m, S.n

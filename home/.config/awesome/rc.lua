@@ -4,6 +4,9 @@
 -- Configuration and Helpers
 --------------------------------
 
+-- Initialize shared state
+require('shared_state.init')
+
 -- Global configuration variables and settings
 require('config.init')
 
@@ -18,7 +21,7 @@ require('helpers.init')
 -- Load LuaRocks loader to support external packages
 pcall(require, 'luarocks.loader')
 
--- Import and initialize the standard AwesomeWM library
+-- Automatically focus new clients
 require('awful.autofocus')
 
 
@@ -34,6 +37,9 @@ require('menus.init')
 
 -- Initialize wibar and widgets
 require('widgets.init')
+
+-- Initialize keybinding actions
+require('actions.init')
 
 -- Define and set key and mouse bindings
 require('bindings.init')

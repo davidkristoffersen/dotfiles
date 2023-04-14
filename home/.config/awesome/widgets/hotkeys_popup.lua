@@ -1,10 +1,12 @@
+-- Global
 local awful = require('awful')
 local gears = require('gears')
 local screen = require('awful.screen')
 local _hotkeys_popup = require('awful.hotkeys_popup')
 
+-- Config
 local hotkeys_style = require('config.vars').hotkeys_style
-local buttons = require('bindings.buttons')
+local buttons = require('bindings.buttons.init')
 
 
 local function get_keybindings()

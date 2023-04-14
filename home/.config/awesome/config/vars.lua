@@ -1,6 +1,8 @@
+-- Global
 local awful = require('awful')
 local naughty = require('naughty')
 local l = require('awful.layout.suit')
+
 
 --[[
     Laouts
@@ -72,6 +74,7 @@ local Modifiers = {
     a = A, -- Alt
     n = N, -- No mod
 }
+
 
 return {
     names = names,                 -- Tag names

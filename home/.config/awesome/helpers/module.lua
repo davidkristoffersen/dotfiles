@@ -1,5 +1,6 @@
--- Config variables
+-- Config
 local c = require('config.init')
+
 
 --- Get current script path, returns
 ---@param level integer | nil
@@ -65,6 +66,7 @@ end
 local function cleanup()
     package.path = c.paths.package
 end
+
 
 --- Module path helper
 return {

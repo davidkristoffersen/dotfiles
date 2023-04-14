@@ -1,10 +1,10 @@
+-- Global
 local awful = require('awful')
 local gears = require('gears')
 
-local warn = require('helpers.debug').warn
-local T = require('helpers.keycode.combinations.tables')
-local S = require('helpers.keycode.combinations.strings')
+-- Local
 local S_to_T = require('helpers.keycode.combinations.strings_to_tables')
+
 
 --- Create a key binding
 ---@param binding table Table where: [1] = 'mod' string[], [2] = 'key' string
@@ -83,9 +83,7 @@ local function parse_key_cb(keyCb)
         end
     end
 
-    if data ~= nil and #data == 2 then
-        data = {description = data[1], group = data[2]}
-    end
+    if data ~= nil and #data == 2 then data = {description = data[1], group = data[2]} end
 
     return {func, data}
 end
@@ -96,9 +94,7 @@ end
 --- @param key string? Key name
 --- ### Returns
 --- @return boolean # True if key is a button
-local function is_key_button(key)
-    return key ~= nil and key:sub(1, 1) == 'B'
-end
+local function is_key_button(key) return key ~= nil and key:sub(1, 1) == 'B' end
 
 --- Parse a button key into a button name
 ---
@@ -106,9 +102,7 @@ end
 --- @param key string Key name
 --- ### Returns
 --- @return string button Button name
-local function parse_button(key)
-    return key:sub(2)
-end
+local function parse_button(key) return key:sub(2) end
 
 --- Map keytable keys to actions
 ---
@@ -141,6 +135,7 @@ local function join_keys(keytable)
     end
     return gears.table.join(table.unpack(keys))
 end
+
 
 return {
     set_key = set_key,

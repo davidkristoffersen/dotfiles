@@ -1,10 +1,13 @@
+-- Global
 local awful = require('awful')
 
-local main = require('menus.init').main
+-- Config
+local menus = require('shared_state.init').menus
+
 
 local _root = {
     toggle = {
-        function () main:toggle() end,
+        function () menus.main:toggle() end,
         {description = 'Toggle main menu', group = 'mouse'},
     },
     next = {awful.tag.viewnext, {description = 'View next tag', group = 'mouse'}},
@@ -31,6 +34,7 @@ local _client = {
         {description = 'Resize', group = 'mouse'},
     },
 }
+
 
 return {
     root = _root,

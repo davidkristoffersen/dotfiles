@@ -6,6 +6,7 @@ local editor = os.getenv('EDITOR') or 'vim'
 -- Editor command
 local editor_cmd = terminal .. ' -e "' .. editor
 
+
 return {
     terminal = terminal,
     editor = editor,
