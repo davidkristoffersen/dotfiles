@@ -1,11 +1,11 @@
 --- Mouse buttons
 --- @type { [string]: string }
 local mouse = {
-    b_left   = 'B1', -- Left mouse button
-    b_middle = 'B2', -- Middle mouse button
-    b_right  = 'B3', -- Right mouse button
-    b_up     = 'B4', -- Scroll Up
-    b_down   = 'B5', -- Scroll Down
+    b_left   = 'B1', -- Left mouse button(1)
+    b_middle = 'B2', -- Middle mouse button(2)
+    b_right  = 'B3', -- Right mouse button(3)
+    b_up     = 'B4', -- Scroll Up(4)
+    b_down   = 'B5', -- Scroll Down(5)
 }
 
 --- Numeric keys 0-9

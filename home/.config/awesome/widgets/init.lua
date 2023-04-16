@@ -3,10 +3,11 @@ local shared_state = require('shared_state.init')
 local table = require('helpers.table')
 
 -- Local
-require('widgets.main')
+require('widgets.wallpaper')
+require('widgets.buttons')
+require('widgets.screens')
 local hotkeys_popup = require('widgets.hotkeys_popup')
 local launcher = require('widgets.launcher')
-
 
 --- Widgets
 ---

@@ -57,7 +57,7 @@ local M = 'Mod4' -- Default modkey
 local C = 'Control'
 local S = 'Shift'
 local A = 'Mod1'
-local N = ''
+local _N = ''
 
 --- ### Description
 --- Modifier names
@@ -68,11 +68,11 @@ local N = ''
 --- - All: `mcsa`
 --- @class Modifiers
 local Modifiers = {
-    m = M, -- Modkey
-    c = C, -- Control
-    s = S, -- Shift
-    a = A, -- Alt
-    n = N, -- No mod
+    m = M,  -- Modkey
+    c = C,  -- Control
+    s = S,  -- Shift
+    a = A,  -- Alt
+    _ = _N, -- No mod
 }
 
 

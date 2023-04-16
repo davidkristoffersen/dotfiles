@@ -19,7 +19,7 @@ local client = require('actions.client')
 --- @field [1] InnerKeyCb Inner.
 --- @field args table List of arguments.
 
---- @alias KeyCb InnerKeyCb | OuterKeyCb
+--- @alias KeyCb function | InnerKeyCb | OuterKeyCb
 
 --- @alias Keytable table<string, KeyCb>
 
