@@ -1,16 +1,17 @@
 -- Global
 local awful = require('awful')
 local wibox = require('wibox.init')
-local gears = require('gears')
 
 -- Config
 local conf = require('config.init')
 local vars = conf.vars
+local join_keys = require('helpers.keycode.funcs').join_keys
+local S = require('helpers.keycode.combinations.strings')
 
+-- Local
 local set_wallpaper = require('widgets.wallpaper').set_wallpaper
 local taglist_buttons = require('widgets.buttons').taglist_buttons
 local tasklist_buttons = require('widgets.buttons').tasklist_buttons
-
 local launcher = require('widgets.launcher')
 
 
@@ -36,14 +37,12 @@ local function connect_screen(s)
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
-    s.mylayoutbox:buttons(
-        gears.table.join(
-            awful.button({}, 1, function () awful.layout.inc(1) end),
-            awful.button({}, 3, function () awful.layout.inc(-1) end),
-            awful.button({}, 4, function () awful.layout.inc(1) end),
-            awful.button({}, 5, function () awful.layout.inc(-1) end)
-        )
-    )
+    s.mylayoutbox:buttons(join_keys{
+        [S._.b_left] = function () awful.layout.inc(1) end,
+        [S._.b_right] = function () awful.layout.inc(-1) end,
+        [S._.b_up] = function () awful.layout.inc(1) end,
+        [S._.b_down] = function () awful.layout.inc(-1) end,
+    })
 
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist{
