@@ -1,12 +1,14 @@
 import itertools
 from typing import Dict, List, OrderedDict, Tuple, cast
 
+from attr import dataclass
+
 _mouse = [
-    ("b_left", "B1", "Left mouse button"),
-    ("b_middle", "B2", "Middle mouse button"),
-    ("b_right", "B3", "Right mouse button"),
-    ("b_up", "B4", "Scroll Up"),
-    ("b_down", "B5", "Scroll Down"),
+    ("b_left", "B1", "Left mouse button(1)"),
+    ("b_middle", "B2", "Middle mouse button(2)"),
+    ("b_right", "B3", "Right mouse button(3)"),
+    ("b_up", "B4", "Scroll Up(4)"),
+    ("b_down", "B5", "Scroll Down(5)"),
 ]
 
 _number = [
@@ -301,14 +303,35 @@ for keycode in keycodes:
 ```
 """
 
+
+@dataclass
+class ModifierKey():
+    m, c, s, a, _ = ["m", "c", "s", "a", "no_mod"]
+
+
+@dataclass
+class ModifierLower():
+    m, c, s, a, _ = ["m", "c", "s", "a", "_"]
+
+
+@dataclass
+class ModifierUpper():
+    m, c, s, a, _ = ["M", "C", "S", "A", "_N"]
+
+
+MK = ModifierKey
+ML = ModifierLower
+MU = ModifierUpper
+
+
 ModT = Dict[str, str]
 ModCombT = OrderedDict[str, ModT]
 modifiers: ModCombT = OrderedDict({
-    "m": {"l": "m", "u": "M", "c": "modkey", "d": "Modkey"},
-    "c": {"l": "c", "u": "C", "c": "'Control'", "d": "Control"},
-    "s": {"l": "s", "u": "S", "c": "'Shift'", "d": "Shift"},
-    "a": {"l": "a", "u": "A", "c": "'Mod1'", "d": "Alt"},
-    "n": {"l": "n", "u": "N", "c": "", "d": "No Modifier"}
+    MK.m: {"l": ML.m, "u": MU.m, "c": "modkey", "d": "Modkey"},
+    MK.c: {"l": ML.c, "u": MU.c, "c": "'Control'", "d": "Control"},
+    MK.s: {"l": ML.s, "u": MU.s, "c": "'Shift'", "d": "Shift"},
+    MK.a: {"l": ML.a, "u": MU.a, "c": "'Mod1'", "d": "Alt"},
+    MK._: {"l": ML._, "u": MU._, "c": "", "d": "No Modifier"}
 })
 """ Modifier names
 ## Description
@@ -334,18 +357,19 @@ for key, value in modifiers.items():
 ```
 """
 
+
 ModCombsT = OrderedDict[str, ModCombT]
 
 
 def _all_combs() -> ModCombsT:
     out: ModCombsT = OrderedDict()
     for n_mods in range(1, len(modifiers)):
-        mods_without_n = {k: v for k, v in modifiers.items() if k != 'n'}
+        mods_without_n = {k: v for k, v in modifiers.items() if k != MK._}
         mods = list(mods_without_n.items())
         for _mod_combs in itertools.combinations(mods, n_mods):
             key = ''.join([x[0] for x in _mod_combs])
             out[key] = OrderedDict({x[0]: x[1] for x in _mod_combs})
-    out['n'] = OrderedDict({'n': modifiers['n']})
+    out[MK._] = OrderedDict({MK._: modifiers[MK._]})
     return out
 
 
@@ -361,3 +385,29 @@ for comb_key, comb_val in modifier_combinations.items():
         control_lower = mod_val['l']
 ```
 """
+
+
+def mods_upper(mods: ModCombT) -> str:
+    """ Get uppercase modifier names
+    ## Description
+    Get uppercase modifier names from a modifier combination
+
+    ## Usage
+    ```python
+    mods_upper(modifier_combinations['ms'])
+    ```
+    """
+    return ''.join([x['u'] for x in mods.values()])
+
+
+def mods_lower(mods: ModCombT) -> str:
+    """ Get lowercase modifier names
+    ## Description
+    Get lowercase modifier names from a modifier combination
+
+    ## Usage
+    ```python
+    mods_lower(modifier_combinations['ms'])
+    ```
+    """
+    return ''.join([x['l'] for x in mods.values()])

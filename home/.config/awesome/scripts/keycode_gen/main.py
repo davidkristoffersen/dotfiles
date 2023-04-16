@@ -3,9 +3,10 @@
 from io import TextIOWrapper
 from typing import Callable
 
-from data import KeyT, ModCombT, keycode_groups, keycodes
+from data import MK, ML, MU, KeyT, ModCombT, keycode_groups, keycodes
 from data import modifier_combinations as mod_combs
 from data import modifiers as mods
+from data import mods_lower, mods_upper
 
 FORCE_FORMAT = True
 SP = ' ' if FORCE_FORMAT else ''
@@ -35,14 +36,14 @@ def tables_init(f: TextIOWrapper, comb: ModCombT):
     f.write("}")
 
 
-def tables_fill(f: TextIOWrapper, key: str, k: KeyT):
-    f.write(f"{{{key.upper()}, '{k[1]}'}}")
+def tables_fill(f: TextIOWrapper, val: ModCombT, k: KeyT):
+    f.write(f"{{{mods_upper(val)}, '{k[1]}'}}")
 
 
 def strings_fill(f: TextIOWrapper, key: str, comb: ModCombT, k: str):
     f.write("'")
     for it, val in enumerate(comb.values()):
-        if key == 'n':
+        if key == MK._:
             continue
         if k == '_':
             if it < len(comb) - 1:
@@ -68,7 +69,7 @@ def combinations(f: TextIOWrapper, name: str):
 
             # Initialize inner modifier tables
             for key, val in mod_combs.items():
-                f.write(f"local {key.upper()} {SP}= ")
+                f.write(f"local {mods_upper(val)} {SP}= ")
                 tables_init(f, val)
                 f.write("\n")
             f.write("\n\n")
@@ -84,36 +85,39 @@ def combinations(f: TextIOWrapper, name: str):
     if name in ['tables', 'strings']:
         for key, val in mod_combs.items():
             f.write(COMB_TYPE if name == 'tables' else STRING_TYPE)
-            f.write(f"local {key} {SP}= {{}}\n")
+            f.write(f"local {mods_lower(val)} {SP}= {{}}\n")
         f.write("\n\n")
 
     # Fill modifier tables
     for it, (key, val) in enumerate(mod_combs.items()):
+        lower = mods_lower(val)
+        upper = mods_upper(val)
         desc = ' + '.join([v['d'] for k, v in val.items()])
         f.write(f"-- {desc}\n")
-        if not key == 'n':
+        if not key == MK._:
             match name:
                 case 'tables':
-                    f.write(f"{key}._ {SP}= " + "{" + key.upper() + ", nil}\n")
+                    f.write(f"{key}.{ML._} {SP}= " +
+                            "{" + upper + ", nil}\n")
                 case 'strings':
-                    f.write(f"{key}._ {SP}= ")
+                    f.write(f"{key}.{ML._} {SP}= ")
                     strings_fill(f, key, val, '_')
                     f.write(f"\n")
                 case 'strings_to_tables':
                     f.write("[")
                     strings_fill(f, key, val, '_')
-                    f.write(f"] {SP}= T.{key}._,\n")
+                    f.write(f"] {SP}= T.{key}.{ML._},\n")
 
         for k in keycodes:
             if name in ['tables', 'strings']:
-                f.write(f"{key}.{k[0]} {SP}= ")
+                f.write(f"{lower}.{k[0]} {SP}= ")
             elif name == 'strings_to_tables':
                 f.write("[")
                 strings_fill(f, key, val, k[1])
-                f.write(f"] {SP}= T.{key}.{k[0]},")
+                f.write(f"] {SP}= T.{lower}.{k[0]},")
             match name:
                 case 'tables':
-                    tables_fill(f, key, k)
+                    tables_fill(f, val, k)
                 case 'strings':
                     strings_fill(f, key, val, k[1])
             f.write(f" -- {k[2]}\n")
@@ -131,7 +135,8 @@ def combinations(f: TextIOWrapper, name: str):
             f.write("return {\n")
             for key, val in mod_combs.items():
                 desc = ' + '.join([v['d'] for k, v in val.items()])
-                f.write(f"    {key} {SP}= {key}, -- {desc}\n")
+                f.write(
+                    f"    {mods_lower(val)} {SP}= {mods_lower(val)}, -- {desc}\n")
             f.write("}\n")
         case 'strings_to_tables':
             f.write(f"return strings_to_tables -- Strings to tables mapping\n")
