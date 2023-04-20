@@ -10,6 +10,7 @@ local apps = require('config.apps')
 local menus = shared_state.menus
 local widgets = shared_state.widgets
 
+--- @type { [string]: KeyCb }
 local awesome = {
     help = {function () widgets.hotkeys_popup:show() end, {'show help', 'awesome'}},
     restart = {awesome.restart, {'reload awesome', 'awesome'}},
@@ -38,6 +39,8 @@ local awesome = {
         {'show main menu', 'awesome'},
     },
 }
+
+--- @type { [string]: KeyCb }
 local tag = {
     view_previous = {awful.tag.viewprev, {'view previous', 'tag'}},
     view_next = {awful.tag.viewnext, {'view next', 'tag'}},
@@ -46,6 +49,8 @@ local tag = {
         {'go back', 'tag'},
     },
 }
+
+--- @type { [string]: KeyCb }
 local client = {
     focus_next = {
         function () awful.client.focus.byidx(1) end,
@@ -75,6 +80,8 @@ local client = {
         {'restore minimized', 'client'},
     }, -- Prompt
 }
+
+--- @type { [string]: KeyCb }
 local screen = {
     focus_next = {
         function () awful.screen.focus_relative(1) end,
@@ -85,6 +92,8 @@ local screen = {
         {'focus the previous screen', 'screen'},
     },
 }
+
+--- @type { [string]: KeyCb }
 local client_swap = {
     -- Layout manipulation
     -- The same for arrow left and right
@@ -98,6 +107,7 @@ local client_swap = {
     },
 }
 
+--- @type { [string]: KeyCb }
 local layout = {
     increase_master_width = {
         function () awful.tag.incmwfact(0.05) end,
@@ -132,6 +142,8 @@ local layout = {
         {'select previous', 'layout'},
     },
 }
+
+--- @type { [string]: KeyCb }
 local launcher = {
     terminal = {
         function () awful.spawn(apps.terminal) end,
@@ -175,6 +187,7 @@ local launcher = {
 }
 
 -- Tag-related actions
+--- @type { [string]: KeyCb[] }
 local tag_actions = {
     view = {},          -- Keybindings for viewing tags
     toggle = {},        -- Keybindings for toggling tags
@@ -208,7 +221,7 @@ for i = 1, 9 do
 
     -- Move client to tag
     tag_actions.move_client[i] = {
-        --- @param c client
+        --- @param c Client
         function (c)
             if c.focus then
                 _tag = c.focus.screen.tags[i]
@@ -220,7 +233,7 @@ for i = 1, 9 do
 
     -- Toggle tag on focused client
     tag_actions.toggle_client[i] = {
-        --- @param c client
+        --- @param c Client
         function (c)
             if c.focus then
                 _tag = c.focus.screen.tags[i]

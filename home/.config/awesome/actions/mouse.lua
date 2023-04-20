@@ -5,6 +5,7 @@ local awful = require('awful')
 local menus = require('shared_state.init').menus
 
 
+--- @type { [string]: KeyCb }
 local _root = {
     toggle = {
         function () menus.main:toggle() end,
@@ -14,20 +15,21 @@ local _root = {
     prev = {awful.tag.viewprev, {description = 'View previous tag', group = 'mouse'}},
 }
 
+--- @type { [string]: KeyCb<Client> }
 local _client = {
     focus = {
-        function (c) c:emit_signal('request::activate', 'mouse_click', {raise = true}) end,
+        f = function (c) c:emit_signal('request::activate', 'mouse_click', {raise = true}) end,
         {description = 'Focus', group = 'mouse'},
     },
     move = {
-        function (c)
+        f = function (c)
             c:emit_signal('request::activate', 'mouse_click', {raise = true})
             awful.mouse.client.move(c)
         end,
         {description = 'Move', group = 'mouse'},
     },
     resize = {
-        function (c)
+        f = function (c)
             c:emit_signal('request::activate', 'mouse_click', {raise = true})
             awful.mouse.client.resize(c)
         end,

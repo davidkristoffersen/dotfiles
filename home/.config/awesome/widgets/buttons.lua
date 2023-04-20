@@ -5,8 +5,8 @@ local awful = require('awful')
 local join_keys = require('helpers.keycode.funcs').join_keys
 local S = require('helpers.keycode.combinations.strings')
 
-
-local taglist_buttons = join_keys{
+--- @type { [string]: KeyCb<Tag> }
+local taglist_table = {
     [S._.b_left] = function (t) t:view_only() end,
     [S.m.b_left] = function (t) if client.focus then client.focus:move_to_tag(t) end end,
     [S._.b_right] = awful.tag.viewtoggle,
@@ -15,7 +15,8 @@ local taglist_buttons = join_keys{
     [S._.b_down] = function (t) awful.tag.viewprev(t.screen) end,
 }
 
-local tasklist_buttons = join_keys{
+--- @type { [string]: KeyCb<Client?> }
+local tasklist_table = {
     [S._.b_left] = function (c)
         if c == client.focus then
             c.minimized = true
@@ -28,6 +29,8 @@ local tasklist_buttons = join_keys{
     [S._.b_down] = function () awful.client.focus.byidx(-1) end,
 }
 
+local taglist_buttons = join_keys(taglist_table)
+local tasklist_buttons = join_keys(tasklist_table)
 
 return {
     taglist_buttons = taglist_buttons,

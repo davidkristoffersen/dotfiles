@@ -6,8 +6,7 @@ local beautiful    = require('beautiful')
 local shared_state = require('shared_state.init')
 
 
---- @class AWLauncher
-local launcher = awful.widget.launcher{
+local launcher = awful.widget.launcher.new{
     image = beautiful.awesome_icon,
     menu = shared_state.menus.main,
 }

@@ -52,12 +52,11 @@ local hotkeys_style = {
 --[[
     Modifier keys
 --]]
-local M = 'Mod4' -- Default modkey
-
-local C = 'Control'
-local S = 'Shift'
-local A = 'Mod1'
-local _N = ''
+local M = 'Mod4'    --- @type SuperKeyLiteral
+local C = 'Control' --- @type ControlKeyLiteral
+local S = 'Shift'   --- @type ShiftKeyLiteral
+local A = 'Mod1'    --- @type AltKeyLiteral
+local _N = ''       --- @type NoModifierLiteral
 
 --- ### Description
 --- Modifier names
@@ -68,11 +67,11 @@ local _N = ''
 --- - All: `mcsa`
 --- @class Modifiers
 local Modifiers = {
-    m = M,  -- Modkey
-    c = C,  -- Control
-    s = S,  -- Shift
-    a = A,  -- Alt
-    _ = _N, -- No mod
+    m = M,
+    c = C,
+    s = S,
+    a = A,
+    _ = _N,
 }
 
 

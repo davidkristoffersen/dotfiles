@@ -34,7 +34,7 @@ end
 -- -- Create a new table for the hotkeys_popup format
 -- local button_bindings = {}
 
--- --- @type AButton
+-- --- @type AwfulButton
 -- local buttons_client = buttons.client
 
 -- -- Iterate through buttons_client and populate the button_bindings table

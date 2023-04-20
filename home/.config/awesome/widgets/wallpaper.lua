@@ -3,6 +3,9 @@ local gears = require('gears')
 local beautiful = require('beautiful')
 
 
+--- Set wallpaper
+---
+--- @param s Screen
 local function set_wallpaper(s)
     if beautiful.wallpaper then
         local wallpaper = beautiful.wallpaper

@@ -23,7 +23,7 @@ local mytextclock = wibox.widget.textclock()
 
 --- Call function for specified screen
 ---
---- @param s table
+--- @param s Screen
 local function connect_screen(s)
     -- Wallpaper
     set_wallpaper(s)
@@ -45,45 +45,43 @@ local function connect_screen(s)
     })
 
     -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist{
+    s.mytaglist = awful.widget.taglist.new{
         screen = s,
         filter = awful.widget.taglist.filter.all,
         buttons = taglist_buttons,
     }
 
     -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist{
+    s.mytasklist = awful.widget.tasklist.new{
         screen = s,
         filter = awful.widget.tasklist.filter.currenttags,
         buttons = tasklist_buttons,
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar{
+    s.mywibox = awful.wibar.new{
         position = 'top',
         screen = s,
     }
 
-
     -- Add widgets to the wibox
+    local left = {
+        layout = wibox.layout.fixed.horizontal,
+        launcher,
+        s.mytaglist,
+        s.mypromptbox,
+    }
+    local middle = s.mytasklist
+    local right = {
+        layout = wibox.layout.fixed.horizontal,
+        mykeyboardlayout,
+        wibox.widget.systray(),
+        mytextclock,
+        s.mylayoutbox,
+    }
     s.mywibox:setup{
         layout = wibox.layout.align.horizontal,
-        {
-            -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            launcher,
-            s.mytaglist,
-            s.mypromptbox,
-        },
-        s.mytasklist, -- Middle widget
-        {
-            -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
-            wibox.widget.systray(),
-            mytextclock,
-            s.mylayoutbox,
-        },
+        left, middle, right,
     }
 end
 

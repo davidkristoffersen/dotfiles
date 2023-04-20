@@ -5,7 +5,7 @@ local m, _ = S.m, S._
 local c = require('actions.mouse').client
 
 
---- @class AButton
+--- @class AwfulButton
 local buttons = join_keys{
     [_.b_left]  = c.focus,
     [m.b_left]  = c.move,

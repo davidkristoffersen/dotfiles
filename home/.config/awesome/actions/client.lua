@@ -3,50 +3,50 @@ local awful = require('awful')
 
 
 -- Toggling
+--- @type { [string]: KeyCb<Client> }
 local toggle = {
     fullscreen = {
-        function (c)
+        f = function (c)
             c.fullscreen = not c.fullscreen
             c:raise()
         end,
         {'toggle fullscreen', 'client'},
     },
     floating = {awful.client.floating.toggle, {'toggle floating', 'client'}},
-    close = {
-        function (c) c:kill() end,
-        {'close', 'client'},
-    },
+    close = {f = function (c) c:kill() end, {'close', 'client'}},
     keep_on_top = {
-        function (c) c.ontop = not c.ontop end,
+        f = function (c) c.ontop = not c.ontop end,
         {'toggle keep on top', 'client'},
     },
 }
 
 -- Moving
+--- @type { [string]: KeyCb<Client> }
 local move = {
     to_master = {
-        function (c) c:swap(awful.client.getmaster()) end,
+        f = function (c) c:swap(awful.client.getmaster()) end,
         {'move to master', 'client'},
     },
     -- Move to next/previous screen
     to_screen = {
-        function (c) c:move_to_screen() end,
+        f = function (c) c:move_to_screen() end,
         {'move to screen', 'client'},
     },
     to_next_screen = {
-        function (c) c:move_to_screen(c.screen.index + 1) end,
+        f = function (c) c:move_to_screen(c.screen.index + 1) end,
         {'move to next screen', 'client'},
     },
     to_previous_screen = {
-        function (c) c:move_to_screen(c.screen.index - 1) end,
+        f = function (c) c:move_to_screen(c.screen.index - 1) end,
         {'move to previous screen', 'client'},
     },
 }
 
 -- Resizing
+--- @type { [string]: KeyCb<Client> }
 local resize = {
     minimize = {
-        function (c)
+        f = function (c)
             -- The client currently has the input focus, so it cannot be
             -- minimized, since minimized clients can't have the focus.
             c.minimized = true
@@ -54,21 +54,21 @@ local resize = {
         {'minimize', 'client'},
     },
     maximize = {
-        function (c)
+        f = function (c)
             c.maximized = not c.maximized
             c:raise()
         end,
         {'(un)maximize', 'client'},
     },
     maximize_vertically = {
-        function (c)
+        f = function (c)
             c.maximized_vertical = not c.maximized_vertical
             c:raise()
         end,
         {'(un)maximize vertically', 'client'},
     },
     maximize_horizontally = {
-        function (c)
+        f = function (c)
             c.maximized_horizontal = not c.maximized_horizontal
             c:raise()
         end,
