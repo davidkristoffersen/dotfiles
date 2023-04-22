@@ -1,6 +1,6 @@
 -- Global
 local awful = require('awful')
-local wibox = require('wibox')
+local wibox = require('wibox.init')
 
 -- Config
 local join_keys = require('helpers.keycode.funcs').join_keys
