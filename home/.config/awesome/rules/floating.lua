@@ -1,6 +1,6 @@
+-- Floating clients.
 --- @type RuledClientRule
 local rules = {
-    -- Floating clients.
     rule_any = {
         instance = {
             'DTA',   -- Firefox addon DownThemAll.
