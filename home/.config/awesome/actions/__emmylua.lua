@@ -130,12 +130,6 @@
 --- ```
 --- @alias KeyCb<T> fun (...: T): (nil) | {f: fun (...: T): (nil), d: AKeyDataCb, [1]: fun (...: T): (nil) | AKeyDataCb, [2]: AKeyDataCb} | {inner: {f: fun (...: T): (nil), d: AKeyDataCb, [1]: fun (...: T): (nil) | AKeyDataCb, [2]: AKeyDataCb}, args: table?} | {inner: KeyCb<T>}
 
---- TODO Maybe create all permutations of types
--- --- @alias KeyCbs<T> fun (...: T): (nil)
--- | {f: fun (...: T): (nil), d: AKeyDataCb, [1]: fun (...: T): (nil) | AKeyDataCb, [2]: AKeyDataCb}
--- | {inner: {f: fun (...: T): (nil), d: AKeyDataCb, [1]: fun (...: T): (nil) | AKeyDataCb, [2]: AKeyDataCb}, args: table?}
--- | {inner: KeyCb<T>}
-
 --- @alias KeyCb KeyCb<any>
 
 --#endregion
