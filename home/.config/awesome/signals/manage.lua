@@ -1,4 +1,9 @@
+-- Global
 local awful = require('awful')
+
+-- Local
+local signal = require('signals.constants.client')
+local connect = require('signals.connecters').client
 
 
 --- Handles the appearance of a new client.
@@ -16,4 +21,4 @@ local function client_appears(c)
     end
 end
 
-client.connect_signal('manage', client_appears)
+connect(signal.request.manage, client_appears)

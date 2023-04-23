@@ -2,6 +2,9 @@
 local gears = require('gears')
 local beautiful = require('beautiful')
 
+-- Local
+local connect = require('signals.connecters').screen
+
 
 --- Set wallpaper
 ---
@@ -14,7 +17,7 @@ local function set_wallpaper(s)
     end
 end
 
-screen.connect_signal('property::geometry', set_wallpaper)
+connect('property::geometry', set_wallpaper)
 
 
 return {

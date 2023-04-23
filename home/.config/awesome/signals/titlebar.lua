@@ -5,6 +5,9 @@ local wibox = require('wibox.init')
 -- Config
 local join_keys = require('helpers.keycode.funcs').join_keys
 local S = require('helpers.keycode.combinations.strings')
+local emit = require('signals.emitters.client')
+local signal = require('signals.constants.client')
+local connect = require('signals.connecters').client
 
 
 --- Adds a titlebar to the client if titlebars_enabled is true in the rules.
@@ -13,11 +16,11 @@ local function add_titlebar(c)
     -- Define buttons for the titlebar.
     local buttons = join_keys{
         [S._.b_left] = function ()
-            c:emit_signal('request::activate', 'titlebar', {raise = true})
+            emit.request.activate(c, 'titlebar', {raise = true})
             awful.mouse.client.move(c)
         end,
         [S._.b_right] = function ()
-            c:emit_signal('request::activate', 'titlebar', {raise = true})
+            emit.request.activate(c, 'titlebar', {raise = true})
             awful.mouse.client.resize(c)
         end,
     }
@@ -52,4 +55,4 @@ local function add_titlebar(c)
     }
 end
 
-client.connect_signal('request::titlebars', add_titlebar)
+connect(signal.request.titlebars, add_titlebar)
