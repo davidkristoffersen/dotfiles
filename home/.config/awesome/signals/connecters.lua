@@ -3,7 +3,7 @@
 ---
 --- ---
 --- @see Client.connect_signal
-local function client_connector(signal, func)
+local function client_connecter(signal, func)
     client.connect_signal(signal, func)
 end
 
@@ -12,11 +12,22 @@ end
 ---
 --- ---
 --- @see Screen.connect_signal
-local function screen_connector(signal, func)
+local function screen_connecter(signal, func)
     screen.connect_signal(signal, func)
 end
 
+--- ### Description
+--- Connects a signal to a function.
+---
+--- ---
+--- @see awesome.connect_signal
+local function awesome_connecter(signal, func)
+    awesome.connect_signal(signal, func)
+end
+
+
 return {
-    client = client_connector,
-    screen = screen_connector,
+    awesome = awesome_connecter,
+    client = client_connecter,
+    screen = screen_connecter,
 }
