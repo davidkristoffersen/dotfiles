@@ -6,6 +6,8 @@ local paths = require('config.paths')
 local theme = require('config.vars').theme
 
 
+-- TODO: Restructure me
+
 --- Initialize a theme
 local function init(name)
     -- Themes define colours, icons, font and wallpapers.
