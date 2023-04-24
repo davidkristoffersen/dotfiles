@@ -3,11 +3,11 @@ local awful = require('awful')
 local wibox = require('wibox.init')
 
 -- Config
-local join_keys = require('helpers.keycode.funcs').join_keys
 local S = require('helpers.keycode.combinations.strings')
-local emit = require('signals.emitters.client')
-local signal = require('signals.constants.client')
-local connect = require('signals.connecters').client
+local signal = require('helpers.signal.constants.client')
+local emit = require('helpers.signal.emitters.client')
+local join_keys = require('helpers.keycode.funcs').join_keys
+local connect = require('helpers.signal.connecters').client
 
 
 --- Adds a titlebar to the client if titlebars_enabled is true in the rules.

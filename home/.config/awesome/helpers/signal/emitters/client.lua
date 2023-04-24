@@ -1,5 +1,5 @@
 -- Local
-local signals = require('signals.constants.client')
+local signals = require('helpers.signal.constants.client')
 
 
 --- ### Description

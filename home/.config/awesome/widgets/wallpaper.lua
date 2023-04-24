@@ -2,8 +2,8 @@
 local gears = require('gears')
 local beautiful = require('beautiful')
 
--- Local
-local connect = require('signals.connecters').screen
+-- Config
+local connect = require('helpers.signal.connecters').screen
 
 
 --- Set wallpaper

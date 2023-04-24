@@ -1,9 +1,9 @@
 -- Global
 local awful = require('awful')
 
--- Local
-local signal = require('signals.constants.client')
-local connect = require('signals.connecters').client
+-- Config
+local signal = require('helpers.signal.constants.client')
+local connect = require('helpers.signal.connecters').client
 
 
 --- Handles the appearance of a new client.

@@ -1,10 +1,10 @@
 -- Global
 local beautiful = require('beautiful')
 
--- Local
-local signal = require('signals.constants.client')
-local emitter = require('signals.emitters.client')
-local connect = require('signals.connecters').client
+-- Config
+local signal = require('helpers.signal.constants.client')
+local emitter = require('helpers.signal.emitters.client')
+local connect = require('helpers.signal.connecters').client
 
 
 --- Change the client focus when the mouse enters its area.
