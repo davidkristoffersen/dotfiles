@@ -167,11 +167,15 @@ local launcher = {
             awful.spawn('xlock.sh')
             awful.spawn.with_shell('sleep 3 && systemctl suspend')
         end,
-        {'Sleep the system', 'launcher'},
+        {'sleep the system', 'launcher'},
     },
     hibernate = {
         function () awful.spawn('systemctl hibernate') end,
-        {'Hybernate the system', 'launcher'},
+        {'hybernate the system', 'launcher'},
+    },
+    poweroff = {
+        function () awful.spawn('systemctl poweroff') end,
+        {'power off the system', 'launcher'},
     },
     prompt = {
         function () awful.screen.focused().mypromptbox:run() end,

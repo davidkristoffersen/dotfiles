@@ -68,6 +68,7 @@ local keys = join_keys{
     [S.mcsa.l]    = gu.lock,
     [S.mcsa.s]    = gu.suspend,
     [S.mcsa.h]    = gu.hibernate,
+    [S.mcsa.p]    = gu.poweroff,
     [S.m.r]       = gu.prompt,
     [S.m.d]       = gu.rofi,
     [S.m.p]       = gu.menubar,
