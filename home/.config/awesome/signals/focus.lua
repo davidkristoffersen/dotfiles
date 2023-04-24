@@ -3,14 +3,14 @@ local beautiful = require('beautiful')
 
 -- Config
 local signal = require('helpers.signal.constants.client')
-local emitter = require('helpers.signal.emitters.client')
+local emit = require('helpers.signal.emitters.client')
 local connect = require('helpers.signal.connecters').client
 
 
 --- Change the client focus when the mouse enters its area.
 --- @param c Client
 local function mouse_enter(c)
-    emitter.request.activate(c, 'mouse_enter', {raise = false})
+    emit.request.activate(c, 'mouse_enter', {raise = false})
 end
 
 --- Set the border color for the focused client.

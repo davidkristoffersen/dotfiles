@@ -4,6 +4,8 @@ local awful = require('awful')
 -- Config
 local join_keys = require('helpers.keycode.funcs').join_keys
 local S = require('helpers.keycode.combinations.strings')
+local emit = require('helpers.signal.emitters.client')
+
 
 --- @type { [string]: KeyCb<Tag> }
 local taglist_table = {
@@ -21,7 +23,7 @@ local tasklist_table = {
         if c == client.focus then
             c.minimized = true
         else
-            c:emit_signal('request::activate', 'tasklist', {raise = true})
+            emit.request.activate(c, 'tasklist', {raise = true})
         end
     end,
     [S._.b_right] = function () awful.menu.client_list{theme = {width = 250}} end,

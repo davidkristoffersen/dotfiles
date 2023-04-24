@@ -3,6 +3,7 @@ local gears = require('gears')
 local beautiful = require('beautiful')
 
 -- Config
+local signal = require('helpers.signal.constants.screen')
 local connect = require('helpers.signal.connecters').screen
 
 
@@ -17,7 +18,7 @@ local function set_wallpaper(s)
     end
 end
 
-connect('property::geometry', set_wallpaper)
+connect(signal.property.geometry, set_wallpaper)
 
 
 return {

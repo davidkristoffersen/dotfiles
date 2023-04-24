@@ -5,6 +5,7 @@ local menubar = require('menubar')
 -- Config
 local shared_state = require('shared_state.init')
 local apps = require('config.apps')
+local emit = require('helpers.signal.emitters.client')
 
 
 local menus = shared_state.menus
@@ -75,7 +76,7 @@ local client = {
         function ()
             local c = awful.client.restore()
             -- Focus restored client
-            if c then c:emit_signal('request::activate', 'key.unminimize', {raise = true}) end
+            if c then emit.request.activate(c, 'key.unminimize', {raise = true}) end
         end,
         {'restore minimized', 'client'},
     }, -- Prompt

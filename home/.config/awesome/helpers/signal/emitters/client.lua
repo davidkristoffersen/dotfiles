@@ -22,6 +22,7 @@ local emitter = {}
 
 --- ### Description
 --- Emit the `scanning` signal.
+---
 --- ---
 --- @see ClientSignals.scanning
 function emitter.scanning()
@@ -30,6 +31,7 @@ end
 
 --- ### Description
 --- Emit the `scanned` signal.
+---
 --- ---
 --- @see ClientSignals.scanned
 function emitter.scanned()
@@ -261,7 +263,7 @@ emitter.button = {}
 --- ### Parameters
 --- @param self Client The client where the mouse button is pressed.
 --- ---
---- @see ClientSignals.button.press
+--- @see ClientSignalsButton.press
 function emitter.button.press(self)
     self:emit_signal(signals.button.press)
 end
@@ -271,7 +273,7 @@ end
 --- ### Parameters
 --- @param self Client The client where the mouse button is released.
 --- ---
---- @see ClientSignals.button.release
+--- @see ClientSignalsButton.release
 function emitter.button.release(self)
     self:emit_signal(signals.button.release)
 end
@@ -285,7 +287,7 @@ emitter.mouse = {}
 --- ### Parameters
 --- @param self Client The client where the mouse enters.
 --- ---
---- @see ClientSignals.mouse.enter
+--- @see ClientSignalsMouse.enter
 function emitter.mouse.enter(self)
     self:emit_signal(signals.mouse.enter)
 end
@@ -295,7 +297,7 @@ end
 --- ### Parameters
 --- @param self Client The client where the mouse leaves.
 --- ---
---- @see ClientSignals.mouse.leave
+--- @see ClientSignalsMouse.leave
 function emitter.mouse.leave(self)
     self:emit_signal(signals.mouse.leave)
 end
@@ -305,7 +307,7 @@ end
 --- ### Parameters
 --- @param self Client The client where the mouse moves within.
 --- ---
---- @see ClientSignals.mouse.move
+--- @see ClientSignalsMouse.move
 function emitter.mouse.move(self)
     self:emit_signal(signals.mouse.move)
 end
@@ -318,6 +320,8 @@ emitter.property = {}
 --- Emit the `property::floating_geometry` signal.
 --- ### Parameters
 --- @param self Client The client whose floating geometry property has changed.
+--- ---
+--- @see ClientSignalsProperty.floating_geometry
 function emitter.property.floating_geometry(self)
     self:emit_signal('property::floating_geometry')
 end

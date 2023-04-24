@@ -3,6 +3,7 @@ local awful = require('awful')
 
 -- Config
 local menus = require('shared_state.init').menus
+local emit = require('helpers.signal.emitters.client')
 
 
 --- @type { [string]: KeyCb }
@@ -18,19 +19,19 @@ local _root = {
 --- @type { [string]: KeyCb<Client> }
 local _client = {
     focus = {
-        f = function (c) c:emit_signal('request::activate', 'mouse_click', {raise = true}) end,
+        f = function (c) emit.request.activate(c, 'mouse_click', {raise = true}) end,
         {description = 'Focus', group = 'mouse'},
     },
     move = {
         f = function (c)
-            c:emit_signal('request::activate', 'mouse_click', {raise = true})
+            emit.request.activate(c, 'mouse_click', {raise = true})
             awful.mouse.client.move(c)
         end,
         {description = 'Move', group = 'mouse'},
     },
     resize = {
         f = function (c)
-            c:emit_signal('request::activate', 'mouse_click', {raise = true})
+            emit.request.activate(c, 'mouse_click', {raise = true})
             awful.mouse.client.resize(c)
         end,
         {description = 'Resize', group = 'mouse'},
