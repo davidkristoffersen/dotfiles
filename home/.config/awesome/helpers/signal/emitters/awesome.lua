@@ -1,6 +1,7 @@
 -- Local
 local signals = require('helpers.signal.constants.awesome')
 
+
 --- ### Description
 --- This module contains emitters for the AwesomeWM signals.
 --- ### Constraints
@@ -85,8 +86,8 @@ end
 --- ### Description
 --- Emit the `debug::index::miss` signal.
 --- ### Parameters
---- @param unknown1 Class The unknown class.
---- @param unknown2 Key The unknown key.
+--- @param unknown1 any? The unknown class.
+--- @param unknown2 any? The unknown key.
 --- ---
 --- @see AwesomeSignalsDebug.index_miss
 function emitter.debug.index_miss(unknown1, unknown2)
@@ -96,9 +97,9 @@ end
 --- ### Description
 --- Emit the `debug::newindex::miss` signal.
 --- ### Parameters
---- @param unknown1 Class The unknown class.
---- @param unknown2 Key The unknown key.
---- @param unknown3 Value The unknown value.
+--- @param unknown1 any? The unknown class.
+--- @param unknown2 any? The unknown key.
+--- @param unknown3 any? The unknown value.
 --- ---
 --- @see AwesomeSignalsDebug.newindex_miss
 function emitter.debug.newindex_miss(unknown1, unknown2, unknown3)
