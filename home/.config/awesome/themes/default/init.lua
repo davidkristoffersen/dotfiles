@@ -3,16 +3,13 @@ require('themes.default.vars')
 local parts = require('themes.default.parts')
 
 
---- ### Description
---- The Theme class combines various theme-related components to create a complete theme for AwesomeWM.
---- @class Theme: ThemeStyle, ThemeTags, ThemeNotification, ThemeMenu, ThemeTitlebar, ThemeIcons, ThemeWallpaper
----
---- ---
---- @see ThemeParts
+--- @type BeautifulConfig
 local theme = {}
+
 for _, part in pairs(parts) do
+    local prefix = part.__part_prefix
     for k, v in pairs(part) do
-        theme[k] = v
+        theme[prefix .. k] = v
     end
 end
 
