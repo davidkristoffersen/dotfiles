@@ -4,6 +4,7 @@ local error = require('helpers.error')
 local module = require('helpers.module')
 local keycodes = require('helpers.keycode.init')
 local signal = require('helpers.signal.init')
+local spawn = require('helpers.spawn')
 
 
 -- Initialize error handling
@@ -18,4 +19,5 @@ return {
     keycodes = keycodes,
     table = table,
     signal = signal,
+    spawn = spawn,
 }

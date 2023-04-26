@@ -1,6 +1,6 @@
--- Global
-local awful = require('awful')
+-- Config
+local background = require('helpers.spawn').background
 
 
 -- Polkit authentication agent
-awful.spawn.with_shell('/usr/lib/polkit-kde-authentication-agent-1 &')
+background('/usr/lib/polkit-kde-authentication-agent-1 &')

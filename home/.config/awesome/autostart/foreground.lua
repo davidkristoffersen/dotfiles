@@ -1,9 +1,6 @@
--- Global
-local awful = require('awful')
-
 -- Config
-local apps = require('config.apps')
+local terminal = require('helpers.spawn').terminal
 
 
 -- Terminal
-awful.spawn(apps.terminal)
+terminal()
