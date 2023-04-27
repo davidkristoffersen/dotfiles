@@ -2,7 +2,7 @@
 local beautiful = require('beautiful')
 
 -- Config
-local term = require('helpers.spawn').terminal
+local terminal = require('helpers.spawn').terminal
 
 -- Local
 local _awesome = require('menus.awesome')
@@ -10,7 +10,7 @@ local _awesome = require('menus.awesome')
 
 local menu = {
     {'awesome',       _awesome, beautiful.awesome_icon},
-    {'open terminal', term},
+    {'open terminal', terminal},
 }
 
 

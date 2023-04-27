@@ -2,18 +2,16 @@
 local apps = require('config.apps')
 local widgets = require('shared_state.init').widgets
 local root = require('config.paths').root
-local spawn = require('helpers.spawn')
+local cb = require('helpers.spawn').cb
 
-
-local termCb, backCb = spawn.terminalCb, spawn.backgroundCb
 
 local menu = {
     {'hotkeys',              function () widgets.hotkeys_popup:show() end},
-    {'manual',               termCb('man awesome')},
-    {'edit config (vim)',    termCb(apps.editor .. ' ' .. root)},
-    {'edit config (vscode)', termCb('code ' .. root)},
+    {'manual',               cb.terminal('man awesome')},
+    {'edit config (vim)',    cb.terminal(apps.editor .. ' ' .. root)},
+    {'edit config (vscode)', cb.terminal('code ' .. root)},
     {'restart',              awesome.restart},
-    {'lock',                 backCb('xlock.sh')},
+    {'lock',                 cb.background('xlock.sh')},
     {'quit',                 function () awesome.quit() end},
 }
 
