@@ -42,11 +42,18 @@ local theme = 'default'
 -- Set the default font size for notifications
 naughty.config.defaults.font = 'sans 20'
 
+local popup_ratio = {
+    max = 1,
+    large = 0.8,
+    medium = 0.6,
+    small = 0.4,
+}
+
 --- Hotkeys popup styling
 local hotkeys_style = {
     font = 'sans 18',
     description_font = 'sans 14',
-    screen_ratio = 0.8,
+    screen_ratio = popup_ratio.large,
 }
 
 --[[
@@ -79,6 +86,7 @@ return {
     names = names,                 -- Tag names
     layouts = layouts,             -- Table of layouts to cover with awful.layout.inc
     theme = theme,                 -- Default theme
+    popup_ratio = popup_ratio,     -- Ratio of screen to use for hotkeys popup
     hotkeys_style = hotkeys_style, -- Hotkeys popup styling
     mods = Modifiers,
 }

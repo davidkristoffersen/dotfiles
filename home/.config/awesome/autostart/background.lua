@@ -1,6 +1,6 @@
 -- Config
-local background = require('helpers.spawn').background
+local spawn = require('helpers.spawn')
 
 
 -- Polkit authentication agent
-background('/usr/lib/polkit-kde-authentication-agent-1 &')
+spawn('/usr/lib/polkit-kde-authentication-agent-1')

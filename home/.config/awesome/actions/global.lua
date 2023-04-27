@@ -4,8 +4,9 @@ local menubar = require('menubar')
 
 -- Config
 local shared_state = require('shared_state.init')
-local apps = require('config.apps')
 local emit = require('helpers.signal.emitters.client')
+local spawn = require('helpers.spawn')
+local geometry = require('helpers.widget').geometry
 
 
 local menus = shared_state.menus
@@ -18,9 +19,8 @@ local awesome = {
     quit = {awesome.quit, {'quit awesome', 'awesome'}},
     test = {
         function ()
-            awful.spawn.with_shell(
-                'Xephyr -ac -br -noreset -screen 1920x1080 :5 & sleep 1 ; DISPLAY=:5 awesome'
-            )
+            local x = 'Xephyr -ac -br -noreset -screen ' .. geometry.large().string .. ' :5 '
+            spawn.shell(x .. ' & sleep 1 ; DISPLAY=:5 awesome')
         end,
         {'test awesome in a new session', 'launcher'},
     },
@@ -147,34 +147,31 @@ local layout = {
 --- @type { [string]: KeyCb }
 local launcher = {
     terminal = {
-        function () awful.spawn(apps.terminal) end,
+        spawn.terminal,
         {'open a terminal', 'launcher'},
     },
     browser = {
-        function () awful.spawn('google-chrome-stable') end,
+        spawn.cb('google-chrome-stable'),
         {'open google-chrome-stable', 'launcher'},
-    }, -- Take a screenshot
+    },
     screenshot = {
-        function () awful.spawn('flameshot gui') end,
+        spawn.cb('flameshot gui'),
         {'take a screenshot', 'launcher'},
     },
     lock = {
-        function () awful.spawn('xlock.sh') end,
+        spawn.cb('xlock.sh'),
         {'lock screen', 'launcher'},
     },
     suspend = {
-        function ()
-            awful.spawn('xlock.sh')
-            awful.spawn.with_shell('sleep 3 && systemctl suspend')
-        end,
+        spawn.cb.shell('xlock.sh &; sleep 3 && systemctl suspend'),
         {'sleep the system', 'launcher'},
     },
     hibernate = {
-        function () awful.spawn('systemctl hibernate') end,
+        spawn.cb('systemctl hibernate'),
         {'hybernate the system', 'launcher'},
     },
     poweroff = {
-        function () awful.spawn('systemctl poweroff') end,
+        spawn.cb('systemctl poweroff'),
         {'power off the system', 'launcher'},
     },
     prompt = {
@@ -182,7 +179,7 @@ local launcher = {
         {'run prompt', 'launcher'},
     },
     rofi = {
-        function () awful.util.spawn('rofi -show drun') end,
+        spawn.cb('rofi -show drun'),
         {'show rofi', 'launcher'},
     },
     menubar = {

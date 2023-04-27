@@ -9,9 +9,9 @@ local menu = {
     {'hotkeys',              function () widgets.hotkeys_popup:show() end},
     {'manual',               cb.terminal('man awesome')},
     {'edit config (vim)',    cb.terminal(apps.editor .. ' ' .. root)},
-    {'edit config (vscode)', cb.terminal('code ' .. root)},
+    {'edit config (vscode)', cb('code ' .. root)},
     {'restart',              awesome.restart},
-    {'lock',                 cb.background('xlock.sh')},
+    {'lock',                 cb('xlock.sh')},
     {'quit',                 function () awesome.quit() end},
 }
 

@@ -3,7 +3,9 @@ local awful = require('awful')
 
 -- Config
 local apps = require('config.apps')
-local warn = require('helpers.debug').warn
+
+-- Local
+local func = require('helpers.func')
 
 
 --- @alias SpawnFunc fun (cmd: string): nil
@@ -21,39 +23,24 @@ local function terminal(cmd)
 end
 
 --- ### Description
---- Launches a command in the background
---- ### Parameters
---- @param cmd string Variable number of string arguments
-local function background(cmd)
-    awful.spawn.with_shell(cmd)
-end
-
---- ### Description
---- Launches a command in the foreground
---- ### Parameters
---- @param cmd string Variable number of string arguments
-local function foreground(cmd)
-    awful.spawn(cmd)
-end
-
-local function genCb(func)
-    return function (cmd) return function () func(cmd) end end
-end
-
---- ### Description
 --- Returns a function that launches a command in the background
 --- ### Parameters
 --- @type { [string]: fun (cmd: string): SpawnFunc }
 local cb = {
-    terminal = genCb(terminal),
-    background = genCb(background),
-    foreground = genCb(foreground),
+    spawn = func.cb(awful.spawn.spawn),
+    shell = func.cb(awful.spawn.with_shell),
+    terminal = func.cb(terminal),
 }
 
-
-return {
-    terminal = terminal,
-    background = background,
-    foreground = foreground,
+local spawn = {
     cb = cb,
+    spawn = awful.spawn.spawn,
+    shell = awful.spawn.with_shell,
+    terminal = terminal,
 }
+
+spawn = setmetatable(spawn, {__call = func.noSelf(awful.spawn.spawn)})
+spawn.cb = setmetatable(spawn.cb, {__call = func.noSelfCb(awful.spawn.spawn)})
+
+
+return spawn

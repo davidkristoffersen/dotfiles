@@ -7,6 +7,7 @@ local _hotkeys_popup = require('awful.hotkeys_popup')
 -- Config
 local hotkeys_style = require('config.vars').hotkeys_style
 local buttons = require('bindings.buttons.init')
+local geometry = require('helpers.widget').geometry
 
 
 local function get_keybindings()
@@ -70,12 +71,10 @@ end
 -- end
 
 local function get_options()
-    local f = screen.focused()
-    local width = f.geometry.width * hotkeys_style.screen_ratio
-    local height = f.geometry.height * hotkeys_style.screen_ratio
+    local g = geometry.large()
     return {
-        width = width,
-        height = height,
+        width = g.width,
+        height = g.height,
     }
 end
 
