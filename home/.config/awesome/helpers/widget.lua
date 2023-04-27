@@ -6,7 +6,6 @@ local popup_ratio = require('config.vars').popup_ratio
 
 
 local function getGeometry(ratio)
-    --- @type Screen
     local s = screen.focused()
     local g = s.geometry
     local out = {
