@@ -163,7 +163,7 @@ local launcher = {
         {'lock screen', 'launcher'},
     },
     suspend = {
-        spawn.cb.shell('xlock.sh &; sleep 3 && systemctl suspend'),
+        spawn.cb.shell('xlock.sh & sleep 3 && systemctl suspend'),
         {'sleep the system', 'launcher'},
     },
     hibernate = {
