@@ -12,7 +12,7 @@ local geometry = require('helpers.widget').geometry
 local menus = shared_state.menus
 local widgets = shared_state.widgets
 
---- @type { [string]: KeyCb }
+--- @type { [string]: InnerKeyCb }
 local awesome = {
     help = {function () widgets.hotkeys_popup:show() end, {'show help', 'awesome'}},
     restart = {awesome.restart, {'reload awesome', 'awesome'}},
@@ -41,7 +41,7 @@ local awesome = {
     },
 }
 
---- @type { [string]: KeyCb }
+--- @type { [string]: InnerKeyCb }
 local tag = {
     view_previous = {awful.tag.viewprev, {'view previous', 'tag'}},
     view_next = {awful.tag.viewnext, {'view next', 'tag'}},
@@ -51,8 +51,8 @@ local tag = {
     },
 }
 
---- @type { [string]: KeyCb }
-local client = {
+--- @type { [string]: InnerKeyCb }
+local _client = {
     focus_next = {
         function () awful.client.focus.byidx(1) end,
         {'focus next by index', 'client'},
@@ -82,7 +82,7 @@ local client = {
     }, -- Prompt
 }
 
---- @type { [string]: KeyCb }
+--- @type { [string]: InnerKeyCb }
 local screen = {
     focus_next = {
         function () awful.screen.focus_relative(1) end,
@@ -94,7 +94,7 @@ local screen = {
     },
 }
 
---- @type { [string]: KeyCb }
+--- @type { [string]: InnerKeyCb }
 local client_swap = {
     -- Layout manipulation
     -- The same for arrow left and right
@@ -108,7 +108,7 @@ local client_swap = {
     },
 }
 
---- @type { [string]: KeyCb }
+--- @type { [string]: InnerKeyCb }
 local layout = {
     increase_master_width = {
         function () awful.tag.incmwfact(0.05) end,
@@ -144,7 +144,7 @@ local layout = {
     },
 }
 
---- @type { [string]: KeyCb }
+--- @type { [string]: InnerKeyCb }
 local launcher = {
     terminal = {
         spawn.terminal,
@@ -189,7 +189,7 @@ local launcher = {
 }
 
 -- Tag-related actions
---- @type { [string]: KeyCb[] }
+--- @type { [string]: InnerKeyCb[] }
 local tag_actions = {
     view = {},          -- Keybindings for viewing tags
     toggle = {},        -- Keybindings for toggling tags
@@ -200,12 +200,18 @@ local tag_actions = {
 
 local _screen
 local _tag
+
+--- @param i integer
+local function get_tag(i)
+    _screen = awful.screen.focused()
+    return _screen and _screen.tags[i]
+end
+
 for i = 1, 9 do
     -- View tag
     tag_actions.view[i] = {
         function ()
-            _screen = awful.screen.focused()
-            _tag = _screen.tags[i]
+            _tag = get_tag(i)
             if _tag then _tag:view_only() end
         end,
         {'view tag #' .. i, 'tag'},
@@ -214,8 +220,7 @@ for i = 1, 9 do
     -- Toggle tag display
     tag_actions.toggle[i] = {
         function ()
-            _screen = awful.screen.focused()
-            _tag = _screen.tags[i]
+            _tag = get_tag(i)
             if _tag then awful.tag.viewtoggle(_tag) end
         end,
         {'toggle tag #' .. i, 'tag'},
@@ -251,7 +256,7 @@ return {
     awesome = awesome,
     tag = tag,
     tag_actions = tag_actions,
-    client = client,
+    client = _client,
     screen = screen,
     client_swap = client_swap,
     layout = layout,

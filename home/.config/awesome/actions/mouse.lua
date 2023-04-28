@@ -6,7 +6,7 @@ local menus = require('shared_state.init').menus
 local emit = require('helpers.signal.emitters.client')
 
 
---- @type { [string]: KeyCb }
+--- @type { [string]: InnerKeyCb }
 local _root = {
     toggle = {
         function () menus.main:toggle() end,
@@ -16,7 +16,7 @@ local _root = {
     prev = {awful.tag.viewprev, {description = 'View previous tag', group = 'mouse'}},
 }
 
---- @type { [string]: KeyCb<Client> }
+--- @type { [string]: InnerKeyCb<Client> }
 local _client = {
     focus = {
         f = function (c) emit.request.activate(c, 'mouse_click', {raise = true}) end,

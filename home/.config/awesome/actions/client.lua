@@ -3,7 +3,7 @@ local awful = require('awful')
 
 
 -- Toggling
---- @type { [string]: KeyCb<Client> }
+--- @type { [string]: InnerKeyCb<Client> }
 local toggle = {
     fullscreen = {
         f = function (c)
@@ -21,7 +21,7 @@ local toggle = {
 }
 
 -- Moving
---- @type { [string]: KeyCb<Client> }
+--- @type { [string]: InnerKeyCb<Client> }
 local move = {
     to_master = {
         f = function (c) c:swap(awful.client.getmaster()) end,
@@ -43,7 +43,7 @@ local move = {
 }
 
 -- Resizing
---- @type { [string]: KeyCb<Client> }
+--- @type { [string]: InnerKeyCb<Client> }
 local resize = {
     minimize = {
         f = function (c)
